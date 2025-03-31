@@ -2,6 +2,8 @@
 import os
 import shutil
 import configparser
+import argparse
+import subprocess
 from collections import defaultdict
 
 def list_all_files(folder_path):
@@ -58,11 +60,6 @@ def get_vivado_project_files(config):
     include_files = config.get('VivadoProjectFiles', 'IncludeFiles').split()
     exclude_files = config.get('VivadoProjectFiles', 'ExcludeFiles').split()
 
-    #print("Include Folders:", include_folders)
-    #print("Exclude Folders:", exclude_folders)
-    #print("Include Files:", include_files)
-    #print("Exclude Files:", exclude_files)
-
     include_folder_files = []
     for folder in include_folders:
         include_folder_files.extend(list_all_files(folder))
@@ -101,10 +98,9 @@ def has_spaces(file_path):
     """
     return ' ' in file_path
 
-def get_TCL_add_files_text(file_list, new_file_path):
+def get_TCL_add_files_text(file_list, file_dir):
     # Compute relative paths and add quotes around file names with spaces
-    replacement_list = [os.path.relpath(file, os.path.dirname(new_file_path)) for file in file_list]
-   # replacement_list = file_list
+    replacement_list = [os.path.relpath(file, file_dir) for file in file_list]
     replacement_list = [f'"{file}"' if has_spaces(file) else file for file in replacement_list]
 
     # Concatenate files with text before and after
@@ -124,28 +120,35 @@ def replace_placeholders_in_file(file_path, new_file_path, add_files, project_na
 def find_and_log_duplicates(file_list):
     """
     Finds duplicate file names in the file list and logs their full paths to a file.
-    Returns an error if any duplicates are found.
+    Errors if duplicates are found.
+    Does not create the log file if no duplicates are found.
 
     :param file_list: List of files to be checked for duplicates.
     """
-    output_file_path = os.path.join(current_dir, 'duplicate_files.log')
     file_dict = defaultdict(list)
     duplicates_found = False
 
+    # Group files by their base name
     for file in file_list:
         file_name = os.path.basename(file)
         file_dict[file_name].append(file)
 
-    with open(output_file_path, 'w') as output_file:
-        for file_name, paths in file_dict.items():
-            if len(paths) > 1:
-                duplicates_found = True
-                output_file.write(f"Duplicate file: {file_name}\n")
-                for path in paths:
-                    output_file.write(f"  {path}\n")
-                output_file.write("\n")
+    # Check for duplicates
+    for file_name, paths in file_dict.items():
+        if len(paths) > 1:
+            duplicates_found = True
+            break
 
+    # If duplicates are found, create the log file and write the details
     if duplicates_found:
+        output_file_path = os.path.join(os.getcwd(), 'duplicate_files.log')
+        with open(output_file_path, 'w') as output_file:
+            for file_name, paths in file_dict.items():
+                if len(paths) > 1:
+                    output_file.write(f"Duplicate file: {file_name}\n")
+                    for path in paths:
+                        output_file.write(f"  {path}\n")
+                    output_file.write("\n")
         raise ValueError("Duplicate files found. Check the log file for details.")
 
 def copy_deps_files(file_list):
@@ -165,27 +168,84 @@ def copy_deps_files(file_list):
                 os.chmod(target_path, 0o777)  # Change the file permission to writable
             shutil.copy2(file, target_path)
             new_file_list.append(target_path)
-           # print(f"Copied {file} to {target_path}")
         else:
             new_file_list.append(file)
     return new_file_list
 
-if __name__ == "__main__":
+def run_command(command, cwd=None):
+    print(command)
+    result = subprocess.run(command, cwd=cwd, shell=True, capture_output=True, text=True)
+    if result.returncode != 0:
+        print(f"Error running command: {command}")
+        print(result.stderr)
+    else:
+        print(result.stdout)
+    return result.returncode, result.stdout.strip()
+
+def update_project_files(new=False):
     current_dir = os.getcwd()
-    config_path = os.path.join(current_dir, 'VivadoProjectSettings.ini')
-    template_path = os.path.join(current_dir, 'TCL/ProjectSetupTemplate.tcl')
-    new_file_path = os.path.join(current_dir, 'TCL/ProjectSetup.tcl')    
+    config_path = os.path.join(current_dir, 'vivadoprojectsettings.ini')
+    new_proj_template_path = os.path.join(current_dir, 'TCL/CreateNewProjectTemplate.tcl')
+    new_proj_path = os.path.join(current_dir, 'TCL/CreateNewProject.tcl')    
+    update_proj_template_path = os.path.join(current_dir, 'TCL/UpdateProjectFilesTemplate.tcl')
+    update_proj_path = os.path.join(current_dir, 'TCL/UpdateProjectFiles.tcl')    
     
     config = configparser.ConfigParser()
     config.read(config_path)
     
     file_list = get_vivado_project_files(config)
-    add_files = get_TCL_add_files_text(file_list, new_file_path)
+    add_files = get_TCL_add_files_text(file_list, os.path.join(current_dir, 'TCL'))
 
     project_name = config.get('VivadoProjectSettings', 'VivadoProjectName')
     top_entity = config.get('VivadoProjectSettings', 'TopLevelEntity')
 
-    # Replace TOKENS in the template vivado project script
-    replace_placeholders_in_file(template_path, new_file_path, add_files, project_name, top_entity)
+    # Replace TOKENS in the template Vivado project scripts
+    replace_placeholders_in_file(new_proj_template_path, new_proj_path, add_files, project_name, top_entity)
+    replace_placeholders_in_file(update_proj_template_path, update_proj_path, add_files, project_name, top_entity)    
 
-    print(os.getcwd())
+    vivado_project_path = os.path.join(os.getcwd(), "VivadoProject")
+    if not os.path.exists(vivado_project_path):
+        os.makedirs(vivado_project_path)   
+    os.chdir("VivadoProject")
+
+    # Check if the project file exists
+    project_file_path = os.path.join(os.getcwd(), project_name + ".xpr")
+    print(f"Project file path: {project_file_path}")
+
+    vivado_path = os.getenv('XILINX')
+
+    if vivado_path:
+        # Determine the Vivado executable based on the operating system
+        if os.name == 'nt':  # Windows
+            vivado_executable = os.path.join(vivado_path, "bin", "vivado.bat")
+        else:  # Linux or other OS
+            vivado_executable = os.path.join(vivado_path, "bin", "vivado")
+
+        if new:
+            # User wants to make a new project
+            # Don't bother checking if the project already exists, always make a new one or overwrite
+            run_command(f'"{vivado_executable}" -mode tcl -source {new_proj_path}', cwd=os.getcwd())
+        elif os.path.exists(project_file_path):
+            # Update the project
+            run_command(f'"{vivado_executable}" {project_name}.xpr -mode tcl -source {update_proj_path}', cwd=os.getcwd())
+        else:
+            # Project is not there and user did not ask for a new one - throw an error
+            raise FileNotFoundError(f"The project file '{project_file_path}' does not exist. Use the --new option to create it.")      
+
+        os.chdir(current_dir)
+    else:
+        print("Environment variable 'XILINX' is not set.")   
+
+
+
+def main():
+    parser = argparse.ArgumentParser(description="Vivado Project Tools")
+    parser.add_argument("function", choices=["update_project_files"], help="Function to execute")
+    parser.add_argument("--new", "-n", action="store_true", help="Create a new project")
+    args = parser.parse_args()
+
+    if args.function == "update_project_files":
+        update_project_files(new=args.new)
+
+if __name__ == "__main__":
+    main()

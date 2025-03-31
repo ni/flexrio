@@ -13,7 +13,7 @@ if not "%OSBit%" == "64" (
 
 pushd "%~dp0"
 setlocal enabledelayedexpansion
-set configFileName=VivadoProjectSettings.ini
+set configFileName=vivadoprojectsettings.ini
 if exist "%configFileName%" (
   for /f "tokens=1,2 delims==" %%x in ('findstr /r /c:"^VivadoProjectName=" %configFileName%') do set "VivadoProjectName=%%y"
   for /f "tokens=1,2 delims==" %%x in ('findstr /r /c:"^VivadoToolsPath=" %configFileName%') do set "VivadoToolsPath=%%y"
@@ -31,4 +31,3 @@ if exist "%configFileName%" (
   pause
 )
 popd
-
