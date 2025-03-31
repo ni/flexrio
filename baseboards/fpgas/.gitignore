@@ -1,0 +1,9 @@
+# Keep this .gitignore file when building user FlexRIO release
+# userhdlbuild=visible
+/objects
+modelsim/
+transcript
+*.jou
+*.log
+# Ignore Python bytecode cache files
+__pycache__/

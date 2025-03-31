@@ -1,0 +1,5 @@
+# Keep this .gitignore file when building user FlexRIO release
+# userhdlbuild=visible
+/objects
+/TCL/ProjectSetup.tcl
+/VivadoProject/*
