@@ -1,4 +1,4 @@
 :: githubvisible=true
-:: @echo off
+@echo off
 
-python ..\..\..\..\..\lvfpgahdltools\vivadoprojecttools\vivadoprojecttools.py extract_deps
+python "%~dp0vivadoprojecttools.py" extract_deps

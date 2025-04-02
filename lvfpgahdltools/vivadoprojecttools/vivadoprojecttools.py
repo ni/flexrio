@@ -111,8 +111,24 @@ def has_spaces(file_path):
     return ' ' in file_path
 
 def get_TCL_add_files_text(file_list, file_dir):
+    """
+    Generates TCL commands to add files to a Vivado project.
+
+    :param file_list: List of file paths.
+    :param file_dir: Directory relative to which the file paths should be computed.
+    :return: A string containing TCL commands to add the files.
+    """
+    def strip_long_path_prefix(path):
+        # Remove the \\?\ prefix if it exists
+        if os.name == 'nt' and path.startswith('\\\\?\\'):
+            return path[4:]
+        return path
+
+    # Strip the \\?\ prefix from all file paths
+    stripped_file_list = [strip_long_path_prefix(file) for file in file_list]
+
     # Compute relative paths and add quotes around file names with spaces
-    replacement_list = [os.path.relpath(file, file_dir) for file in file_list]
+    replacement_list = [os.path.relpath(file, file_dir) for file in stripped_file_list]
     replacement_list = [f'"{file}"' if has_spaces(file) else file for file in replacement_list]
 
     # Concatenate files with text before and after
@@ -166,6 +182,8 @@ def find_and_log_duplicates(file_list):
 def copy_deps_files(file_list):
     """
     Copies files that have "githubdeps" in the file path to the "objects/gathereddeps" folder.
+    Handles long paths by using the '\\?\' prefix on Windows.
+    Logs the file list to a file for debugging.
 
     :param file_list: List of files to be copied.
     """
@@ -174,12 +192,23 @@ def copy_deps_files(file_list):
 
     new_file_list = []
     for file in file_list:
-        if '/githubdeps/' in file:
-            target_path = os.path.join(target_folder, os.path.basename(file))
+        # Handle long paths on Windows
+        if os.name == 'nt':
+            file = f"\\\\?\\{os.path.abspath(file)}"
+            target_folder_long = f"\\\\?\\{os.path.abspath(target_folder)}"
+        else:
+            target_folder_long = target_folder
+
+        if 'githubdeps' in file:
+            target_path = os.path.join(target_folder_long, os.path.basename(file))
             if os.path.exists(target_path):
                 os.chmod(target_path, 0o777)  # Change the file permission to writable
-            shutil.copy2(file, target_path)
-            new_file_list.append(target_path)
+            try:
+                shutil.copy2(file, target_path)
+                new_file_list.append(target_path)
+                print(f"Copied: {file} -> {target_path}")
+            except Exception as e:
+                print(f"Error copying file '{file}' to '{target_path}': {e}")
         else:
             new_file_list.append(file)
     return new_file_list
@@ -194,40 +223,29 @@ def run_command(command, cwd=None):
         print(result.stdout)
     return result.returncode, result.stdout.strip()
 
-def extract_deps_from_zip(config):
+def extract_deps_from_zip(deps_folder, deps_zip_file):
     """
     Extracts the DepsZipFile from the DepsFolder and places its contents into the DepsFolder.
     Handles long paths by using the '\\?\' prefix on Windows.
 
-    :param config: The ConfigParser object containing the VivadoProjectSettings.
     """
-    # Get DepsFolder and DepsZipFile from the INI file
-    deps_folder = config.get('VivadoProjectFiles', 'DepsFolder', fallback=None)
-    deps_zip_file = config.get('VivadoProjectFiles', 'DepsZipFile', fallback=None)
-
-    if not deps_folder or not deps_zip_file:
-        print("DepsFolder or DepsZipFile is not specified in the configuration.")
-        return
-
-    # Construct the full path to the zip file
-    zip_file_path = os.path.join(deps_folder, deps_zip_file)
 
     # Handle long paths on Windows
     if os.name == 'nt':
-        zip_file_path = f"\\\\?\\{os.path.abspath(zip_file_path)}"
+        deps_zip_file = f"\\\\?\\{os.path.abspath(deps_zip_file)}"
         deps_folder = f"\\\\?\\{os.path.abspath(deps_folder)}"
 
     # Check if the zip file exists
-    if not os.path.exists(zip_file_path):
-        print(f"DepsZipFile '{zip_file_path}' does not exist.")
+    if not os.path.exists(deps_zip_file):
+        print(f"DepsZipFile '{deps_zip_file}' does not exist.")
         return
 
     # Extract the zip file into the DepsFolder
     try:
-        shutil.unpack_archive(zip_file_path, deps_folder, 'zip')
+        shutil.unpack_archive(deps_zip_file, deps_folder, 'zip')
         print(f"Extracted '{deps_zip_file}' into '{deps_folder}'.")
     except Exception as e:
-        print(f"Error extracting '{zip_file_path}': {e}")
+        print(f"Error extracting '{deps_zip_file}': {e}")
 
 def update_project_files(config, new=False):
     current_dir = os.getcwd()
@@ -292,10 +310,14 @@ def main():
     config = configparser.ConfigParser()
     config.read(config_path)
 
+    # Get DepsFolder and DepsZipFile from the INI file
+    deps_folder = config.get('VivadoProjectFiles', 'DepsFolder', fallback=None)
+    deps_zip_file = config.get('VivadoProjectFiles', 'DepsZipFile', fallback=None)
+
     if args.function == "update_project_files":
         update_project_files(config, new=args.new)
     elif args.function == "extract_deps":
-        extract_deps_from_zip(config)
+        extract_deps_from_zip(deps_folder, deps_zip_file)
 
 if __name__ == "__main__":
     main()
