@@ -5,6 +5,7 @@ import configparser
 import argparse
 import subprocess
 from collections import defaultdict
+import zipfile
 
 def list_all_files(folder_path):
     all_files = []
@@ -193,16 +194,48 @@ def run_command(command, cwd=None):
         print(result.stdout)
     return result.returncode, result.stdout.strip()
 
-def update_project_files(new=False):
+def extract_deps_from_zip(config):
+    """
+    Extracts the DepsZipFile from the DepsFolder and places its contents into the DepsFolder.
+    Handles long paths by using the '\\?\' prefix on Windows.
+
+    :param config: The ConfigParser object containing the VivadoProjectSettings.
+    """
+    # Get DepsFolder and DepsZipFile from the INI file
+    deps_folder = config.get('VivadoProjectFiles', 'DepsFolder', fallback=None)
+    deps_zip_file = config.get('VivadoProjectFiles', 'DepsZipFile', fallback=None)
+
+    if not deps_folder or not deps_zip_file:
+        print("DepsFolder or DepsZipFile is not specified in the configuration.")
+        return
+
+    # Construct the full path to the zip file
+    zip_file_path = os.path.join(deps_folder, deps_zip_file)
+
+    # Handle long paths on Windows
+    if os.name == 'nt':
+        zip_file_path = f"\\\\?\\{os.path.abspath(zip_file_path)}"
+        deps_folder = f"\\\\?\\{os.path.abspath(deps_folder)}"
+
+    # Check if the zip file exists
+    if not os.path.exists(zip_file_path):
+        print(f"DepsZipFile '{zip_file_path}' does not exist.")
+        return
+
+    # Extract the zip file into the DepsFolder
+    try:
+        shutil.unpack_archive(zip_file_path, deps_folder, 'zip')
+        print(f"Extracted '{deps_zip_file}' into '{deps_folder}'.")
+    except Exception as e:
+        print(f"Error extracting '{zip_file_path}': {e}")
+
+def update_project_files(config, new=False):
     current_dir = os.getcwd()
     config_path = os.path.join(current_dir, 'vivadoprojectsettings.ini')
     new_proj_template_path = os.path.join(current_dir, 'TCL/CreateNewProjectTemplate.tcl')
     new_proj_path = os.path.join(current_dir, 'TCL/CreateNewProject.tcl')    
     update_proj_template_path = os.path.join(current_dir, 'TCL/UpdateProjectFilesTemplate.tcl')
     update_proj_path = os.path.join(current_dir, 'TCL/UpdateProjectFiles.tcl')    
-    
-    config = configparser.ConfigParser()
-    config.read(config_path)
     
     file_list = get_vivado_project_files(config)
     add_files = get_TCL_add_files_text(file_list, os.path.join(current_dir, 'TCL'))
@@ -251,12 +284,18 @@ def update_project_files(new=False):
 
 def main():
     parser = argparse.ArgumentParser(description="Vivado Project Tools")
-    parser.add_argument("function", choices=["update_project_files"], help="Function to execute")
+    parser.add_argument("function", choices=["update_project_files", "extract_deps"], help="Function to execute")
     parser.add_argument("--new", "-n", action="store_true", help="Create a new project")
     args = parser.parse_args()
 
+    config_path = os.path.join(os.getcwd(), 'vivadoprojectsettings.ini')
+    config = configparser.ConfigParser()
+    config.read(config_path)
+
     if args.function == "update_project_files":
-        update_project_files(new=args.new)
+        update_project_files(config, new=args.new)
+    elif args.function == "extract_deps":
+        extract_deps_from_zip(config)
 
 if __name__ == "__main__":
     main()

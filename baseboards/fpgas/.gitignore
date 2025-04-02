@@ -1,6 +1,12 @@
 # Keep this .gitignore file when building user FlexRIO release
 # githubvisible=true
-/objects
+
+# Ignore everything in objects except "PLACE DEPENDENCIES ZIP FILE HERE"
+objects/*
+!objects/githubdeps/
+objects/githubdeps/*
+!objects/githubdeps/PLACE*DEPENDENCIES*ZIP*FILE*HERE.txt
+
 modelsim/
 transcript
 *.jou
