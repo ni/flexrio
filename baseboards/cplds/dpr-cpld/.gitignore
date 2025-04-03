@@ -1,0 +1,7 @@
+.vscode/
+__pycache__/
+transcript
+modelsim/
+objects/
+*.jou
+*.log
