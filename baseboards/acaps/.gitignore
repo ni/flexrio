@@ -1,7 +1,0 @@
-/objects
-modelsim/
-transcript
-*.jou
-*.log
-/source/fixedlogic/vcom
-/source/microblaze/*.str

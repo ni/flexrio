@@ -17,9 +17,14 @@ Our user facing process will mirror what we do in HW tools in a simpler way.  Fo
 ### <u>User Flow for Getting Dependencies into Vivado Projects</u>
 ![FlexRIO Module Specific Deps](flexrio_model_deps.png)
 
+### Design Alternatives for User Vivado Project Creation
+![Create vs Update](create_vs_update.png)
+
+
 ## Repo and Tool Structure
 
 ![Repo and Tool Structure](repo_tools.png)
+
 
 ## Release Process
 
