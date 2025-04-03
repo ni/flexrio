@@ -53,7 +53,7 @@ Our user facing process will mirror what we do in HW tools in a simpler way.  Fo
 
 
 ## FAQ
-### Why don't we leverage hwtools for the user workflow?
+### Why don't we leverage hwtools for the user-facing side of the workflow?
 ### Why are the user FlexRIO dependencies delivered in a zip file?
 
 

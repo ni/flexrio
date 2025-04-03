@@ -1,0 +1,8 @@
+# Libraries
+*.lvlibp
+
+# Metadata
+*.aliases
+*.lvlps
+.cache/
+builds/

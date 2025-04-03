@@ -307,6 +307,11 @@ def main():
     args = parser.parse_args()
 
     config_path = os.path.join(os.getcwd(), 'vivadoprojectsettings.ini')
+
+    # Check if the configuration file exists
+    if not os.path.exists(config_path):
+        raise FileNotFoundError(f"Configuration file '{config_path}' not found. Please ensure it exists in the current working directory.")
+
     config = configparser.ConfigParser()
     config.read(config_path)
 
