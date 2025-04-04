@@ -6,97 +6,112 @@ import argparse
 import subprocess
 from collections import defaultdict
 import zipfile
+from enum import Enum
 
 def list_all_files(folder_path):
+    """
+    Lists all files in a folder and its subfolders that match specific extensions.
+    This is used to gather relevant files (e.g., .vhd, .xdc, .edf) for Vivado projects.
+    """
     all_files = []
     for root, dirs, files in os.walk(folder_path):
         for file in files:
-            if file.endswith('.vhd') or file.endswith('.xdc') or file.endswith('edf'):  # Only include .vhd, .xdc or .edf files
+            if file.endswith('.vhd') or file.endswith('.xdc') or file.endswith('edf'):  # Only include specific file types
                 all_files.append(fix_file_slashes(os.path.join(root, file)))
     return all_files
 
 def remove_duplicates(file_list):
+    """
+    Removes duplicate file paths from the list.
+    This ensures that each file is processed only once.
+    """
     return list(set(file_list))
 
 def add_files_to_list(file_list, files):
+    """
+    Adds additional files to the file list.
+    This is used to include specific files that are not part of the folder-based inclusion.
+    """
     for file in files:
         file_list.append(file)  
     return file_list
 
 def fix_file_slashes(path):
+    """
+    Converts backslashes to forward slashes in file paths.
+    This ensures compatibility across platforms (e.g., Windows and Linux).
+    """
     return path.replace('\\', '/')
 
 def remove_files_from_list(list_a, list_b):
     """
-    Removes all files that are in list_b from list_a.
-
-    :param list_a: List of files to be filtered.
-    :param list_b: List of files to be removed from list_a.
-    :return: A new list with files from list_b removed from list_a.
+    Removes all files in list_b from list_a.
+    This is used to exclude specific files or folders from the final file list.
     """
     set_b = set(list_b)
     return [file for file in list_a if file not in set_b]
 
 def remove_testbench_files(file_list):
     """
-    Removes files from the list if they contain "_tb" or "testbench" in the path.
-
-    :param file_list: List of files to be filtered.
-    :return: A new list with testbench files removed.
+    Removes files that are testbench-related (e.g., containing "_tb" in their path).
+    This ensures that only design files are included in the Vivado project.
     """
     return [file for file in file_list if "tb_" not in file.lower()]
 
 def sort_file_list(file_list):
     """
-    Sorts the file list in alphabetical order.
-
-    :param file_list: List of files to be sorted.
-    :return: A new list with files sorted in alphabetical order.
+    Sorts the file list alphabetically.
+    This ensures consistent ordering of files in the Vivado project.
     """
     return sorted(file_list)
 
 def get_vivado_project_files(config):
+    """
+    Processes the configuration to generate the list of files for the Vivado project.
+    This includes applying inclusion/exclusion rules, removing duplicates, and handling dependencies.
+    """
+    # Read inclusion and exclusion rules from the configuration
     include_folders = config.get('VivadoProjectFiles', 'IncludeFolders').split()
     exclude_folders = config.get('VivadoProjectFiles', 'ExcludeFolders').split()
     include_files = config.get('VivadoProjectFiles', 'IncludeFiles').split()
     exclude_files = config.get('VivadoProjectFiles', 'ExcludeFiles').split()
 
-    # Get the value of DepsFolder from the INI file
+    # Replace $DepsFolder$ placeholders with the actual DepsFolder value
     deps_folder = config.get('VivadoProjectFiles', 'DepsFolder', fallback=None)
-
-     # Replace $DepsFolder$ in file paths with the value of DepsFolder
     if deps_folder:
         include_folders = [file.replace("$DepsFolder$", deps_folder) for file in include_folders]   
         exclude_folders = [file.replace("$DepsFolder$", deps_folder) for file in exclude_folders]  
         include_files = [file.replace("$DepsFolder$", deps_folder) for file in include_files]  
         exclude_files = [file.replace("$DepsFolder$", deps_folder) for file in exclude_files]  
 
+    # Gather files from included folders
     include_folder_files = []
     for folder in include_folders:
         include_folder_files.extend(list_all_files(folder))
 
+    # Gather files from excluded folders
     exclude_folder_files = []
     for folder in exclude_folders:
         exclude_folder_files.extend(list_all_files(folder))    
 
-    # Initialize file list with files from included folders
+    # Apply inclusion and exclusion rules
     file_list = include_folder_files
-    # Remove files in exclude folders
     file_list = remove_files_from_list(file_list, exclude_folder_files)
-    # Add files in include files list
     file_list = add_files_to_list(file_list, include_files)
-    # Remove files in exclude files list
     file_list = remove_files_from_list(file_list, exclude_files)
-    # Remove testbench files
+    # A bunch of tb_ files get into the Vivado project that should not be there
+    # TODO - remove this when we have the INI file setup to exclude the testbench files
+    #  or remove when we are having Vivado prune unused files from the project
     file_list = remove_testbench_files(file_list)
-    # Remove duplicates of the exact same file path - this is OK because included file paths may overlap
     file_list = remove_duplicates(file_list)
-    # Find and log duplicate file names - Cannot have multiple of the same file name - error if duplicates are found
-    find_and_log_duplicates(file_list)  
-    # Copy dependency files to the gathereddeps folder
-    file_list = copy_deps_files(file_list)   
 
-    # Sort the file list
+    # Check for duplicate file names and log them
+    find_and_log_duplicates(file_list)
+
+    # Copy dependency files to the gathereddeps folder
+    file_list = copy_deps_files(file_list)
+
+    # Sort the final file list
     file_list = sort_file_list(file_list)
   
     return file_list
@@ -104,38 +119,35 @@ def get_vivado_project_files(config):
 def has_spaces(file_path):
     """
     Checks if the given file path contains spaces.
-
-    :param file_path: The file path to check.
-    :return: True if the file path contains spaces, False otherwise.
+    This is used to ensure proper handling of file paths in Vivado TCL scripts.
     """
     return ' ' in file_path
 
 def get_TCL_add_files_text(file_list, file_dir):
     """
     Generates TCL commands to add files to a Vivado project.
-
-    :param file_list: List of file paths.
-    :param file_dir: Directory relative to which the file paths should be computed.
-    :return: A string containing TCL commands to add the files.
+    This converts file paths to relative paths and ensures proper quoting for paths with spaces.
     """
     def strip_long_path_prefix(path):
-        # Remove the \\?\ prefix if it exists
+        # Remove the \\?\ prefix if it exists (used for long paths on Windows)
         if os.name == 'nt' and path.startswith('\\\\?\\'):
             return path[4:]
         return path
 
-    # Strip the \\?\ prefix from all file paths
+    # Strip the \\?\ prefix and compute relative paths
     stripped_file_list = [strip_long_path_prefix(file) for file in file_list]
-
-    # Compute relative paths and add quotes around file names with spaces
     replacement_list = [os.path.relpath(file, file_dir) for file in stripped_file_list]
     replacement_list = [f'"{file}"' if has_spaces(file) else file for file in replacement_list]
 
-    # Concatenate files with text before and after
+    # Generate TCL commands
     replacement_text = '\n'.join([f'add_files {{{file}}}' for file in replacement_list])
     return replacement_text
 
 def replace_placeholders_in_file(file_path, new_file_path, add_files, project_name, top_entity):
+    """
+    Replaces placeholders in a template file with actual values.
+    This is used to generate Vivado TCL scripts for creating or updating projects.
+    """
     with open(file_path, 'r') as file:
         file_contents = file.read()
     modified_contents = file_contents.replace('ADD_FILES', add_files)
@@ -148,10 +160,7 @@ def replace_placeholders_in_file(file_path, new_file_path, add_files, project_na
 def find_and_log_duplicates(file_list):
     """
     Finds duplicate file names in the file list and logs their full paths to a file.
-    Errors if duplicates are found.
-    Does not create the log file if no duplicates are found.
-
-    :param file_list: List of files to be checked for duplicates.
+    Raises an error if duplicates are found to prevent issues in the Vivado project.
     """
     file_dict = defaultdict(list)
     duplicates_found = False
@@ -167,7 +176,7 @@ def find_and_log_duplicates(file_list):
             duplicates_found = True
             break
 
-    # If duplicates are found, create the log file and write the details
+    # Log duplicates if found
     if duplicates_found:
         output_file_path = os.path.join(os.getcwd(), 'duplicate_files.log')
         with open(output_file_path, 'w') as output_file:
@@ -181,11 +190,11 @@ def find_and_log_duplicates(file_list):
 
 def copy_deps_files(file_list):
     """
-    Copies files that have "githubdeps" in the file path to the "objects/gathereddeps" folder.
-    Handles long paths by using the '\\?\' prefix on Windows.
-    Logs the file list to a file for debugging.
+    Copies files with "githubdeps" in their path to the "objects/gathereddeps" folder.
+    This ensures that dependency files are gathered in a central location for the Vivado project.
 
-    :param file_list: List of files to be copied.
+    Returns the file list of the locations of the copied files in objects/gathereddeps
+    This returned file list is used to generate the TCL add_files text.
     """
     target_folder = os.path.join(os.getcwd(), 'objects/gathereddeps')
     os.makedirs(target_folder, exist_ok=True)
@@ -202,11 +211,10 @@ def copy_deps_files(file_list):
         if 'githubdeps' in file:
             target_path = os.path.join(target_folder_long, os.path.basename(file))
             if os.path.exists(target_path):
-                os.chmod(target_path, 0o777)  # Change the file permission to writable
+                os.chmod(target_path, 0o777)  # Make the file writable
             try:
                 shutil.copy2(file, target_path)
                 new_file_list.append(target_path)
-                print(f"Copied: {file} -> {target_path}")
             except Exception as e:
                 print(f"Error copying file '{file}' to '{target_path}': {e}")
         else:
@@ -214,6 +222,10 @@ def copy_deps_files(file_list):
     return new_file_list
 
 def run_command(command, cwd=None):
+    """
+    Runs a shell command and captures its output.
+    This is used to execute Vivado commands or other system commands.
+    """
     print(command)
     result = subprocess.run(command, cwd=cwd, shell=True, capture_output=True, text=True)
     if result.returncode != 0:
@@ -225,11 +237,9 @@ def run_command(command, cwd=None):
 
 def extract_deps_from_zip(deps_folder, deps_zip_file):
     """
-    Extracts the DepsZipFile from the DepsFolder and places its contents into the DepsFolder.
-    Handles long paths by using the '\\?\' prefix on Windows.
-
+    Extracts the contents of a zip file into the specified folder.
+    This is used to manage dependencies for the Vivado project.
     """
-
     # Handle long paths on Windows
     if os.name == 'nt':
         deps_zip_file = f"\\\\?\\{os.path.abspath(deps_zip_file)}"
@@ -240,14 +250,21 @@ def extract_deps_from_zip(deps_folder, deps_zip_file):
         print(f"DepsZipFile '{deps_zip_file}' does not exist.")
         return
 
-    # Extract the zip file into the DepsFolder
+    # Extract the zip file
     try:
         shutil.unpack_archive(deps_zip_file, deps_folder, 'zip')
         print(f"Extracted '{deps_zip_file}' into '{deps_folder}'.")
     except Exception as e:
         print(f"Error extracting '{deps_zip_file}': {e}")
 
-def update_project_files(config, new=False):
+class ProjectMode(Enum):
+    NEW = "new"
+    UPDATE = "update"
+
+def create_project(mode: ProjectMode, config):
+    """
+    Creates or updates a Vivado project based on the specified mode.
+    """
     current_dir = os.getcwd()
     config_path = os.path.join(current_dir, 'vivadoprojectsettings.ini')
     new_proj_template_path = os.path.join(current_dir, 'TCL/CreateNewProjectTemplate.tcl')
@@ -261,7 +278,7 @@ def update_project_files(config, new=False):
     project_name = config.get('VivadoProjectSettings', 'VivadoProjectName')
     top_entity = config.get('VivadoProjectSettings', 'TopLevelEntity')
 
-    # Replace TOKENS in the template Vivado project scripts
+    # Replace placeholders in the template Vivado project scripts
     replace_placeholders_in_file(new_proj_template_path, new_proj_path, add_files, project_name, top_entity)
     replace_placeholders_in_file(update_proj_template_path, update_proj_path, add_files, project_name, top_entity)    
 
@@ -283,27 +300,61 @@ def update_project_files(config, new=False):
         else:  # Linux or other OS
             vivado_executable = os.path.join(vivado_path, "bin", "vivado")
 
-        if new:
-            # User wants to make a new project
-            # Don't bother checking if the project already exists, always make a new one or overwrite
+        if mode == ProjectMode.NEW:
+            # Create a new project
             run_command(f'"{vivado_executable}" -mode tcl -source {new_proj_path}', cwd=os.getcwd())
-        elif os.path.exists(project_file_path):
-            # Update the project
+        elif mode == ProjectMode.UPDATE:
+            # Update the existing project
             run_command(f'"{vivado_executable}" {project_name}.xpr -mode tcl -source {update_proj_path}', cwd=os.getcwd())
         else:
-            # Project is not there and user did not ask for a new one - throw an error
-            raise FileNotFoundError(f"The project file '{project_file_path}' does not exist. Use the --new option to create it.")      
+            raise ValueError(f"Unsupported mode: {mode}")
 
         os.chdir(current_dir)
     else:
-        print("Environment variable 'XILINX' is not set.")   
+        print("Environment variable 'XILINX' is not set.")
 
+def create_project_handler(config, overwrite=False, updatefiles=False):
+    """
+    Handles command line arguments and performs the desired create Vivado project operation.
+    """
+    project_name = config.get('VivadoProjectSettings', 'VivadoProjectName')
 
+    project_file_path = os.path.join(os.getcwd(), "VivadoProject", project_name + ".xpr")
+    print(f"Project file path: {project_file_path}")
+
+    if not overwrite and not updatefiles:
+        # User wants to create a new project
+        if os.path.exists(project_file_path):
+            # Throw error if the project already exists and they didn't ask to overwrite or update
+            raise FileExistsError(
+                f"The project file '{project_file_path}' already exists. Use the --overwrite or --updatefiles flag to modify the project."
+            )
+        else:
+            create_project(ProjectMode.NEW, config)
+    elif updatefiles and not overwrite:
+        if not os.path.exists(project_file_path):
+            # Throw error if the project does not exist and they want to update it
+            raise FileNotFoundError(
+                f"The project file '{project_file_path}' does not exist. Run without the --updatefiles flag to create a new project."
+            )
+        else:
+            create_project(ProjectMode.UPDATE, config)
+    elif overwrite and not updatefiles:
+        # Overwrite the project by creating a new one
+        create_project(ProjectMode.NEW, config)
+    else:
+        # Error case if both overwrite and updatefiles are set
+        raise ValueError("Invalid combination of arguements.")
 
 def main():
+    """
+    Main entry point for the script.
+    Parses command-line arguments and executes the requested function.
+    """
     parser = argparse.ArgumentParser(description="Vivado Project Tools")
-    parser.add_argument("function", choices=["update_project_files", "extract_deps"], help="Function to execute")
-    parser.add_argument("--new", "-n", action="store_true", help="Create a new project")
+    parser.add_argument("function", choices=["create_project", "extract_deps"], help="Function to execute")
+    parser.add_argument("--overwrite", "-o", action="store_true", help="Overwrite and create a new project")
+    parser.add_argument("--updatefiles", "-u", action="store_true", help="Update files in the existing project")
     args = parser.parse_args()
 
     config_path = os.path.join(os.getcwd(), 'vivadoprojectsettings.ini')
@@ -315,13 +366,11 @@ def main():
     config = configparser.ConfigParser()
     config.read(config_path)
 
-    # Get DepsFolder and DepsZipFile from the INI file
-    deps_folder = config.get('VivadoProjectFiles', 'DepsFolder', fallback=None)
-    deps_zip_file = config.get('VivadoProjectFiles', 'DepsZipFile', fallback=None)
-
-    if args.function == "update_project_files":
-        update_project_files(config, new=args.new)
+    if args.function == "create_project":
+        create_project_handler(config, overwrite=args.overwrite, updatefiles=args.updatefiles)
     elif args.function == "extract_deps":
+        deps_folder = config.get('VivadoProjectFiles', 'DepsFolder', fallback=None)
+        deps_zip_file = config.get('VivadoProjectFiles', 'DepsZipFile', fallback=None)
         extract_deps_from_zip(deps_folder, deps_zip_file)
 
 if __name__ == "__main__":
