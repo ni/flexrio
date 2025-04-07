@@ -9,3 +9,7 @@
 
 # Allow this .gitignore file
 !.gitignore
+
+# Allow scripts
+!*.bat
+!*.sh

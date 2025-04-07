@@ -357,20 +357,20 @@ def main():
     parser.add_argument("--updatefiles", "-u", action="store_true", help="Update files in the existing project")
     args = parser.parse_args()
 
-    config_path = os.path.join(os.getcwd(), 'vivadoprojectsettings.ini')
-
-    # Check if the configuration file exists
-    if not os.path.exists(config_path):
-        raise FileNotFoundError(f"Configuration file '{config_path}' not found. Please ensure it exists in the current working directory.")
-
-    config = configparser.ConfigParser()
-    config.read(config_path)
 
     if args.function == "create_project":
+        config_path = os.path.join(os.getcwd(), 'vivadoprojectsettings.ini')
+        # Check if the configuration file exists
+        if not os.path.exists(config_path):
+            raise FileNotFoundError(f"Configuration file '{config_path}' not found. Please ensure it exists in the current working directory.")
+        config = configparser.ConfigParser()
+        config.read(config_path)
         create_project_handler(config, overwrite=args.overwrite, updatefiles=args.updatefiles)
     elif args.function == "extract_deps":
-        deps_folder = config.get('VivadoProjectFiles', 'DepsFolder', fallback=None)
-        deps_zip_file = config.get('VivadoProjectFiles', 'DepsZipFile', fallback=None)
+        #deps_folder = config.get('VivadoProjectFiles', 'DepsFolder', fallback=None)
+        #deps_zip_file = config.get('VivadoProjectFiles', 'DepsZipFile', fallback=None)
+        deps_folder = "githubdeps"
+        deps_zip_file = "flexriodeps.zip"
         extract_deps_from_zip(deps_folder, deps_zip_file)
 
 if __name__ == "__main__":
