@@ -252,6 +252,8 @@ def extract_deps_from_zip(deps_folder, deps_zip_file):
 
     # Extract the zip file
     try:
+        # Delete everything in the target directory before extracting
+        shutil.rmtree(deps_folder, ignore_errors=True)
         shutil.unpack_archive(deps_zip_file, deps_folder, 'zip')
         print(f"Extracted '{deps_zip_file}' into '{deps_folder}'.")
     except Exception as e:

@@ -22,15 +22,9 @@
 --
 ------------------------------------------------------------------------------------------
 
--- adding comments to test build pipeline for file change
--- more comments for file change
--- more comments
--- more comments 2
--- more comments 3
--- more comments 4
--- more comments 5
--- more comments 6
--- more comments 7
+-- Ignore these comments, they will be removed eventually
+-- These comments are to force a file change that bubbles up to the release branch during testing
+-- comments
 
 library ieee;
 use ieee.std_logic_1164.all;

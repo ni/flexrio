@@ -1,4 +1,4 @@
-Note: This <b>githubvisible=true</b> tag ensures that this file is preserved for the GitHub releas
+Note: This <b>githubvisible=true</b> tag ensures that this file is preserved for the GitHub release
 
 
 # User Visible FlexRIO Releases on GitHub
@@ -7,7 +7,7 @@ Note: This <b>githubvisible=true</b> tag ensures that this file is preserved for
 
 Dependencies is a complicated part of the release process.  We have many files duplicated across all the dependencies for the FlexRIO repo.  For example, ni cores are pulled in from a normal ni cores export and also they are re-packaged within the FPGA Digital Designs export.  Different FlexRIO products may choose to depend on different versions of these files.  
 
-In our internal process, we use hwtools to pull all of the dependencies from Perforce and Nugets into one folder.  And then each product has a vsmake settings file that specifies which files from within those dependencies are used for a pariticular FPGA build.  The dependencies have very deep folder hierarchies and Vivado has trouble with long file paths.  To mitigate this, our internal tools copy the files used for the Vivado build into a single flat gatheredfiles folder.
+In our internal process, we use hwtools to pull all of the dependencies from Perforce and Nugets into one folder.  And then each product has a vsmake settings file that specifies which files from within those dependencies are used for a particular FPGA build.  The dependencies have very deep folder hierarchies and Vivado has trouble with long file paths.  To mitigate this, our internal tools copy the files used for the Vivado build into a single flat gatheredfiles folder.
 
 Our user facing process will mirror what we do in HW tools in a simpler way.  For example, internal hwtools needs to pull dependencies from a variety of sources that NI has created over the years.  For the user facing workflow, we will bundle all of those dependencies into ONE export object and give that to the user.  This means their tools won't require all the dependency syncing complexity of NI's internal process.
 
@@ -34,7 +34,7 @@ Our user facing process will mirror what we do in HW tools in a simpler way.  Fo
     * The pipeline has a <b>commit_message</b> variable which shows up on all of the files that are pushed to GitHub.  As you are developing and pushing to main in AzDO, those commit messages will not show on GitHub.  Make sure you have a good commit message that describes all of the changes that are being pushed into the release branch.  It is ideal for you to have more incremental AzDO release branch pushes rather than one mega-push that contains lots of changes.
     * Optionally review the release branch in AzDO
 3. Push to GitHub
-    * This is not supported in the AzDO pipeline yet becuase it requires a user's GitHub credentials
+    * This is not supported in the AzDO pipeline yet because it requires a user's GitHub credentials
     * Here are the steps to manually run the push script:
         > git clone https://ni@dev.azure.com/ni/DevCentral/_git/hw-flexrio
         >
