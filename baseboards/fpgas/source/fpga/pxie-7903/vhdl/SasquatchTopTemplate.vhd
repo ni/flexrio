@@ -24,7 +24,7 @@
 
 -- Ignore these comments, they will be removed eventually
 -- These comments are to force a file change that bubbles up to the release branch during testing
--- comments 1
+-- comments 2
 
 library ieee;
 use ieee.std_logic_1164.all;
