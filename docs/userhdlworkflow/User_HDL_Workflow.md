@@ -35,16 +35,17 @@ Our user facing process will mirror what we do in HW tools in a simpler way.  Fo
     * Optionally review the release branch in AzDO
 3. Push to GitHub
     * This is not supported in the AzDO pipeline yet because it requires a user's GitHub credentials
+        * Go onto GitHub and login with your SSO crecentials before proceeding
     * Here are the steps to manually run the push script:
         > git clone https://ni@dev.azure.com/ni/DevCentral/_git/hw-flexrio
         >
-        > cd hw-flexrio/baseboards/fpgas
+        > cd hw-flexrio/targets
         >
-        > git checkout users/ssantolu/flexrionew <-- replace this with MAIN branch later
+        > git checkout main (probably not needed, should be on main branch already)
         >
         > hwsetup
         >
-        > python buildall.py --flow=pushgithubrelease
+        > python build.py --flow=pushgithubrelease
 4. On GitHub, complete the pull request
     * Review and sanity check that things look OK
 5. On GitHub, create a release that contains the bundled dependencies zip file
