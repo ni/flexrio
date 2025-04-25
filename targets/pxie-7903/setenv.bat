@@ -21,10 +21,12 @@ if not defined XILINX (
     exit /b 1
 )
 
-REM Add ..\..\lvfpgahdltools\vivadoprojecttools to the PATH
+REM Add tools to the PATH
 set "VIVADO_PROJECT_TOOLS=..\..\lvfpgahdltools\vivadoprojecttools"
-set "PATH=%PATH%;%VIVADO_PROJECT_TOOLS%"
+set "LV_TARGET_TOOLS=..\..\lvfpgahdltools\lvtargettools"
+set "PATH=%PATH%;%VIVADO_PROJECT_TOOLS%;%LV_TARGET_TOOLS%"
 
 REM Print the XILINX variable for confirmation
 echo XILINX is set to "%XILINX%"
 echo PATH is updated to include "%VIVADO_PROJECT_TOOLS%"
+echo PATH is updated to include "%LV_TARGET_TOOLS%"
