@@ -1,14 +1,14 @@
 
 ###################################################################################
 ##
-## Automatically generated XDC file. Do not modify manually!
+## 
 ##
 ###################################################################################
 ## Start add from file DramConstraints.xdc
 
 ###################################################################################
 ##
-## Automatically generated XDC file. Do not modify manually!
+## 
 ##
 ###################################################################################
 ## Start add from file SasquatchBank0Dram.xdc
@@ -779,7 +779,7 @@ current_instance HostInterfacex/Inchwormx/InchwormNetlist
 
 ###################################################################################
 ##
-## Automatically generated XDC file. Do not modify manually!
+## 
 ##
 ###################################################################################
 
@@ -959,7 +959,7 @@ current_instance AtmelAuthenticationTopx
 
 ###################################################################################
 ##
-## Automatically generated XDC file. Do not modify manually!
+## 
 ##
 ###################################################################################
 
@@ -1295,7 +1295,7 @@ current_instance HostInterfacex/IFifox/IFifoNetlistx
 
 ###################################################################################
 ##
-## Automatically generated XDC file. Do not modify manually!
+## 
 ##
 ###################################################################################
 set MacallanIFifoN0 [current_instance .]
@@ -2258,7 +2258,7 @@ current_instance HostInterfacex/IwCompanionx/IwCompanionNx
 
 ###################################################################################
 ##
-## Automatically generated XDC file. Do not modify manually!
+## 
 ##
 ###################################################################################
 set BasePath DmaClockRSD
@@ -2504,7 +2504,7 @@ current_instance TimingEnginex
 
 ###################################################################################
 ##
-## Automatically generated XDC file. Do not modify manually!
+## 
 ##
 ###################################################################################
 set PxieUspTimingEngine0 [current_instance .]
@@ -3526,7 +3526,7 @@ current_instance FixedLogicWrapperx/MacallanFixedLogicx
 
 ###################################################################################
 ##
-## Automatically generated XDC file. Do not modify manually!
+## 
 ##
 ###################################################################################
 set BasePath DmaClockRSD
