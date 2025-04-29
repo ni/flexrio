@@ -257,11 +257,10 @@ def create_project(mode: ProjectMode, config):
     Creates or updates a Vivado project based on the specified mode.
     """
     current_dir = os.getcwd()
-    config_path = os.path.join(current_dir, 'vivadoprojectsettings.ini')
     new_proj_template_path = os.path.join(current_dir, 'TCL/CreateNewProjectTemplate.tcl')
-    new_proj_path = os.path.join(current_dir, 'TCL/CreateNewProject.tcl')    
+    new_proj_path = os.path.join(current_dir, 'objects/TCL/CreateNewProject.tcl')    
     update_proj_template_path = os.path.join(current_dir, 'TCL/UpdateProjectFilesTemplate.tcl')
-    update_proj_path = os.path.join(current_dir, 'TCL/UpdateProjectFiles.tcl')    
+    update_proj_path = os.path.join(current_dir, 'objects/TCL/UpdateProjectFiles.tcl')    
     
     file_list = get_vivado_project_files(config)
     add_files = get_TCL_add_files_text(file_list, os.path.join(current_dir, 'TCL'))
@@ -358,8 +357,6 @@ def main():
         config.read(config_path)
         create_project_handler(config, overwrite=args.overwrite, updatefiles=args.updatefiles)
     elif args.function == "extract_deps":
-        #deps_folder = config.get('VivadoProjectFiles', 'DepsFolder', fallback=None)
-        #deps_zip_file = config.get('VivadoProjectFiles', 'DepsZipFile', fallback=None)
         deps_folder = "githubdeps"
         deps_zip_file = "flexriodeps.zip"
         extract_deps_from_zip(deps_folder, deps_zip_file)
