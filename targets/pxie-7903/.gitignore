@@ -1,6 +1,4 @@
 # Keep this .gitignore file when building user FlexRIO release
 # githubvisible=true
 /objects
-/TCL/UpdateProjectFiles.tcl
-/TCL/CreateNewProject.tcl
 /VivadoProject/*
