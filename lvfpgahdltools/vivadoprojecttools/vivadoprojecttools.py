@@ -47,23 +47,52 @@ def remove_files_from_list(list_a, list_b):
 def get_vivado_project_files(config):
     """
     Processes the configuration to generate the list of files for the Vivado project.
-    This also identifies duplicates and handles dependencies.
+    This includes applying inclusion/exclusion rules, removing duplicates, and handling dependencies.
     """
-    # Get the lists of Vivado project files from the configuration
-    lists_of_files = config.get('VivadoProjectSettings', 'VivadoProjectFilesLists').split()
-    
-    # Combine all file lists into a single file_list
-    file_list = []
-    for file_list_path in lists_of_files:
-        if os.path.exists(file_list_path):
-            with open(file_list_path, 'r') as f:
-                for line in f:
-                    line = line.strip()
-                    if line and not line.startswith('#'):  # Skip empty lines and comments
-                        file_list.append(fix_file_slashes(line))
-        else:
-            raise FileNotFoundError(f"File list path '{file_list_path}' does not exist.")
-        
+    # Read inclusion and exclusion rules from the configuration
+    include_folders = config.get('VivadoProjectFiles', 'IncludeFolders').split()
+    exclude_folders = config.get('VivadoProjectFiles', 'ExcludeFolders').split()
+    include_files = config.get('VivadoProjectFiles', 'IncludeFiles').split()
+    exclude_files = config.get('VivadoProjectFiles', 'ExcludeFiles').split()
+
+    # Replace $DepsFolder$ placeholders with the actual DepsFolder value
+    deps_folder = config.get('VivadoProjectFiles', 'DepsFolder', fallback=None)
+    if deps_folder:
+        include_folders = [file.replace("$DepsFolder$", deps_folder) for file in include_folders]   
+        exclude_folders = [file.replace("$DepsFolder$", deps_folder) for file in exclude_folders]  
+        include_files = [file.replace("$DepsFolder$", deps_folder) for file in include_files]  
+        exclude_files = [file.replace("$DepsFolder$", deps_folder) for file in exclude_files]  
+
+    # Gather files from included folders
+    include_folder_files = []
+    for folder in include_folders:
+        include_folder_files.extend(list_all_files(folder))
+
+    # Gather files from excluded folders
+    exclude_folder_files = []
+    for folder in exclude_folders:
+        exclude_folder_files.extend(list_all_files(folder))    
+
+    # ----------------------------------------------------
+    # Apply inclusion and exclusion rules
+    # THIS ORDER MATTERS - it must match the order sess in the vivadoprojectsettings.ini file
+    # ----------------------------------------------------
+    # First - add all the files from the include folders
+    file_list = include_folder_files
+    # Second - remove the files from the exclude folders
+    file_list = remove_files_from_list(file_list, exclude_folder_files)
+    # Third - add the files from the include files list
+    file_list = add_files_to_list(file_list, include_files)
+    # Fourth (last) - remove the files from the exclude files list
+    file_list = remove_files_from_list(file_list, exclude_files)
+
+    # A bunch of tb_ files get into the Vivado project that should not be there
+    # TODO - remove this when we have the INI file setup to exclude the testbench files
+    #  or remove when we are having Vivado prune unused files from the project
+    file_list = [file for file in file_list if "tb_" not in file.lower()]
+    # Remove duplicate file paths from the list.
+    file_list = list(set(file_list))
+
     # Check for duplicate file names and log them
     find_and_log_duplicates(file_list)
 
@@ -113,9 +142,6 @@ def replace_placeholders_in_file(file_path, new_file_path, add_files, project_na
     modified_contents = file_contents.replace('ADD_FILES', add_files)
     modified_contents = modified_contents.replace('PROJ_NAME', project_name)
     modified_contents = modified_contents.replace('TOP_ENTITY', top_entity)
-
-    # Create the directory for the new file if it doesn't exist
-    os.makedirs(os.path.dirname(new_file_path), exist_ok=True)
 
     with open(new_file_path, 'w') as file:
         file.write(modified_contents)
@@ -179,7 +205,7 @@ def copy_deps_files(file_list):
                 shutil.copy2(file, target_path)
                 new_file_list.append(target_path)
             except Exception as e:
-                raise IOError(f"Error copying file '{file}' to '{target_path}': {e}")
+                print(f"Error copying file '{file}' to '{target_path}': {e}")
         else:
             new_file_list.append(file)
     return new_file_list
@@ -231,10 +257,11 @@ def create_project(mode: ProjectMode, config):
     Creates or updates a Vivado project based on the specified mode.
     """
     current_dir = os.getcwd()
+    config_path = os.path.join(current_dir, 'vivadoprojectsettings.ini')
     new_proj_template_path = os.path.join(current_dir, 'TCL/CreateNewProjectTemplate.tcl')
-    new_proj_path = os.path.join(current_dir, 'objects/TCL/CreateNewProject.tcl')    
+    new_proj_path = os.path.join(current_dir, 'TCL/CreateNewProject.tcl')    
     update_proj_template_path = os.path.join(current_dir, 'TCL/UpdateProjectFilesTemplate.tcl')
-    update_proj_path = os.path.join(current_dir, 'objects/TCL/UpdateProjectFiles.tcl')    
+    update_proj_path = os.path.join(current_dir, 'TCL/UpdateProjectFiles.tcl')    
     
     file_list = get_vivado_project_files(config)
     add_files = get_TCL_add_files_text(file_list, os.path.join(current_dir, 'TCL'))
@@ -331,6 +358,8 @@ def main():
         config.read(config_path)
         create_project_handler(config, overwrite=args.overwrite, updatefiles=args.updatefiles)
     elif args.function == "extract_deps":
+        #deps_folder = config.get('VivadoProjectFiles', 'DepsFolder', fallback=None)
+        #deps_zip_file = config.get('VivadoProjectFiles', 'DepsZipFile', fallback=None)
         deps_folder = "githubdeps"
         deps_zip_file = "flexriodeps.zip"
         extract_deps_from_zip(deps_folder, deps_zip_file)
