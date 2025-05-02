@@ -47,52 +47,23 @@ def remove_files_from_list(list_a, list_b):
 def get_vivado_project_files(config):
     """
     Processes the configuration to generate the list of files for the Vivado project.
-    This includes applying inclusion/exclusion rules, removing duplicates, and handling dependencies.
+    This also identifies duplicates and handles dependencies.
     """
-    # Read inclusion and exclusion rules from the configuration
-    include_folders = config.get('VivadoProjectFiles', 'IncludeFolders').split()
-    exclude_folders = config.get('VivadoProjectFiles', 'ExcludeFolders').split()
-    include_files = config.get('VivadoProjectFiles', 'IncludeFiles').split()
-    exclude_files = config.get('VivadoProjectFiles', 'ExcludeFiles').split()
-
-    # Replace $DepsFolder$ placeholders with the actual DepsFolder value
-    deps_folder = config.get('VivadoProjectFiles', 'DepsFolder', fallback=None)
-    if deps_folder:
-        include_folders = [file.replace("$DepsFolder$", deps_folder) for file in include_folders]   
-        exclude_folders = [file.replace("$DepsFolder$", deps_folder) for file in exclude_folders]  
-        include_files = [file.replace("$DepsFolder$", deps_folder) for file in include_files]  
-        exclude_files = [file.replace("$DepsFolder$", deps_folder) for file in exclude_files]  
-
-    # Gather files from included folders
-    include_folder_files = []
-    for folder in include_folders:
-        include_folder_files.extend(list_all_files(folder))
-
-    # Gather files from excluded folders
-    exclude_folder_files = []
-    for folder in exclude_folders:
-        exclude_folder_files.extend(list_all_files(folder))    
-
-    # ----------------------------------------------------
-    # Apply inclusion and exclusion rules
-    # THIS ORDER MATTERS - it must match the order sess in the vivadoprojectsettings.ini file
-    # ----------------------------------------------------
-    # First - add all the files from the include folders
-    file_list = include_folder_files
-    # Second - remove the files from the exclude folders
-    file_list = remove_files_from_list(file_list, exclude_folder_files)
-    # Third - add the files from the include files list
-    file_list = add_files_to_list(file_list, include_files)
-    # Fourth (last) - remove the files from the exclude files list
-    file_list = remove_files_from_list(file_list, exclude_files)
-
-    # A bunch of tb_ files get into the Vivado project that should not be there
-    # TODO - remove this when we have the INI file setup to exclude the testbench files
-    #  or remove when we are having Vivado prune unused files from the project
-    file_list = [file for file in file_list if "tb_" not in file.lower()]
-    # Remove duplicate file paths from the list.
-    file_list = list(set(file_list))
-
+    # Get the lists of Vivado project files from the configuration
+    lists_of_files = config.get('VivadoProjectSettings', 'VivadoProjectFilesLists').split()
+    
+    # Combine all file lists into a single file_list
+    file_list = []
+    for file_list_path in lists_of_files:
+        if os.path.exists(file_list_path):
+            with open(file_list_path, 'r') as f:
+                for line in f:
+                    line = line.strip()
+                    if line and not line.startswith('#'):  # Skip empty lines and comments
+                        file_list.append(fix_file_slashes(line))
+        else:
+            raise FileNotFoundError(f"File list path '{file_list_path}' does not exist.")
+        
     # Check for duplicate file names and log them
     find_and_log_duplicates(file_list)
 
