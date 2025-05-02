@@ -113,7 +113,7 @@ def replace_placeholders_in_file(file_path, new_file_path, add_files, project_na
     modified_contents = file_contents.replace('ADD_FILES', add_files)
     modified_contents = modified_contents.replace('PROJ_NAME', project_name)
     modified_contents = modified_contents.replace('TOP_ENTITY', top_entity)
-    
+
     # Create the directory for the new file if it doesn't exist
     os.makedirs(os.path.dirname(new_file_path), exist_ok=True)
 
@@ -179,7 +179,7 @@ def copy_deps_files(file_list):
                 shutil.copy2(file, target_path)
                 new_file_list.append(target_path)
             except Exception as e:
-                print(f"Error copying file '{file}' to '{target_path}': {e}")
+                raise IOError(f"Error copying file '{file}' to '{target_path}': {e}")
         else:
             new_file_list.append(file)
     return new_file_list
