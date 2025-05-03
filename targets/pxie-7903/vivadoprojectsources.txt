@@ -1,0 +1,7 @@
+../common/rtl-lvfpga/G3UspGtyHostInterface.vhd
+../common/rtl-lvfpga/IoRefClkSelect.vhd
+../common/rtl-lvfpga/SasquatchIoBuffers.vhd
+../common/rtl-lvfpga/SasquatchIoBuffersStage1.vhd
+../common/rtl-lvfpga/packages/PkgSasquatch.vhd
+rtl-lvfpga/PkgFlexRioTargetConfig.vhd
+rtl-lvfpga/SasquatchTopTemplate.vhd
