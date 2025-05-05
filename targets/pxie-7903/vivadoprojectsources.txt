@@ -5,3 +5,5 @@
 ../common/rtl-lvfpga/packages/PkgSasquatch.vhd
 rtl-lvfpga/PkgFlexRioTargetConfig.vhd
 rtl-lvfpga/SasquatchTopTemplate.vhd
+xdc/constraints.xdc
+xdc/constraints_place.xdc

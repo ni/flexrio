@@ -139,9 +139,14 @@ def find_and_log_duplicates(file_list):
             duplicates_found = True
             break
 
+    output_file_path = os.path.join(os.getcwd(), 'duplicate_files.log')  
+
+    # Delete any existing log file
+    if os.path.exists(output_file_path):
+        os.remove(output_file_path)
+
     # Log duplicates if found
     if duplicates_found:
-        output_file_path = os.path.join(os.getcwd(), 'duplicate_files.log')
         with open(output_file_path, 'w') as output_file:
             for file_name, paths in file_dict.items():
                 if len(paths) > 1:
