@@ -240,10 +240,10 @@ entity TheWindow is
     MgtRefClk_p               : in    std_logic_vector (11 downto 0);
     MgtRefClk_n               : in    std_logic_vector (11 downto 0);
     -- MGTs
-    MgtPortRx_p               : in    std_logic_vector (47 downto 0);
-    MgtPortRx_n               : in    std_logic_vector (47 downto 0);
-    MgtPortTx_p               : out   std_logic_vector (47 downto 0);
-    MgtPortTx_n               : out   std_logic_vector (47 downto 0);
+--    MgtPortRx_p               : in    std_logic_vector (47 downto 0);
+--    MgtPortRx_n               : in    std_logic_vector (47 downto 0);
+--    MgtPortTx_p               : out   std_logic_vector (47 downto 0);
+--    MgtPortTx_n               : out   std_logic_vector (47 downto 0);
 
     -- Base board DIO
     aDio                      : inout std_logic_vector(7 downto 0);

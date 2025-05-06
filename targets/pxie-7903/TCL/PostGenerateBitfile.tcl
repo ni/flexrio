@@ -1,2 +1,2 @@
 #githubvisible=true
-exec "..\\..\\..\\CreateBitfile.bat"
+exec "..\\..\\..\\lvfpgahdltools\\vivadoprojecttools\\createbitfile.bat"
