@@ -51,6 +51,46 @@ Our user facing process will mirror what we do in HW tools in a simpler way.  Fo
     * Extract the deliverables\githubflexrioreleasedeps\flexriodeps.zip file
     * Create a Release on GitHub and attach the zip file 
 
+## Supporting GitHub Release on a New Target
+* Set the "supportsgithubrelease" parameter to True in targetconfig.py
+* Add "githubvisible=true" to the header comments of each HDL file you wish to show up on GitHub
+* Add the license header text (replace any existing copyright header that was in the file)
+> MIT License<br />
+> 
+> Copyright (c) 2025 National Instruments Corporation<br />
+> 
+> Permission is hereby granted, free of charge, to any person obtaining a copy of this<br />
+> software and associated documentation files (the "Software"), to deal in the Software<br />
+> without restriction, including without limitation the rights to use, copy, modify, merge,<br />
+> publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons<br />
+> to whom the Software is furnished to do so, subject to the following conditions:<br />
+> 
+> The above copyright notice and this permission notice shall be included in all copies or<br />
+> substantial portions of the Software.<br />
+> 
+> THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,<br />
+> INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR<br />
+> PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE<br />
+> FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR<br />
+> OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER<br />
+> DEALINGS IN THE SOFTWARE.<br />
+* Create the vivadoprojectsettings.ini file in the pxie-7xxx directory
+* Add setenv.bat and setenv.sh to the pxie-7xxx directory
+* Add a TCL folder to the pxie-7xxx directory
+    * Required TCL files:
+        * CreateNewProjectTemplate.tcl
+        * PostGenerateBitfile.tcl
+        * PreGenerateBitfile.tcl
+        * PreSynthesize.tcl
+        * SynthProject2.tcl
+        * UpdateProjectFilesTemplate.tcl
+    * The CreateNewProjectTemplate is derived from settings used in the target project from a LV FPGA Vivado Project Export
+* Add a .gitignore file to ignore objects and VivadoProject folders
+* Convert TheWindow.vhd to TheWindow.vhd.mako (following what the PXIe-7903 does)
+* Convert the target's resource XML to mako (following what is done in Sasquatch7903.xml.mako)
+
+
+
 ## FAQ
 ### Why don't we leverage hwtools for the user-facing side of the workflow?
 ### Why are the user FlexRIO dependencies delivered in a zip file?
