@@ -88,6 +88,7 @@ Our user facing process will mirror what we do in HW tools in a simpler way.  Fo
 * Add a .gitignore file to ignore objects and VivadoProject folders
 * Convert TheWindow.vhd to TheWindow.vhd.mako (following what the PXIe-7903 does)
 * Convert the target's resource XML to mako (following what is done in Sasquatch7903.xml.mako)
+* Add GitHub.xdc into the cfmakesettings.xml file to show users where to insert custom constraints
 
 
 
