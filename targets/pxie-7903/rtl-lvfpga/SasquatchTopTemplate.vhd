@@ -6,9 +6,25 @@
 -- Date: 09 April 2019
 --
 ------------------------------------------------------------------------------------------
--- (c) 2019 Copyright National Instruments Corporation
--- All Rights Reserved
--- National Instruments Internal Information
+-- MIT License
+-- 
+-- Copyright (c) 2025 National Instruments Corporation
+-- 
+-- Permission is hereby granted, free of charge, to any person obtaining a copy of this
+-- software and associated documentation files (the "Software"), to deal in the Software
+-- without restriction, including without limitation the rights to use, copy, modify, merge,
+-- publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons
+-- to whom the Software is furnished to do so, subject to the following conditions:
+-- 
+-- The above copyright notice and this permission notice shall be included in all copies or
+-- substantial portions of the Software.
+-- 
+-- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+-- INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+-- PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
+-- FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+-- OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+-- DEALINGS IN THE SOFTWARE.
 ------------------------------------------------------------------------------------------
 --
 -- Purpose: This is the top level file for the 7903
@@ -22,9 +38,6 @@
 --
 ------------------------------------------------------------------------------------------
 
--- Ignore these comments, they will be removed eventually
--- These comments are to force a file change that bubbles up to the release branch during testing
--- comments 2
 
 library ieee;
 use ieee.std_logic_1164.all;
@@ -167,198 +180,208 @@ entity SasquatchTopTemplate is
     MgtRefClk_n          : in    std_logic_vector (11 downto 0);
     -- MGTs
     --@@BEGIN TOP_LEVEL_PORT
-    MgtPortRxLane0_p     : in    std_logic;
-    MgtPortRxLane1_p     : in    std_logic;
-    MgtPortRxLane2_p     : in    std_logic;
-    MgtPortRxLane3_p     : in    std_logic;
-    MgtPortRxLane4_p     : in    std_logic;
-    MgtPortRxLane5_p     : in    std_logic;
-    MgtPortRxLane6_p     : in    std_logic;
-    MgtPortRxLane7_p     : in    std_logic;
-    MgtPortRxLane8_p     : in    std_logic;
-    MgtPortRxLane9_p     : in    std_logic;
-    MgtPortRxLane10_p    : in    std_logic;
-    MgtPortRxLane11_p    : in    std_logic;
-    MgtPortRxLane12_p    : in    std_logic;
-    MgtPortRxLane13_p    : in    std_logic;
-    MgtPortRxLane14_p    : in    std_logic;
-    MgtPortRxLane15_p    : in    std_logic;
-    MgtPortRxLane16_p    : in    std_logic;
-    MgtPortRxLane17_p    : in    std_logic;
-    MgtPortRxLane18_p    : in    std_logic;
-    MgtPortRxLane19_p    : in    std_logic;
-    MgtPortRxLane20_p    : in    std_logic;
-    MgtPortRxLane21_p    : in    std_logic;
-    MgtPortRxLane22_p    : in    std_logic;
-    MgtPortRxLane23_p    : in    std_logic;
-    MgtPortRxLane24_p    : in    std_logic;
-    MgtPortRxLane25_p    : in    std_logic;
-    MgtPortRxLane26_p    : in    std_logic;
-    MgtPortRxLane27_p    : in    std_logic;
-    MgtPortRxLane28_p    : in    std_logic;
-    MgtPortRxLane29_p    : in    std_logic;
-    MgtPortRxLane30_p    : in    std_logic;
-    MgtPortRxLane31_p    : in    std_logic;
-    MgtPortRxLane32_p    : in    std_logic;
-    MgtPortRxLane33_p    : in    std_logic;
-    MgtPortRxLane34_p    : in    std_logic;
-    MgtPortRxLane35_p    : in    std_logic;
-    MgtPortRxLane36_p    : in    std_logic;
-    MgtPortRxLane37_p    : in    std_logic;
-    MgtPortRxLane38_p    : in    std_logic;
-    MgtPortRxLane39_p    : in    std_logic;
-    MgtPortRxLane40_p    : in    std_logic;
-    MgtPortRxLane41_p    : in    std_logic;
-    MgtPortRxLane42_p    : in    std_logic;
-    MgtPortRxLane43_p    : in    std_logic;
-    MgtPortRxLane44_p    : in    std_logic;
-    MgtPortRxLane45_p    : in    std_logic;
-    MgtPortRxLane46_p    : in    std_logic;
-    MgtPortRxLane47_p    : in    std_logic;
-    MgtPortRxLane0_n     : in    std_logic;
-    MgtPortRxLane1_n     : in    std_logic;
-    MgtPortRxLane2_n     : in    std_logic;
-    MgtPortRxLane3_n     : in    std_logic;
-    MgtPortRxLane4_n     : in    std_logic;
-    MgtPortRxLane5_n     : in    std_logic;
-    MgtPortRxLane6_n     : in    std_logic;
-    MgtPortRxLane7_n     : in    std_logic;
-    MgtPortRxLane8_n     : in    std_logic;
-    MgtPortRxLane9_n     : in    std_logic;
-    MgtPortRxLane10_n    : in    std_logic;
-    MgtPortRxLane11_n    : in    std_logic;
-    MgtPortRxLane12_n    : in    std_logic;
-    MgtPortRxLane13_n    : in    std_logic;
-    MgtPortRxLane14_n    : in    std_logic;
-    MgtPortRxLane15_n    : in    std_logic;
-    MgtPortRxLane16_n    : in    std_logic;
-    MgtPortRxLane17_n    : in    std_logic;
-    MgtPortRxLane18_n    : in    std_logic;
-    MgtPortRxLane19_n    : in    std_logic;
-    MgtPortRxLane20_n    : in    std_logic;
-    MgtPortRxLane21_n    : in    std_logic;
-    MgtPortRxLane22_n    : in    std_logic;
-    MgtPortRxLane23_n    : in    std_logic;
-    MgtPortRxLane24_n    : in    std_logic;
-    MgtPortRxLane25_n    : in    std_logic;
-    MgtPortRxLane26_n    : in    std_logic;
-    MgtPortRxLane27_n    : in    std_logic;
-    MgtPortRxLane28_n    : in    std_logic;
-    MgtPortRxLane29_n    : in    std_logic;
-    MgtPortRxLane30_n    : in    std_logic;
-    MgtPortRxLane31_n    : in    std_logic;
-    MgtPortRxLane32_n    : in    std_logic;
-    MgtPortRxLane33_n    : in    std_logic;
-    MgtPortRxLane34_n    : in    std_logic;
-    MgtPortRxLane35_n    : in    std_logic;
-    MgtPortRxLane36_n    : in    std_logic;
-    MgtPortRxLane37_n    : in    std_logic;
-    MgtPortRxLane38_n    : in    std_logic;
-    MgtPortRxLane39_n    : in    std_logic;
-    MgtPortRxLane40_n    : in    std_logic;
-    MgtPortRxLane41_n    : in    std_logic;
-    MgtPortRxLane42_n    : in    std_logic;
-    MgtPortRxLane43_n    : in    std_logic;
-    MgtPortRxLane44_n    : in    std_logic;
-    MgtPortRxLane45_n    : in    std_logic;
-    MgtPortRxLane46_n    : in    std_logic;
-    MgtPortRxLane47_n    : in    std_logic;
-    MgtPortTxLane0_p     : out   std_logic;
-    MgtPortTxLane1_p     : out   std_logic;
-    MgtPortTxLane2_p     : out   std_logic;
-    MgtPortTxLane3_p     : out   std_logic;
-    MgtPortTxLane4_p     : out   std_logic;
-    MgtPortTxLane5_p     : out   std_logic;
-    MgtPortTxLane6_p     : out   std_logic;
-    MgtPortTxLane7_p     : out   std_logic;
-    MgtPortTxLane8_p     : out   std_logic;
-    MgtPortTxLane9_p     : out   std_logic;
-    MgtPortTxLane10_p    : out   std_logic;
-    MgtPortTxLane11_p    : out   std_logic;
-    MgtPortTxLane12_p    : out   std_logic;
-    MgtPortTxLane13_p    : out   std_logic;
-    MgtPortTxLane14_p    : out   std_logic;
-    MgtPortTxLane15_p    : out   std_logic;
-    MgtPortTxLane16_p    : out   std_logic;
-    MgtPortTxLane17_p    : out   std_logic;
-    MgtPortTxLane18_p    : out   std_logic;
-    MgtPortTxLane19_p    : out   std_logic;
-    MgtPortTxLane20_p    : out   std_logic;
-    MgtPortTxLane21_p    : out   std_logic;
-    MgtPortTxLane22_p    : out   std_logic;
-    MgtPortTxLane23_p    : out   std_logic;
-    MgtPortTxLane24_p    : out   std_logic;
-    MgtPortTxLane25_p    : out   std_logic;
-    MgtPortTxLane26_p    : out   std_logic;
-    MgtPortTxLane27_p    : out   std_logic;
-    MgtPortTxLane28_p    : out   std_logic;
-    MgtPortTxLane29_p    : out   std_logic;
-    MgtPortTxLane30_p    : out   std_logic;
-    MgtPortTxLane31_p    : out   std_logic;
-    MgtPortTxLane32_p    : out   std_logic;
-    MgtPortTxLane33_p    : out   std_logic;
-    MgtPortTxLane34_p    : out   std_logic;
-    MgtPortTxLane35_p    : out   std_logic;
-    MgtPortTxLane36_p    : out   std_logic;
-    MgtPortTxLane37_p    : out   std_logic;
-    MgtPortTxLane38_p    : out   std_logic;
-    MgtPortTxLane39_p    : out   std_logic;
-    MgtPortTxLane40_p    : out   std_logic;
-    MgtPortTxLane41_p    : out   std_logic;
-    MgtPortTxLane42_p    : out   std_logic;
-    MgtPortTxLane43_p    : out   std_logic;
-    MgtPortTxLane44_p    : out   std_logic;
-    MgtPortTxLane45_p    : out   std_logic;
-    MgtPortTxLane46_p    : out   std_logic;
-    MgtPortTxLane47_p    : out   std_logic;
-    MgtPortTxLane0_n     : out   std_logic;
-    MgtPortTxLane1_n     : out   std_logic;
-    MgtPortTxLane2_n     : out   std_logic;
-    MgtPortTxLane3_n     : out   std_logic;
-    MgtPortTxLane4_n     : out   std_logic;
-    MgtPortTxLane5_n     : out   std_logic;
-    MgtPortTxLane6_n     : out   std_logic;
-    MgtPortTxLane7_n     : out   std_logic;
-    MgtPortTxLane8_n     : out   std_logic;
-    MgtPortTxLane9_n     : out   std_logic;
-    MgtPortTxLane10_n    : out   std_logic;
-    MgtPortTxLane11_n    : out   std_logic;
-    MgtPortTxLane12_n    : out   std_logic;
-    MgtPortTxLane13_n    : out   std_logic;
-    MgtPortTxLane14_n    : out   std_logic;
-    MgtPortTxLane15_n    : out   std_logic;
-    MgtPortTxLane16_n    : out   std_logic;
-    MgtPortTxLane17_n    : out   std_logic;
-    MgtPortTxLane18_n    : out   std_logic;
-    MgtPortTxLane19_n    : out   std_logic;
-    MgtPortTxLane20_n    : out   std_logic;
-    MgtPortTxLane21_n    : out   std_logic;
-    MgtPortTxLane22_n    : out   std_logic;
-    MgtPortTxLane23_n    : out   std_logic;
-    MgtPortTxLane24_n    : out   std_logic;
-    MgtPortTxLane25_n    : out   std_logic;
-    MgtPortTxLane26_n    : out   std_logic;
-    MgtPortTxLane27_n    : out   std_logic;
-    MgtPortTxLane28_n    : out   std_logic;
-    MgtPortTxLane29_n    : out   std_logic;
-    MgtPortTxLane30_n    : out   std_logic;
-    MgtPortTxLane31_n    : out   std_logic;
-    MgtPortTxLane32_n    : out   std_logic;
-    MgtPortTxLane33_n    : out   std_logic;
-    MgtPortTxLane34_n    : out   std_logic;
-    MgtPortTxLane35_n    : out   std_logic;
-    MgtPortTxLane36_n    : out   std_logic;
-    MgtPortTxLane37_n    : out   std_logic;
-    MgtPortTxLane38_n    : out   std_logic;
-    MgtPortTxLane39_n    : out   std_logic;
-    MgtPortTxLane40_n    : out   std_logic;
-    MgtPortTxLane41_n    : out   std_logic;
-    MgtPortTxLane42_n    : out   std_logic;
-    MgtPortTxLane43_n    : out   std_logic;
-    MgtPortTxLane44_n    : out   std_logic;
-    MgtPortTxLane45_n    : out   std_logic;
-    MgtPortTxLane46_n    : out   std_logic;
-    MgtPortTxLane47_n    : out   std_logic;
+--
+-- TheWindow.vhd is generated by LabVIEW FPGA.  We ship a stub to ensure that we can synthesize the design.
+-- Vivado will error when building a design that has MGT lines in the top level entity that are not connected
+-- to anything.  So we comment out the MGT lines in the top level and in the Window stub.
+--
+-- If you are making a custom FPGA target, the MGT lines will be statically connected to your MGT logic.  If you are
+-- using this FPGA target with a CLIP in LabVIEW FPGA, these MGT signals will be auto-generated by LV FPGA when it
+-- processes the VHDL files.  The @ @ BEGIN / END around these signals is where LV FPGA generates the ports.
+--
+--    
+--    MgtPortRxLane0_p     : in    std_logic;
+--    MgtPortRxLane1_p     : in    std_logic;
+--    MgtPortRxLane2_p     : in    std_logic;
+--    MgtPortRxLane3_p     : in    std_logic;
+--    MgtPortRxLane4_p     : in    std_logic;
+--    MgtPortRxLane5_p     : in    std_logic;
+--    MgtPortRxLane6_p     : in    std_logic;
+--    MgtPortRxLane7_p     : in    std_logic;
+--    MgtPortRxLane8_p     : in    std_logic;
+--    MgtPortRxLane9_p     : in    std_logic;
+--    MgtPortRxLane10_p    : in    std_logic;
+--    MgtPortRxLane11_p    : in    std_logic;
+--    MgtPortRxLane12_p    : in    std_logic;
+--    MgtPortRxLane13_p    : in    std_logic;
+--    MgtPortRxLane14_p    : in    std_logic;
+--    MgtPortRxLane15_p    : in    std_logic;
+--    MgtPortRxLane16_p    : in    std_logic;
+--    MgtPortRxLane17_p    : in    std_logic;
+--    MgtPortRxLane18_p    : in    std_logic;
+--    MgtPortRxLane19_p    : in    std_logic;
+--    MgtPortRxLane20_p    : in    std_logic;
+--    MgtPortRxLane21_p    : in    std_logic;
+--    MgtPortRxLane22_p    : in    std_logic;
+--    MgtPortRxLane23_p    : in    std_logic;
+--    MgtPortRxLane24_p    : in    std_logic;
+--    MgtPortRxLane25_p    : in    std_logic;
+--    MgtPortRxLane26_p    : in    std_logic;
+--    MgtPortRxLane27_p    : in    std_logic;
+--    MgtPortRxLane28_p    : in    std_logic;
+--    MgtPortRxLane29_p    : in    std_logic;
+--    MgtPortRxLane30_p    : in    std_logic;
+--    MgtPortRxLane31_p    : in    std_logic;
+--    MgtPortRxLane32_p    : in    std_logic;
+--    MgtPortRxLane33_p    : in    std_logic;
+--    MgtPortRxLane34_p    : in    std_logic;
+--    MgtPortRxLane35_p    : in    std_logic;
+--    MgtPortRxLane36_p    : in    std_logic;
+--    MgtPortRxLane37_p    : in    std_logic;
+--    MgtPortRxLane38_p    : in    std_logic;
+--    MgtPortRxLane39_p    : in    std_logic;
+--    MgtPortRxLane40_p    : in    std_logic;
+--    MgtPortRxLane41_p    : in    std_logic;
+--    MgtPortRxLane42_p    : in    std_logic;
+--    MgtPortRxLane43_p    : in    std_logic;
+--    MgtPortRxLane44_p    : in    std_logic;
+--    MgtPortRxLane45_p    : in    std_logic;
+--    MgtPortRxLane46_p    : in    std_logic;
+--    MgtPortRxLane47_p    : in    std_logic;
+--    MgtPortRxLane0_n     : in    std_logic;
+--    MgtPortRxLane1_n     : in    std_logic;
+--    MgtPortRxLane2_n     : in    std_logic;
+--    MgtPortRxLane3_n     : in    std_logic;
+--    MgtPortRxLane4_n     : in    std_logic;
+--    MgtPortRxLane5_n     : in    std_logic;
+--    MgtPortRxLane6_n     : in    std_logic;
+--    MgtPortRxLane7_n     : in    std_logic;
+--    MgtPortRxLane8_n     : in    std_logic;
+--    MgtPortRxLane9_n     : in    std_logic;
+--    MgtPortRxLane10_n    : in    std_logic;
+--    MgtPortRxLane11_n    : in    std_logic;
+--    MgtPortRxLane12_n    : in    std_logic;
+--    MgtPortRxLane13_n    : in    std_logic;
+--    MgtPortRxLane14_n    : in    std_logic;
+--    MgtPortRxLane15_n    : in    std_logic;
+--    MgtPortRxLane16_n    : in    std_logic;
+--    MgtPortRxLane17_n    : in    std_logic;
+--    MgtPortRxLane18_n    : in    std_logic;
+--    MgtPortRxLane19_n    : in    std_logic;
+--    MgtPortRxLane20_n    : in    std_logic;
+--    MgtPortRxLane21_n    : in    std_logic;
+--    MgtPortRxLane22_n    : in    std_logic;
+--    MgtPortRxLane23_n    : in    std_logic;
+--    MgtPortRxLane24_n    : in    std_logic;
+--    MgtPortRxLane25_n    : in    std_logic;
+--    MgtPortRxLane26_n    : in    std_logic;
+--    MgtPortRxLane27_n    : in    std_logic;
+--    MgtPortRxLane28_n    : in    std_logic;
+--    MgtPortRxLane29_n    : in    std_logic;
+--    MgtPortRxLane30_n    : in    std_logic;
+--    MgtPortRxLane31_n    : in    std_logic;
+--    MgtPortRxLane32_n    : in    std_logic;
+--    MgtPortRxLane33_n    : in    std_logic;
+--    MgtPortRxLane34_n    : in    std_logic;
+--    MgtPortRxLane35_n    : in    std_logic;
+--    MgtPortRxLane36_n    : in    std_logic;
+--    MgtPortRxLane37_n    : in    std_logic;
+--    MgtPortRxLane38_n    : in    std_logic;
+--    MgtPortRxLane39_n    : in    std_logic;
+--    MgtPortRxLane40_n    : in    std_logic;
+--    MgtPortRxLane41_n    : in    std_logic;
+--    MgtPortRxLane42_n    : in    std_logic;
+--    MgtPortRxLane43_n    : in    std_logic;
+--    MgtPortRxLane44_n    : in    std_logic;
+--    MgtPortRxLane45_n    : in    std_logic;
+--    MgtPortRxLane46_n    : in    std_logic;
+--    MgtPortRxLane47_n    : in    std_logic;
+--    MgtPortTxLane0_p     : out   std_logic;
+--    MgtPortTxLane1_p     : out   std_logic;
+--    MgtPortTxLane2_p     : out   std_logic;
+--    MgtPortTxLane3_p     : out   std_logic;
+--    MgtPortTxLane4_p     : out   std_logic;
+--    MgtPortTxLane5_p     : out   std_logic;
+--    MgtPortTxLane6_p     : out   std_logic;
+--    MgtPortTxLane7_p     : out   std_logic;
+--    MgtPortTxLane8_p     : out   std_logic;
+--    MgtPortTxLane9_p     : out   std_logic;
+--    MgtPortTxLane10_p    : out   std_logic;
+--    MgtPortTxLane11_p    : out   std_logic;
+--    MgtPortTxLane12_p    : out   std_logic;
+--    MgtPortTxLane13_p    : out   std_logic;
+--    MgtPortTxLane14_p    : out   std_logic;
+--    MgtPortTxLane15_p    : out   std_logic;
+--    MgtPortTxLane16_p    : out   std_logic;
+--    MgtPortTxLane17_p    : out   std_logic;
+--    MgtPortTxLane18_p    : out   std_logic;
+--    MgtPortTxLane19_p    : out   std_logic;
+--    MgtPortTxLane20_p    : out   std_logic;
+--    MgtPortTxLane21_p    : out   std_logic;
+--    MgtPortTxLane22_p    : out   std_logic;
+--    MgtPortTxLane23_p    : out   std_logic;
+--    MgtPortTxLane24_p    : out   std_logic;
+--    MgtPortTxLane25_p    : out   std_logic;
+--    MgtPortTxLane26_p    : out   std_logic;
+--    MgtPortTxLane27_p    : out   std_logic;
+--    MgtPortTxLane28_p    : out   std_logic;
+--    MgtPortTxLane29_p    : out   std_logic;
+--    MgtPortTxLane30_p    : out   std_logic;
+--    MgtPortTxLane31_p    : out   std_logic;
+--    MgtPortTxLane32_p    : out   std_logic;
+--    MgtPortTxLane33_p    : out   std_logic;
+--    MgtPortTxLane34_p    : out   std_logic;
+--    MgtPortTxLane35_p    : out   std_logic;
+--    MgtPortTxLane36_p    : out   std_logic;
+--    MgtPortTxLane37_p    : out   std_logic;
+--    MgtPortTxLane38_p    : out   std_logic;
+--    MgtPortTxLane39_p    : out   std_logic;
+--    MgtPortTxLane40_p    : out   std_logic;
+--    MgtPortTxLane41_p    : out   std_logic;
+--    MgtPortTxLane42_p    : out   std_logic;
+--    MgtPortTxLane43_p    : out   std_logic;
+--    MgtPortTxLane44_p    : out   std_logic;
+--    MgtPortTxLane45_p    : out   std_logic;
+--    MgtPortTxLane46_p    : out   std_logic;
+--    MgtPortTxLane47_p    : out   std_logic;
+--    MgtPortTxLane0_n     : out   std_logic;
+--    MgtPortTxLane1_n     : out   std_logic;
+--    MgtPortTxLane2_n     : out   std_logic;
+--    MgtPortTxLane3_n     : out   std_logic;
+--    MgtPortTxLane4_n     : out   std_logic;
+--    MgtPortTxLane5_n     : out   std_logic;
+--    MgtPortTxLane6_n     : out   std_logic;
+--    MgtPortTxLane7_n     : out   std_logic;
+--    MgtPortTxLane8_n     : out   std_logic;
+--    MgtPortTxLane9_n     : out   std_logic;
+--    MgtPortTxLane10_n    : out   std_logic;
+--    MgtPortTxLane11_n    : out   std_logic;
+--    MgtPortTxLane12_n    : out   std_logic;
+--    MgtPortTxLane13_n    : out   std_logic;
+--    MgtPortTxLane14_n    : out   std_logic;
+--    MgtPortTxLane15_n    : out   std_logic;
+--    MgtPortTxLane16_n    : out   std_logic;
+--    MgtPortTxLane17_n    : out   std_logic;
+--    MgtPortTxLane18_n    : out   std_logic;
+--    MgtPortTxLane19_n    : out   std_logic;
+--    MgtPortTxLane20_n    : out   std_logic;
+--    MgtPortTxLane21_n    : out   std_logic;
+--    MgtPortTxLane22_n    : out   std_logic;
+--    MgtPortTxLane23_n    : out   std_logic;
+--    MgtPortTxLane24_n    : out   std_logic;
+--    MgtPortTxLane25_n    : out   std_logic;
+--    MgtPortTxLane26_n    : out   std_logic;
+--    MgtPortTxLane27_n    : out   std_logic;
+--    MgtPortTxLane28_n    : out   std_logic;
+--    MgtPortTxLane29_n    : out   std_logic;
+--    MgtPortTxLane30_n    : out   std_logic;
+--    MgtPortTxLane31_n    : out   std_logic;
+--    MgtPortTxLane32_n    : out   std_logic;
+--    MgtPortTxLane33_n    : out   std_logic;
+--    MgtPortTxLane34_n    : out   std_logic;
+--    MgtPortTxLane35_n    : out   std_logic;
+--    MgtPortTxLane36_n    : out   std_logic;
+--    MgtPortTxLane37_n    : out   std_logic;
+--    MgtPortTxLane38_n    : out   std_logic;
+--    MgtPortTxLane39_n    : out   std_logic;
+--    MgtPortTxLane40_n    : out   std_logic;
+--    MgtPortTxLane41_n    : out   std_logic;
+--    MgtPortTxLane42_n    : out   std_logic;
+--    MgtPortTxLane43_n    : out   std_logic;
+--    MgtPortTxLane44_n    : out   std_logic;
+--    MgtPortTxLane45_n    : out   std_logic;
+--    MgtPortTxLane46_n    : out   std_logic;
+--    MgtPortTxLane47_n    : out   std_logic;
     --@@END TOP_LEVEL_PORT
     --VSMake doesn't like prefix-less signals.
     --vhook_nodgv {.*Mgt(Port)?[TR]x_[pn]}
@@ -1699,199 +1722,209 @@ begin  -- architecture struct
       stIoModuleSupportsFRAGLs            => stIoModuleSupportsFRAGLs,                  --out std_logic
       MgtRefClk_p                         => MgtRefClk_p,                               --in  std_logic_vector(11:0)
       MgtRefClk_n                         => MgtRefClk_n,                               --in  std_logic_vector(11:0)
-      --@@BEGIN COMPONENT_SIGNAL_ASSIGNMENT
-      MgtPortRx_p(0)                      => MgtPortRxLane0_p,                          --in  std_logic_vector(47:0)
-      MgtPortRx_p(1)                      => MgtPortRxLane1_p,                          --in  std_logic_vector(47:0)
-      MgtPortRx_p(2)                      => MgtPortRxLane2_p,                          --in  std_logic_vector(47:0)
-      MgtPortRx_p(3)                      => MgtPortRxLane3_p,                          --in  std_logic_vector(47:0)
-      MgtPortRx_p(4)                      => MgtPortRxLane4_p,                          --in  std_logic_vector(47:0)
-      MgtPortRx_p(5)                      => MgtPortRxLane5_p,                          --in  std_logic_vector(47:0)
-      MgtPortRx_p(6)                      => MgtPortRxLane6_p,                          --in  std_logic_vector(47:0)
-      MgtPortRx_p(7)                      => MgtPortRxLane7_p,                          --in  std_logic_vector(47:0)
-      MgtPortRx_p(8)                      => MgtPortRxLane8_p,                          --in  std_logic_vector(47:0)
-      MgtPortRx_p(9)                      => MgtPortRxLane9_p,                          --in  std_logic_vector(47:0)
-      MgtPortRx_p(10)                     => MgtPortRxLane10_p,                         --in  std_logic_vector(47:0)
-      MgtPortRx_p(11)                     => MgtPortRxLane11_p,                         --in  std_logic_vector(47:0)
-      MgtPortRx_p(12)                     => MgtPortRxLane12_p,                         --in  std_logic_vector(47:0)
-      MgtPortRx_p(13)                     => MgtPortRxLane13_p,                         --in  std_logic_vector(47:0)
-      MgtPortRx_p(14)                     => MgtPortRxLane14_p,                         --in  std_logic_vector(47:0)
-      MgtPortRx_p(15)                     => MgtPortRxLane15_p,                         --in  std_logic_vector(47:0)
-      MgtPortRx_p(16)                     => MgtPortRxLane16_p,                         --in  std_logic_vector(47:0)
-      MgtPortRx_p(17)                     => MgtPortRxLane17_p,                         --in  std_logic_vector(47:0)
-      MgtPortRx_p(18)                     => MgtPortRxLane18_p,                         --in  std_logic_vector(47:0)
-      MgtPortRx_p(19)                     => MgtPortRxLane19_p,                         --in  std_logic_vector(47:0)
-      MgtPortRx_p(20)                     => MgtPortRxLane20_p,                         --in  std_logic_vector(47:0)
-      MgtPortRx_p(21)                     => MgtPortRxLane21_p,                         --in  std_logic_vector(47:0)
-      MgtPortRx_p(22)                     => MgtPortRxLane22_p,                         --in  std_logic_vector(47:0)
-      MgtPortRx_p(23)                     => MgtPortRxLane23_p,                         --in  std_logic_vector(47:0)
-      MgtPortRx_p(24)                     => MgtPortRxLane24_p,                         --in  std_logic_vector(47:0)
-      MgtPortRx_p(25)                     => MgtPortRxLane25_p,                         --in  std_logic_vector(47:0)
-      MgtPortRx_p(26)                     => MgtPortRxLane26_p,                         --in  std_logic_vector(47:0)
-      MgtPortRx_p(27)                     => MgtPortRxLane27_p,                         --in  std_logic_vector(47:0)
-      MgtPortRx_p(28)                     => MgtPortRxLane28_p,                         --in  std_logic_vector(47:0)
-      MgtPortRx_p(29)                     => MgtPortRxLane29_p,                         --in  std_logic_vector(47:0)
-      MgtPortRx_p(30)                     => MgtPortRxLane30_p,                         --in  std_logic_vector(47:0)
-      MgtPortRx_p(31)                     => MgtPortRxLane31_p,                         --in  std_logic_vector(47:0)
-      MgtPortRx_p(32)                     => MgtPortRxLane32_p,                         --in  std_logic_vector(47:0)
-      MgtPortRx_p(33)                     => MgtPortRxLane33_p,                         --in  std_logic_vector(47:0)
-      MgtPortRx_p(34)                     => MgtPortRxLane34_p,                         --in  std_logic_vector(47:0)
-      MgtPortRx_p(35)                     => MgtPortRxLane35_p,                         --in  std_logic_vector(47:0)
-      MgtPortRx_p(36)                     => MgtPortRxLane36_p,                         --in  std_logic_vector(47:0)
-      MgtPortRx_p(37)                     => MgtPortRxLane37_p,                         --in  std_logic_vector(47:0)
-      MgtPortRx_p(38)                     => MgtPortRxLane38_p,                         --in  std_logic_vector(47:0)
-      MgtPortRx_p(39)                     => MgtPortRxLane39_p,                         --in  std_logic_vector(47:0)
-      MgtPortRx_p(40)                     => MgtPortRxLane40_p,                         --in  std_logic_vector(47:0)
-      MgtPortRx_p(41)                     => MgtPortRxLane41_p,                         --in  std_logic_vector(47:0)
-      MgtPortRx_p(42)                     => MgtPortRxLane42_p,                         --in  std_logic_vector(47:0)
-      MgtPortRx_p(43)                     => MgtPortRxLane43_p,                         --in  std_logic_vector(47:0)
-      MgtPortRx_p(44)                     => MgtPortRxLane44_p,                         --in  std_logic_vector(47:0)
-      MgtPortRx_p(45)                     => MgtPortRxLane45_p,                         --in  std_logic_vector(47:0)
-      MgtPortRx_p(46)                     => MgtPortRxLane46_p,                         --in  std_logic_vector(47:0)
-      MgtPortRx_p(47)                     => MgtPortRxLane47_p,                         --in  std_logic_vector(47:0)
-      MgtPortRx_n(0)                      => MgtPortRxLane0_n,                          --in  std_logic_vector(47:0)
-      MgtPortRx_n(1)                      => MgtPortRxLane1_n,                          --in  std_logic_vector(47:0)
-      MgtPortRx_n(2)                      => MgtPortRxLane2_n,                          --in  std_logic_vector(47:0)
-      MgtPortRx_n(3)                      => MgtPortRxLane3_n,                          --in  std_logic_vector(47:0)
-      MgtPortRx_n(4)                      => MgtPortRxLane4_n,                          --in  std_logic_vector(47:0)
-      MgtPortRx_n(5)                      => MgtPortRxLane5_n,                          --in  std_logic_vector(47:0)
-      MgtPortRx_n(6)                      => MgtPortRxLane6_n,                          --in  std_logic_vector(47:0)
-      MgtPortRx_n(7)                      => MgtPortRxLane7_n,                          --in  std_logic_vector(47:0)
-      MgtPortRx_n(8)                      => MgtPortRxLane8_n,                          --in  std_logic_vector(47:0)
-      MgtPortRx_n(9)                      => MgtPortRxLane9_n,                          --in  std_logic_vector(47:0)
-      MgtPortRx_n(10)                     => MgtPortRxLane10_n,                         --in  std_logic_vector(47:0)
-      MgtPortRx_n(11)                     => MgtPortRxLane11_n,                         --in  std_logic_vector(47:0)
-      MgtPortRx_n(12)                     => MgtPortRxLane12_n,                         --in  std_logic_vector(47:0)
-      MgtPortRx_n(13)                     => MgtPortRxLane13_n,                         --in  std_logic_vector(47:0)
-      MgtPortRx_n(14)                     => MgtPortRxLane14_n,                         --in  std_logic_vector(47:0)
-      MgtPortRx_n(15)                     => MgtPortRxLane15_n,                         --in  std_logic_vector(47:0)
-      MgtPortRx_n(16)                     => MgtPortRxLane16_n,                         --in  std_logic_vector(47:0)
-      MgtPortRx_n(17)                     => MgtPortRxLane17_n,                         --in  std_logic_vector(47:0)
-      MgtPortRx_n(18)                     => MgtPortRxLane18_n,                         --in  std_logic_vector(47:0)
-      MgtPortRx_n(19)                     => MgtPortRxLane19_n,                         --in  std_logic_vector(47:0)
-      MgtPortRx_n(20)                     => MgtPortRxLane20_n,                         --in  std_logic_vector(47:0)
-      MgtPortRx_n(21)                     => MgtPortRxLane21_n,                         --in  std_logic_vector(47:0)
-      MgtPortRx_n(22)                     => MgtPortRxLane22_n,                         --in  std_logic_vector(47:0)
-      MgtPortRx_n(23)                     => MgtPortRxLane23_n,                         --in  std_logic_vector(47:0)
-      MgtPortRx_n(24)                     => MgtPortRxLane24_n,                         --in  std_logic_vector(47:0)
-      MgtPortRx_n(25)                     => MgtPortRxLane25_n,                         --in  std_logic_vector(47:0)
-      MgtPortRx_n(26)                     => MgtPortRxLane26_n,                         --in  std_logic_vector(47:0)
-      MgtPortRx_n(27)                     => MgtPortRxLane27_n,                         --in  std_logic_vector(47:0)
-      MgtPortRx_n(28)                     => MgtPortRxLane28_n,                         --in  std_logic_vector(47:0)
-      MgtPortRx_n(29)                     => MgtPortRxLane29_n,                         --in  std_logic_vector(47:0)
-      MgtPortRx_n(30)                     => MgtPortRxLane30_n,                         --in  std_logic_vector(47:0)
-      MgtPortRx_n(31)                     => MgtPortRxLane31_n,                         --in  std_logic_vector(47:0)
-      MgtPortRx_n(32)                     => MgtPortRxLane32_n,                         --in  std_logic_vector(47:0)
-      MgtPortRx_n(33)                     => MgtPortRxLane33_n,                         --in  std_logic_vector(47:0)
-      MgtPortRx_n(34)                     => MgtPortRxLane34_n,                         --in  std_logic_vector(47:0)
-      MgtPortRx_n(35)                     => MgtPortRxLane35_n,                         --in  std_logic_vector(47:0)
-      MgtPortRx_n(36)                     => MgtPortRxLane36_n,                         --in  std_logic_vector(47:0)
-      MgtPortRx_n(37)                     => MgtPortRxLane37_n,                         --in  std_logic_vector(47:0)
-      MgtPortRx_n(38)                     => MgtPortRxLane38_n,                         --in  std_logic_vector(47:0)
-      MgtPortRx_n(39)                     => MgtPortRxLane39_n,                         --in  std_logic_vector(47:0)
-      MgtPortRx_n(40)                     => MgtPortRxLane40_n,                         --in  std_logic_vector(47:0)
-      MgtPortRx_n(41)                     => MgtPortRxLane41_n,                         --in  std_logic_vector(47:0)
-      MgtPortRx_n(42)                     => MgtPortRxLane42_n,                         --in  std_logic_vector(47:0)
-      MgtPortRx_n(43)                     => MgtPortRxLane43_n,                         --in  std_logic_vector(47:0)
-      MgtPortRx_n(44)                     => MgtPortRxLane44_n,                         --in  std_logic_vector(47:0)
-      MgtPortRx_n(45)                     => MgtPortRxLane45_n,                         --in  std_logic_vector(47:0)
-      MgtPortRx_n(46)                     => MgtPortRxLane46_n,                         --in  std_logic_vector(47:0)
-      MgtPortRx_n(47)                     => MgtPortRxLane47_n,                         --in  std_logic_vector(47:0)
-      MgtPortTx_p(0)                      => MgtPortTxLane0_p,                          --out std_logic_vector(47:0)
-      MgtPortTx_p(1)                      => MgtPortTxLane1_p,                          --out std_logic_vector(47:0)
-      MgtPortTx_p(2)                      => MgtPortTxLane2_p,                          --out std_logic_vector(47:0)
-      MgtPortTx_p(3)                      => MgtPortTxLane3_p,                          --out std_logic_vector(47:0)
-      MgtPortTx_p(4)                      => MgtPortTxLane4_p,                          --out std_logic_vector(47:0)
-      MgtPortTx_p(5)                      => MgtPortTxLane5_p,                          --out std_logic_vector(47:0)
-      MgtPortTx_p(6)                      => MgtPortTxLane6_p,                          --out std_logic_vector(47:0)
-      MgtPortTx_p(7)                      => MgtPortTxLane7_p,                          --out std_logic_vector(47:0)
-      MgtPortTx_p(8)                      => MgtPortTxLane8_p,                          --out std_logic_vector(47:0)
-      MgtPortTx_p(9)                      => MgtPortTxLane9_p,                          --out std_logic_vector(47:0)
-      MgtPortTx_p(10)                     => MgtPortTxLane10_p,                         --out std_logic_vector(47:0)
-      MgtPortTx_p(11)                     => MgtPortTxLane11_p,                         --out std_logic_vector(47:0)
-      MgtPortTx_p(12)                     => MgtPortTxLane12_p,                         --out std_logic_vector(47:0)
-      MgtPortTx_p(13)                     => MgtPortTxLane13_p,                         --out std_logic_vector(47:0)
-      MgtPortTx_p(14)                     => MgtPortTxLane14_p,                         --out std_logic_vector(47:0)
-      MgtPortTx_p(15)                     => MgtPortTxLane15_p,                         --out std_logic_vector(47:0)
-      MgtPortTx_p(16)                     => MgtPortTxLane16_p,                         --out std_logic_vector(47:0)
-      MgtPortTx_p(17)                     => MgtPortTxLane17_p,                         --out std_logic_vector(47:0)
-      MgtPortTx_p(18)                     => MgtPortTxLane18_p,                         --out std_logic_vector(47:0)
-      MgtPortTx_p(19)                     => MgtPortTxLane19_p,                         --out std_logic_vector(47:0)
-      MgtPortTx_p(20)                     => MgtPortTxLane20_p,                         --out std_logic_vector(47:0)
-      MgtPortTx_p(21)                     => MgtPortTxLane21_p,                         --out std_logic_vector(47:0)
-      MgtPortTx_p(22)                     => MgtPortTxLane22_p,                         --out std_logic_vector(47:0)
-      MgtPortTx_p(23)                     => MgtPortTxLane23_p,                         --out std_logic_vector(47:0)
-      MgtPortTx_p(24)                     => MgtPortTxLane24_p,                         --out std_logic_vector(47:0)
-      MgtPortTx_p(25)                     => MgtPortTxLane25_p,                         --out std_logic_vector(47:0)
-      MgtPortTx_p(26)                     => MgtPortTxLane26_p,                         --out std_logic_vector(47:0)
-      MgtPortTx_p(27)                     => MgtPortTxLane27_p,                         --out std_logic_vector(47:0)
-      MgtPortTx_p(28)                     => MgtPortTxLane28_p,                         --out std_logic_vector(47:0)
-      MgtPortTx_p(29)                     => MgtPortTxLane29_p,                         --out std_logic_vector(47:0)
-      MgtPortTx_p(30)                     => MgtPortTxLane30_p,                         --out std_logic_vector(47:0)
-      MgtPortTx_p(31)                     => MgtPortTxLane31_p,                         --out std_logic_vector(47:0)
-      MgtPortTx_p(32)                     => MgtPortTxLane32_p,                         --out std_logic_vector(47:0)
-      MgtPortTx_p(33)                     => MgtPortTxLane33_p,                         --out std_logic_vector(47:0)
-      MgtPortTx_p(34)                     => MgtPortTxLane34_p,                         --out std_logic_vector(47:0)
-      MgtPortTx_p(35)                     => MgtPortTxLane35_p,                         --out std_logic_vector(47:0)
-      MgtPortTx_p(36)                     => MgtPortTxLane36_p,                         --out std_logic_vector(47:0)
-      MgtPortTx_p(37)                     => MgtPortTxLane37_p,                         --out std_logic_vector(47:0)
-      MgtPortTx_p(38)                     => MgtPortTxLane38_p,                         --out std_logic_vector(47:0)
-      MgtPortTx_p(39)                     => MgtPortTxLane39_p,                         --out std_logic_vector(47:0)
-      MgtPortTx_p(40)                     => MgtPortTxLane40_p,                         --out std_logic_vector(47:0)
-      MgtPortTx_p(41)                     => MgtPortTxLane41_p,                         --out std_logic_vector(47:0)
-      MgtPortTx_p(42)                     => MgtPortTxLane42_p,                         --out std_logic_vector(47:0)
-      MgtPortTx_p(43)                     => MgtPortTxLane43_p,                         --out std_logic_vector(47:0)
-      MgtPortTx_p(44)                     => MgtPortTxLane44_p,                         --out std_logic_vector(47:0)
-      MgtPortTx_p(45)                     => MgtPortTxLane45_p,                         --out std_logic_vector(47:0)
-      MgtPortTx_p(46)                     => MgtPortTxLane46_p,                         --out std_logic_vector(47:0)
-      MgtPortTx_p(47)                     => MgtPortTxLane47_p,                         --out std_logic_vector(47:0)
-      MgtPortTx_n(0)                      => MgtPortTxLane0_n,                          --out std_logic_vector(47:0)
-      MgtPortTx_n(1)                      => MgtPortTxLane1_n,                          --out std_logic_vector(47:0)
-      MgtPortTx_n(2)                      => MgtPortTxLane2_n,                          --out std_logic_vector(47:0)
-      MgtPortTx_n(3)                      => MgtPortTxLane3_n,                          --out std_logic_vector(47:0)
-      MgtPortTx_n(4)                      => MgtPortTxLane4_n,                          --out std_logic_vector(47:0)
-      MgtPortTx_n(5)                      => MgtPortTxLane5_n,                          --out std_logic_vector(47:0)
-      MgtPortTx_n(6)                      => MgtPortTxLane6_n,                          --out std_logic_vector(47:0)
-      MgtPortTx_n(7)                      => MgtPortTxLane7_n,                          --out std_logic_vector(47:0)
-      MgtPortTx_n(8)                      => MgtPortTxLane8_n,                          --out std_logic_vector(47:0)
-      MgtPortTx_n(9)                      => MgtPortTxLane9_n,                          --out std_logic_vector(47:0)
-      MgtPortTx_n(10)                     => MgtPortTxLane10_n,                         --out std_logic_vector(47:0)
-      MgtPortTx_n(11)                     => MgtPortTxLane11_n,                         --out std_logic_vector(47:0)
-      MgtPortTx_n(12)                     => MgtPortTxLane12_n,                         --out std_logic_vector(47:0)
-      MgtPortTx_n(13)                     => MgtPortTxLane13_n,                         --out std_logic_vector(47:0)
-      MgtPortTx_n(14)                     => MgtPortTxLane14_n,                         --out std_logic_vector(47:0)
-      MgtPortTx_n(15)                     => MgtPortTxLane15_n,                         --out std_logic_vector(47:0)
-      MgtPortTx_n(16)                     => MgtPortTxLane16_n,                         --out std_logic_vector(47:0)
-      MgtPortTx_n(17)                     => MgtPortTxLane17_n,                         --out std_logic_vector(47:0)
-      MgtPortTx_n(18)                     => MgtPortTxLane18_n,                         --out std_logic_vector(47:0)
-      MgtPortTx_n(19)                     => MgtPortTxLane19_n,                         --out std_logic_vector(47:0)
-      MgtPortTx_n(20)                     => MgtPortTxLane20_n,                         --out std_logic_vector(47:0)
-      MgtPortTx_n(21)                     => MgtPortTxLane21_n,                         --out std_logic_vector(47:0)
-      MgtPortTx_n(22)                     => MgtPortTxLane22_n,                         --out std_logic_vector(47:0)
-      MgtPortTx_n(23)                     => MgtPortTxLane23_n,                         --out std_logic_vector(47:0)
-      MgtPortTx_n(24)                     => MgtPortTxLane24_n,                         --out std_logic_vector(47:0)
-      MgtPortTx_n(25)                     => MgtPortTxLane25_n,                         --out std_logic_vector(47:0)
-      MgtPortTx_n(26)                     => MgtPortTxLane26_n,                         --out std_logic_vector(47:0)
-      MgtPortTx_n(27)                     => MgtPortTxLane27_n,                         --out std_logic_vector(47:0)
-      MgtPortTx_n(28)                     => MgtPortTxLane28_n,                         --out std_logic_vector(47:0)
-      MgtPortTx_n(29)                     => MgtPortTxLane29_n,                         --out std_logic_vector(47:0)
-      MgtPortTx_n(30)                     => MgtPortTxLane30_n,                         --out std_logic_vector(47:0)
-      MgtPortTx_n(31)                     => MgtPortTxLane31_n,                         --out std_logic_vector(47:0)
-      MgtPortTx_n(32)                     => MgtPortTxLane32_n,                         --out std_logic_vector(47:0)
-      MgtPortTx_n(33)                     => MgtPortTxLane33_n,                         --out std_logic_vector(47:0)
-      MgtPortTx_n(34)                     => MgtPortTxLane34_n,                         --out std_logic_vector(47:0)
-      MgtPortTx_n(35)                     => MgtPortTxLane35_n,                         --out std_logic_vector(47:0)
-      MgtPortTx_n(36)                     => MgtPortTxLane36_n,                         --out std_logic_vector(47:0)
-      MgtPortTx_n(37)                     => MgtPortTxLane37_n,                         --out std_logic_vector(47:0)
-      MgtPortTx_n(38)                     => MgtPortTxLane38_n,                         --out std_logic_vector(47:0)
-      MgtPortTx_n(39)                     => MgtPortTxLane39_n,                         --out std_logic_vector(47:0)
-      MgtPortTx_n(40)                     => MgtPortTxLane40_n,                         --out std_logic_vector(47:0)
-      MgtPortTx_n(41)                     => MgtPortTxLane41_n,                         --out std_logic_vector(47:0)
-      MgtPortTx_n(42)                     => MgtPortTxLane42_n,                         --out std_logic_vector(47:0)
-      MgtPortTx_n(43)                     => MgtPortTxLane43_n,                         --out std_logic_vector(47:0)
-      MgtPortTx_n(44)                     => MgtPortTxLane44_n,                         --out std_logic_vector(47:0)
-      MgtPortTx_n(45)                     => MgtPortTxLane45_n,                         --out std_logic_vector(47:0)
-      MgtPortTx_n(46)                     => MgtPortTxLane46_n,                         --out std_logic_vector(47:0)
-      MgtPortTx_n(47)                     => MgtPortTxLane47_n,                         --out std_logic_vector(47:0)
+--      --@@BEGIN COMPONENT_SIGNAL_ASSIGNMENT
+--
+-- TheWindow.vhd is generated by LabVIEW FPGA.  We ship a stub to ensure that we can synthesize the design.
+-- Vivado will error when building a design that has MGT lines in the top level entity that are not connected
+-- to anything.  So we comment out the MGT lines in the top level and in the Window stub.
+--
+-- If you are making a custom FPGA target, the MGT lines will be statically connected to your MGT logic.  If you are
+-- using this FPGA target with a CLIP in LabVIEW FPGA, these MGT signals will be auto-generated by LV FPGA when it
+-- processes the VHDL files.  The @ @ BEGIN / END around these signals is where LV FPGA generates the ports.
+--
+--
+--      MgtPortRx_p(0)                      => MgtPortRxLane0_p,                          --in  std_logic_vector(47:0)
+--      MgtPortRx_p(1)                      => MgtPortRxLane1_p,                          --in  std_logic_vector(47:0)
+--      MgtPortRx_p(2)                      => MgtPortRxLane2_p,                          --in  std_logic_vector(47:0)
+--      MgtPortRx_p(3)                      => MgtPortRxLane3_p,                          --in  std_logic_vector(47:0)
+--      MgtPortRx_p(4)                      => MgtPortRxLane4_p,                          --in  std_logic_vector(47:0)
+--      MgtPortRx_p(5)                      => MgtPortRxLane5_p,                          --in  std_logic_vector(47:0)
+--      MgtPortRx_p(6)                      => MgtPortRxLane6_p,                          --in  std_logic_vector(47:0)
+--      MgtPortRx_p(7)                      => MgtPortRxLane7_p,                          --in  std_logic_vector(47:0)
+--      MgtPortRx_p(8)                      => MgtPortRxLane8_p,                          --in  std_logic_vector(47:0)
+--      MgtPortRx_p(9)                      => MgtPortRxLane9_p,                          --in  std_logic_vector(47:0)
+--      MgtPortRx_p(10)                     => MgtPortRxLane10_p,                         --in  std_logic_vector(47:0)
+--      MgtPortRx_p(11)                     => MgtPortRxLane11_p,                         --in  std_logic_vector(47:0)
+--      MgtPortRx_p(12)                     => MgtPortRxLane12_p,                         --in  std_logic_vector(47:0)
+--      MgtPortRx_p(13)                     => MgtPortRxLane13_p,                         --in  std_logic_vector(47:0)
+--      MgtPortRx_p(14)                     => MgtPortRxLane14_p,                         --in  std_logic_vector(47:0)
+--      MgtPortRx_p(15)                     => MgtPortRxLane15_p,                         --in  std_logic_vector(47:0)
+--      MgtPortRx_p(16)                     => MgtPortRxLane16_p,                         --in  std_logic_vector(47:0)
+--      MgtPortRx_p(17)                     => MgtPortRxLane17_p,                         --in  std_logic_vector(47:0)
+--      MgtPortRx_p(18)                     => MgtPortRxLane18_p,                         --in  std_logic_vector(47:0)
+--      MgtPortRx_p(19)                     => MgtPortRxLane19_p,                         --in  std_logic_vector(47:0)
+--      MgtPortRx_p(20)                     => MgtPortRxLane20_p,                         --in  std_logic_vector(47:0)
+--      MgtPortRx_p(21)                     => MgtPortRxLane21_p,                         --in  std_logic_vector(47:0)
+--      MgtPortRx_p(22)                     => MgtPortRxLane22_p,                         --in  std_logic_vector(47:0)
+--      MgtPortRx_p(23)                     => MgtPortRxLane23_p,                         --in  std_logic_vector(47:0)
+--      MgtPortRx_p(24)                     => MgtPortRxLane24_p,                         --in  std_logic_vector(47:0)
+--      MgtPortRx_p(25)                     => MgtPortRxLane25_p,                         --in  std_logic_vector(47:0)
+--      MgtPortRx_p(26)                     => MgtPortRxLane26_p,                         --in  std_logic_vector(47:0)
+--      MgtPortRx_p(27)                     => MgtPortRxLane27_p,                         --in  std_logic_vector(47:0)
+--      MgtPortRx_p(28)                     => MgtPortRxLane28_p,                         --in  std_logic_vector(47:0)
+--      MgtPortRx_p(29)                     => MgtPortRxLane29_p,                         --in  std_logic_vector(47:0)
+--      MgtPortRx_p(30)                     => MgtPortRxLane30_p,                         --in  std_logic_vector(47:0)
+--      MgtPortRx_p(31)                     => MgtPortRxLane31_p,                         --in  std_logic_vector(47:0)
+--      MgtPortRx_p(32)                     => MgtPortRxLane32_p,                         --in  std_logic_vector(47:0)
+--      MgtPortRx_p(33)                     => MgtPortRxLane33_p,                         --in  std_logic_vector(47:0)
+--      MgtPortRx_p(34)                     => MgtPortRxLane34_p,                         --in  std_logic_vector(47:0)
+--      MgtPortRx_p(35)                     => MgtPortRxLane35_p,                         --in  std_logic_vector(47:0)
+--      MgtPortRx_p(36)                     => MgtPortRxLane36_p,                         --in  std_logic_vector(47:0)
+--      MgtPortRx_p(37)                     => MgtPortRxLane37_p,                         --in  std_logic_vector(47:0)
+--      MgtPortRx_p(38)                     => MgtPortRxLane38_p,                         --in  std_logic_vector(47:0)
+--      MgtPortRx_p(39)                     => MgtPortRxLane39_p,                         --in  std_logic_vector(47:0)
+--      MgtPortRx_p(40)                     => MgtPortRxLane40_p,                         --in  std_logic_vector(47:0)
+--      MgtPortRx_p(41)                     => MgtPortRxLane41_p,                         --in  std_logic_vector(47:0)
+--      MgtPortRx_p(42)                     => MgtPortRxLane42_p,                         --in  std_logic_vector(47:0)
+--      MgtPortRx_p(43)                     => MgtPortRxLane43_p,                         --in  std_logic_vector(47:0)
+--      MgtPortRx_p(44)                     => MgtPortRxLane44_p,                         --in  std_logic_vector(47:0)
+--      MgtPortRx_p(45)                     => MgtPortRxLane45_p,                         --in  std_logic_vector(47:0)
+--      MgtPortRx_p(46)                     => MgtPortRxLane46_p,                         --in  std_logic_vector(47:0)
+--      MgtPortRx_p(47)                     => MgtPortRxLane47_p,                         --in  std_logic_vector(47:0)
+--      MgtPortRx_n(0)                      => MgtPortRxLane0_n,                          --in  std_logic_vector(47:0)
+--      MgtPortRx_n(1)                      => MgtPortRxLane1_n,                          --in  std_logic_vector(47:0)
+--      MgtPortRx_n(2)                      => MgtPortRxLane2_n,                          --in  std_logic_vector(47:0)
+--      MgtPortRx_n(3)                      => MgtPortRxLane3_n,                          --in  std_logic_vector(47:0)
+--      MgtPortRx_n(4)                      => MgtPortRxLane4_n,                          --in  std_logic_vector(47:0)
+--      MgtPortRx_n(5)                      => MgtPortRxLane5_n,                          --in  std_logic_vector(47:0)
+--      MgtPortRx_n(6)                      => MgtPortRxLane6_n,                          --in  std_logic_vector(47:0)
+--      MgtPortRx_n(7)                      => MgtPortRxLane7_n,                          --in  std_logic_vector(47:0)
+--      MgtPortRx_n(8)                      => MgtPortRxLane8_n,                          --in  std_logic_vector(47:0)
+--      MgtPortRx_n(9)                      => MgtPortRxLane9_n,                          --in  std_logic_vector(47:0)
+--      MgtPortRx_n(10)                     => MgtPortRxLane10_n,                         --in  std_logic_vector(47:0)
+--      MgtPortRx_n(11)                     => MgtPortRxLane11_n,                         --in  std_logic_vector(47:0)
+--      MgtPortRx_n(12)                     => MgtPortRxLane12_n,                         --in  std_logic_vector(47:0)
+--      MgtPortRx_n(13)                     => MgtPortRxLane13_n,                         --in  std_logic_vector(47:0)
+--      MgtPortRx_n(14)                     => MgtPortRxLane14_n,                         --in  std_logic_vector(47:0)
+--      MgtPortRx_n(15)                     => MgtPortRxLane15_n,                         --in  std_logic_vector(47:0)
+--      MgtPortRx_n(16)                     => MgtPortRxLane16_n,                         --in  std_logic_vector(47:0)
+--      MgtPortRx_n(17)                     => MgtPortRxLane17_n,                         --in  std_logic_vector(47:0)
+--      MgtPortRx_n(18)                     => MgtPortRxLane18_n,                         --in  std_logic_vector(47:0)
+--      MgtPortRx_n(19)                     => MgtPortRxLane19_n,                         --in  std_logic_vector(47:0)
+--      MgtPortRx_n(20)                     => MgtPortRxLane20_n,                         --in  std_logic_vector(47:0)
+--      MgtPortRx_n(21)                     => MgtPortRxLane21_n,                         --in  std_logic_vector(47:0)
+--      MgtPortRx_n(22)                     => MgtPortRxLane22_n,                         --in  std_logic_vector(47:0)
+--      MgtPortRx_n(23)                     => MgtPortRxLane23_n,                         --in  std_logic_vector(47:0)
+--      MgtPortRx_n(24)                     => MgtPortRxLane24_n,                         --in  std_logic_vector(47:0)
+--      MgtPortRx_n(25)                     => MgtPortRxLane25_n,                         --in  std_logic_vector(47:0)
+--      MgtPortRx_n(26)                     => MgtPortRxLane26_n,                         --in  std_logic_vector(47:0)
+--      MgtPortRx_n(27)                     => MgtPortRxLane27_n,                         --in  std_logic_vector(47:0)
+--      MgtPortRx_n(28)                     => MgtPortRxLane28_n,                         --in  std_logic_vector(47:0)
+--      MgtPortRx_n(29)                     => MgtPortRxLane29_n,                         --in  std_logic_vector(47:0)
+--      MgtPortRx_n(30)                     => MgtPortRxLane30_n,                         --in  std_logic_vector(47:0)
+--      MgtPortRx_n(31)                     => MgtPortRxLane31_n,                         --in  std_logic_vector(47:0)
+--      MgtPortRx_n(32)                     => MgtPortRxLane32_n,                         --in  std_logic_vector(47:0)
+--      MgtPortRx_n(33)                     => MgtPortRxLane33_n,                         --in  std_logic_vector(47:0)
+--      MgtPortRx_n(34)                     => MgtPortRxLane34_n,                         --in  std_logic_vector(47:0)
+--      MgtPortRx_n(35)                     => MgtPortRxLane35_n,                         --in  std_logic_vector(47:0)
+--      MgtPortRx_n(36)                     => MgtPortRxLane36_n,                         --in  std_logic_vector(47:0)
+--      MgtPortRx_n(37)                     => MgtPortRxLane37_n,                         --in  std_logic_vector(47:0)
+--      MgtPortRx_n(38)                     => MgtPortRxLane38_n,                         --in  std_logic_vector(47:0)
+--      MgtPortRx_n(39)                     => MgtPortRxLane39_n,                         --in  std_logic_vector(47:0)
+--      MgtPortRx_n(40)                     => MgtPortRxLane40_n,                         --in  std_logic_vector(47:0)
+--      MgtPortRx_n(41)                     => MgtPortRxLane41_n,                         --in  std_logic_vector(47:0)
+--      MgtPortRx_n(42)                     => MgtPortRxLane42_n,                         --in  std_logic_vector(47:0)
+--      MgtPortRx_n(43)                     => MgtPortRxLane43_n,                         --in  std_logic_vector(47:0)
+--      MgtPortRx_n(44)                     => MgtPortRxLane44_n,                         --in  std_logic_vector(47:0)
+--      MgtPortRx_n(45)                     => MgtPortRxLane45_n,                         --in  std_logic_vector(47:0)
+--      MgtPortRx_n(46)                     => MgtPortRxLane46_n,                         --in  std_logic_vector(47:0)
+--      MgtPortRx_n(47)                     => MgtPortRxLane47_n,                         --in  std_logic_vector(47:0)
+--      MgtPortTx_p(0)                      => MgtPortTxLane0_p,                          --out std_logic_vector(47:0)
+--      MgtPortTx_p(1)                      => MgtPortTxLane1_p,                          --out std_logic_vector(47:0)
+--      MgtPortTx_p(2)                      => MgtPortTxLane2_p,                          --out std_logic_vector(47:0)
+--      MgtPortTx_p(3)                      => MgtPortTxLane3_p,                          --out std_logic_vector(47:0)
+--      MgtPortTx_p(4)                      => MgtPortTxLane4_p,                          --out std_logic_vector(47:0)
+--      MgtPortTx_p(5)                      => MgtPortTxLane5_p,                          --out std_logic_vector(47:0)
+--      MgtPortTx_p(6)                      => MgtPortTxLane6_p,                          --out std_logic_vector(47:0)
+--      MgtPortTx_p(7)                      => MgtPortTxLane7_p,                          --out std_logic_vector(47:0)
+--      MgtPortTx_p(8)                      => MgtPortTxLane8_p,                          --out std_logic_vector(47:0)
+--      MgtPortTx_p(9)                      => MgtPortTxLane9_p,                          --out std_logic_vector(47:0)
+--      MgtPortTx_p(10)                     => MgtPortTxLane10_p,                         --out std_logic_vector(47:0)
+--      MgtPortTx_p(11)                     => MgtPortTxLane11_p,                         --out std_logic_vector(47:0)
+--      MgtPortTx_p(12)                     => MgtPortTxLane12_p,                         --out std_logic_vector(47:0)
+--      MgtPortTx_p(13)                     => MgtPortTxLane13_p,                         --out std_logic_vector(47:0)
+--      MgtPortTx_p(14)                     => MgtPortTxLane14_p,                         --out std_logic_vector(47:0)
+--      MgtPortTx_p(15)                     => MgtPortTxLane15_p,                         --out std_logic_vector(47:0)
+--      MgtPortTx_p(16)                     => MgtPortTxLane16_p,                         --out std_logic_vector(47:0)
+--      MgtPortTx_p(17)                     => MgtPortTxLane17_p,                         --out std_logic_vector(47:0)
+--      MgtPortTx_p(18)                     => MgtPortTxLane18_p,                         --out std_logic_vector(47:0)
+--      MgtPortTx_p(19)                     => MgtPortTxLane19_p,                         --out std_logic_vector(47:0)
+--      MgtPortTx_p(20)                     => MgtPortTxLane20_p,                         --out std_logic_vector(47:0)
+--      MgtPortTx_p(21)                     => MgtPortTxLane21_p,                         --out std_logic_vector(47:0)
+--      MgtPortTx_p(22)                     => MgtPortTxLane22_p,                         --out std_logic_vector(47:0)
+--      MgtPortTx_p(23)                     => MgtPortTxLane23_p,                         --out std_logic_vector(47:0)
+--      MgtPortTx_p(24)                     => MgtPortTxLane24_p,                         --out std_logic_vector(47:0)
+--      MgtPortTx_p(25)                     => MgtPortTxLane25_p,                         --out std_logic_vector(47:0)
+--      MgtPortTx_p(26)                     => MgtPortTxLane26_p,                         --out std_logic_vector(47:0)
+--      MgtPortTx_p(27)                     => MgtPortTxLane27_p,                         --out std_logic_vector(47:0)
+--      MgtPortTx_p(28)                     => MgtPortTxLane28_p,                         --out std_logic_vector(47:0)
+--      MgtPortTx_p(29)                     => MgtPortTxLane29_p,                         --out std_logic_vector(47:0)
+--      MgtPortTx_p(30)                     => MgtPortTxLane30_p,                         --out std_logic_vector(47:0)
+--      MgtPortTx_p(31)                     => MgtPortTxLane31_p,                         --out std_logic_vector(47:0)
+--      MgtPortTx_p(32)                     => MgtPortTxLane32_p,                         --out std_logic_vector(47:0)
+--      MgtPortTx_p(33)                     => MgtPortTxLane33_p,                         --out std_logic_vector(47:0)
+--      MgtPortTx_p(34)                     => MgtPortTxLane34_p,                         --out std_logic_vector(47:0)
+--      MgtPortTx_p(35)                     => MgtPortTxLane35_p,                         --out std_logic_vector(47:0)
+--      MgtPortTx_p(36)                     => MgtPortTxLane36_p,                         --out std_logic_vector(47:0)
+--      MgtPortTx_p(37)                     => MgtPortTxLane37_p,                         --out std_logic_vector(47:0)
+--      MgtPortTx_p(38)                     => MgtPortTxLane38_p,                         --out std_logic_vector(47:0)
+--      MgtPortTx_p(39)                     => MgtPortTxLane39_p,                         --out std_logic_vector(47:0)
+--      MgtPortTx_p(40)                     => MgtPortTxLane40_p,                         --out std_logic_vector(47:0)
+--      MgtPortTx_p(41)                     => MgtPortTxLane41_p,                         --out std_logic_vector(47:0)
+--      MgtPortTx_p(42)                     => MgtPortTxLane42_p,                         --out std_logic_vector(47:0)
+--      MgtPortTx_p(43)                     => MgtPortTxLane43_p,                         --out std_logic_vector(47:0)
+--      MgtPortTx_p(44)                     => MgtPortTxLane44_p,                         --out std_logic_vector(47:0)
+--      MgtPortTx_p(45)                     => MgtPortTxLane45_p,                         --out std_logic_vector(47:0)
+--      MgtPortTx_p(46)                     => MgtPortTxLane46_p,                         --out std_logic_vector(47:0)
+--      MgtPortTx_p(47)                     => MgtPortTxLane47_p,                         --out std_logic_vector(47:0)
+--      MgtPortTx_n(0)                      => MgtPortTxLane0_n,                          --out std_logic_vector(47:0)
+--      MgtPortTx_n(1)                      => MgtPortTxLane1_n,                          --out std_logic_vector(47:0)
+--      MgtPortTx_n(2)                      => MgtPortTxLane2_n,                          --out std_logic_vector(47:0)
+--      MgtPortTx_n(3)                      => MgtPortTxLane3_n,                          --out std_logic_vector(47:0)
+--      MgtPortTx_n(4)                      => MgtPortTxLane4_n,                          --out std_logic_vector(47:0)
+--      MgtPortTx_n(5)                      => MgtPortTxLane5_n,                          --out std_logic_vector(47:0)
+--      MgtPortTx_n(6)                      => MgtPortTxLane6_n,                          --out std_logic_vector(47:0)
+--      MgtPortTx_n(7)                      => MgtPortTxLane7_n,                          --out std_logic_vector(47:0)
+--      MgtPortTx_n(8)                      => MgtPortTxLane8_n,                          --out std_logic_vector(47:0)
+--      MgtPortTx_n(9)                      => MgtPortTxLane9_n,                          --out std_logic_vector(47:0)
+--      MgtPortTx_n(10)                     => MgtPortTxLane10_n,                         --out std_logic_vector(47:0)
+--      MgtPortTx_n(11)                     => MgtPortTxLane11_n,                         --out std_logic_vector(47:0)
+--      MgtPortTx_n(12)                     => MgtPortTxLane12_n,                         --out std_logic_vector(47:0)
+--      MgtPortTx_n(13)                     => MgtPortTxLane13_n,                         --out std_logic_vector(47:0)
+--      MgtPortTx_n(14)                     => MgtPortTxLane14_n,                         --out std_logic_vector(47:0)
+--      MgtPortTx_n(15)                     => MgtPortTxLane15_n,                         --out std_logic_vector(47:0)
+--      MgtPortTx_n(16)                     => MgtPortTxLane16_n,                         --out std_logic_vector(47:0)
+--      MgtPortTx_n(17)                     => MgtPortTxLane17_n,                         --out std_logic_vector(47:0)
+--      MgtPortTx_n(18)                     => MgtPortTxLane18_n,                         --out std_logic_vector(47:0)
+--      MgtPortTx_n(19)                     => MgtPortTxLane19_n,                         --out std_logic_vector(47:0)
+--      MgtPortTx_n(20)                     => MgtPortTxLane20_n,                         --out std_logic_vector(47:0)
+--      MgtPortTx_n(21)                     => MgtPortTxLane21_n,                         --out std_logic_vector(47:0)
+--      MgtPortTx_n(22)                     => MgtPortTxLane22_n,                         --out std_logic_vector(47:0)
+--      MgtPortTx_n(23)                     => MgtPortTxLane23_n,                         --out std_logic_vector(47:0)
+--      MgtPortTx_n(24)                     => MgtPortTxLane24_n,                         --out std_logic_vector(47:0)
+--      MgtPortTx_n(25)                     => MgtPortTxLane25_n,                         --out std_logic_vector(47:0)
+--      MgtPortTx_n(26)                     => MgtPortTxLane26_n,                         --out std_logic_vector(47:0)
+--      MgtPortTx_n(27)                     => MgtPortTxLane27_n,                         --out std_logic_vector(47:0)
+--      MgtPortTx_n(28)                     => MgtPortTxLane28_n,                         --out std_logic_vector(47:0)
+--      MgtPortTx_n(29)                     => MgtPortTxLane29_n,                         --out std_logic_vector(47:0)
+--      MgtPortTx_n(30)                     => MgtPortTxLane30_n,                         --out std_logic_vector(47:0)
+--      MgtPortTx_n(31)                     => MgtPortTxLane31_n,                         --out std_logic_vector(47:0)
+--      MgtPortTx_n(32)                     => MgtPortTxLane32_n,                         --out std_logic_vector(47:0)
+--      MgtPortTx_n(33)                     => MgtPortTxLane33_n,                         --out std_logic_vector(47:0)
+--      MgtPortTx_n(34)                     => MgtPortTxLane34_n,                         --out std_logic_vector(47:0)
+--      MgtPortTx_n(35)                     => MgtPortTxLane35_n,                         --out std_logic_vector(47:0)
+--      MgtPortTx_n(36)                     => MgtPortTxLane36_n,                         --out std_logic_vector(47:0)
+--      MgtPortTx_n(37)                     => MgtPortTxLane37_n,                         --out std_logic_vector(47:0)
+--      MgtPortTx_n(38)                     => MgtPortTxLane38_n,                         --out std_logic_vector(47:0)
+--      MgtPortTx_n(39)                     => MgtPortTxLane39_n,                         --out std_logic_vector(47:0)
+--      MgtPortTx_n(40)                     => MgtPortTxLane40_n,                         --out std_logic_vector(47:0)
+--      MgtPortTx_n(41)                     => MgtPortTxLane41_n,                         --out std_logic_vector(47:0)
+--      MgtPortTx_n(42)                     => MgtPortTxLane42_n,                         --out std_logic_vector(47:0)
+--      MgtPortTx_n(43)                     => MgtPortTxLane43_n,                         --out std_logic_vector(47:0)
+--      MgtPortTx_n(44)                     => MgtPortTxLane44_n,                         --out std_logic_vector(47:0)
+--      MgtPortTx_n(45)                     => MgtPortTxLane45_n,                         --out std_logic_vector(47:0)
+--      MgtPortTx_n(46)                     => MgtPortTxLane46_n,                         --out std_logic_vector(47:0)
+--      MgtPortTx_n(47)                     => MgtPortTxLane47_n,                         --out std_logic_vector(47:0)
       --@@END COMPONENT_SIGNAL_ASSIGNMENT
       aDio                                => aDio,                                      --inout std_logic_vector(7:0)
       aLmkI2cSda                          => aLmkI2cSda,                                --inout std_logic

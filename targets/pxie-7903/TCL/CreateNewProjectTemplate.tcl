@@ -11,7 +11,7 @@ update_compile_order -fileset sim_1
 
 set_property steps.synth_design.args.flatten_hierarchy "full" [get_runs -filter is_synthesis]
 set_property steps.synth_design.args.keep_equivalent_registers "true" [get_runs -filter is_synthesis]
-set_property steps.synth_design.tcl.pre {..\..\..\TCL\PreSynthesize.tcl} [get_runs -filter is_synthesis]
+set_property steps.synth_design.tcl.pre {$PPRDIR/../TCL/PreSynthesize.tcl} [get_runs -filter is_synthesis]
 set_property steps.opt_design.args.directive "Explore" [get_runs -filter !is_synthesis]
 set_property steps.opt_design.args.is_enabled "true" [get_runs -filter !is_synthesis]
 set_property steps.place_design.args.directive "Explore" [get_runs -filter !is_synthesis]
@@ -19,9 +19,9 @@ set_property steps.phys_opt_design.args.directive "Explore" [get_runs -filter !i
 set_property steps.phys_opt_design.args.is_enabled "true" [get_runs -filter !is_synthesis]
 set_property steps.route_design.args.directive "Explore" [get_runs -filter !is_synthesis]
 set_property steps.write_bitstream.args.bin_file "true" [get_runs -filter !is_synthesis]
-set_property steps.write_bitstream.tcl.pre {..\..\..\TCL\PreGenerateBitfile.tcl} [get_runs -filter !is_synthesis]
+set_property steps.write_bitstream.tcl.pre {$PPRDIR/../TCL/PreGenerateBitfile.tcl} [get_runs -filter !is_synthesis]
 set_property steps.post_route_phys_opt_design.args.is_enabled "false" [get_runs -filter !is_synthesis]
-set_property steps.write_bitstream.tcl.post {..\..\..\TCL\PostGenerateBitfile.tcl} [get_runs -filter !is_synthesis]
+set_property steps.write_bitstream.tcl.post {$PPRDIR/../TCL/PostGenerateBitfile.tcl} [get_runs -filter !is_synthesis]
 set_property top TOP_ENTITY [current_fileset]
 
 exit

@@ -6,9 +6,25 @@
 -- Date: 25 November 2015
 --
 ------------------------------------------------------------------------------------------
--- (c) 2015 Copyright National Instruments Corporation
--- All Rights Reserved
--- National Instruments Internal Information
+-- MIT License
+-- 
+-- Copyright (c) 2025 National Instruments Corporation
+-- 
+-- Permission is hereby granted, free of charge, to any person obtaining a copy of this
+-- software and associated documentation files (the "Software"), to deal in the Software
+-- without restriction, including without limitation the rights to use, copy, modify, merge,
+-- publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons
+-- to whom the Software is furnished to do so, subject to the following conditions:
+-- 
+-- The above copyright notice and this permission notice shall be included in all copies or
+-- substantial portions of the Software.
+-- 
+-- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+-- INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+-- PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
+-- FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+-- OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+-- DEALINGS IN THE SOFTWARE.
 ------------------------------------------------------------------------------------------
 --
 -- Purpose: This module instantiates the main blocks for a gen 3x8 PCIe interface for an
@@ -424,18 +440,18 @@ begin  -- architecture struct
       dNiDmaOutputRequestFromDma               => dOutputRequestFromDma,                     --in  NiDmaOutputRequestFromDma_t
       dNiDmaOutputDataFromDma                  => dOutputDataFromDma,                        --in  NiDmaOutputDataFromDma_t
       dNiDmaHighSpeedSinkFromDma               => dHighSpeedSinkFromDma,                     --in  NiDmaHighSpeedSinkFromDma_t
-      dInputStreamInterfaceFromFifo            => dInputStreamInterfaceFromFifo,             --in  InputStreamInterfaceFromFifoArray_t(Larger(kNumberOfDmaChannels, 1)-1:0)
-      dInputStreamInterfaceToFifo              => dInputStreamInterfaceToFifo,               --out InputStreamInterfaceToFifoArray_t(Larger(kNumberOfDmaChannels, 1)-1:0)
-      dOutputStreamInterfaceFromFifo           => dOutputStreamInterfaceFromFifo,            --in  OutputStreamInterfaceFromFifoArray_t(Larger(kNumberOfDmaChannels, 1)-1:0)
-      dOutputStreamInterfaceToFifo             => dOutputStreamInterfaceToFifo,              --out OutputStreamInterfaceToFifoArray_t(Larger(kNumberOfDmaChannels, 1)-1:0)
-      dNiFpgaMasterWriteRequestFromMasterArray => dNiFpgaMasterWriteRequestFromMasterArray,  --in  NiFpgaMasterWriteRequestFromMasterArray_t(Larger(kNumberOfMasterPorts, 1)-1:0)
-      dNiFpgaMasterWriteRequestToMasterArray   => dNiFpgaMasterWriteRequestToMasterArray,    --out NiFpgaMasterWriteRequestToMasterArray_t(Larger(kNumberOfMasterPorts, 1)-1:0)
-      dNiFpgaMasterWriteDataFromMasterArray    => dNiFpgaMasterWriteDataFromMasterArray,     --in  NiFpgaMasterWriteDataFromMasterArray_t(Larger(kNumberOfMasterPorts, 1)-1:0)
-      dNiFpgaMasterWriteDataToMasterArray      => dNiFpgaMasterWriteDataToMasterArray,       --out NiFpgaMasterWriteDataToMasterArray_t(Larger(kNumberOfMasterPorts, 1)-1:0)
-      dNiFpgaMasterWriteStatusToMasterArray    => dNiFpgaMasterWriteStatusToMasterArray,     --out NiFpgaMasterWriteStatusToMasterArray_t(Larger(kNumberOfMasterPorts, 1)-1:0)
-      dNiFpgaMasterReadRequestFromMasterArray  => dNiFpgaMasterReadRequestFromMasterArray,   --in  NiFpgaMasterReadRequestFromMasterArray_t(Larger(kNumberOfMasterPorts, 1)-1:0)
-      dNiFpgaMasterReadRequestToMasterArray    => dNiFpgaMasterReadRequestToMasterArray,     --out NiFpgaMasterReadRequestToMasterArray_t(Larger(kNumberOfMasterPorts, 1)-1:0)
-      dNiFpgaMasterReadDataToMasterArray       => dNiFpgaMasterReadDataToMasterArray,        --out NiFpgaMasterreadDataToMasterArray_t(Larger(kNumberOfMasterPorts, 1)-1:0)
+      dInputStreamInterfaceFromFifo            => dInputStreamInterfaceFromFifo,             --in  InputStreamInterfaceFromFifoArray_t(Larger(kNumberOfDmaChannels,1)-1:0)
+      dInputStreamInterfaceToFifo              => dInputStreamInterfaceToFifo,               --out InputStreamInterfaceToFifoArray_t(Larger(kNumberOfDmaChannels,1)-1:0)
+      dOutputStreamInterfaceFromFifo           => dOutputStreamInterfaceFromFifo,            --in  OutputStreamInterfaceFromFifoArray_t(Larger(kNumberOfDmaChannels,1)-1:0)
+      dOutputStreamInterfaceToFifo             => dOutputStreamInterfaceToFifo,              --out OutputStreamInterfaceToFifoArray_t(Larger(kNumberOfDmaChannels,1)-1:0)
+      dNiFpgaMasterWriteRequestFromMasterArray => dNiFpgaMasterWriteRequestFromMasterArray,  --in  NiFpgaMasterWriteRequestFromMasterArray_t(Larger(kNumberOfMasterPorts,1)-1:0)
+      dNiFpgaMasterWriteRequestToMasterArray   => dNiFpgaMasterWriteRequestToMasterArray,    --out NiFpgaMasterWriteRequestToMasterArray_t(Larger(kNumberOfMasterPorts,1)-1:0)
+      dNiFpgaMasterWriteDataFromMasterArray    => dNiFpgaMasterWriteDataFromMasterArray,     --in  NiFpgaMasterWriteDataFromMasterArray_t(Larger(kNumberOfMasterPorts,1)-1:0)
+      dNiFpgaMasterWriteDataToMasterArray      => dNiFpgaMasterWriteDataToMasterArray,       --out NiFpgaMasterWriteDataToMasterArray_t(Larger(kNumberOfMasterPorts,1)-1:0)
+      dNiFpgaMasterWriteStatusToMasterArray    => dNiFpgaMasterWriteStatusToMasterArray,     --out NiFpgaMasterWriteStatusToMasterArray_t(Larger(kNumberOfMasterPorts,1)-1:0)
+      dNiFpgaMasterReadRequestFromMasterArray  => dNiFpgaMasterReadRequestFromMasterArray,   --in  NiFpgaMasterReadRequestFromMasterArray_t(Larger(kNumberOfMasterPorts,1)-1:0)
+      dNiFpgaMasterReadRequestToMasterArray    => dNiFpgaMasterReadRequestToMasterArray,     --out NiFpgaMasterReadRequestToMasterArray_t(Larger(kNumberOfMasterPorts,1)-1:0)
+      dNiFpgaMasterReadDataToMasterArray       => dNiFpgaMasterReadDataToMasterArray,        --out NiFpgaMasterreadDataToMasterArray_t(Larger(kNumberOfMasterPorts,1)-1:0)
       dNiFpgaInputRequestToDmaArray            => dNiFpgaInputRequestToDmaArray,             --in  NiDmaInputRequestToDmaArray_t(kNiFpgaFixedInputPorts-1:0)
       dNiFpgaInputRequestFromDmaArray          => dNiFpgaInputRequestFromDmaArray,           --out NiDmaInputRequestFromDmaArray_t(kNiFpgaFixedInputPorts-1:0)
       dNiFpgaInputDataToDmaArray               => dNiFpgaInputDataToDmaArray,                --in  NiDmaInputDataToDmaArray_t(kNiFpgaFixedInputPorts-1:0)
@@ -448,7 +464,7 @@ begin  -- architecture struct
       dNiFpgaInputArbGrant                     => dNiFpgaInputArbGrant,                      --out NiDmaArbGrantArray_t(kNiFpgaFixedInputPorts-1:0)
       dNiFpgaOutputArbReq                      => dNiFpgaOutputArbReq,                       --in  NiDmaArbReqArray_t(kNiFpgaFixedOutputPorts-1:0)
       dNiFpgaOutputArbGrant                    => dNiFpgaOutputArbGrant,                     --out NiDmaArbGrantArray_t(kNiFpgaFixedOutputPorts-1:0)
-      iLvFpgaIrq                               => bIrqToInterface,                           --in  IrqToInterfaceArray_t(Larger(kNumberOfIrqs, 1)-1:0)
+      iLvFpgaIrq                               => bIrqToInterface,                           --in  IrqToInterfaceArray_t(Larger(kNumberOfIrqs,1)-1:0)
       dFixedLogicDmaIrq                        => dFixedLogicDmaIrq,                         --in  IrqStatusArray_t
       dIrq                                     => dIrqToInchworm,                            --out std_logic_vector(kNumberOfIrqs-1:0)
       dRegPortIn                               => dRegPortIn,                                --in  RegPortIn_t

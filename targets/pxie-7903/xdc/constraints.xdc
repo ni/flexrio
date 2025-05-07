@@ -4755,6 +4755,14 @@ add_cells_to_pblock [get_pblocks $pciePblock] [get_cells TimingEnginex/TimingPci
 ################################################################################
 
 
+## Start add from file GitHub.xdc
+################################################################################
+
+# Insert custom constraints here for GitHub customized targets
+
+################################################################################
+
+
 ## Start add from file TimingPxiTrigs.xdc
 # This constraints file assumes that there's a Routing CLIP, and that said routing CLIP creates amongst its constraints two variables:
 

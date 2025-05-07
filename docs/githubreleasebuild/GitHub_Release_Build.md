@@ -1,6 +1,3 @@
-Note: This <b>githubvisible=true</b> tag ensures that this file is preserved for the GitHub release
-
-
 # User Visible FlexRIO Releases on GitHub
 
 ## Dependencies
@@ -54,48 +51,46 @@ Our user facing process will mirror what we do in HW tools in a simpler way.  Fo
     * Extract the deliverables\githubflexrioreleasedeps\flexriodeps.zip file
     * Create a Release on GitHub and attach the zip file 
 
+## Supporting GitHub Release on a New Target
+* Set the "supportsgithubrelease" parameter to True in targetconfig.py
+* Add "githubvisible=true" to the header comments of each HDL file you wish to show up on GitHub
+* Add the license header text (replace any existing copyright header that was in the file)
+> MIT License<br />
+> 
+> Copyright (c) 2025 National Instruments Corporation<br />
+> 
+> Permission is hereby granted, free of charge, to any person obtaining a copy of this<br />
+> software and associated documentation files (the "Software"), to deal in the Software<br />
+> without restriction, including without limitation the rights to use, copy, modify, merge,<br />
+> publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons<br />
+> to whom the Software is furnished to do so, subject to the following conditions:<br />
+> 
+> The above copyright notice and this permission notice shall be included in all copies or<br />
+> substantial portions of the Software.<br />
+> 
+> THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,<br />
+> INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR<br />
+> PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE<br />
+> FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR<br />
+> OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER<br />
+> DEALINGS IN THE SOFTWARE.<br />
+* Create the vivadoprojectsettings.ini file in the pxie-7xxx directory
+* Add setenv.bat and setenv.sh to the pxie-7xxx directory
+* Add a TCL folder to the pxie-7xxx directory
+    * Required TCL files:
+        * CreateNewProjectTemplate.tcl
+        * PostGenerateBitfile.tcl
+        * PreGenerateBitfile.tcl
+        * PreSynthesize.tcl
+        * SynthProject2.tcl
+        * UpdateProjectFilesTemplate.tcl
+    * The CreateNewProjectTemplate is derived from settings used in the target project from a LV FPGA Vivado Project Export
+* Add a .gitignore file to ignore objects and VivadoProject folders
+* Convert TheWindow.vhd to TheWindow.vhd.mako (following what the PXIe-7903 does)
+* Convert the target's resource XML to mako (following what is done in Sasquatch7903.xml.mako)
+* Add GitHub.xdc into the cfmakesettings.xml file to show users where to insert custom constraints
 
-## User Workflow
-### Prerequisites
-1.	Install latest version Git  – https://git-scm.com/downloads
-2.	Install Python (version XYZ officially tested) –  https://www.python.org/downloads/
-3.	Install LabVIEW FPGA Compilation tool for Vivado 2021.1 – https://www.ni.com/en/support/downloads/software-products/download.package-manager.html
 
-### Phase 1 – Clone the FlexRIO GitHub repo
-1.	Go to the FlexRIO repo on GitHub – https://github.com/ni/flexrio-test
-2.	Copy the repo HTTPS URL to clipboard
-3.	Open a command prompt in C:\dev\github
-4.	Clone the FlexRIO GitHub repo:
-    > git clone <b>[paste FlexRIO GitHub repo URL]</b>
-    >
-    > git clone https://github.com/ni/flexrio-test.git
-
-### Phase 2 – Install the FlexRIO dependencies
-1.	Download the dependencies zip file from the latest FlexRIO release:
-2.	Put the zip file into this folder:
-    > C:\dev\github\flexrio-test\dependencies
-3.	Open a command prompt at the PXIe-7903 folder:
-    > C:\dev\github\flexrio\baseboards\fpgas\source\fpga\pxie-7903
-    * Note: the PXIe-7903 folder is the working directory where you will run all commands
-4.	Run the setenv script to setup the tools into your command path
-    > setenv
-    Note: run setenv each time you create a new command prompt
-5.	Run the script to extract the dependencies zip file into your FlexRIO folder:
-    > extractdependencies 
-
-### Phase 3 – Create and Build the Vivado Project
-You may skip steps 1 &2 if continuing from the previous phase
-1.	Open a command prompt at the PXIe-7903 folder:
-    > C:\dev\github\flexrio\baseboards\fpgas\source\fpga\pxie-7903
-    * Note: the PXIe-7903 folder is the working directory where you will run all commands
-2.	Run the setenv script to setup the tools into your command path
-    > setenv
-    * Note: run setenv each time you create a new command prompt
-3.	Create the Vivado Project:
-    > createvivadoproject
-4.	Launch Vivado:
-    > launchvivado
-5.	In the Vivado IDE, click <b>Synthesize</b>
 
 ## FAQ
 ### Why don't we leverage hwtools for the user-facing side of the workflow?

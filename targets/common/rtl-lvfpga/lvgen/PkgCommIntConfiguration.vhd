@@ -6,16 +6,32 @@
 -- Date: 2 February 2012
 --
 -------------------------------------------------------------------------------
--- (c) 2012 Copyright National Instruments Corporation
--- All Rights Reserved
--- National Instruments Internal Information
+-- MIT License
+-- 
+-- Copyright (c) 2025 National Instruments Corporation
+-- 
+-- Permission is hereby granted, free of charge, to any person obtaining a copy of this
+-- software and associated documentation files (the "Software"), to deal in the Software
+-- without restriction, including without limitation the rights to use, copy, modify, merge,
+-- publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons
+-- to whom the Software is furnished to do so, subject to the following conditions:
+-- 
+-- The above copyright notice and this permission notice shall be included in all copies or
+-- substantial portions of the Software.
+-- 
+-- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+-- INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+-- PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
+-- FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+-- OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+-- DEALINGS IN THE SOFTWARE.
 -------------------------------------------------------------------------------
 --
 -- Purpose:
 --
---   This package is intended to configure the package PkgCommunicationInterface. It's
---   usually dynamically generated from G code based on the configuration of the target
---   plug-in used, but here we've just created our own (simplified) version.
+--   This package is only intended to configure the package
+--   PkgCommunicationInterface. It is dynamically generated from G code based
+--   on configuration of the plug-in used.
 --
 -------------------------------------------------------------------------------
 --
@@ -31,8 +47,9 @@ package PkgCommIntConfiguration is
   -- CONSTANTS AND TYPES----------------------------------------------------------------
 
   -- Constants that configure the communication interface
-  constant kAddressWidth          : positive := 19;
+    constant kAddressWidth          : positive := 19;
   constant kNumberOfDmaChannels   : natural  := 64;
+  constant kNumberOfMemoryBufferDmaChannels   : natural  := 0;
   constant kNumberOfIrqs          : natural  := 1;
   constant kNumberOfMasterPorts   : natural  := 64;
   constant kNiFpgaFixedInputPorts : natural := 3;
@@ -94,7 +111,7 @@ package PkgCommIntConfiguration is
     of MasterPortConfiguration_t;
 
   constant kMasterPortConfArray : MasterPortConfArray_t(0 to kNumberOfMasterPorts - 1) := (
-       (Mode => Disabled)
+(Mode => Disabled)
 , (Mode => Disabled)
 , (Mode => Disabled)
 , (Mode => Disabled)
@@ -158,57 +175,72 @@ package PkgCommIntConfiguration is
 , (Mode => Disabled)
 , (Mode => Disabled)
 , (Mode => Disabled)
-      );
+);
 
 
   type DmaChannelMode_t is (
-    Disabled,               -- channel is disabled (no hardware generated).
-    NiFpgaTargetToHost,     -- input mode using modified mite read interface
-    NiFpgaHostToTarget,     -- output mode using modified mite write interface
-    NiCoreTargetToHost,     -- input mode using standard nicore mite read interface
-    NiCoreHostToTarget,     -- output mode using standard nicore mite write interface
-    NiFpgaPeerToPeerWriter, -- peer to peer input channel
-    NiFpgaPeerToPeerReader  -- peer to peer output channel
+    Disabled,                 -- channel is disabled (no hardware generated).
+    NiFpgaTargetToHost,       -- input mode using modified mite read interface
+    NiFpgaHostToTarget,       -- output mode using modified mite write interface
+    NiCoreTargetToHost,       -- input mode using standard nicore mite read interface
+    NiCoreHostToTarget,       -- output mode using standard nicore mite write interface
+    NiFpgaPeerToPeerWriter,   -- peer to peer input channel
+    NiFpgaPeerToPeerReader,   -- peer to peer output channel
+    NiFpgaMemoryBufferWriter, -- memory buffer peer to peer input channel
+    NiFpgaMemoryBufferReader  -- memory buffer peer to peer output channel
     );
-
+  
   type DmaChannelConfiguration_t is record
-    Mode                      : DmaChannelMode_t;
-    FifoDepth                 : natural;
-    FifoWidth                 : natural;
-    ElementsPerClockCycle     : natural;
-    SignedData                : boolean;
-    BaseAddress               : natural;
-    SCL                       : boolean;
-    CountSCL                  : boolean;
-    FxpType                   : boolean;
-    DisableOnFifoTimeout      : boolean;
-    WriteWindowOffset         : natural;
-    DmaClkIsDefaultClk        : boolean;
-    InterfaceIsHandshaking    : boolean;
+    Mode                  : DmaChannelMode_t;
+    FifoDepth             : natural;
+    FifoWidth             : natural;
+    ElementsPerClockCycle : natural;
+    SignedData            : boolean;
+    BaseAddress           : natural;
+    SCL                   : boolean;
+    CountSCL              : boolean;
+    FxpType               : boolean;
+    DisableOnFifoTimeout  : boolean;
+    WriteWindowOffset     : natural;
+    DmaClkIsDefaultClk    : boolean;
+    InterfaceIsHandshaking: boolean;
   end record;
 
   type DmaChannelConfArray_t is array (natural range <>)
     of DmaChannelConfiguration_t;
 
   constant kDmaChannelConfigurationZero : DmaChannelConfiguration_t :=
-    (FifoDepth               => 0,
-     FifoWidth               => 0,
-     ElementsPerClockCycle   => 0,
-     SignedData              => false,
-     BaseAddress             => 0,
-     Mode                    => Disabled,
-     SCL                     => false,
-     CountSCL                => false,
-     FxpType                 => false,
-     DisableOnFifoTimeout    => false,
-     WriteWindowOffset       => 0,
-     DmaClkIsDefaultClk      => false,
-     InterfaceIsHandshaking  => false);
+    (FifoDepth              => 0,
+     FifoWidth              => 0,
+     ElementsPerClockCycle  => 0,
+     SignedData             => false,
+     BaseAddress            => 0,
+     Mode                   => Disabled,
+     SCL                    => false,
+     CountSCL               => false,
+     FxpType                => false,
+     DisableOnFifoTimeout   => false,
+     WriteWindowOffset      => 0,
+     DmaClkIsDefaultClk     => false,
+     InterfaceIsHandshaking => false);
 
-    constant kDmaFifoConfArray : DmaChannelConfArray_t(0 to kNumberOfDmaChannels-1) :=
-(    (FifoDepth => 0,
+    constant kDmaFifoConfArray : DmaChannelConfArray_t(0 to kNumberOfDmaChannels -1) :=
+(    (FifoDepth => 1029, 
+    FifoWidth => 64,
+    SignedData => false, 
+    BaseAddress =>16#3FFC0#,
+    SCL => true,
+    CountSCL => false,
+    FxpType => false,
+    DisableOnFifoTimeout => false,
+    WriteWindowOffset => 16#0#,
+    DmaClkIsDefaultClk => true,
+    Mode => niFpgaHostToTarget,
+    ElementsPerClockCycle => 1,
+    InterfaceIsHandshaking => false)
+,     (FifoDepth => 0, 
     FifoWidth => 0,
-    SignedData => false,
+    SignedData => false, 
     BaseAddress =>16#0#,
     SCL => false,
     CountSCL => false,
@@ -219,9 +251,9 @@ package PkgCommIntConfiguration is
     Mode => Disabled,
     ElementsPerClockCycle => 0,
     InterfaceIsHandshaking => false)
-,     (FifoDepth => 0,
+,     (FifoDepth => 0, 
     FifoWidth => 0,
-    SignedData => false,
+    SignedData => false, 
     BaseAddress =>16#0#,
     SCL => false,
     CountSCL => false,
@@ -232,9 +264,9 @@ package PkgCommIntConfiguration is
     Mode => Disabled,
     ElementsPerClockCycle => 0,
     InterfaceIsHandshaking => false)
-,     (FifoDepth => 0,
+,     (FifoDepth => 0, 
     FifoWidth => 0,
-    SignedData => false,
+    SignedData => false, 
     BaseAddress =>16#0#,
     SCL => false,
     CountSCL => false,
@@ -245,9 +277,9 @@ package PkgCommIntConfiguration is
     Mode => Disabled,
     ElementsPerClockCycle => 0,
     InterfaceIsHandshaking => false)
-,     (FifoDepth => 0,
+,     (FifoDepth => 0, 
     FifoWidth => 0,
-    SignedData => false,
+    SignedData => false, 
     BaseAddress =>16#0#,
     SCL => false,
     CountSCL => false,
@@ -258,9 +290,9 @@ package PkgCommIntConfiguration is
     Mode => Disabled,
     ElementsPerClockCycle => 0,
     InterfaceIsHandshaking => false)
-,     (FifoDepth => 0,
+,     (FifoDepth => 0, 
     FifoWidth => 0,
-    SignedData => false,
+    SignedData => false, 
     BaseAddress =>16#0#,
     SCL => false,
     CountSCL => false,
@@ -271,9 +303,9 @@ package PkgCommIntConfiguration is
     Mode => Disabled,
     ElementsPerClockCycle => 0,
     InterfaceIsHandshaking => false)
-,     (FifoDepth => 0,
+,     (FifoDepth => 0, 
     FifoWidth => 0,
-    SignedData => false,
+    SignedData => false, 
     BaseAddress =>16#0#,
     SCL => false,
     CountSCL => false,
@@ -284,9 +316,9 @@ package PkgCommIntConfiguration is
     Mode => Disabled,
     ElementsPerClockCycle => 0,
     InterfaceIsHandshaking => false)
-,     (FifoDepth => 0,
+,     (FifoDepth => 0, 
     FifoWidth => 0,
-    SignedData => false,
+    SignedData => false, 
     BaseAddress =>16#0#,
     SCL => false,
     CountSCL => false,
@@ -297,9 +329,9 @@ package PkgCommIntConfiguration is
     Mode => Disabled,
     ElementsPerClockCycle => 0,
     InterfaceIsHandshaking => false)
-,     (FifoDepth => 0,
+,     (FifoDepth => 0, 
     FifoWidth => 0,
-    SignedData => false,
+    SignedData => false, 
     BaseAddress =>16#0#,
     SCL => false,
     CountSCL => false,
@@ -310,9 +342,9 @@ package PkgCommIntConfiguration is
     Mode => Disabled,
     ElementsPerClockCycle => 0,
     InterfaceIsHandshaking => false)
-,     (FifoDepth => 0,
+,     (FifoDepth => 0, 
     FifoWidth => 0,
-    SignedData => false,
+    SignedData => false, 
     BaseAddress =>16#0#,
     SCL => false,
     CountSCL => false,
@@ -323,9 +355,9 @@ package PkgCommIntConfiguration is
     Mode => Disabled,
     ElementsPerClockCycle => 0,
     InterfaceIsHandshaking => false)
-,     (FifoDepth => 0,
+,     (FifoDepth => 0, 
     FifoWidth => 0,
-    SignedData => false,
+    SignedData => false, 
     BaseAddress =>16#0#,
     SCL => false,
     CountSCL => false,
@@ -336,9 +368,9 @@ package PkgCommIntConfiguration is
     Mode => Disabled,
     ElementsPerClockCycle => 0,
     InterfaceIsHandshaking => false)
-,     (FifoDepth => 0,
+,     (FifoDepth => 0, 
     FifoWidth => 0,
-    SignedData => false,
+    SignedData => false, 
     BaseAddress =>16#0#,
     SCL => false,
     CountSCL => false,
@@ -349,9 +381,9 @@ package PkgCommIntConfiguration is
     Mode => Disabled,
     ElementsPerClockCycle => 0,
     InterfaceIsHandshaking => false)
-,     (FifoDepth => 0,
+,     (FifoDepth => 0, 
     FifoWidth => 0,
-    SignedData => false,
+    SignedData => false, 
     BaseAddress =>16#0#,
     SCL => false,
     CountSCL => false,
@@ -362,9 +394,9 @@ package PkgCommIntConfiguration is
     Mode => Disabled,
     ElementsPerClockCycle => 0,
     InterfaceIsHandshaking => false)
-,     (FifoDepth => 0,
+,     (FifoDepth => 0, 
     FifoWidth => 0,
-    SignedData => false,
+    SignedData => false, 
     BaseAddress =>16#0#,
     SCL => false,
     CountSCL => false,
@@ -375,9 +407,9 @@ package PkgCommIntConfiguration is
     Mode => Disabled,
     ElementsPerClockCycle => 0,
     InterfaceIsHandshaking => false)
-,     (FifoDepth => 0,
+,     (FifoDepth => 0, 
     FifoWidth => 0,
-    SignedData => false,
+    SignedData => false, 
     BaseAddress =>16#0#,
     SCL => false,
     CountSCL => false,
@@ -388,9 +420,9 @@ package PkgCommIntConfiguration is
     Mode => Disabled,
     ElementsPerClockCycle => 0,
     InterfaceIsHandshaking => false)
-,     (FifoDepth => 0,
+,     (FifoDepth => 0, 
     FifoWidth => 0,
-    SignedData => false,
+    SignedData => false, 
     BaseAddress =>16#0#,
     SCL => false,
     CountSCL => false,
@@ -401,9 +433,9 @@ package PkgCommIntConfiguration is
     Mode => Disabled,
     ElementsPerClockCycle => 0,
     InterfaceIsHandshaking => false)
-,     (FifoDepth => 0,
+,     (FifoDepth => 0, 
     FifoWidth => 0,
-    SignedData => false,
+    SignedData => false, 
     BaseAddress =>16#0#,
     SCL => false,
     CountSCL => false,
@@ -414,9 +446,9 @@ package PkgCommIntConfiguration is
     Mode => Disabled,
     ElementsPerClockCycle => 0,
     InterfaceIsHandshaking => false)
-,     (FifoDepth => 0,
+,     (FifoDepth => 0, 
     FifoWidth => 0,
-    SignedData => false,
+    SignedData => false, 
     BaseAddress =>16#0#,
     SCL => false,
     CountSCL => false,
@@ -427,9 +459,9 @@ package PkgCommIntConfiguration is
     Mode => Disabled,
     ElementsPerClockCycle => 0,
     InterfaceIsHandshaking => false)
-,     (FifoDepth => 0,
+,     (FifoDepth => 0, 
     FifoWidth => 0,
-    SignedData => false,
+    SignedData => false, 
     BaseAddress =>16#0#,
     SCL => false,
     CountSCL => false,
@@ -440,9 +472,9 @@ package PkgCommIntConfiguration is
     Mode => Disabled,
     ElementsPerClockCycle => 0,
     InterfaceIsHandshaking => false)
-,     (FifoDepth => 0,
+,     (FifoDepth => 0, 
     FifoWidth => 0,
-    SignedData => false,
+    SignedData => false, 
     BaseAddress =>16#0#,
     SCL => false,
     CountSCL => false,
@@ -453,9 +485,9 @@ package PkgCommIntConfiguration is
     Mode => Disabled,
     ElementsPerClockCycle => 0,
     InterfaceIsHandshaking => false)
-,     (FifoDepth => 0,
+,     (FifoDepth => 0, 
     FifoWidth => 0,
-    SignedData => false,
+    SignedData => false, 
     BaseAddress =>16#0#,
     SCL => false,
     CountSCL => false,
@@ -466,9 +498,9 @@ package PkgCommIntConfiguration is
     Mode => Disabled,
     ElementsPerClockCycle => 0,
     InterfaceIsHandshaking => false)
-,     (FifoDepth => 0,
+,     (FifoDepth => 0, 
     FifoWidth => 0,
-    SignedData => false,
+    SignedData => false, 
     BaseAddress =>16#0#,
     SCL => false,
     CountSCL => false,
@@ -479,9 +511,9 @@ package PkgCommIntConfiguration is
     Mode => Disabled,
     ElementsPerClockCycle => 0,
     InterfaceIsHandshaking => false)
-,     (FifoDepth => 0,
+,     (FifoDepth => 0, 
     FifoWidth => 0,
-    SignedData => false,
+    SignedData => false, 
     BaseAddress =>16#0#,
     SCL => false,
     CountSCL => false,
@@ -492,9 +524,9 @@ package PkgCommIntConfiguration is
     Mode => Disabled,
     ElementsPerClockCycle => 0,
     InterfaceIsHandshaking => false)
-,     (FifoDepth => 0,
+,     (FifoDepth => 0, 
     FifoWidth => 0,
-    SignedData => false,
+    SignedData => false, 
     BaseAddress =>16#0#,
     SCL => false,
     CountSCL => false,
@@ -505,9 +537,9 @@ package PkgCommIntConfiguration is
     Mode => Disabled,
     ElementsPerClockCycle => 0,
     InterfaceIsHandshaking => false)
-,     (FifoDepth => 0,
+,     (FifoDepth => 0, 
     FifoWidth => 0,
-    SignedData => false,
+    SignedData => false, 
     BaseAddress =>16#0#,
     SCL => false,
     CountSCL => false,
@@ -518,9 +550,9 @@ package PkgCommIntConfiguration is
     Mode => Disabled,
     ElementsPerClockCycle => 0,
     InterfaceIsHandshaking => false)
-,     (FifoDepth => 0,
+,     (FifoDepth => 0, 
     FifoWidth => 0,
-    SignedData => false,
+    SignedData => false, 
     BaseAddress =>16#0#,
     SCL => false,
     CountSCL => false,
@@ -531,9 +563,9 @@ package PkgCommIntConfiguration is
     Mode => Disabled,
     ElementsPerClockCycle => 0,
     InterfaceIsHandshaking => false)
-,     (FifoDepth => 0,
+,     (FifoDepth => 0, 
     FifoWidth => 0,
-    SignedData => false,
+    SignedData => false, 
     BaseAddress =>16#0#,
     SCL => false,
     CountSCL => false,
@@ -544,9 +576,9 @@ package PkgCommIntConfiguration is
     Mode => Disabled,
     ElementsPerClockCycle => 0,
     InterfaceIsHandshaking => false)
-,     (FifoDepth => 0,
+,     (FifoDepth => 0, 
     FifoWidth => 0,
-    SignedData => false,
+    SignedData => false, 
     BaseAddress =>16#0#,
     SCL => false,
     CountSCL => false,
@@ -557,9 +589,9 @@ package PkgCommIntConfiguration is
     Mode => Disabled,
     ElementsPerClockCycle => 0,
     InterfaceIsHandshaking => false)
-,     (FifoDepth => 0,
+,     (FifoDepth => 0, 
     FifoWidth => 0,
-    SignedData => false,
+    SignedData => false, 
     BaseAddress =>16#0#,
     SCL => false,
     CountSCL => false,
@@ -570,9 +602,9 @@ package PkgCommIntConfiguration is
     Mode => Disabled,
     ElementsPerClockCycle => 0,
     InterfaceIsHandshaking => false)
-,     (FifoDepth => 0,
+,     (FifoDepth => 0, 
     FifoWidth => 0,
-    SignedData => false,
+    SignedData => false, 
     BaseAddress =>16#0#,
     SCL => false,
     CountSCL => false,
@@ -583,9 +615,9 @@ package PkgCommIntConfiguration is
     Mode => Disabled,
     ElementsPerClockCycle => 0,
     InterfaceIsHandshaking => false)
-,     (FifoDepth => 0,
+,     (FifoDepth => 0, 
     FifoWidth => 0,
-    SignedData => false,
+    SignedData => false, 
     BaseAddress =>16#0#,
     SCL => false,
     CountSCL => false,
@@ -596,9 +628,9 @@ package PkgCommIntConfiguration is
     Mode => Disabled,
     ElementsPerClockCycle => 0,
     InterfaceIsHandshaking => false)
-,     (FifoDepth => 0,
+,     (FifoDepth => 0, 
     FifoWidth => 0,
-    SignedData => false,
+    SignedData => false, 
     BaseAddress =>16#0#,
     SCL => false,
     CountSCL => false,
@@ -609,9 +641,9 @@ package PkgCommIntConfiguration is
     Mode => Disabled,
     ElementsPerClockCycle => 0,
     InterfaceIsHandshaking => false)
-,     (FifoDepth => 0,
+,     (FifoDepth => 0, 
     FifoWidth => 0,
-    SignedData => false,
+    SignedData => false, 
     BaseAddress =>16#0#,
     SCL => false,
     CountSCL => false,
@@ -622,9 +654,9 @@ package PkgCommIntConfiguration is
     Mode => Disabled,
     ElementsPerClockCycle => 0,
     InterfaceIsHandshaking => false)
-,     (FifoDepth => 0,
+,     (FifoDepth => 0, 
     FifoWidth => 0,
-    SignedData => false,
+    SignedData => false, 
     BaseAddress =>16#0#,
     SCL => false,
     CountSCL => false,
@@ -635,9 +667,9 @@ package PkgCommIntConfiguration is
     Mode => Disabled,
     ElementsPerClockCycle => 0,
     InterfaceIsHandshaking => false)
-,     (FifoDepth => 0,
+,     (FifoDepth => 0, 
     FifoWidth => 0,
-    SignedData => false,
+    SignedData => false, 
     BaseAddress =>16#0#,
     SCL => false,
     CountSCL => false,
@@ -648,9 +680,9 @@ package PkgCommIntConfiguration is
     Mode => Disabled,
     ElementsPerClockCycle => 0,
     InterfaceIsHandshaking => false)
-,     (FifoDepth => 0,
+,     (FifoDepth => 0, 
     FifoWidth => 0,
-    SignedData => false,
+    SignedData => false, 
     BaseAddress =>16#0#,
     SCL => false,
     CountSCL => false,
@@ -661,9 +693,9 @@ package PkgCommIntConfiguration is
     Mode => Disabled,
     ElementsPerClockCycle => 0,
     InterfaceIsHandshaking => false)
-,     (FifoDepth => 0,
+,     (FifoDepth => 0, 
     FifoWidth => 0,
-    SignedData => false,
+    SignedData => false, 
     BaseAddress =>16#0#,
     SCL => false,
     CountSCL => false,
@@ -674,9 +706,9 @@ package PkgCommIntConfiguration is
     Mode => Disabled,
     ElementsPerClockCycle => 0,
     InterfaceIsHandshaking => false)
-,     (FifoDepth => 0,
+,     (FifoDepth => 0, 
     FifoWidth => 0,
-    SignedData => false,
+    SignedData => false, 
     BaseAddress =>16#0#,
     SCL => false,
     CountSCL => false,
@@ -687,9 +719,9 @@ package PkgCommIntConfiguration is
     Mode => Disabled,
     ElementsPerClockCycle => 0,
     InterfaceIsHandshaking => false)
-,     (FifoDepth => 0,
+,     (FifoDepth => 0, 
     FifoWidth => 0,
-    SignedData => false,
+    SignedData => false, 
     BaseAddress =>16#0#,
     SCL => false,
     CountSCL => false,
@@ -700,9 +732,9 @@ package PkgCommIntConfiguration is
     Mode => Disabled,
     ElementsPerClockCycle => 0,
     InterfaceIsHandshaking => false)
-,     (FifoDepth => 0,
+,     (FifoDepth => 0, 
     FifoWidth => 0,
-    SignedData => false,
+    SignedData => false, 
     BaseAddress =>16#0#,
     SCL => false,
     CountSCL => false,
@@ -713,9 +745,9 @@ package PkgCommIntConfiguration is
     Mode => Disabled,
     ElementsPerClockCycle => 0,
     InterfaceIsHandshaking => false)
-,     (FifoDepth => 0,
+,     (FifoDepth => 0, 
     FifoWidth => 0,
-    SignedData => false,
+    SignedData => false, 
     BaseAddress =>16#0#,
     SCL => false,
     CountSCL => false,
@@ -726,9 +758,9 @@ package PkgCommIntConfiguration is
     Mode => Disabled,
     ElementsPerClockCycle => 0,
     InterfaceIsHandshaking => false)
-,     (FifoDepth => 0,
+,     (FifoDepth => 0, 
     FifoWidth => 0,
-    SignedData => false,
+    SignedData => false, 
     BaseAddress =>16#0#,
     SCL => false,
     CountSCL => false,
@@ -739,9 +771,9 @@ package PkgCommIntConfiguration is
     Mode => Disabled,
     ElementsPerClockCycle => 0,
     InterfaceIsHandshaking => false)
-,     (FifoDepth => 0,
+,     (FifoDepth => 0, 
     FifoWidth => 0,
-    SignedData => false,
+    SignedData => false, 
     BaseAddress =>16#0#,
     SCL => false,
     CountSCL => false,
@@ -752,9 +784,9 @@ package PkgCommIntConfiguration is
     Mode => Disabled,
     ElementsPerClockCycle => 0,
     InterfaceIsHandshaking => false)
-,     (FifoDepth => 0,
+,     (FifoDepth => 0, 
     FifoWidth => 0,
-    SignedData => false,
+    SignedData => false, 
     BaseAddress =>16#0#,
     SCL => false,
     CountSCL => false,
@@ -765,9 +797,9 @@ package PkgCommIntConfiguration is
     Mode => Disabled,
     ElementsPerClockCycle => 0,
     InterfaceIsHandshaking => false)
-,     (FifoDepth => 0,
+,     (FifoDepth => 0, 
     FifoWidth => 0,
-    SignedData => false,
+    SignedData => false, 
     BaseAddress =>16#0#,
     SCL => false,
     CountSCL => false,
@@ -778,9 +810,9 @@ package PkgCommIntConfiguration is
     Mode => Disabled,
     ElementsPerClockCycle => 0,
     InterfaceIsHandshaking => false)
-,     (FifoDepth => 0,
+,     (FifoDepth => 0, 
     FifoWidth => 0,
-    SignedData => false,
+    SignedData => false, 
     BaseAddress =>16#0#,
     SCL => false,
     CountSCL => false,
@@ -791,9 +823,9 @@ package PkgCommIntConfiguration is
     Mode => Disabled,
     ElementsPerClockCycle => 0,
     InterfaceIsHandshaking => false)
-,     (FifoDepth => 0,
+,     (FifoDepth => 0, 
     FifoWidth => 0,
-    SignedData => false,
+    SignedData => false, 
     BaseAddress =>16#0#,
     SCL => false,
     CountSCL => false,
@@ -804,9 +836,9 @@ package PkgCommIntConfiguration is
     Mode => Disabled,
     ElementsPerClockCycle => 0,
     InterfaceIsHandshaking => false)
-,     (FifoDepth => 0,
+,     (FifoDepth => 0, 
     FifoWidth => 0,
-    SignedData => false,
+    SignedData => false, 
     BaseAddress =>16#0#,
     SCL => false,
     CountSCL => false,
@@ -817,9 +849,9 @@ package PkgCommIntConfiguration is
     Mode => Disabled,
     ElementsPerClockCycle => 0,
     InterfaceIsHandshaking => false)
-,     (FifoDepth => 0,
+,     (FifoDepth => 0, 
     FifoWidth => 0,
-    SignedData => false,
+    SignedData => false, 
     BaseAddress =>16#0#,
     SCL => false,
     CountSCL => false,
@@ -830,9 +862,9 @@ package PkgCommIntConfiguration is
     Mode => Disabled,
     ElementsPerClockCycle => 0,
     InterfaceIsHandshaking => false)
-,     (FifoDepth => 0,
+,     (FifoDepth => 0, 
     FifoWidth => 0,
-    SignedData => false,
+    SignedData => false, 
     BaseAddress =>16#0#,
     SCL => false,
     CountSCL => false,
@@ -843,9 +875,9 @@ package PkgCommIntConfiguration is
     Mode => Disabled,
     ElementsPerClockCycle => 0,
     InterfaceIsHandshaking => false)
-,     (FifoDepth => 0,
+,     (FifoDepth => 0, 
     FifoWidth => 0,
-    SignedData => false,
+    SignedData => false, 
     BaseAddress =>16#0#,
     SCL => false,
     CountSCL => false,
@@ -856,9 +888,9 @@ package PkgCommIntConfiguration is
     Mode => Disabled,
     ElementsPerClockCycle => 0,
     InterfaceIsHandshaking => false)
-,     (FifoDepth => 0,
+,     (FifoDepth => 0, 
     FifoWidth => 0,
-    SignedData => false,
+    SignedData => false, 
     BaseAddress =>16#0#,
     SCL => false,
     CountSCL => false,
@@ -869,9 +901,9 @@ package PkgCommIntConfiguration is
     Mode => Disabled,
     ElementsPerClockCycle => 0,
     InterfaceIsHandshaking => false)
-,     (FifoDepth => 0,
+,     (FifoDepth => 0, 
     FifoWidth => 0,
-    SignedData => false,
+    SignedData => false, 
     BaseAddress =>16#0#,
     SCL => false,
     CountSCL => false,
@@ -882,9 +914,9 @@ package PkgCommIntConfiguration is
     Mode => Disabled,
     ElementsPerClockCycle => 0,
     InterfaceIsHandshaking => false)
-,     (FifoDepth => 0,
+,     (FifoDepth => 0, 
     FifoWidth => 0,
-    SignedData => false,
+    SignedData => false, 
     BaseAddress =>16#0#,
     SCL => false,
     CountSCL => false,
@@ -895,9 +927,9 @@ package PkgCommIntConfiguration is
     Mode => Disabled,
     ElementsPerClockCycle => 0,
     InterfaceIsHandshaking => false)
-,     (FifoDepth => 0,
+,     (FifoDepth => 0, 
     FifoWidth => 0,
-    SignedData => false,
+    SignedData => false, 
     BaseAddress =>16#0#,
     SCL => false,
     CountSCL => false,
@@ -908,9 +940,9 @@ package PkgCommIntConfiguration is
     Mode => Disabled,
     ElementsPerClockCycle => 0,
     InterfaceIsHandshaking => false)
-,     (FifoDepth => 0,
+,     (FifoDepth => 0, 
     FifoWidth => 0,
-    SignedData => false,
+    SignedData => false, 
     BaseAddress =>16#0#,
     SCL => false,
     CountSCL => false,
@@ -921,9 +953,9 @@ package PkgCommIntConfiguration is
     Mode => Disabled,
     ElementsPerClockCycle => 0,
     InterfaceIsHandshaking => false)
-,     (FifoDepth => 0,
+,     (FifoDepth => 0, 
     FifoWidth => 0,
-    SignedData => false,
+    SignedData => false, 
     BaseAddress =>16#0#,
     SCL => false,
     CountSCL => false,
@@ -934,9 +966,9 @@ package PkgCommIntConfiguration is
     Mode => Disabled,
     ElementsPerClockCycle => 0,
     InterfaceIsHandshaking => false)
-,     (FifoDepth => 0,
+,     (FifoDepth => 0, 
     FifoWidth => 0,
-    SignedData => false,
+    SignedData => false, 
     BaseAddress =>16#0#,
     SCL => false,
     CountSCL => false,
@@ -947,9 +979,9 @@ package PkgCommIntConfiguration is
     Mode => Disabled,
     ElementsPerClockCycle => 0,
     InterfaceIsHandshaking => false)
-,     (FifoDepth => 0,
+,     (FifoDepth => 0, 
     FifoWidth => 0,
-    SignedData => false,
+    SignedData => false, 
     BaseAddress =>16#0#,
     SCL => false,
     CountSCL => false,
@@ -960,9 +992,9 @@ package PkgCommIntConfiguration is
     Mode => Disabled,
     ElementsPerClockCycle => 0,
     InterfaceIsHandshaking => false)
-,     (FifoDepth => 0,
+,     (FifoDepth => 0, 
     FifoWidth => 0,
-    SignedData => false,
+    SignedData => false, 
     BaseAddress =>16#0#,
     SCL => false,
     CountSCL => false,
@@ -973,9 +1005,9 @@ package PkgCommIntConfiguration is
     Mode => Disabled,
     ElementsPerClockCycle => 0,
     InterfaceIsHandshaking => false)
-,     (FifoDepth => 0,
+,     (FifoDepth => 0, 
     FifoWidth => 0,
-    SignedData => false,
+    SignedData => false, 
     BaseAddress =>16#0#,
     SCL => false,
     CountSCL => false,
@@ -986,9 +1018,9 @@ package PkgCommIntConfiguration is
     Mode => Disabled,
     ElementsPerClockCycle => 0,
     InterfaceIsHandshaking => false)
-,     (FifoDepth => 0,
+,     (FifoDepth => 0, 
     FifoWidth => 0,
-    SignedData => false,
+    SignedData => false, 
     BaseAddress =>16#0#,
     SCL => false,
     CountSCL => false,
@@ -999,9 +1031,9 @@ package PkgCommIntConfiguration is
     Mode => Disabled,
     ElementsPerClockCycle => 0,
     InterfaceIsHandshaking => false)
-,     (FifoDepth => 0,
+,     (FifoDepth => 0, 
     FifoWidth => 0,
-    SignedData => false,
+    SignedData => false, 
     BaseAddress =>16#0#,
     SCL => false,
     CountSCL => false,
@@ -1012,22 +1044,9 @@ package PkgCommIntConfiguration is
     Mode => Disabled,
     ElementsPerClockCycle => 0,
     InterfaceIsHandshaking => false)
-,     (FifoDepth => 0,
+,     (FifoDepth => 0, 
     FifoWidth => 0,
-    SignedData => false,
-    BaseAddress =>16#0#,
-    SCL => false,
-    CountSCL => false,
-    FxpType => false,
-    DisableOnFifoTimeout => false,
-    WriteWindowOffset => 16#0#,
-    DmaClkIsDefaultClk => false,
-    Mode => Disabled,
-    ElementsPerClockCycle => 0,
-    InterfaceIsHandshaking => false)
-,     (FifoDepth => 0,
-    FifoWidth => 0,
-    SignedData => false,
+    SignedData => false, 
     BaseAddress =>16#0#,
     SCL => false,
     CountSCL => false,
@@ -1041,24 +1060,67 @@ package PkgCommIntConfiguration is
 );
 
 
+    -- Printing this array even when no DMA channels are supported because
+  -- not printing it causes synthesis problems for other files.  This is
+  -- sized to 2 because Xilinx was complaining when the array was sized
+  -- to 1.
+  constant kMemoryBufferFifoConfArray : DmaChannelConfArray_t(0 to 1) := (
+   (
+    Mode => Disabled,
+    FifoDepth => 0,
+    FifoWidth => 0,
+    SignedData => False,
+    BaseAddress => 16#0#,
+    SCL => False,
+    CountSCL => False,
+    FxpType => False,
+    DisableOnFifoTimeout => False,
+    WriteWindowOffset => 16#0#,
+    DmaClkIsDefaultClk => False,
+    ElementsPerClockCycle => 0,
+    InterfaceIsHandshaking => False
+   ),
+   (
+    Mode => Disabled,
+    FifoDepth => 0,
+    FifoWidth => 0,
+    SignedData => False,
+    BaseAddress => 16#0#,
+    SCL => False,
+    CountSCL => False,
+    FxpType => False,
+    DisableOnFifoTimeout => False,
+    WriteWindowOffset => 16#0#,
+    DmaClkIsDefaultClk => False,
+    ElementsPerClockCycle => 0,
+    InterfaceIsHandshaking => False
+   )
+  );
+
+
+
   -- FUNCTIONS ----------------------------------------------------------------
 
   -- Function to return the depths of the DMA FIFOs in samples.
   function GetFifoDepthsInSamples(ChannelConfig: DmaChannelConfArray_t)
     return DmaChannelConfArray_t;
-
+  
+  function DmaMaxWidth(DmaChannelConfArray : DmaChannelConfArray_t) return natural;
   function DmaMaxWidth(unused : boolean) return natural;
+  function MemoryBufferDmaMaxWidth(unused : boolean) return natural;
+  function DmaMaxDepth(DmaChannelConfArray : DmaChannelConfArray_t) return positive;
   function DmaMaxDepth(unused : boolean) return positive;
-
-  -- Functions to return the number of DMA input, output and sink channels.
+  function MemoryBufferDmaMaxDepth(unused : boolean) return positive;
+ 
+  -- Functions to return the number of DMA input, output and sink channels.  
   function NumOfInStrms(Arg : DmaChannelConfArray_t) return natural;
   function NumOfOutStrms(Arg : DmaChannelConfArray_t) return natural;
   function NumOfSinkStrms(Arg : DmaChannelConfArray_t) return natural;
 
-  -- Functions to return the number of Write and Read Master Ports.
+  --Functions to return the number of Write and Read Master Ports.
   function NumOfWriteMasterPorts(Arg : MasterPortConfArray_t) return natural;
   function NumOfReadMasterPorts(Arg : MasterPortConfArray_t) return natural;
-
+  
 end PkgCommIntConfiguration;
 
 -------------------------------------------------------------------------------
@@ -1078,7 +1140,7 @@ package body PkgCommIntConfiguration is
     -- Set the configuration output equal to the configuration input.
     ReturnVal := ChannelConfig;
 
-    -- Find the depth for each channel.
+    -- Find the depth for each channel.  
     for i in ChannelConfig'range loop
       -- An output channel needs to subtract the size of the pop buffer.
       if ChannelConfig(i).Mode = NiFpgaTargetToHost or
@@ -1092,70 +1154,90 @@ package body PkgCommIntConfiguration is
     return ReturnVal;
   end GetFifoDepthsInSamples;
 
-  function DmaMaxWidth(unused : boolean) return natural is
+  function DmaMaxWidth(DmaChannelConfArray : DmaChannelConfArray_t) return natural is
     variable maxWidth : natural := 1;
   begin
-    for i in 0 to kNumberOfDmaChannels-1 loop
+    for i in DmaChannelConfArray'range loop
       maxWidth := Larger(maxWidth,
-                    kDmaFifoConfArray(i).FifoWidth*kDmaFifoConfArray(i).ElementsPerClockCycle);
+                    DmaChannelConfArray(i).FifoWidth*DmaChannelConfArray(i).ElementsPerClockCycle);
     end loop;
     return maxWidth;
+  end DmaMaxWidth;  
+
+  function DmaMaxWidth(unused : boolean) return natural is
+  begin
+    return DmaMaxWidth(kDmaFifoConfArray);
   end DmaMaxWidth;
 
-  function DmaMaxDepth(unused : boolean) return positive is
+  function MemoryBufferDmaMaxWidth(unused : boolean) return natural is
+  begin
+    return DmaMaxWidth(kMemoryBufferFifoConfArray);
+  end MemoryBufferDmaMaxWidth;
+
+  function DmaMaxDepth(DmaChannelConfArray : DmaChannelConfArray_t) return positive is
     variable maxDepth : positive := 1;
   begin
-    for i in 0 to kNumberOfDmaChannels-1 loop
-      maxDepth := Larger(maxDepth, kDmaFifoConfArray(i).FifoDepth);
+    for i in DmaChannelConfArray'range loop
+      maxDepth := Larger(maxDepth, DmaChannelConfArray(i).FifoDepth);
     end loop;
     return maxDepth;
   end DmaMaxDepth;
 
-  -- This function returns the number of used DMA input channels.
-  function NumOfInStrms(Arg : DmaChannelConfArray_t)
+  function DmaMaxDepth(unused : boolean) return positive is
+  begin
+    return DmaMaxDepth(kDmaFifoConfArray);
+  end DmaMaxDepth;
+
+  function MemoryBufferDmaMaxDepth(unused : boolean) return positive is
+  begin
+    return DmaMaxDepth(kMemoryBufferFifoConfArray);
+  end MemoryBufferDmaMaxDepth;
+
+  -- This function returns the number of used DMA input channels.  
+  function NumOfInStrms(Arg : DmaChannelConfArray_t) 
   return natural is
     variable ReturnVal : natural;
   begin
     ReturnVal := 0;
     for i in arg'range loop
-      if Arg(i).Mode = NiFpgaTargetToHost or Arg(i).Mode = NiFpgaPeerToPeerWriter then
+      if Arg(i).Mode = NiFpgaTargetToHost or Arg(i).Mode = NiFpgaPeerToPeerWriter or Arg(i).Mode = NiFpgaMemoryBufferWriter then
         ReturnVal := ReturnVal + 1;
       end if;
     end loop;
     return ReturnVal;
   end NumOfInStrms;
-
+  
   -- This function returns the number of used DMA output channels.  This includes
   -- peer-to-peer sink streams.
-  function NumOfOutStrms(Arg : DmaChannelConfArray_t)
+  function NumOfOutStrms(Arg : DmaChannelConfArray_t) 
   return natural is
     variable ReturnVal : natural;
   begin
     ReturnVal := 0;
     for i in arg'range loop
-      if Arg(i).Mode = NiFpgaHostToTarget then
+      if Arg(i).Mode = NiFpgaHostToTarget or Arg(i).Mode = NiFpgaMemoryBufferReader then
         ReturnVal := ReturnVal + 1;
       end if;
     end loop;
     return ReturnVal;
   end NumOfOutStrms;
 
-  -- This function returns the number of used DMA sink channels.
-  function NumOfSinkStrms(Arg : DmaChannelConfArray_t)
+  -- This function returns the number of used DMA sink channels.  
+  function NumOfSinkStrms(Arg : DmaChannelConfArray_t) 
   return natural is
     variable ReturnVal : natural;
   begin
     ReturnVal := 0;
     for i in arg'range loop
-      if Arg(i).Mode = NiFpgaPeerToPeerReader then
+      if Arg(i).Mode = NiFpgaPeerToPeerReader or Arg(i).Mode = NiFpgaMemoryBufferReader then
         ReturnVal := ReturnVal + 1;
       end if;
     end loop;
     return ReturnVal;
   end NumOfSinkStrms;
 
-  -- This function returns the number of used Write Master Ports.
-  function NumOfWriteMasterPorts(Arg : MasterPortConfArray_t)
+  -- This function returns the number of used Write Master Ports.  
+  function NumOfWriteMasterPorts(Arg : MasterPortConfArray_t) 
   return natural is
     variable ReturnVal : natural;
   begin
@@ -1167,10 +1249,10 @@ package body PkgCommIntConfiguration is
     end loop;
     return ReturnVal;
   end NumOfWriteMasterPorts;
-
+  
   -- This function returns the number of used DMA output channels.  This includes
   -- peer-to-peer sink streams.
-  function NumOfReadMasterPorts(Arg : MasterPortConfArray_t)
+  function NumOfReadMasterPorts(Arg : MasterPortConfArray_t) 
   return natural is
     variable ReturnVal : natural;
   begin
@@ -1182,5 +1264,5 @@ package body PkgCommIntConfiguration is
     end loop;
     return ReturnVal;
   end NumOfReadMasterPorts;
-
+  
 end PkgCommIntConfiguration;
