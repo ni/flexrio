@@ -27,7 +27,7 @@ Our user facing process will mirror what we do in HW tools in a simpler way.  Fo
         * Runs a synthesis script to ensure that the Vivado project has all of the necessary dependency files
 2. Run the <b>hw-flexrio-baseboards-buildgithubrelease</b> pipeline
     * These steps are automated:
-        * Creates a filtered release branch that only contains files with the "githubvisible=true" tag
+        * Creates a filtered release branch that only contains files with the github visible tag
     * The pipeline has a <b>commit_message</b> variable which shows up on all of the files that are pushed to GitHub.  As you are developing and pushing to main in AzDO, those commit messages will not show on GitHub.  Make sure you have a good commit message that describes all of the changes that are being pushed into the release branch.  It is ideal for you to have more incremental AzDO release branch pushes rather than one mega-push that contains lots of changes.
     * Optionally review the release branch in AzDO
 3. Push to GitHub
@@ -53,7 +53,9 @@ Our user facing process will mirror what we do in HW tools in a simpler way.  Fo
 
 ## Supporting GitHub Release on a New Target
 * Set the "supportsgithubrelease" parameter to True in targetconfig.py
-* Add "githubvisible=true" to the header comments of each HDL file you wish to show up on GitHub
+* Add the github visible to the header comments of each HDL file you wish to show up on GitHub
+    * The tag is "github visible = true" without any spaces
+    * We can't have the exact tag in this doc file because it should not be on GitHub
 * Add the license header text (replace any existing copyright header that was in the file)
 > MIT License<br />
 > 
