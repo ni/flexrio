@@ -85,6 +85,9 @@ Our user facing process will mirror what we do in HW tools in a simpler way.  Fo
         * SynthProject2.tcl
         * UpdateProjectFilesTemplate.tcl
     * The CreateNewProjectTemplate is derived from settings used in the target project from a LV FPGA Vivado Project Export
+* For all files with "githubvisible=true", ensure that the comments are professional and appropriate for users
+    * You can automate this by asking copilot to "Ensure that all comments in this file are professional"
+    * I've found that this catches typos and other unprofessional-sounding content
 * Add a .gitignore file to ignore objects and VivadoProject folders
 * Convert TheWindow.vhd to TheWindow.vhd.mako (following what the PXIe-7903 does)
 * Convert the target's resource XML to mako (following what is done in Sasquatch7903.xml.mako)
