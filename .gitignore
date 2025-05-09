@@ -7,3 +7,4 @@ modelsim/
 transcript
 # Ignore Python bytecode cache files
 __pycache__/
+.Xil/
