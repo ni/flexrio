@@ -18,19 +18,14 @@
 1.	Download the dependencies zip file from the latest FlexRIO release:
 2.	Put the zip file into this folder:
     > C:\dev\github\flexrio-test\dependencies
-3.	Open a command prompt at the PXIe-7903 folder:
-    > C:\dev\github\flexrio\baseboards\fpgas\source\fpga\pxie-7903
-    * Note: the PXIe-7903 folder is the working directory where you will run all commands
-4.	Run the setenv script to setup the tools into your command path
-    > setenv
-    Note: run setenv each time you create a new command prompt
-5.	Run the script to extract the dependencies zip file into your FlexRIO folder:
-    > extractdependencies 
+    * Note: ensure that the file name stays "flexriodeps.zip"
+3.	Run the batch file to extract the dependencies:
+    > extractdependencies.bat
 
 ### Phase 3 – Create and Build the Vivado Project
 You may skip steps 1 &2 if continuing from the previous phase
 1.	Open a command prompt at the PXIe-7903 folder:
-    > C:\dev\github\flexrio\baseboards\fpgas\source\fpga\pxie-7903
+    > C:\dev\github\flexrio-test\targets\pxie-7903
     * Note: the PXIe-7903 folder is the working directory where you will run all commands
 2.	Run the setenv script to setup the tools into your command path
     > setenv

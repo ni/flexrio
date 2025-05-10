@@ -8,14 +8,22 @@ In our internal process, we use hwtools to pull all of the dependencies from Per
 
 Our user facing process will mirror what we do in HW tools in a simpler way.  For example, internal hwtools needs to pull dependencies from a variety of sources that NI has created over the years.  For the user facing workflow, we will bundle all of those dependencies into ONE export object and give that to the user.  This means their tools won't require all the dependency syncing complexity of NI's internal process.
 
-### <u>Build Flow for Generating User Dependencies</u>
-![FlexRIO Repo Deps](flexrio_deps.png)
+The general flow is:
+* VSMake produces absfiles_[topentityname].txt that lists all the files used in synthesis
+* Build runs a githubbuildtools function that processes that into vivadoprojectdeps.txt and vivadoprojectsources.txt files
+* The vivadoprojectdeps.txt file is used to bundle the dependnecies that are used into a flexriodeps.zip file
+    * The zip file is published into the nuget during build
+* Both text files are copied into the branch that ends up as GitHub source
+* The user clones the GitHub repo and follows this process for installing the dependencies:
+    * Downloads the flexriodeps.zip file into the dependencies folder within their cloned GitHub folder hierarchy
+    * Runs extractdeps.bat to unzip the dependencies into the right folder
+* The user runs createvivadoproject.bat from the target folder:
+    * Generates a TCL script and runs it to create a Vivado project using all the files in vivadoprojectdeps.txt and vivadoprojectsources.txt
+    * Copies all of the deps files needed by Vivado into a flat gathereddeps folder (this is necessary to avoid long file path problems)
 
-### <u>User Flow for Getting Dependencies into Vivado Projects</u>
-![FlexRIO Module Specific Deps](flexrio_model_deps.png)
 
 ## Repo and Tool Structure
-![Repo and Tool Structure](repo_tools.png)
+
 
 ## Release Process
 
@@ -87,6 +95,8 @@ Our user facing process will mirror what we do in HW tools in a simpler way.  Fo
         * SynthProject2.tcl
         * UpdateProjectFilesTemplate.tcl
     * The CreateNewProjectTemplate is derived from settings used in the target project from a LV FPGA Vivado Project Export
+* Determine what files should be user visible vs encrypted
+    * Follow directions <<<< HERE >>>>
 * For all files with "githubvisible=true", ensure that the comments are professional and appropriate for users
     * You can automate this by asking copilot to "Ensure that all comments in this file are professional"
     * I've found that this catches typos and other unprofessional-sounding content
