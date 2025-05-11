@@ -1,0 +1,3 @@
+[submodule "lvfpgahdltools"]
+	path = lvfpgahdltools
+	url = https://github.com/ni/lvfpgahdltools.git
