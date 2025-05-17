@@ -1,0 +1,3 @@
+CLIPMigration\Aurora\Source\vhdl
+CLIPMigration\Aurora\Source\xdc
+CLIPMigration\Aurora\Target
