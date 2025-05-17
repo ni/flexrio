@@ -1,8 +1,35 @@
+# 
+# This file was automatically processed for release on GitHub
+# All comments were removed and this header was added
+# 
+# 
+# MIT License
+# 
+# Copyright (c) 2025 National Instruments Corporation
+# 
+# Permission is hereby granted, free of charge, to any person obtaining a copy of this
+# software and associated documentation files (the "Software"), to deal in the Software
+# without restriction, including without limitation the rights to use, copy, modify, merge,
+# publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons
+# to whom the Software is furnished to do so, subject to the following conditions:
+# 
+# The above copyright notice and this permission notice shall be included in all copies or
+# substantial portions of the Software.
+# 
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+# INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+# PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
+# FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+# OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+# DEALINGS IN THE SOFTWARE.
+# 
+# 
+
 # Constraints for an Aurora 12 port, 4 lane implementation using GTY transievers
 
 #vreview_group Ni7903AuroraStreamingConstraints
-#vreview_closed http://review-board.natinst.com/r/332346/
-#vreview_closed http://review-board.natinst.com/r/315309/
+#vreview_closed http:
+#vreview_closed http:
 #vreview_reviewers kygreen dhearn amoch
 
 set LineRateInGbs 28.0
@@ -902,5 +929,4 @@ set port11_TNM_HandShake_iRdyPushToggle_ms  [get_cells {SasquatchTop/AuroraBlock
 set_max_delay -from $port11_TNM_HandShake_iStoredData        -to $port11_TNM_HandShake_oDataFlop         -datapath_only 10.0
 set_max_delay -from $port11_TNM_HandShake_iPushToggle        -to $port11_TNM_HandShake_oPushToggle0_ms   -datapath_only 10.0
 set_max_delay -from $port11_TNM_HandShake_oPushToggleToReady -to $port11_TNM_HandShake_iRdyPushToggle_ms -datapath_only 10.0
-
 
