@@ -1,4 +1,3 @@
- <!-- githubvisible=true -->
 <?xml version="1.0" encoding="UTF-8"?>
 <Target name="PXIe-7903" version="1.0" arbitrationDefault="NeverArbitrate">
   <Protocols>NI-FlexRIO</Protocols>
@@ -8,3 +7,4 @@
   <IOModuleID>0x10937AEC</IOModuleID>
   <:Include what="children">Targets/NI/FPGA/RIO/79XXR/PXIe-7903/Sasquatch7903.xml</:Include>
 </Target>
+<!-- githubvisible=true -->
