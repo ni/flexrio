@@ -1,8 +1,8 @@
 :: githubvisible=true
 @echo off
 
-REM Path to the vivadoprojectsettings.ini file
-set CONFIG_FILE=vivadoprojectsettings.ini
+REM Path to the projectsettings.ini file
+set CONFIG_FILE=projectsettings.ini
 
 REM Check if the configuration file exists
 if not exist "%CONFIG_FILE%" (

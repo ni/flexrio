@@ -84,7 +84,7 @@ The general flow is:
 > FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR<br />
 > OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER<br />
 > DEALINGS IN THE SOFTWARE.<br />
-* Create the vivadoprojectsettings.ini file in the pxie-7xxx directory
+* Create the projectsettings.ini file in the pxie-7xxx directory
 * Add setenv.bat and setenv.sh to the pxie-7xxx directory
 * Add a TCL folder to the pxie-7xxx directory
     * Required TCL files:
