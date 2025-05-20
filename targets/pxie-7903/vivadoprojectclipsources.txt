@@ -1,2 +1,0 @@
-../../dependencies/githubdeps/ni.hw-flexrio.sasquatch_aurora64b66b_clip.23.1.0.2-ci-passed-main-f/aurora64b66b_framing_crcx4_28p0GHz/CLIP/aurora64b66b_framing_crcx4_28p0GHz/Source/vhdl
-../../dependencies/githubdeps/ni.hw-flexrio.sasquatch_aurora64b66b_clip.23.1.0.2-ci-passed-main-f/aurora64b66b_framing_crcx4_28p0GHz/CLIP/aurora64b66b_framing_crcx4_28p0GHz/Target
