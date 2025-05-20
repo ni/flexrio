@@ -28,3 +28,7 @@ set "PATH=%PATH%;%VIVADO_PROJECT_TOOLS%"
 REM Print the XILINX variable for confirmation
 echo XILINX is set to "%XILINX%"
 echo PATH is updated to include "%VIVADO_PROJECT_TOOLS%"
+
+REM Initialize git submodules
+echo Initializing git submodules...
+git submodule update --init --recursive
