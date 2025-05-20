@@ -1,4 +1,4 @@
 :: githubvisible=true
 @echo off
 
-python "%cd%\..\lvfpgahdltools\tools\extractdependencies.py"
+python "%cd%\..\lvfpgahdltools\vivadoprojecttools\vivadoprojecttools.py" extract_deps
