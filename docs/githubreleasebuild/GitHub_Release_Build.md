@@ -1,5 +1,10 @@
 # User Visible FlexRIO Releases on GitHub
 
+
+## Repo and Tool Structure
+
+![Repo Structure](repo_structure.png)
+
 ## Dependencies
 
 Dependencies is a complicated part of the release process.  We have many files duplicated across all the dependencies for the FlexRIO repo.  For example, ni cores are pulled in from a normal ni cores export and also they are re-packaged within the FPGA Digital Designs export.  Different FlexRIO products may choose to depend on different versions of these files.  
@@ -21,23 +26,16 @@ The general flow is:
     * Generates a TCL script and runs it to create a Vivado project using all the files in vivadoprojectdeps.txt and vivadoprojectsources.txt
     * Copies all of the deps files needed by Vivado into a flat gathereddeps folder (this is necessary to avoid long file path problems)
 
-
-## Repo and Tool Structure
-
-
 ## Release Process
 
-1. Run the <b>hw-flexrio-baseboards-ci</b> pipeline
+1. Run the <b>hw-flexrio Global CI</b> pipeline
     * These steps are automated:
-        * Runs bundlereleasedeps.py to aggregate the dependencies used by products in the FlexRIO GitHub release into a zip file
-        * Unzips that zip file so that later pipeline steps can test the userworkflow
-        * Runs the update_project_files user tools function to create a new Vivado project
+        * Aggregates the dependencies used by products in the FlexRIO GitHub release into a zip file that is put into the export nuget
+        * Unzips that zip file so that later pipeline steps can test the user workflow
+        * Runs the user tools function to create a new Vivado project
         * Runs a synthesis script to ensure that the Vivado project has all of the necessary dependency files
-2. Run the <b>hw-flexrio-baseboards-buildgithubrelease</b> pipeline
-    * These steps are automated:
-        * Creates a filtered release branch that only contains files with the github visible tag
-    * The pipeline has a <b>commit_message</b> variable which shows up on all of the files that are pushed to GitHub.  As you are developing and pushing to main in AzDO, those commit messages will not show on GitHub.  Make sure you have a good commit message that describes all of the changes that are being pushed into the release branch.  It is ideal for you to have more incremental AzDO release branch pushes rather than one mega-push that contains lots of changes.
-    * Optionally review the release branch in AzDO
+        * Creates a filtered githubreleasestaging  branch that only contains files with the github visible tag
+    * Optionally review the githubreleasestaging branch in AzDO
 3. Push to GitHub
     * This is not supported in the AzDO pipeline yet because it requires a user's GitHub credentials
         * Go onto GitHub and login with your SSO crecentials before proceeding
@@ -65,25 +63,9 @@ The general flow is:
     * The tag is "github visible = true" without any spaces
     * We can't have the exact tag in this doc file because it should not be on GitHub
 * Add the license header text (replace any existing copyright header that was in the file)
-> MIT License<br />
+> Copyright (c) 2025 National Instruments Corporation
 > 
-> Copyright (c) 2025 National Instruments Corporation<br />
-> 
-> Permission is hereby granted, free of charge, to any person obtaining a copy of this<br />
-> software and associated documentation files (the "Software"), to deal in the Software<br />
-> without restriction, including without limitation the rights to use, copy, modify, merge,<br />
-> publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons<br />
-> to whom the Software is furnished to do so, subject to the following conditions:<br />
-> 
-> The above copyright notice and this permission notice shall be included in all copies or<br />
-> substantial portions of the Software.<br />
-> 
-> THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,<br />
-> INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR<br />
-> PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE<br />
-> FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR<br />
-> OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER<br />
-> DEALINGS IN THE SOFTWARE.<br />
+> SPDX-License-Identifier: MIT
 * Create the vivadoprojectsettings.ini file in the pxie-7xxx directory
 * Add setenv.bat and setenv.sh to the pxie-7xxx directory
 * Add a TCL folder to the pxie-7xxx directory

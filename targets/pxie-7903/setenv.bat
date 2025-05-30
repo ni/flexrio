@@ -1,8 +1,8 @@
 :: githubvisible=true
 @echo off
 
-REM Path to the vivadoprojectsettings.ini file
-set CONFIG_FILE=vivadoprojectsettings.ini
+REM Path to the projectsettings.ini file
+set CONFIG_FILE=projectsettings.ini
 
 REM Check if the configuration file exists
 if not exist "%CONFIG_FILE%" (
@@ -22,9 +22,13 @@ if not defined XILINX (
 )
 
 REM Add tools to the PATH
-set "VIVADO_PROJECT_TOOLS=..\..\lvfpgahdltools\vivadoprojecttools"
+set "VIVADO_PROJECT_TOOLS=..\..\lvfpgahdltools\tools"
 set "PATH=%PATH%;%VIVADO_PROJECT_TOOLS%"
 
 REM Print the XILINX variable for confirmation
 echo XILINX is set to "%XILINX%"
 echo PATH is updated to include "%VIVADO_PROJECT_TOOLS%"
+
+REM Initialize git submodules
+echo Initializing git submodules...
+git submodule update --init --recursive
