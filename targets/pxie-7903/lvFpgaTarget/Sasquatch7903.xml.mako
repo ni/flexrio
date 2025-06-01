@@ -4,7 +4,7 @@
 % endif
 <?xml version="1.0" encoding="UTF-8"?>
 <Target>
-  <FPGASourceFilesDirPath>Targets/NI/FPGA/RIO/79XXR/PXIe-7903/FpgaFiles</FPGASourceFilesDirPath>
+  <FPGASourceFilesDirPath>Targets/NI/FPGA/RIO/79XXR/${lv_target_name}/FpgaFiles</FPGASourceFilesDirPath>
   <DeviceIDs>0x7AEC</DeviceIDs>
   <FPGASynthesisSourceFileList>
     <Path>Targets/NI/FPGA/RIO/79XXR/HMB/VHDL</Path>
@@ -22,7 +22,7 @@
     <PartNumber>xcvu11p-flgb2104-2-e</PartNumber>
     <ProcessPropertyList>
       <Process name="Place">
-        <XdcFilePath>Targets/NI/FPGA/RIO/79XXR/PXIe-7903/FpgaFiles/constraints_place.xdc</XdcFilePath>
+        <XdcFilePath>Targets/NI/FPGA/RIO/79XXR/${lv_target_name}/FpgaFiles/constraints_place.xdc</XdcFilePath>
       </Process>
     </ProcessPropertyList>
   </FPGACompilation>
