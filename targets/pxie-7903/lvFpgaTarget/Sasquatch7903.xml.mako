@@ -47,8 +47,8 @@
   </CLIPSocketTypeList>
 
 % if include_custom_io:
-  <:Include what="children">Targets/NI/FPGA/RIO/79XXR/Common/Resource/${custom_boardio}</:Include>
-  <:Include what="children">Targets/NI/FPGA/RIO/79XXR/Common/Resource/${custom_clock}</:Include>    
+  <:Include what="children">Targets/NI/FPGA/RIO/79XXR/${lv_target_name}/${custom_boardio}</:Include>
+  <:Include what="children">Targets/NI/FPGA/RIO/79XXR/${lv_target_name}/${custom_clock}</:Include>    
 % endif
 
     <SkipTopCompilationFileCheck/>
