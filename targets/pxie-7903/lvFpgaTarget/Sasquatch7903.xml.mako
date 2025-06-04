@@ -35,6 +35,9 @@
     <:Include what="children">Targets/NI/FPGA/RIO/79XXR/Common/Resource/AppletonClocks.xml</:Include>
     <:Include what="children">Targets/NI/FPGA/RIO/79XXR/Common/Resource/MacallanDramClocks.xml</:Include>
     <:Include what="children">Targets/NI/FPGA/RIO/79XXR/HMB/resource/Dram2DPClocks.xml</:Include>
+% if include_custom_io:    
+    <:Include what="children">Targets/NI/FPGA/RIO/79XXR/${lv_target_name}/${custom_clock}</:Include>
+% endif
   </ClockList>
 
   <!-- CLIPs -->
@@ -47,8 +50,7 @@
   </CLIPSocketTypeList>
 
 % if include_custom_io:
-  <:Include what="children">Targets/NI/FPGA/RIO/79XXR/${lv_target_name}/${custom_boardio}</:Include>
-  <:Include what="children">Targets/NI/FPGA/RIO/79XXR/${lv_target_name}/${custom_clock}</:Include>    
+  <:Include what="children">Targets/NI/FPGA/RIO/79XXR/${lv_target_name}/${custom_boardio}</:Include>  
 % endif
 
     <SkipTopCompilationFileCheck/>
