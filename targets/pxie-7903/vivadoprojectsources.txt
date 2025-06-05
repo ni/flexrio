@@ -8,5 +8,5 @@
 objects/rtl-lvfpga/lvgen/TheWindow.vhd
 rtl-lvfpga/PkgFlexRioTargetConfig.vhd
 rtl-lvfpga/SasquatchTopTemplate.vhd
-xdc/constraints.xdc
+xdc/constraints.xdc_template
 xdc/constraints_place.xdc
