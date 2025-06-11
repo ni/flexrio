@@ -549,13 +549,12 @@ architecture struct of SasquatchTopTemplate is
   signal MbClk: std_logic;
   --vhook_sigend
 
-  signal TopLevelClk80 : std_logic; -- Top Level Clock To Clip (output)
+
   signal xIoModuleReady : std_logic; -- IO Ready (input)
   signal xIoModuleErrorCode : std_logic_vector(31 downto 0); -- IO Error (input)
   signal aDioOut : std_logic_vector(7 downto 0); -- DIO Out (output)
   signal aDioIn : std_logic_vector(7 downto 0); -- DIO In (input)
-  signal InitClk : std_logic; -- InitClk (output)
-  signal SAClk : std_logic; -- SAClk (output)
+
   signal UserClkPort0 : std_logic; -- Port0 User Clock (input)
   signal aPort0PmaInit : std_logic; -- Port0.PmaInit (output)
   signal aPort0ResetPb : std_logic; -- Port0.ResetPb (output)
@@ -2134,11 +2133,14 @@ begin  -- architecture struct
 
   SasquatchWindow: entity work.TheWindow (behavioral)
     port map (
+      ------------------------
       -- CLIP ports copied over from TheWindowInstantiationExample.vhd
+      ------------------------
       xIoModuleReady => xIoModuleReady,
       xIoModuleErrorCode => xIoModuleErrorCode,
       aDioOut => aDioOut,
       aDioIn => aDioIn,
+      UserClkPort0 => UserClkPort0,
       aPort0PmaInit => aPort0PmaInit,
       aPort0ResetPb => aPort0ResetPb,
       uPort0AxiTxTData0 => uPort0AxiTxTData0,
@@ -2202,6 +2204,7 @@ begin  -- architecture struct
       sGtwiz0DrpChAxiRResp => sGtwiz0DrpChAxiRResp,
       sGtwiz0DrpChAxiRValid => sGtwiz0DrpChAxiRValid,
       sGtwiz0DrpChAxiRReady => sGtwiz0DrpChAxiRReady,
+      UserClkPort1 => UserClkPort1,
       aPort1PmaInit => aPort1PmaInit,
       aPort1ResetPb => aPort1ResetPb,
       uPort1AxiTxTData0 => uPort1AxiTxTData0,
@@ -2265,6 +2268,7 @@ begin  -- architecture struct
       sGtwiz1DrpChAxiRResp => sGtwiz1DrpChAxiRResp,
       sGtwiz1DrpChAxiRValid => sGtwiz1DrpChAxiRValid,
       sGtwiz1DrpChAxiRReady => sGtwiz1DrpChAxiRReady,
+      UserClkPort2 => UserClkPort2,
       aPort2PmaInit => aPort2PmaInit,
       aPort2ResetPb => aPort2ResetPb,
       uPort2AxiTxTData0 => uPort2AxiTxTData0,
@@ -2328,6 +2332,7 @@ begin  -- architecture struct
       sGtwiz2DrpChAxiRResp => sGtwiz2DrpChAxiRResp,
       sGtwiz2DrpChAxiRValid => sGtwiz2DrpChAxiRValid,
       sGtwiz2DrpChAxiRReady => sGtwiz2DrpChAxiRReady,
+      UserClkPort3 => UserClkPort3,
       aPort3PmaInit => aPort3PmaInit,
       aPort3ResetPb => aPort3ResetPb,
       uPort3AxiTxTData0 => uPort3AxiTxTData0,
@@ -2391,6 +2396,7 @@ begin  -- architecture struct
       sGtwiz3DrpChAxiRResp => sGtwiz3DrpChAxiRResp,
       sGtwiz3DrpChAxiRValid => sGtwiz3DrpChAxiRValid,
       sGtwiz3DrpChAxiRReady => sGtwiz3DrpChAxiRReady,
+      UserClkPort4 => UserClkPort4,
       aPort4PmaInit => aPort4PmaInit,
       aPort4ResetPb => aPort4ResetPb,
       uPort4AxiTxTData0 => uPort4AxiTxTData0,
@@ -2454,6 +2460,7 @@ begin  -- architecture struct
       sGtwiz4DrpChAxiRResp => sGtwiz4DrpChAxiRResp,
       sGtwiz4DrpChAxiRValid => sGtwiz4DrpChAxiRValid,
       sGtwiz4DrpChAxiRReady => sGtwiz4DrpChAxiRReady,
+      UserClkPort5 => UserClkPort5,
       aPort5PmaInit => aPort5PmaInit,
       aPort5ResetPb => aPort5ResetPb,
       uPort5AxiTxTData0 => uPort5AxiTxTData0,
@@ -2517,6 +2524,7 @@ begin  -- architecture struct
       sGtwiz5DrpChAxiRResp => sGtwiz5DrpChAxiRResp,
       sGtwiz5DrpChAxiRValid => sGtwiz5DrpChAxiRValid,
       sGtwiz5DrpChAxiRReady => sGtwiz5DrpChAxiRReady,
+      UserClkPort6 => UserClkPort6,
       aPort6PmaInit => aPort6PmaInit,
       aPort6ResetPb => aPort6ResetPb,
       uPort6AxiTxTData0 => uPort6AxiTxTData0,
@@ -2580,6 +2588,7 @@ begin  -- architecture struct
       sGtwiz6DrpChAxiRResp => sGtwiz6DrpChAxiRResp,
       sGtwiz6DrpChAxiRValid => sGtwiz6DrpChAxiRValid,
       sGtwiz6DrpChAxiRReady => sGtwiz6DrpChAxiRReady,
+      UserClkPort7 => UserClkPort7,
       aPort7PmaInit => aPort7PmaInit,
       aPort7ResetPb => aPort7ResetPb,
       uPort7AxiTxTData0 => uPort7AxiTxTData0,
@@ -2643,6 +2652,7 @@ begin  -- architecture struct
       sGtwiz7DrpChAxiRResp => sGtwiz7DrpChAxiRResp,
       sGtwiz7DrpChAxiRValid => sGtwiz7DrpChAxiRValid,
       sGtwiz7DrpChAxiRReady => sGtwiz7DrpChAxiRReady,
+      UserClkPort8 => UserClkPort8,
       aPort8PmaInit => aPort8PmaInit,
       aPort8ResetPb => aPort8ResetPb,
       uPort8AxiTxTData0 => uPort8AxiTxTData0,
@@ -2706,6 +2716,7 @@ begin  -- architecture struct
       sGtwiz8DrpChAxiRResp => sGtwiz8DrpChAxiRResp,
       sGtwiz8DrpChAxiRValid => sGtwiz8DrpChAxiRValid,
       sGtwiz8DrpChAxiRReady => sGtwiz8DrpChAxiRReady,
+      UserClkPort9 => UserClkPort9,
       aPort9PmaInit => aPort9PmaInit,
       aPort9ResetPb => aPort9ResetPb,
       uPort9AxiTxTData0 => uPort9AxiTxTData0,
@@ -2769,6 +2780,7 @@ begin  -- architecture struct
       sGtwiz9DrpChAxiRResp => sGtwiz9DrpChAxiRResp,
       sGtwiz9DrpChAxiRValid => sGtwiz9DrpChAxiRValid,
       sGtwiz9DrpChAxiRReady => sGtwiz9DrpChAxiRReady,
+      UserClkPort10 => UserClkPort10,
       aPort10PmaInit => aPort10PmaInit,
       aPort10ResetPb => aPort10ResetPb,
       uPort10AxiTxTData0 => uPort10AxiTxTData0,
@@ -2832,6 +2844,7 @@ begin  -- architecture struct
       sGtwiz10DrpChAxiRResp => sGtwiz10DrpChAxiRResp,
       sGtwiz10DrpChAxiRValid => sGtwiz10DrpChAxiRValid,
       sGtwiz10DrpChAxiRReady => sGtwiz10DrpChAxiRReady,
+      UserClkPort11 => UserClkPort11,
       aPort11PmaInit => aPort11PmaInit,
       aPort11ResetPb => aPort11ResetPb,
       uPort11AxiTxTData0 => uPort11AxiTxTData0,
@@ -2894,7 +2907,7 @@ begin  -- architecture struct
       sGtwiz11DrpChAxiRData => sGtwiz11DrpChAxiRData,
       sGtwiz11DrpChAxiRResp => sGtwiz11DrpChAxiRResp,
       sGtwiz11DrpChAxiRValid => sGtwiz11DrpChAxiRValid,
-      sGtwiz11DrpChAxiRReady => sGtwiz11DrpChAxiRReady,     
+      sGtwiz11DrpChAxiRReady => sGtwiz11DrpChAxiRReady,  
       aBusReset                           => aBusReset,                                 --in  boolean
       bRegPortIn                          => bRegPortIn,                                --in  RegPortIn_t
       bRegPortOut                         => bLvWindowRegPortOut,                       --out RegPortOut_t
@@ -2962,25 +2975,9 @@ begin  -- architecture struct
       aPxiStarData                        => aPxiStarData,                              --in  std_logic
       aPxieDstarB                         => aPxieDstarB,                               --in  std_logic
       aPxieDstarC                         => aPxieDstarC,                               --out std_logic
-      aLmkI2cSda                          => aLmkI2cSda,                                --inout std_logic
-      aLmkI2cScl                          => aLmkI2cScl,                                --inout std_logic
-      aLmk1Pdn_n                          => aLmk1Pdn_n,                                --out std_logic
-      aLmk2Pdn_n                          => aLmk2Pdn_n,                                --out std_logic
-      aLmk1Gpio0                          => aLmk1Gpio0,                                --out std_logic
-      aLmk2Gpio0                          => aLmk2Gpio0,                                --out std_logic
-      aLmk1Status0                        => aLmk1Status0,                              --in  std_logic
-      aLmk1Status1                        => aLmk1Status1,                              --in  std_logic
-      aLmk2Status0                        => aLmk2Status0,                              --in  std_logic
-      aLmk2Status1                        => aLmk2Status1,                              --in  std_logic
-      aIPassVccPowerFault_n               => aIPassVccPowerFault_n,                     --in  std_logic
-      aIPassPrsnt_n                       => aIPassPrsnt_n,                             --in  std_logic_vector(7:0)
-      aIPassIntr_n                        => aIPassIntr_n,                              --in  std_logic_vector(7:0)
-      aIPassSCL                           => aIPassSCL,                                 --inout std_logic_vector(11:0)
-      aIPassSDA                           => aIPassSDA,                                 --inout std_logic_vector(11:0)
-      aPortExpReset_n                     => aPortExpReset_n,                           --out std_logic
-      aPortExpIntr_n                      => aPortExpIntr_n,                            --in  std_logic
-      aPortExpSda                         => aPortExpSda,                               --inout std_logic
-      aPortExpScl                         => aPortExpScl,                               --inout std_logic
+      --------------------------------
+      -- Removed CLIP socket signals from TheWindow because the CLIP HDL is instantaited directly in the top level HDL
+      ---------------------------------
       aDramReady                          => aDramReady,                                --in  std_logic
       du0DramAddrFifoAddr                 => du0DramAddrFifoAddr,                       --out std_logic_vector(29:0)
       du0DramAddrFifoCmd                  => du0DramAddrFifoCmd,                        --out std_logic_vector(2:0)
@@ -3293,7 +3290,7 @@ begin  -- architecture struct
       MgtPortTx_p(45) => MgtPortTxLane45_p,
       MgtPortTx_p(46) => MgtPortTxLane46_p,
       MgtPortTx_p(47) => MgtPortTxLane47_p,
-      TopLevelClk80 => TopLevelClk80,
+      TopLevelClk80 => BusClk,
       xIoModuleReady => xIoModuleReady,
       xIoModuleErrorCode => xIoModuleErrorCode,
       aDioOut => aDioOut,
@@ -4066,8 +4063,8 @@ begin  -- architecture struct
       sGtwiz11DrpChAxiRResp => sGtwiz11DrpChAxiRResp,
       sGtwiz11DrpChAxiRValid => sGtwiz11DrpChAxiRValid,
       sGtwiz11DrpChAxiRReady => sGtwiz11DrpChAxiRReady,
-      InitClk => InitClk,
-      SAClk => SAClk
+      InitClk => BusClk,
+      SAClk => BusClk
   );
 
 
