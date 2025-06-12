@@ -63,8 +63,30 @@ end entity IoRefClkSelect;
 
 architecture rtl of IoRefClkSelect is
 
-  constant kEnableIoRefClk10  : std_logic := kEnableFamClockSync and (not kFamClockSrcSel);
-  constant kEnableIoRefClk100 : std_logic := kEnableFamClockSync and kFamClockSrcSel;
+  -- The constants kEnableFamClockSync and kClockSrcSel are defined in PkgLvFpgaConst.vhd
+  --
+  -- When LV FPGA generates VHDL files, it creates PkgLvFpgaConst.vhd and sets those two
+  -- constants based on how the CLIP socket is defined in the LV target plugin.  When a
+  -- custom FlexRIO target plugin is created, it may not be using the CLIP socket.  This is
+  -- specificed in the projectsettings.ini file by settting IncludeCLIPSocket = False
+  --
+  -- If the CLIP socket is not included, then these constants are NOT created in the 
+  -- PkgLvFpgaConst.vhd file.  In that case, we must edit this file to not require them.
+  --
+  -- THIS IS A TEMPORARY WORKAROUND.  Eventually, we will have a new FlexRIO driver version
+  -- that properly sets these constantes even wehn the CLIP socket is not included.
+  --
+  -- Both kEnableFamClockSync and kClockSrcSel are set to '1' for the 7903 custom PFGA targets.
+  --
+  -- Uncomment these two constants if you are not using the CLIP socket:
+  --
+  constant kEnableIoRefClk10  : std_logic := '0'
+  constant kEnableIoRefClk100 : std_logic := '1'
+
+  -- Comment these out if you are using the two above constants that are hardcoded to '0' and '1':
+  --
+  -- constant kEnableIoRefClk10  : std_logic := kEnableFamClockSync and (not kFamClockSrcSel);
+  -- constant kEnableIoRefClk100 : std_logic := kEnableFamClockSync and kFamClockSrcSel;
 
   -- Enable/Disable Locals (with default assignments)
   signal bdIoRefClk100EnabledLcl : std_logic := kEnableIoRefClk100;
