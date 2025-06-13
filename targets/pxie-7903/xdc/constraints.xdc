@@ -773,7 +773,7 @@ set DmaClk [get_clocks -of [get_nets DmaClk]]
 ## constrain them, and then Xilinx complains that they're not constrained. *Sigh*
 
 
-set SasquatchTopTemplate0 [current_instance .]
+set SasquatchTopTemplate1 [current_instance .]
 current_instance HostInterfacex/Inchwormx/InchwormNetlist
 ## Start add from file InchwormNetlistTiming.xdc
 
@@ -1267,7 +1267,7 @@ current_instance $InchwormNetlist0
 
 
 
-set SasquatchTopTemplate1 [current_instance .]
+set SasquatchTopTemplate2 [current_instance .]
 current_instance PcieIpWrapper/PcieIp/inst
 
 set_property LOC PCIE40E4_X0Y0 [get_cells pcie4_uscale_plus_0_pcie_4_0_pipe_inst/pcie_4_0_e4_inst]
@@ -1280,16 +1280,16 @@ set_property USER_CLOCK_ROOT X7Y0 [get_nets -of_objects [get_pins -hierarchical 
 
 
 current_instance -quiet
-current_instance $SasquatchTopTemplate1
+current_instance $SasquatchTopTemplate2
 
 current_instance -quiet
-current_instance $SasquatchTopTemplate0
+current_instance $SasquatchTopTemplate1
 
 # In order to simplify constraint-writing, we want to give DmaClk a "DmaClk" name.
 set DmaClkPins [get_pins -of [get_clocks -of [get_nets DmaClk]]]
 create_generated_clock -name DmaClk     $DmaClkPins
 
-set SasquatchTopTemplate0 [current_instance .]
+set SasquatchTopTemplate1 [current_instance .]
 current_instance HostInterfacex/IFifox/IFifoNetlistx
 ## Start add from file MacallanIFifoN.xdc
 
@@ -2248,11 +2248,11 @@ set_false_path -from [get_cells RsdBusClk/acReset_reg] -to [get_clocks -of [get_
 
 
 current_instance -quiet
-current_instance $SasquatchTopTemplate0
+current_instance $SasquatchTopTemplate1
 
 
 ## Start include, file cfmakesasquatch_common.xml
-set SasquatchTopTemplate0 [current_instance .]
+set SasquatchTopTemplate1 [current_instance .]
 current_instance HostInterfacex/IwCompanionx/IwCompanionNx
 ## Start add from file IwCompanion.xdc
 
@@ -2497,8 +2497,8 @@ current_instance $IwCompanion0
 
 
 current_instance -quiet
-current_instance $SasquatchTopTemplate0
-set SasquatchTopTemplate0 [current_instance .]
+current_instance $SasquatchTopTemplate1
+set SasquatchTopTemplate1 [current_instance .]
 current_instance TimingEnginex
 ## Start add from file PxieUspTimingEngine.xdc
 
@@ -3519,8 +3519,8 @@ set_property CLOCK_DELAY_GROUP MicroBlazeClockGrp [get_nets {TimingStage1x/Relia
 
 
 current_instance -quiet
-current_instance $SasquatchTopTemplate0
-set SasquatchTopTemplate0 [current_instance .]
+current_instance $SasquatchTopTemplate1
+set SasquatchTopTemplate1 [current_instance .]
 current_instance FixedLogicWrapperx/MacallanFixedLogicx
 ## Start add from file MacallanFixedLogic.xdc
 
@@ -4019,7 +4019,7 @@ current_instance $MacallanFixedLogicInst
 
 
 current_instance -quiet
-current_instance $SasquatchTopTemplate0
+current_instance $SasquatchTopTemplate1
 ## Start add from file TimingCommon.xdc
 ##################### TIMING CONSTRAINTS #######################
 
