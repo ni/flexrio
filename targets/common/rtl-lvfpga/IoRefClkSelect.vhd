@@ -74,14 +74,14 @@ architecture rtl of IoRefClkSelect is
   -- PkgLvFpgaConst.vhd file.  In that case, we must edit this file to not require them.
   --
   -- THIS IS A TEMPORARY WORKAROUND.  Eventually, we will have a new FlexRIO driver version
-  -- that properly sets these constantes even wehn the CLIP socket is not included.
+  -- that properly sets these constantes even when the CLIP socket is not included.
   --
   -- Both kEnableFamClockSync and kClockSrcSel are set to '1' for the 7903 custom PFGA targets.
   --
   -- Uncomment these two constants if you are not using the CLIP socket:
   --
-  constant kEnableIoRefClk10  : std_logic := '0'
-  constant kEnableIoRefClk100 : std_logic := '1'
+  constant kEnableIoRefClk10  : std_logic := '0';
+  constant kEnableIoRefClk100 : std_logic := '1';
 
   -- Comment these out if you are using the two above constants that are hardcoded to '0' and '1':
   --
