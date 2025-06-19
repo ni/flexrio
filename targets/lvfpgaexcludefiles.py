@@ -1,4 +1,8 @@
 # githubvisible=true
+"""
+This module provides a function to retrieve a list of regular expression patterns
+for files that should be excluded from FPGA taret plugin generation operations.
+"""
 
 def get_exclude_regex_list():
     """
