@@ -4,7 +4,11 @@
 % endif
 <?xml version="1.0" encoding="UTF-8"?>
 <Target>
+% if custom_target:   
   <FPGASourceFilesDirPath>Targets/NI/FPGA/RIO/79XXR/${lv_target_name}/FpgaFiles</FPGASourceFilesDirPath>
+% else:
+  <FPGASourceFilesDirPath>Targets/NI/FPGA/RIO/79XXR/PXIe-7903/FpgaFiles</FPGASourceFilesDirPath>
+% endif
   <DeviceIDs>0x7AEC</DeviceIDs>
   <FPGASynthesisSourceFileList>
     <Path>Targets/NI/FPGA/RIO/79XXR/HMB/VHDL</Path>
@@ -22,7 +26,11 @@
     <PartNumber>xcvu11p-flgb2104-2-e</PartNumber>
     <ProcessPropertyList>
       <Process name="Place">
+% if custom_target:   
         <XdcFilePath>Targets/NI/FPGA/RIO/79XXR/${lv_target_name}/FpgaFiles/constraints_place.xdc</XdcFilePath>
+% else:
+        <XdcFilePath>Targets/NI/FPGA/RIO/79XXR/PXIe-7903/FpgaFiles/constraints_place.xdc</XdcFilePath>
+% endif      
       </Process>
     </ProcessPropertyList>
   </FPGACompilation>
