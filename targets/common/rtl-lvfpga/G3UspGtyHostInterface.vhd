@@ -7,7 +7,7 @@
 --
 ------------------------------------------------------------------------------------------
 -- Copyright (c) 2025 National Instruments Corporation
--- 
+--
 -- SPDX-License-Identifier: MIT
 ------------------------------------------------------------------------------------------
 --
@@ -289,7 +289,7 @@ begin  -- architecture struct
   --vhook_a aBusReset                           aResetFromInchworm
   --vhook_a DmaClock                            DmaClk
   --vhook_# We don't use the LIB
-  --vhook_h dHostR*                             open   mode=out
+  --vhook_a dHostR*                             open   mode=out
   --vhook_a dHostResponseData                   (others => '0')
   --vhook_a dHostResponse*                      false
   --vhook_a dHostRequestRx                      kSwitchedLinkRxZero
@@ -326,6 +326,7 @@ begin  -- architecture struct
       dBaRegPortOut         => dBaRegPortOut,          --in  BaRegPortOut_t
       dLvUserMappable       => dLvUserMappable,        --in  std_logic
       dHighSpeedSinkFromDma => dHighSpeedSinkFromDma,  --out NiDmaHighSpeedSinkFromDma_t
+      dHostRequestTx        => open,                   --out SwitchedLinkTx_t
       dHostRequestRx        => kSwitchedLinkRxZero,    --in  SwitchedLinkRx_t
       dHostResponseAck      => false,                  --in  boolean
       dHostResponseErr      => false,                  --in  boolean
