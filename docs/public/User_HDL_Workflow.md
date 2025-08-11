@@ -12,18 +12,18 @@
 4.	Clone the FlexRIO GitHub repo:
     > git clone <b>[paste FlexRIO GitHub repo URL]</b>
     >
+    >   EXAMPLE:
+    >
     > git clone https://github.com/ni/flexrio-test.git
 
 ### Phase 2 – Install the FlexRIO dependencies
-1.	Download the dependencies zip file from the latest FlexRIO release:
+1.	Download the dependencies zip file from the latest FlexRIO release
 2.	Put the zip file into this folder:
     > C:\dev\github\flexrio-test\dependencies
-    * Note: ensure that the file name stays "flexriodeps.zip"
 3.	Run the batch file to extract the dependencies:
     > extractdependencies.bat
 
 ### Phase 3 – Create and Build the Vivado Project
-You may skip steps 1 &2 if continuing from the previous phase
 1.	Open a command prompt at the PXIe-7903 folder:
     > C:\dev\github\flexrio-test\targets\pxie-7903
     * Note: the PXIe-7903 folder is the working directory where you will run all commands
