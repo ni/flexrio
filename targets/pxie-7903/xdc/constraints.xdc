@@ -4753,7 +4753,7 @@ set ToplevelClockPeriod 12.490
 #niFpga_Keep
 
 set RoutingClipInstanceRestore [current_instance .]
-current_instance SasquatchWindow/theCLIPs/Routing_CLIP0/RegisteredRouting_1
+current_instance SasquatchWindow/theCLIPs/Routing_CLIP1/RegisteredRouting_1
 #########################################################################################
 ## Clock Crossing
 #########################################################################################
@@ -4908,13 +4908,26 @@ current_instance $RoutingClipInstanceRestore
 
 #niFpga_EndKeep
 
-set TNM_Custom877 [get_cells {*DmaPortCommIfcIrqInterfacex/DoubleSyncSLx*iDlySigx/*FDCPEx} -filter {IS_SEQUENTIAL==true}]
-set TNM_Custom878 [get_cells {*DmaPortCommIfcIrqInterfacex/DoubleSyncSLx*DoubleSyncAsyncInBasex/oSig_msx/*FDCPEx} -filter {IS_SEQUENTIAL==true}]
 
-set_max_delay -from $TNM_Custom877 -to $TNM_Custom878 -datapath_only 100.0000000000
+set TNM_Custom8771 [get_cells {*DmaPortCommIfcIrqInterfacex/DoubleSyncSLx*iDlySigx/*FDCPEx} -filter {IS_SEQUENTIAL==true}]
+set TNM_Custom8781 [get_cells {*DmaPortCommIfcIrqInterfacex/DoubleSyncSLx*DoubleSyncAsyncInBasex/oSig_msx/*FDCPEx} -filter {IS_SEQUENTIAL==true}]
+
+set_max_delay -from $TNM_Custom8771 -to $TNM_Custom8781 -datapath_only 100.0000000000
+
+set TNM_Custom8772 [get_cells {*DmaPortCommIfcIrqInterfacex/DoubleSyncSLx*iDlySigx/*FDCEx} -filter {IS_SEQUENTIAL==true}]
+set TNM_Custom8782 [get_cells {*DmaPortCommIfcIrqInterfacex/DoubleSyncSLx*DoubleSyncAsyncInBasex/oSig_msx/*FDCEx} -filter {IS_SEQUENTIAL==true}]
+
+set_max_delay -from $TNM_Custom8772 -to $TNM_Custom8782 -datapath_only 100.0000000000
+
 
 set SasquatchTopTemplate0 [current_instance .]
 current_instance SasquatchWindow
+
+set TNM_Custom8773 [get_cells {*DmaPortCommIfcIrqInterfacex/DoubleSyncSLx*iDlySigx/*FDCEx} -filter {IS_SEQUENTIAL==true}]
+set TNM_Custom8783 [get_cells {*DmaPortCommIfcIrqInterfacex/DoubleSyncSLx*DoubleSyncAsyncInBasex/oSig_msx/*FDCEx} -filter {IS_SEQUENTIAL==true}]
+
+set_max_delay -from $TNM_Custom8773 -to $TNM_Custom8783 -datapath_only 100.0000000000
+
 
 set TNM_Custom1 [get_cells {*TimeLoopCoreFromPllClk80ToUserClkPort0/*HandshakeSLV_Ackx/*iLclStoredData*} -filter {IS_SEQUENTIAL==true}]
 set TNM_Custom2 [get_cells {*TimeLoopCoreFromPllClk80ToUserClkPort0/*HandshakeSLV_Ackx/*ODataFlop**FDCPEx} -filter {IS_SEQUENTIAL==true}]

@@ -1,7 +1,8 @@
-../../dependencies/githubdeps/Dram2DP.3.9.1d1/VHDL/Dram2DP.vhd
-../../dependencies/githubdeps/Dram2DP.3.9.1d1/VHDL/PkgDram2DP.vhd
-../../dependencies/githubdeps/Dram2DP.3.9.1d1/VHDL/PkgDram2DPConstants.vhd
-../../dependencies/githubdeps/Dram2DP.3.9.1d1/VHDL/SingleClockDeviceRam.vhd
+../../dependencies/githubdeps/Dram2DP.3.9.1f0/VHDL/Dram2DP.vhd
+../../dependencies/githubdeps/Dram2DP.3.9.1f0/VHDL/Dram2DP.xdc
+../../dependencies/githubdeps/Dram2DP.3.9.1f0/VHDL/PkgDram2DP.vhd
+../../dependencies/githubdeps/Dram2DP.3.9.1f0/VHDL/PkgDram2DPConstants.vhd
+../../dependencies/githubdeps/Dram2DP.3.9.1f0/VHDL/SingleClockDeviceRam.vhd
 ../../dependencies/githubdeps/PkgFlexRioAxiStream.1.0.3d2/Source/VHDL/Packages/PkgFlexRioAxiStream.vhd
 ../../dependencies/githubdeps/fpgaDigitalDesigns.25.1.0f405/distribution/release/DmaPortCommInterface/LabVIEW/rvi/Vivado/HDL/CommInterfaces/DmaPort/Arbiter/DmaPortCommIfcInputArbiter.vhd
 ../../dependencies/githubdeps/fpgaDigitalDesigns.25.1.0f405/distribution/release/DmaPortCommInterface/LabVIEW/rvi/Vivado/HDL/CommInterfaces/DmaPort/Arbiter/DmaPortCommIfcOutputArbiter.vhd
