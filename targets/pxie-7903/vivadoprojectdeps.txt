@@ -1,4 +1,5 @@
 ../../dependencies/githubdeps/Dram2DP.3.9.1f0/VHDL/Dram2DP.vhd
+../../dependencies/githubdeps/Dram2DP.3.9.1f0/VHDL/Dram2DP.xdc
 ../../dependencies/githubdeps/Dram2DP.3.9.1f0/VHDL/PkgDram2DP.vhd
 ../../dependencies/githubdeps/Dram2DP.3.9.1f0/VHDL/PkgDram2DPConstants.vhd
 ../../dependencies/githubdeps/Dram2DP.3.9.1f0/VHDL/SingleClockDeviceRam.vhd
