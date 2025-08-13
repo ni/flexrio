@@ -4763,14 +4763,20 @@ add_cells_to_pblock [get_pblocks $pciePblock] [get_cells TimingEnginex/TimingPci
 ## Start add from file GitHubSasquatch.xdc
 ################################################################################
 
-# It is OK to leave these constraints in the LV FPGA target plugin constraints file that is used by
+# It is OK to leave these constraints in the LV FPGA target plugin constraints file that is used by 
 # LV FPGA compile worker compiles.  The DMA port crossing constriants will be ignored.  And setting/reverting
 # the current instance will have no affect.
 
 # GitHub Vivado build needs these constraints that are normally provided by LV FPGA because they are actually
-# for clock boundary crossings that are outside of the LV Window.  We must duplicate these constraints outside
+# for clock boundary crossings that are outside of the LV Window.  We must duplicate these constraints outside 
 # of the LV Window current_instance section so that they are applied properly.
 #
+
+# BEGIN_LV_NETLIST_PERIOD_AND_CLIP_CONSTRAINTS
+#
+#
+# END_LV_NETLIST_PERIOD_AND_CLIP_CONSTRAINTS
+
 set DmaPortCommCrossingFrom [get_cells {*DmaPortCommIfcIrqInterfacex/DoubleSyncSLx*iDlySigx/*FDCPEx} -filter {IS_SEQUENTIAL==true}]
 set DmaPortCommCrossingTo [get_cells {*DmaPortCommIfcIrqInterfacex/DoubleSyncSLx*DoubleSyncAsyncInBasex/oSig_msx/*FDCPEx} -filter {IS_SEQUENTIAL==true}]
 
@@ -4782,10 +4788,10 @@ current_instance SasquatchWindow
 # This section pulls in constraints extracted from the Vivado Project Export for The Window.
 # It is only used in the GitHub Vivado workflow to build the bitfile.
 #
-# BEGIN_LV_WINDDOW_NETLIST_CONSTRAINTS
+# BEGIN_LV_NETLIST_FROM_TO_CONSTRAINTS
 #
 #
-# END_LV_WINDDOW_NETLIST_CONSTRAINTS
+# END_LV_NETLIST_FROM_TO_CONSTRAINTS
 
 current_instance -quiet
 current_instance $TopInstance0
@@ -4793,6 +4799,7 @@ current_instance $TopInstance0
 ##############################################################
 # Insert custom constraints here for GitHub customized targets
 ##############################################################
+
 
 
 # Constraints for an Aurora 12 port, 4 lane implementation using GTY transievers
