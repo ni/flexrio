@@ -4760,36 +4760,40 @@ add_cells_to_pblock [get_pblocks $pciePblock] [get_cells TimingEnginex/TimingPci
 #AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 
 
-## Start add from file GitHub.xdc
-#BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
-# BEGIN_LV_WINDOW_NETLIST_CONSTRAINTS
-# This code pulls in constraints extracted from the Vivado Project Export for The Window.
-#
-# It is only used in the GitHub Vivado workflow to build the bitfile.
-#
-# This section is removed when generating a custom LV FPGA target plugin.  
-#
+## Start add from file GitHubSasquatch.xdc
+################################################################################
 
-set TNM_Custom8771 [get_cells {*DmaPortCommIfcIrqInterfacex/DoubleSyncSLx*iDlySigx/*FDCPEx} -filter {IS_SEQUENTIAL==true}]
-set TNM_Custom8781 [get_cells {*DmaPortCommIfcIrqInterfacex/DoubleSyncSLx*DoubleSyncAsyncInBasex/oSig_msx/*FDCPEx} -filter {IS_SEQUENTIAL==true}]
+# It is OK to leave these constraints in the LV FPGA target plugin constraints file that is used by
+# LV FPGA compile worker compiles.  The DMA port crossing constriants will be ignored.  And setting/reverting
+# the current instance will have no affect.
 
-set_max_delay -from $TNM_Custom8771 -to $TNM_Custom8781 -datapath_only 100.0000000000
+# GitHub Vivado build needs these constraints that are normally provided by LV FPGA because they are actually
+# for clock boundary crossings that are outside of the LV Window.  We must duplicate these constraints outside
+# of the LV Window current_instance section so that they are applied properly.
+#
+set DmaPortCommCrossingFrom [get_cells {*DmaPortCommIfcIrqInterfacex/DoubleSyncSLx*iDlySigx/*FDCPEx} -filter {IS_SEQUENTIAL==true}]
+set DmaPortCommCrossingTo [get_cells {*DmaPortCommIfcIrqInterfacex/DoubleSyncSLx*DoubleSyncAsyncInBasex/oSig_msx/*FDCPEx} -filter {IS_SEQUENTIAL==true}]
 
-set SasquatchTopTemplate0 [current_instance .]
+set_max_delay -from $DmaPortCommCrossingFrom -to $DmaPortCommCrossingTo -datapath_only 100.0000000000
+
+set TopInstance0 [current_instance .]
 current_instance SasquatchWindow
 
-source ../objects/TheWindow/TheWindowConstraints.xdc
+# This section pulls in constraints extracted from the Vivado Project Export for The Window.
+# It is only used in the GitHub Vivado workflow to build the bitfile.
+#
+# BEGIN_LV_WINDDOW_NETLIST_CONSTRAINTS
+#
+#
+# END_LV_WINDDOW_NETLIST_CONSTRAINTS
 
 current_instance -quiet
-current_instance $SasquatchTopTemplate0
+current_instance $TopInstance0
 
-# END_LV_WINDOW_NETLIST_CONSTRAINTS
-#BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
-
-#CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
-#
+##############################################################
 # Insert custom constraints here for GitHub customized targets
-#
+##############################################################
+
 
 # Constraints for an Aurora 12 port, 4 lane implementation using GTY transievers
 
