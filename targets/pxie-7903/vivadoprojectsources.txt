@@ -6,7 +6,7 @@
 ../common/rtl-lvfpga/lvgen/PkgDmaPortCommIfcRegs.vhd
 ../common/rtl-lvfpga/packages/PkgSasquatch.vhd
 objects/rtl-lvfpga/lvgen/TheWindow.vhd
-objects/xdc/constraints.xdc
 rtl-lvfpga/PkgFlexRioTargetConfig.vhd
 rtl-lvfpga/SasquatchTopTemplate.vhd
+xdc/constraints.xdc
 xdc/constraints_place.xdc
