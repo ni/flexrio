@@ -31,4 +31,4 @@ echo PATH is updated to include "%VIVADO_PROJECT_TOOLS%"
 
 REM Initialize git submodules
 echo Initializing git submodules...
-git submodule update --init --recursive
+:: git submodule update --init --recursive
