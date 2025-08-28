@@ -247,6 +247,7 @@ entity TheWindow is
 
     -- Base board DIO
     aDio                      : inout std_logic_vector(7 downto 0);
+% endif
 
     -- Configuration
     aLmkI2cSda            : inout std_logic;
@@ -268,8 +269,6 @@ entity TheWindow is
     aPortExpIntr_n        : in std_logic;
     aPortExpSda           : inout std_logic;
     aPortExpScl           : inout std_logic;
-% endif
-    
     -----------------------------------------------------------------------------
     --Dram Interface
     -----------------------------------------------------------------------------
