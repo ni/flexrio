@@ -1,5 +1,0 @@
-# Keep this .gitmodules file when building user FlexRIO release
-# githubvisible=true
-[submodule "lvfpgahdltools"]
-	path = lvfpgahdltools
-	url = https://github.com/ni/lvfpgahdltools.git
