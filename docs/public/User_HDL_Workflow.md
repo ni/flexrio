@@ -14,26 +14,33 @@
     >
     > git clone https://github.com/ni/flexrio-test.git
 
-### Phase 2 – Install the FlexRIO dependencies
+### Phase 2 – Install the LabVIEW FPGA HDL Tools Module
+1. Open a command prompt to the targets folder:
+    > C:\dev\github\flexrio-test\targets
+2. Run pip to install the HDL tools module and any dependencies:
+    > pip install -r requirements.txt
+
+### Phase 3 - Install the FlexRIO dependencies
 1.	Download the dependencies zip file from the latest FlexRIO release:
 2.	Put the zip file into this folder:
     > C:\dev\github\flexrio-test\dependencies
-    * Note: ensure that the file name stays "flexriodeps.zip"
-3.	Run the batch file to extract the dependencies:
-    > extractdependencies.bat
+3.  Go to the targets folder in your command prompt:
+    > C:\dev\github\flexrio-test\targets
+4. Run the nihdl command to extract the dependencies:
+    > nihdl extract-deps
 
-### Phase 3 – Create and Build the Vivado Project
-You may skip steps 1 &2 if continuing from the previous phase
+#### NOTE - Installing the HDL tools and dependencies are the only commands you run from the "targets" folder.  Everything else is done from the "targets/pxie-6903" folder
+
+### Phase 4 – Create and Build the Vivado Project
+You may skip steps 1-3 if continuing from the previous phase
 1.	Open a command prompt at the PXIe-7903 folder:
     > C:\dev\github\flexrio-test\targets\pxie-7903
-    * Note: the PXIe-7903 folder is the working directory where you will run all commands
-2.	Run the setenv script to setup the tools into your command path
-    > setenv
-    * Note: run setenv each time you create a new command prompt
+2.  Run the nihdl help command to see what functions are available:
+    > nihdl --help
 3.	Create the Vivado Project:
-    > createvivadoproject
+    > nihdl create-project
 4.	Launch Vivado:
-    > launchvivado
-5.	In the Vivado IDE, click <b>Synthesize</b>
+    > nihdl launch-vivado
+5.	In the Vivado IDE, click <b>Run Synthesis</b>, then <b>Run Implementation</b>, then <b>Generate Bitstream</b>
 
 
