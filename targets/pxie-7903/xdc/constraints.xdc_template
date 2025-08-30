@@ -4790,15 +4790,9 @@ add_cells_to_pblock [get_pblocks $pciePblock] [get_cells TimingEnginex/TimingPci
 
 
 # GitHub Vivado build needs these constraints that are normally provided by LV FPGA because they are actually
-# for clock boundary crossings that are outside of the LV Window.  We must duplicate these constraints outside 
+# for clock boundary crossings that are outside of the LV Window.  We must duplicate these constraints outside
 # of the LV Window current_instance section so that they are applied properly.
 #
-
-# BEGIN_LV_NETLIST_PERIOD_AND_CLIP_CONSTRAINTS
-#
-#
-# END_LV_NETLIST_PERIOD_AND_CLIP_CONSTRAINTS
-
 set DmaPortCommCrossingFrom [get_cells {*DmaPortCommIfcIrqInterfacex/DoubleSyncSLx*iDlySigx/*FDCPEx} -filter {IS_SEQUENTIAL==true}]
 set DmaPortCommCrossingTo [get_cells {*DmaPortCommIfcIrqInterfacex/DoubleSyncSLx*DoubleSyncAsyncInBasex/oSig_msx/*FDCPEx} -filter {IS_SEQUENTIAL==true}]
 
