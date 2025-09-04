@@ -21,6 +21,7 @@ def get_exclude_regex_list():
         "(.*)PkgNi(.*)\.vhd",
         "/PkgCommunicationInterface.vhd$",
         "(.*)Dram2DP(.*)\.vhd",
+        "(.*)Dram2DP(.*)\.xdc",
         "(.*)DFlop(.*)\.vhd",
         "(.*)DoubleSync(.*)\.vhd",
         "(.*)DualPortRAM(.*)\.vhd",
