@@ -6,7 +6,7 @@
 -- Date: 18 September 2017
 --
 ------------------------------------------------------------------------------------------
--- Copyright (c) 2025 National Instruments Corporation
+-- (c) 2025 Copyright National Instruments Corporation
 -- 
 -- SPDX-License-Identifier: MIT
 ------------------------------------------------------------------------------------------
