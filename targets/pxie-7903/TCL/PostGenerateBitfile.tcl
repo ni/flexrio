@@ -5,4 +5,4 @@ set env(PYTHONPATH) ""
 set env(PYTHONHOME) ""
 
 # Execute the Python script
-exec nihdl create-lvbitx
+exec python.bat ..\\..\\..\\..\\..\\lvfpgahdltools\\tools\\createlvbitfile.py
