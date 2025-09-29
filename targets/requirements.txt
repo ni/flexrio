@@ -1,3 +1,4 @@
 # githubvisible=true
+
 click==8.2.1
-lvfpgahdltools==0.0.11
+labview-fpga-hdl-tools==0.0.18
