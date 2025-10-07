@@ -6,9 +6,9 @@
 -- Date: 13 February 2015
 --
 ------------------------------------------------------------------------------------------
--- Copyright (c) 2025 National Instruments Corporation
+-- (c) 2025 Copyright National Instruments Corporation
 -- 
--- SPDX-License-Identifier: MIT
+-- All rights reserved.
 ------------------------------------------------------------------------------------------
 --
 -- Purpose: This package contains configuration information that describes a given

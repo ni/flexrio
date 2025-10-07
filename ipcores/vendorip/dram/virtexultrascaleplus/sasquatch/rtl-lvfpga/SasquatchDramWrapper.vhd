@@ -6,9 +6,9 @@
 -- Date: 15 October 2015
 --
 ------------------------------------------------------------------------------------------
--- Copyright (c) 2025 National Instruments Corporation
+-- (c) 2025 Copyright National Instruments Corporation
 -- 
--- SPDX-License-Identifier: MIT
+-- All rights reserved.
 ------------------------------------------------------------------------------------------
 --
 -- Purpose: This is a wrapper to prettify the signals coming from the UltrascaleDdr4

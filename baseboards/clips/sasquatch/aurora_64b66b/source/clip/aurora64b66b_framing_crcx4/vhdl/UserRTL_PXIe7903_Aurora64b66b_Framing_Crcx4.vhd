@@ -4,9 +4,9 @@
 -- Workspace: PXIe-7903 HSS
 -- Date: 26 August 2022
 -------------------------------------------------------------------------------
--- Copyright (c) 2025 National Instruments Corporation
+-- (c) 2025 Copyright National Instruments Corporation
 -- 
--- SPDX-License-Identifier: MIT
+-- All rights reserved.
 -------------------------------------------------------------------------------
 --
 -- Purpose:

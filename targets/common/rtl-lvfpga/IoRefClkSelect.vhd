@@ -6,9 +6,9 @@
 -- Date: 29 November 2017
 --
 ------------------------------------------------------------------------------------------
--- Copyright (c) 2025 National Instruments Corporation
+-- (c) 2025 Copyright National Instruments Corporation
 -- 
--- SPDX-License-Identifier: MIT
+-- All rights reserved.
 ------------------------------------------------------------------------------------------
 --
 -- Purpose: These flops are place outside the fixedlogic because their reset values are

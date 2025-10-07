@@ -6,9 +6,9 @@
 -- Date: 18 September 2017
 --
 ------------------------------------------------------------------------------------------
--- Copyright (c) 2025 National Instruments Corporation
+-- (c) 2025 Copyright National Instruments Corporation
 -- 
--- SPDX-License-Identifier: MIT
+-- All rights reserved.
 ------------------------------------------------------------------------------------------
 --
 -- Purpose: This module groups together IO Buffer blocks that need to be applied to Stage 2
