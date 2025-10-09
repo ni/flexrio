@@ -60,10 +60,10 @@
 ../../dependencies/githubdeps/ni.hw-flexrio.dram.25.5.0.21-ci-passed-main-f/source/virtexultrascaleplus/sasquatch/rtl-lvfpga/SasquatchDram.vhd
 ../../dependencies/githubdeps/ni.hw-flexrio.dram.25.5.0.21-ci-passed-main-f/source/virtexultrascaleplus/sasquatch/rtl-lvfpga/SasquatchDramWrapper.vhd
 ../../dependencies/githubdeps/ni.hw-flexrio.dram.25.5.0.21-ci-passed-main-f/source/virtexultrascaleplus/sasquatch/rtl-lvfpga/SasquatchEmptyDram.vhd
-../../dependencies/githubdeps/ni.hw-flexrio.fixedlogic.26.0.0.6-manual-passed-users-jperreau-1480-mb-update-for-clip-not-loaded-d/common/rtl/packages/lvgen/PkgLvFpgaConst.vhd
-../../dependencies/githubdeps/ni.hw-flexrio.fixedlogic.26.0.0.6-manual-passed-users-jperreau-1480-mb-update-for-clip-not-loaded-d/sasquatchfixedlogic/rtl/FixedLogicWrapper.vhd
-../../dependencies/githubdeps/ni.hw-flexrio.fixedlogic.26.0.0.6-manual-passed-users-jperreau-1480-mb-update-for-clip-not-loaded-d/sasquatchfixedlogic/rtl/packages/PkgSysMonConfig.vhd
-../../dependencies/githubdeps/ni.hw-flexrio.fixedlogic.26.0.0.6-manual-passed-users-jperreau-1480-mb-update-for-clip-not-loaded-d/sasquatchfixedlogic/synth/MacallanFixedLogic.edf
+../../dependencies/githubdeps/ni.hw-flexrio.fixedlogic.26.0.0.10-ci-passed-main-d/common/rtl/packages/lvgen/PkgLvFpgaConst.vhd
+../../dependencies/githubdeps/ni.hw-flexrio.fixedlogic.26.0.0.10-ci-passed-main-d/sasquatchfixedlogic/rtl/FixedLogicWrapper.vhd
+../../dependencies/githubdeps/ni.hw-flexrio.fixedlogic.26.0.0.10-ci-passed-main-d/sasquatchfixedlogic/rtl/packages/PkgSysMonConfig.vhd
+../../dependencies/githubdeps/ni.hw-flexrio.fixedlogic.26.0.0.10-ci-passed-main-d/sasquatchfixedlogic/synth/MacallanFixedLogic.edf
 ../../dependencies/githubdeps/nicores_CommonCores.1.0.0a26/CommonFiles/Packages/PkgNiUtilities.vhd
 ../../dependencies/githubdeps/nicores_CommonCores.1.0.0a26/CommonFiles/Packages/PkgXReg.vhd
 ../../dependencies/githubdeps/nicores_CommonCores.1.0.0a26/CommonFiles/RegPort/PkgBaRegPort.vhd
