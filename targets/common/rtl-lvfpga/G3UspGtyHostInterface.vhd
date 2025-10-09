@@ -8,7 +8,7 @@
 ------------------------------------------------------------------------------------------
 -- (c) 2025 Copyright National Instruments Corporation
 -- 
--- All rights reserved.
+-- SPDX-License-Identifier: MIT
 ------------------------------------------------------------------------------------------
 --
 -- Purpose: This module instantiates the main blocks for a gen 3x8 PCIe interface for an

@@ -8,7 +8,7 @@
 ------------------------------------------------------------------------------------------
 -- (c) 2025 Copyright National Instruments Corporation
 -- 
--- All rights reserved.
+-- SPDX-License-Identifier: MIT
 ------------------------------------------------------------------------------------------
 --
 -- Purpose: This file is instantiated if a bank of DRAM is not used. This ties the
