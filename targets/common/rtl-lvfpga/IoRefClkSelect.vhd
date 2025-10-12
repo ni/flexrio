@@ -8,7 +8,7 @@
 ------------------------------------------------------------------------------------------
 -- (c) 2025 Copyright National Instruments Corporation
 -- 
--- All rights reserved.
+-- SPDX-License-Identifier: MIT
 ------------------------------------------------------------------------------------------
 --
 -- Purpose: These flops are place outside the fixedlogic because their reset values are

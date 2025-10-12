@@ -8,7 +8,7 @@
 ------------------------------------------------------------------------------------------
 -- (c) 2025 Copyright National Instruments Corporation
 -- 
--- All rights reserved.
+-- SPDX-License-Identifier: MIT
 ------------------------------------------------------------------------------------------
 --
 -- Purpose: This package contains configuration information that describes a given
