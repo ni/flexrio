@@ -6,7 +6,7 @@
 -------------------------------------------------------------------------------
 -- (c) 2025 Copyright National Instruments Corporation
 -- 
--- SPDX-License-Identifier: MIT
+-- All rights reserved.
 -------------------------------------------------------------------------------
 --
 -- Purpose:
