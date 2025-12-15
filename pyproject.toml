@@ -12,12 +12,15 @@ authors = [
 readme = "README.md"
 license = "MIT"
 dependencies = {python = ">=3.7,<4.0"}
+packages = [
+  { include = "flexrio", from = "pypi_package" }
+]
 include = [
   { path = "**", format = "sdist" }
 ]
 
 [tool.mypy]
-packages = ["pypi_package/flexrio"]
+packages = ["flexrio"]
 python_version = "3.9"
 warn_return_any = true
 warn_unused_configs = true
