@@ -13,10 +13,10 @@ readme = "README.md"
 license = "MIT"
 dependencies = {python = ">=3.7,<4.0"}
 packages = [
-  { include = "flexrio", from = "pypi_package" }
+  { include = "py_package"}
 ]
 include = [
-  { path = "**", format = "sdist" }
+  { path = "targets/**/*.vhd", format = "sdist" }
 ]
 
 [tool.mypy]
