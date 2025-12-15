@@ -1,0 +1,32 @@
+[build-system]
+requires = ["poetry-core>=1.8"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+name = "flexrio"
+version = "26.0.0.dev0"
+description = "FlexRIO Dependencies"
+authors = [
+  "Salvador Santolucito <salvador.santolucito@gmail.com>"
+]
+readme = "README.md"
+license = "MIT"
+dependencies = {python = ">=3.7,<4.0"}
+include = [
+  { path = "**", format = "sdist" }
+]
+
+[tool.mypy]
+packages = ["flexrio"]
+python_version = "3.9"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false
+disallow_incomplete_defs = false
+
+[[tool.mypy.overrides]]
+module = "mako.*"
+ignore_missing_imports = true
+
+[tool.bandit]
+exclude_dirs = ["tests"]
