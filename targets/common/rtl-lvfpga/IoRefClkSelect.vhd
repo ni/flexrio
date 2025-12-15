@@ -1,100 +1,129 @@
-------------------------------------------------------------------------------------------
---
--- File: IoRefClkSelect.vhd
--- Author: Rolando Ortega
--- Original Project: Macallan Next Generation FlexRIO
--- Date: 29 November 2017
---
-------------------------------------------------------------------------------------------
--- (c) 2025 Copyright National Instruments Corporation
--- 
--- All rights reserved.
-------------------------------------------------------------------------------------------
---
--- Purpose: These flops are place outside the fixedlogic because their reset values are
--- set by scripted constants defined in PkgLvFpgaConst. Since we pre-synthesize the
--- Fixedlogic it might not be possible to properly optimize their reset values.
---
--- This module would be perfectly at home (and would perhaps take up less vertical space)
--- living on the top-level directly. But we get better code reuse by modularizing this
--- functionality.
--------------------------------------------------------------------------------------------
---
--- githubvisible=true
---
--- vreview_group CommonFixedLogic
--- vreview_closed http://review-board.natinst.com/r/313040/
--- vreview_closed http://review-board.natinst.com/r/266932/
--- vreview_closed http://review-board.natinst.com/r/217971/
--- vreview_reviewers kygreen dhearn esalinas hrubio lboughal rcastro
--- 
-------------------------------------------------------------------------------------------
-
-library ieee;
-use ieee.std_logic_1164.all;
-
-library work;
-use work.PkgLvFpgaConst.all;
-
-entity IoRefClkSelect is
-
-  port (
-    BusClk                   : in  std_logic;
-    abDiagramReset           : in  boolean;
-    -- Fixed-logic controls
-    bdSetIoRefClk100Enable   : in  std_logic;
-    bdClearIoRefClk100Enable : in  std_logic;
-    bdSetIoRefClk10Enable    : in  std_logic;
-    bdClearIoRefClk10Enable  : in  std_logic;
-    bdSelectIoRefClk100      : in  std_logic;
-    bdSelectIoRefClk10       : in  std_logic;
-    -- Enable/Disable outputs.
-    bdIoRefClk100Enabled     : out std_logic;
-    bdIoRefClk10Enabled      : out std_logic;
-    bdIoRefClkSwitch         : out std_logic;
-    -- Static values that are pushed out to the top level to be consumed by the fixed
-    -- logic.
-    stEnableIoRefClk10       : out std_logic;
-    stEnableIoRefClk100      : out std_logic
-    );
-
-
-end entity IoRefClkSelect;
-
-architecture rtl of IoRefClkSelect is
-
-  constant kEnableIoRefClk10  : std_logic := kEnableFamClockSync and (not kFamClockSrcSel);
-  constant kEnableIoRefClk100 : std_logic := kEnableFamClockSync and kFamClockSrcSel;
-
-  -- Enable/Disable Locals (with default assignments)
-  signal bdIoRefClk100EnabledLcl : std_logic := kEnableIoRefClk100;
-  signal bdIoRefClk10EnabledLcl  : std_logic := kEnableIoRefClk10;
-  signal bdIoRefClkSwitchLcl     : std_logic := kFamClockSrcSel;
-
-begin  -- architecture rtl
-
-  RefClkSelect : process(abDiagramReset, BusClk) is
-  begin
-    if abDiagramReset then
-      bdIoRefClk100EnabledLcl <= kEnableIoRefClk100;
-      bdIoRefClk10EnabledLcl  <= kEnableIoRefClk10;
-      bdIoRefClkSwitchLcl     <= kFamClockSrcSel;
-    elsif rising_edge(BusClk) then
-      -- Simple set/resets.
-      bdIoRefClk100EnabledLcl <= (bdIoRefClk100EnabledLcl or bdSetIoRefClk100Enable)
-                                 and (not bdClearIoRefClk100Enable);
-      bdIoRefClk10EnabledLcl <= (bdIoRefClk10EnabledLcl or bdSetIoRefClk10Enable)
-                                and (not bdClearIoRefClk10Enable);
-      bdIoRefClkSwitchLcl <= (bdIoRefClkSwitchLcl or bdSelectIoRefClk100)
-                             and (not bdSelectIoRefClk10);
-    end if;
-  end process RefClkSelect;
-
-  bdIoRefClk100Enabled <= bdIoRefClk100EnabledLcl;
-  bdIoRefClk10Enabled  <= bdIoRefClk10EnabledLcl;
-  bdIoRefClkSwitch     <= bdIoRefClkSwitchLcl;
-
-  stEnableIoRefClk10  <= kEnableIoRefClk10;
-  stEnableIoRefClk100 <= kEnableIoRefClk100;
-
-end architecture rtl;
+`protect begin_protected
+`protect version = 2
+`protect encrypt_agent = "NI LabVIEW FPGA" , encrypt_agent_info = "2.0"
+`protect begin_commonblock
+`protect license_proxyname = "NI_LV_proxy"
+`protect license_attributes = "USER,MAC,PROXYINFO=2.0"
+`protect license_keyowner = "NI_LV"
+`protect license_keyname = "NI_LV_2.0"
+`protect license_symmetric_key_method = "aes128-cbc"
+`protect license_public_key_method = "rsa"
+`protect license_public_key
+MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxngMPQrDv/s/Rz/ED4Ri
+j3tGzeObw/Topab4sl+WDRl/up6SWpAfcgdqb2jvLontfkiQS2xnGoq/Ye0JJEp2
+h0NYydCB5GtcEBEe+2n5YJxgiHJ5fGaPguuM6pMX2GcBfKpp3dg8hA/KVTGwvX6a
+L4ThrFgEyCSRe2zVd4DpayOre1LZlFVO8X207BNIJD29reTGSFzj5fbVsHSyRpPl
+kmOpFQiXMjqOtYFAwI9LyVEJpfx2B6GxwA+5zrGC/ZptmaTTj1a3Z815q1GUZu1A
+dpBK2uY9B4wXer6M8yKeqGX0uxDAOW1zh7tvzBysCJoWkZD39OJJWaoaddvhq6HU
+MwIDAQAB
+`protect end_commonblock
+`protect begin_toolblock
+`protect key_keyowner = "Xilinx" , key_keyname = "xilinxt_2021_01"
+`protect key_method = "rsa"
+`protect encoding = ( enctype = "base64" , line_length = 64 , bytes = 256 )
+`protect key_block
+dYVY1GBMsK1ODCn3ZUp8SoAWP8Fvt20jOclKciHf7Ysn2OlvHpNHbXI7BFbSBeZ8
+c0HSNxtSIQSCmTTcVbiOe5bNYdnShY74EmVDlUagwaODhK9Urx30VHPfg7K0Q8Dj
+u4EuL8LzGtWyNpPuuYUPfH/EWWJz8j2B3GlAugKl7fR1RciktYEXyNArDzj2i2Lo
+icoQhkynNgC7v9DkMLR1BxAwtrFrckccZalCrbzlnjwD/DOLPtfjLaczesJPkKoa
+xZJUnnMJHmZHdGCWDxS1eicDF7kXXzsE1BA2jAX7HQtg/mw+vmEQXKqvkKy9tRtW
+yhUEHOXSIVFkC6gJ+buK9Q==
+`protect control xilinx_schematic_visibility = "true"
+`protect rights_digest_method = "sha256"
+`protect end_toolblock="SgR4h9hEc61j3UcDg7JP89NUc7gPf41F4aolx7zbZ/Y="
+`protect begin_toolblock
+`protect key_keyowner = "Mentor Graphics Corporation" , key_keyname = "MGC-VERIF-SIM-RSA-1"
+`protect key_method = "rsa"
+`protect encoding = ( enctype = "base64" , line_length = 64 , bytes = 128 )
+`protect key_block
+PcTZf+e633x3tw5Pd+98Hvg8K8pEx1TP/UFyHup9OvIvZyp7VdJ/eQ7Czw0TCb/d
+NGL0fQmqipTyP1VBR/CwCDPv8pUq9mWdoIhPzGBVMq1ZfAiLygNMWUwFu0/xPfyw
+rAKvJfKF1tLDCsja4oREz1+w00FDmJ2gsQcbY/9d4Lw=
+`protect rights_digest_method = "sha256"
+`protect end_toolblock="fB5pBzxyhRsqq3gFtq6qZ5Drx26WwP+GzJuJsgJq2oo="
+`protect data_method = "aes128-cbc"
+`protect encoding = ( enctype = "base64", line_length = 64 , bytes = 3936 )
+`protect data_block
+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
+`protect end_protected
