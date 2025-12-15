@@ -17,7 +17,7 @@ include = [
 ]
 
 [tool.mypy]
-packages = ["flexrio"]
+packages = ["pypi_package/flexrio"]
 python_version = "3.9"
 warn_return_any = true
 warn_unused_configs = true
