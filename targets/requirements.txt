@@ -1,5 +1,4 @@
 # githubvisible=true
 
 click==8.2.1
-labview-fpga-hdl-tools==0.1.0
-mako==1.3.10
+labview-fpga-hdl-tools==0.1.5
