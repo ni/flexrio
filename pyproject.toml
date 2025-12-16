@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "flexrio"
-version = "26.0.0.dev4"
+version = "26.0.0.dev5"
 description = "FlexRIO Dependencies"
 authors = [
   "Salvador Santolucito <salvador.santolucito@gmail.com>"
@@ -16,7 +16,8 @@ packages = [
   { include = "py_package"}
 ]
 include = [
-  { path = "targets/**/*.vhd", format = "sdist" }
+  { path = "targets/**", format = "sdist" },
+  { path = "fixedlogic/**", format = "sdist" },  
 ]
 
 [tool.mypy]
