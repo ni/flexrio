@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "flexrio"
-version = "26.0.0.dev5"
+version = "26.0.0.dev6"
 description = "FlexRIO Dependencies"
 authors = [
   "Salvador Santolucito <salvador.santolucito@gmail.com>"
