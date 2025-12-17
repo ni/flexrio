@@ -13,5 +13,3 @@ __pycache__/
 ~*.pptx
 ~*.docx
 ~*.tmp
-# Ignore pypi dist folder
-dist/
