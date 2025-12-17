@@ -1,3 +1,5 @@
+# Keep this .gitignore file when building user FlexRIO release
+# githubvisible=true
 # All objects folders should be ignored
 objects/
 # Ignore things modelsim creates
