@@ -4799,12 +4799,12 @@ set DmaPortCommCrossingTo [get_cells {*DmaPortCommIfcIrqInterfacex/DoubleSyncSLx
 set_max_delay -from $DmaPortCommCrossingFrom -to $DmaPortCommCrossingTo -datapath_only 100.0000000000
 
 set TopInstance0 [current_instance .]
-current_instance SasquatchWindow
+current_instance SasquatchWindow/TheWindowFlatWrapper_inst/TheWindow_inst
 
 # This section pulls in FROM-TO constraints extracted from the Vivado Project Export for The Window.
-# This must be inserted within the current_instance set to SasquatchWindow because the paths constrained
-# in this section are inside of The Window netlist.  In a LabVIEW FPGA compile worker build, The Window
-# is HDL and the constraints do not need to be put within the current_instance.
+# This must be inserted within the current_instance set to SasquatchWindow/TheWindowFlatWrapper_inst/TheWindow_inst
+# because the paths constrained in this section are inside of The Window netlist.  In a LabVIEW FPGA compile worker
+# build, The Window is HDL and the constraints do not need to be put within the current_instance.
 #
 # BEGIN_LV_NETLIST_FROM_TO_CONSTRAINTS
 #
@@ -4818,6 +4818,12 @@ current_instance $TopInstance0
 # Insert custom constraints here for GitHub customized targets
 ##############################################################
 
+# This section pulls in constraints that are specified in the CustomConstraintsFile setting in projectsettings.ini
+#
+# BEGIN_GITHUB_CUSTOM_CONSTRAINTS
+#
+#
+# END_GITHUB_CUSTOM_CONSTRAINTS
 
 ################################################################################
 

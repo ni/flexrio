@@ -5,7 +5,7 @@
 ../common/rtl-lvfpga/lvgen/PkgCommIntConfiguration.vhd
 ../common/rtl-lvfpga/lvgen/PkgDmaPortCommIfcRegs.vhd
 ../common/rtl-lvfpga/packages/PkgSasquatch.vhd
-objects/GeneratedVHDL/TheWindow.vhd
-objects/GeneratedVHDL/TheWindowFlatWrapper.vhd
+objects/GeneratedHDL/TheWindow.vhd
+objects/GeneratedHDL/TheWindowFlatWrapper.vhd
 rtl-lvfpga/PkgFlexRioTargetConfig.vhd
 rtl-lvfpga/SasquatchTopTemplate.vhd
