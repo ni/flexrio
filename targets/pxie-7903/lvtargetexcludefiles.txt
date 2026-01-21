@@ -1,3 +1,5 @@
+PkgCommIntConfiguration.vhd
+PkgDmaPortCommIfcRegs.vhd
 Dram2DP.vhd
 Dram2DP.xdc
 PkgDram2DP.vhd
@@ -45,6 +47,7 @@ SingleClkFifo.vhd
 SingleClkFifoFlags.vhd
 DualPortRAM.vhd
 DualPortRAM_Vivado.vhd
+PkgLvFpgaConst.vhd
 PkgNiUtilities.vhd
 PkgNiDma.vhd
 PkgNiDmaRegMap.vhd
