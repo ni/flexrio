@@ -4125,8 +4125,9 @@ set PxiClk100BufSkewMax 0.28
 set InputPorts [get_ports {aPxiGa[?]}]
 set_input_delay -max -5 [get_ports $InputPorts]
 set_input_delay -min 5 [get_ports $InputPorts]
-
 #########################################################################################
+
+
 # Stage 1 output tristates
 set_false_path -through [get_nets SasquatchIoBuffersStage1x/aStage2Enabled]
 
@@ -4140,12 +4141,36 @@ set_false_path -through [get_nets SasquatchIoBuffersStage1x/aStage2Enabled]
 # So we must move these constriants outside the group of TheWindow constraints so that they are
 # outside TheWindow set_instance group.
 
-set DmaPortCommCrossingFrom [get_cells {*DmaPortCommIfcIrqInterfacex/DoubleSyncSLx*iDlySigx/*FDCPEx} -filter {IS_SEQUENTIAL==true}]
-set DmaPortCommCrossingTo [get_cells {*DmaPortCommIfcIrqInterfacex/DoubleSyncSLx*DoubleSyncAsyncInBasex/oSig_msx/*FDCPEx} -filter {IS_SEQUENTIAL==true}]
+set DmaPortCommCrossingFrom [get_cells {HostInterfacex/*/*DmaPortCommIfcIrqInterfacex/DoubleSyncSLx*iDlySigx/*FDCPEx} -filter {IS_SEQUENTIAL==true}]
+set DmaPortCommCrossingTo [get_cells {HostInterfacex/*/*DmaPortCommIfcIrqInterfacex/DoubleSyncSLx*DoubleSyncAsyncInBasex/oSig_msx/*FDCPEx} -filter {IS_SEQUENTIAL==true}]
 
 set_max_delay -from $DmaPortCommCrossingFrom -to $DmaPortCommCrossingTo -datapath_only 100.0000000000
 #########################################################################################
 
+
+#########################################################################################
+# Dram2DP Crossings
+#
+# These constraints are normally provided by LV FPGA that places Dram2DP.xdc in the generated files
+# folder.  However, Sasquatch needs to customize these constraints so must add them here.  The old
+# constraints provided by LV FPGA and Dram2DP.xdc will be ignored by Vivado.
+#
+
+set_false_path -from [get_pins {Dram2DPx/*bNumOfMemBuffers*/C }] \
+-to   [all_registers -edge_triggered]
+
+set_false_path -from [get_pins {Dram2DPx/*bLowLatencyBuffer*/C }] \
+-to   [all_registers -edge_triggered]
+
+set_false_path -from [get_pins {Dram2DPx/*bBaseAddrTable*/C }] \
+-to   [all_registers -edge_triggered]
+
+set_false_path -from [get_pins {Dram2DPx/*bBaggageBits*/C }] \
+-to   [all_registers -edge_triggered]
+
+set_false_path -from [get_pins {Dram2DPx/*ClearFDCP*/C }] \
+-to   [all_registers -edge_triggered]
+#########################################################################################
 
 ## Start add from file PinsSasquatch.xdc
 ######################################################

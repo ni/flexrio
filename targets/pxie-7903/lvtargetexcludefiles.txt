@@ -1,7 +1,6 @@
 PkgCommIntConfiguration.vhd
 PkgDmaPortCommIfcRegs.vhd
 Dram2DP.vhd
-Dram2DP.xdc
 PkgDram2DP.vhd
 PkgDram2DPConstants.vhd
 SingleClockDeviceRam.vhd

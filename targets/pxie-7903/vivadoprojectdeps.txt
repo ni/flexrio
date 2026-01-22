@@ -1,5 +1,4 @@
 ../../deps/flexrio-deps/flexrio-deps//Dram2DP.vhd
-../../deps/flexrio-deps/flexrio-deps//Dram2DP.xdc
 ../../deps/flexrio-deps/flexrio-deps//PkgDram2DP.vhd
 ../../deps/flexrio-deps/flexrio-deps//PkgDram2DPConstants.vhd
 ../../deps/flexrio-deps/flexrio-deps//SingleClockDeviceRam.vhd
