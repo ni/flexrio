@@ -4131,6 +4131,22 @@ set_input_delay -min 5 [get_ports $InputPorts]
 set_false_path -through [get_nets SasquatchIoBuffersStage1x/aStage2Enabled]
 
 
+#########################################################################################
+# Outside LV Window DMA Port Crossings
+#
+# These constraints are provided by LV FPGA code generation along with TheWindow clock crossing
+# constraints.  However, these actually apply to paths that are outside TheWindow.  We have
+# moved TheWindow into a component and require set_instance to make the constraint paths work.
+# So we must move these constriants outside the group of TheWindow constraints so that they are
+# outside TheWindow set_instance group.
+
+set DmaPortCommCrossingFrom [get_cells {*DmaPortCommIfcIrqInterfacex/DoubleSyncSLx*iDlySigx/*FDCPEx} -filter {IS_SEQUENTIAL==true}]
+set DmaPortCommCrossingTo [get_cells {*DmaPortCommIfcIrqInterfacex/DoubleSyncSLx*DoubleSyncAsyncInBasex/oSig_msx/*FDCPEx} -filter {IS_SEQUENTIAL==true}]
+
+set_max_delay -from $DmaPortCommCrossingFrom -to $DmaPortCommCrossingTo -datapath_only 100.0000000000
+#########################################################################################
+
+
 ## Start add from file PinsSasquatch.xdc
 ######################################################
 # Configuration setup
@@ -4743,7 +4759,7 @@ add_cells_to_pblock [get_pblocks $pciePblock] [get_cells TimingEnginex/TimingPci
 # set_property SEVERITY {Error} [get_drc_checks HDTC-14]
 
 
-## Start add from file LvFpga.xdc
+## Start add from file LvFpgaSasquatch.xdc
 ################################################################################
 # The "LabVIEWFPGA_Macro" comments are replaced by LV FPGA when it generates constraints
 #
@@ -4766,7 +4782,13 @@ add_cells_to_pblock [get_pblocks $pciePblock] [get_cells TimingEnginex/TimingPci
 
 # BEGIN_LV_FPGA_FROM_TO_CONSTRAINTS
 
+set TopInstance0 [current_instance .]
+current_instance SasquatchWindowWrapper/SasquatchWindow
+
 #LabVIEWFPGA_Macro macro_fromToConstraints
+
+current_instance -quiet
+current_instance $TopInstance0
 
 # END_LV_FPGA_FROM_TO_CONSTRAINTS
 
@@ -4775,45 +4797,6 @@ add_cells_to_pblock [get_pblocks $pciePblock] [get_cells TimingEnginex/TimingPci
 
 
 ## Start add from file GitHubSasquatch.xdc
-################################################################################
-
-# It is OK to leave these constraints in the LV FPGA target plugin constraints file that is used by
-# LV FPGA compile worker compiles.  The added DMA port crossing constriants will be ignored.
-# And setting/reverting the current instance will have no affect.
-
-# This section pulls in PERIOD and CLIP constraints extracted from the Vivado Project Export for The Window.
-#
-# BEGIN_LV_NETLIST_PERIOD_AND_CLIP_CONSTRAINTS
-#
-#
-# END_LV_NETLIST_PERIOD_AND_CLIP_CONSTRAINTS
-
-
-# GitHub Vivado build needs these constraints that are normally provided by LV FPGA because they are actually
-# for clock boundary crossings that are outside of the LV Window.  We must duplicate these constraints outside
-# of the LV Window current_instance section so that they are applied properly.
-#
-set DmaPortCommCrossingFrom [get_cells {*DmaPortCommIfcIrqInterfacex/DoubleSyncSLx*iDlySigx/*FDCPEx} -filter {IS_SEQUENTIAL==true}]
-set DmaPortCommCrossingTo [get_cells {*DmaPortCommIfcIrqInterfacex/DoubleSyncSLx*DoubleSyncAsyncInBasex/oSig_msx/*FDCPEx} -filter {IS_SEQUENTIAL==true}]
-
-set_max_delay -from $DmaPortCommCrossingFrom -to $DmaPortCommCrossingTo -datapath_only 100.0000000000
-
-set TopInstance0 [current_instance .]
-current_instance SasquatchWindow/TheWindowFlatWrapper_inst/TheWindow_inst
-
-# This section pulls in FROM-TO constraints extracted from the Vivado Project Export for The Window.
-# This must be inserted within the current_instance set to SasquatchWindow/TheWindowFlatWrapper_inst/TheWindow_inst
-# because the paths constrained in this section are inside of The Window netlist.  In a LabVIEW FPGA compile worker
-# build, The Window is HDL and the constraints do not need to be put within the current_instance.
-#
-# BEGIN_LV_NETLIST_FROM_TO_CONSTRAINTS
-#
-#
-# END_LV_NETLIST_FROM_TO_CONSTRAINTS
-
-current_instance -quiet
-current_instance $TopInstance0
-
 ##############################################################
 # Insert custom constraints here for GitHub customized targets
 ##############################################################
@@ -4822,6 +4805,7 @@ current_instance $TopInstance0
 #
 # BEGIN_GITHUB_CUSTOM_CONSTRAINTS
 #
+#LabVIEWFPGA_Macro macro_GitHubCustomConstraints
 #
 # END_GITHUB_CUSTOM_CONSTRAINTS
 

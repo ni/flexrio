@@ -40,7 +40,7 @@ entity TheWindowFlatWrapper is
     -----------------------------------
 % if include_custom_io:
 % for signal in custom_signals:
-    ${signal['name']} : ${signal['direction']} ${signal['type']}; -- ${signal['lv_name']}
+    ${signal['name']} : ${signal['direction']} ${signal['type']}; -- ${signal['name']}
 % endfor
 % endif
 
@@ -451,7 +451,7 @@ begin
     -----------------------------------
 % if include_custom_io:
 % for signal in custom_signals:
-    ${signal['name']} => ${signal['lv_name']},
+    ${signal['name']} => ${signal['name']},
 % endfor
 % endif      
       -----------------------------------
