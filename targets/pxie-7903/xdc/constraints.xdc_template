@@ -4156,19 +4156,19 @@ set_max_delay -from $DmaPortCommCrossingFrom -to $DmaPortCommCrossingTo -datapat
 # constraints provided by LV FPGA and Dram2DP.xdc will be ignored by Vivado.
 #
 
-set_false_path -from [get_pins {Dram2DPx/*bNumOfMemBuffers*/C }] \
+set_false_path -from [get_pins -hierarchical {*bNumOfMemBuffers*/C}] \
 -to   [all_registers -edge_triggered]
 
-set_false_path -from [get_pins {Dram2DPx/*bLowLatencyBuffer*/C }] \
+set_false_path -from [get_pins -hierarchical {*bLowLatencyBuffer*/C}] \
 -to   [all_registers -edge_triggered]
 
-set_false_path -from [get_pins {Dram2DPx/*bBaseAddrTable*/C }] \
+set_false_path -from [get_pins -hierarchical {*bBaseAddrTable*/C}] \
 -to   [all_registers -edge_triggered]
 
-set_false_path -from [get_pins {Dram2DPx/*bBaggageBits*/C }] \
+set_false_path -from [get_pins -hierarchical {*bBaggageBits*/C}] \
 -to   [all_registers -edge_triggered]
 
-set_false_path -from [get_pins {Dram2DPx/*ClearFDCP*/C }] \
+set_false_path -from [get_pins -hierarchical {*Dram2DP*ClearFDCP*/C}] \
 -to   [all_registers -edge_triggered]
 #########################################################################################
 
