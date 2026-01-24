@@ -4797,7 +4797,7 @@ add_cells_to_pblock [get_pblocks $pciePblock] [get_cells TimingEnginex/TimingPci
 
 # BEGIN_LV_FPGA_CONSTRAINTS
 
-# BEGIN_LV_FPGA_PERIODCONSTRAINTS
+# BEGIN_LV_FPGA_PERIOD_CONSTRAINTS
 
 #LabVIEWFPGA_Macro macro_periodConstraints
 
