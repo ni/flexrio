@@ -11,3 +11,5 @@ __pycache__/
 ~*.pptx
 ~*.docx
 ~*.tmp
+# Ignore Deps folder
+deps/
