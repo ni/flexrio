@@ -1,74 +1,92 @@
--------------------------------------------------------------------------------
---
--- File: DoubleSyncBool.vhd
--- Author: Craig Conway
--- Original Project: NICores
--- Date: 13 September 2002
---
--------------------------------------------------------------------------------
--- (c) 2002 Copyright National Instruments Corporation
--- All Rights Reserved
--- National Instruments Internal Information
--------------------------------------------------------------------------------
---
--- Purpose:
---      This module transfers a boolean signal
---  from one clock domain to another using a
---  double synchronizer.
---      It uses a single flip-flop in the IClk domain
---  to resynchronize the signal so that the entire
---  clock boundary crossing is within this module.
---
---      Refer to DoubleSyncBase for more information.
--------------------------------------------------------------------------------
-
-library ieee;
-  use ieee.std_logic_1164.all;
-  use ieee.numeric_std.all;
-
-entity DoubleSyncBool is
-  port (
-    aReset: in  boolean;
-
-    IClk:   in  std_logic;
-    iSig:   in  boolean;
-
-    OClk:   in  std_logic;
-    oSig:   out boolean
-  );
-end DoubleSyncBool;
-
-architecture behavior of DoubleSyncBool is
-
-  signal iSigIn, oSigSL : std_logic;
-
-begin
-
-  -- Convert iSig to std_logic
-  iSigIn <= '1' when iSig else '0';
-
-  --vhook_e DoubleSyncBase
-  --vhook_a kResetVal '0'
-  --vhook_a {a[IO]Reset} aReset
-  --vhook_a iSigOut open
-  --vhook_a iClkEn true
-  --vhook_a oClkEn true
-  --vhook_a oSig oSigSL
-  DoubleSyncBasex: entity work.DoubleSyncBase (behavior)
-    generic map (
-      kResetVal => '0')  -- in  std_logic := '0'
-    port map (
-      aIReset => aReset,  -- in  boolean
-      IClk    => IClk,    -- in  std_logic
-      iClkEn  => true,    -- in  boolean
-      iSigIn  => iSigIn,  -- in  std_logic
-      iSigOut => open,    -- out std_logic
-      aOReset => aReset,  -- in  boolean
-      OClk    => OClk,    -- in  std_logic
-      oClkEn  => true,    -- in  boolean
-      oSig    => oSigSL); -- out std_logic
-
-  -- Convert oSigSL back to boolean
-  oSig <= oSigSL='1';
-
-end behavior;
+`protect begin_protected
+`protect version = 2
+`protect encrypt_agent = "NI LabVIEW FPGA" , encrypt_agent_info = "2.0"
+`protect begin_commonblock
+`protect license_proxyname = "NI_LV_proxy"
+`protect license_attributes = "USER,MAC,PROXYINFO=2.0"
+`protect license_keyowner = "NI_LV"
+`protect license_keyname = "NI_LV_2.0"
+`protect license_symmetric_key_method = "aes128-cbc"
+`protect license_public_key_method = "rsa"
+`protect license_public_key
+MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxngMPQrDv/s/Rz/ED4Ri
+j3tGzeObw/Topab4sl+WDRl/up6SWpAfcgdqb2jvLontfkiQS2xnGoq/Ye0JJEp2
+h0NYydCB5GtcEBEe+2n5YJxgiHJ5fGaPguuM6pMX2GcBfKpp3dg8hA/KVTGwvX6a
+L4ThrFgEyCSRe2zVd4DpayOre1LZlFVO8X207BNIJD29reTGSFzj5fbVsHSyRpPl
+kmOpFQiXMjqOtYFAwI9LyVEJpfx2B6GxwA+5zrGC/ZptmaTTj1a3Z815q1GUZu1A
+dpBK2uY9B4wXer6M8yKeqGX0uxDAOW1zh7tvzBysCJoWkZD39OJJWaoaddvhq6HU
+MwIDAQAB
+`protect end_commonblock
+`protect begin_toolblock
+`protect key_keyowner = "Xilinx" , key_keyname = "xilinxt_2021_01"
+`protect key_method = "rsa"
+`protect encoding = ( enctype = "base64" , line_length = 64 , bytes = 256 )
+`protect key_block
+KA9cVevs/0fyPmeNmim17AMCVKqU9BLi3XLi6sBkPfg2MPuQ3yH/0ZuxdfA470z/
+u54/MbaohlfCNjUztKX8uh/OshV2P1mr6kLbI2U3DzVxxNE3QvB0/bOLReH5tfCA
+HwSp0e6TCR85kkGI/HgR4cXz0EbYhkdexeDWFBBJftUcmK1VNoQiZxre1wIX8nBP
+m0e+Ki7I4ALlNyXGt/hU2PrY4OmWC5wImZB1jih5QRQKkS8dXMsi858KKhUGSqxY
+sQxVp5T4KwqY4fvqcGFb4v9IPTv1PaKKL26MFtrgzyWo2COGjTzyA9BIrTUTUtuO
+XeJqFMW4hX9VeupV+aRp7g==
+`protect control xilinx_schematic_visibility = "true"
+`protect rights_digest_method = "sha256"
+`protect end_toolblock="B3YNvCssl4wtuyxkxEE/WbGSszv22Nu5/Dk6+ZOULiw="
+`protect begin_toolblock
+`protect key_keyowner = "Mentor Graphics Corporation" , key_keyname = "MGC-VERIF-SIM-RSA-1"
+`protect key_method = "rsa"
+`protect encoding = ( enctype = "base64" , line_length = 64 , bytes = 128 )
+`protect key_block
+k4ag3TYMGgrSuvellzxiL0xVLm7fSExLGPrQiVAIJQjOhMB7efNsO1toyprwMFky
+lpUdO2SFDcPPBtqHJnMt1l4pzqeGpxb9ujsag+NS3MY9YgQjc3FBgfnhDF83xz3F
+lN6qXDpBcn3SMrfJ1DFAaxEZtrhiJ+oCBmGuxnjq9C0=
+`protect rights_digest_method = "sha256"
+`protect end_toolblock="0ekDx/VTf7Cegpk27kILstUnKeU0jJYj82NrNmdF4Vk="
+`protect data_method = "aes128-cbc"
+`protect encoding = ( enctype = "base64", line_length = 64 , bytes = 2128 )
+`protect data_block
+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
+ktuvYY1aM8aP5guiyU7uXQ==
+`protect end_protected

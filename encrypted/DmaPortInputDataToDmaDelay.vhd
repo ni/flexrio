@@ -1,86 +1,117 @@
--------------------------------------------------------------------------------
---
--- File: DmaPortInputDataToDmaDelay.vhd
--- Author: Paul Butler
--- Original Project: LV FPGA Dma Port Communication Interface
--- Date: 16 Oct 2014
---
--------------------------------------------------------------------------------
--- (c) 2014 Copyright National Instruments Corporation
--- All Rights Reserved
--- National Instruments Internal Information
--------------------------------------------------------------------------------
---
--- Purpose:
---
--- This simple component will delay the input by kDelay clock cycles. 
--- kDelay can have any natural value, including 0.
---
-
-library IEEE;
-  use IEEE.std_logic_1164.all;
-
-library WORK;
-  use WORK.PkgNiUtilities.all;
-
-  use work.PkgNiDma.all;
-
-  use work.PkgDmaPortCommunicationInterface.all;
-  use work.PkgDmaPortCommIfcInputDataControl.all;
-  use work.PkgCommIntConfiguration.all;
-
-entity DmaPortInputDataToDmaDelay is
-  generic (
-    kDelay : natural := 0
-          );
-  port (
-    Clk                             : in  std_logic;
-    cNiDmaInputDataToDma            : in  NiDmaInputDataToDma_t;
-    cNiDmaInputDataToDmaDelayed     : out NiDmaInputDataToDma_t
-       );
-end entity DmaPortInputDataToDmaDelay;
-
-architecture RTL of DmaPortInputDataToDmaDelay is
-
-  -- The index corresponds to the number of state delays applied to each 
-  -- element of the array. Index 0 has not been delayed at all and index 
-  -- kDelay has been delayed by exactly that many clock cycles.
-  -- I declared the array using an increasing range because I think it 
-  -- felt natural to me to shift from left to right. I could shift left 
-  -- to right using a decreasing range, but then the index would not 
-  -- correspond to the amount of delay.
-  signal cDataShiftReg : NiDmaInputDataToDmaArray_t ( 0 to kDelay ) :=
-         (others => kNiDmaInputDataToDmaZero);
-
-begin
-
-  cDataShiftReg ( 0 ) <= cNiDmaInputDataToDma;
-
-  -- I intentionally omitted a reset because this shift register is only 
-  -- used for data, not control signals. When the control logic is being 
-  -- reset, the data is undefined and it remains undefined until the 
-  -- control logic has shifted meaningful data through these registers. 
-  -- For those reasons, we have no functional requirement to reset these 
-  -- registers.
-  --
-  -- When the corresponding control logic enters the reset state, it 
-  -- might conceivably cause the first register in this chain to become 
-  -- metastable (we have a boundary from the control logic's reset 
-  -- domain into a domain with no reset). However, none of the data in 
-  -- this shift register has any meaning at that time and we cannot 
-  -- transfer any data until well after the control logic exits the 
-  -- reset state. For those reasons, I claim that metastability on these 
-  -- registers is safe.
-  --
-  -- By not resetting registers unnecessarily, I preserve routing 
-  -- resources and I simplify timing closure on the reset net in case we 
-  -- elect to use a synchronous reset or a reset with an asynchronous 
-  -- assertion, synchhronous deassertion.
-  cDataShiftReg ( 1 to kDelay ) <= cDataShiftReg ( 0 to kDelay - 1 ) 
-                                   when rising_edge ( Clk );
-
-  cNiDmaInputDataToDmaDelayed <= cDataShiftReg ( kDelay );
-
-end RTL;
-
-
+`protect begin_protected
+`protect version = 2
+`protect encrypt_agent = "NI LabVIEW FPGA" , encrypt_agent_info = "2.0"
+`protect begin_commonblock
+`protect license_proxyname = "NI_LV_proxy"
+`protect license_attributes = "USER,MAC,PROXYINFO=2.0"
+`protect license_keyowner = "NI_LV"
+`protect license_keyname = "NI_LV_2.0"
+`protect license_symmetric_key_method = "aes128-cbc"
+`protect license_public_key_method = "rsa"
+`protect license_public_key
+MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxngMPQrDv/s/Rz/ED4Ri
+j3tGzeObw/Topab4sl+WDRl/up6SWpAfcgdqb2jvLontfkiQS2xnGoq/Ye0JJEp2
+h0NYydCB5GtcEBEe+2n5YJxgiHJ5fGaPguuM6pMX2GcBfKpp3dg8hA/KVTGwvX6a
+L4ThrFgEyCSRe2zVd4DpayOre1LZlFVO8X207BNIJD29reTGSFzj5fbVsHSyRpPl
+kmOpFQiXMjqOtYFAwI9LyVEJpfx2B6GxwA+5zrGC/ZptmaTTj1a3Z815q1GUZu1A
+dpBK2uY9B4wXer6M8yKeqGX0uxDAOW1zh7tvzBysCJoWkZD39OJJWaoaddvhq6HU
+MwIDAQAB
+`protect end_commonblock
+`protect begin_toolblock
+`protect key_keyowner = "Xilinx" , key_keyname = "xilinxt_2021_01"
+`protect key_method = "rsa"
+`protect encoding = ( enctype = "base64" , line_length = 64 , bytes = 256 )
+`protect key_block
+KA9cVevs/0fyPmeNmim17AMCVKqU9BLi3XLi6sBkPfg2MPuQ3yH/0ZuxdfA470z/
+u54/MbaohlfCNjUztKX8uh/OshV2P1mr6kLbI2U3DzVxxNE3QvB0/bOLReH5tfCA
+HwSp0e6TCR85kkGI/HgR4cXz0EbYhkdexeDWFBBJftUcmK1VNoQiZxre1wIX8nBP
+m0e+Ki7I4ALlNyXGt/hU2PrY4OmWC5wImZB1jih5QRQKkS8dXMsi858KKhUGSqxY
+sQxVp5T4KwqY4fvqcGFb4v9IPTv1PaKKL26MFtrgzyWo2COGjTzyA9BIrTUTUtuO
+XeJqFMW4hX9VeupV+aRp7g==
+`protect control xilinx_schematic_visibility = "true"
+`protect rights_digest_method = "sha256"
+`protect end_toolblock="B3YNvCssl4wtuyxkxEE/WbGSszv22Nu5/Dk6+ZOULiw="
+`protect begin_toolblock
+`protect key_keyowner = "Mentor Graphics Corporation" , key_keyname = "MGC-VERIF-SIM-RSA-1"
+`protect key_method = "rsa"
+`protect encoding = ( enctype = "base64" , line_length = 64 , bytes = 128 )
+`protect key_block
+k4ag3TYMGgrSuvellzxiL0xVLm7fSExLGPrQiVAIJQjOhMB7efNsO1toyprwMFky
+lpUdO2SFDcPPBtqHJnMt1l4pzqeGpxb9ujsag+NS3MY9YgQjc3FBgfnhDF83xz3F
+lN6qXDpBcn3SMrfJ1DFAaxEZtrhiJ+oCBmGuxnjq9C0=
+`protect rights_digest_method = "sha256"
+`protect end_toolblock="0ekDx/VTf7Cegpk27kILstUnKeU0jJYj82NrNmdF4Vk="
+`protect data_method = "aes128-cbc"
+`protect encoding = ( enctype = "base64", line_length = 64 , bytes = 3328 )
+`protect data_block
+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
+AqwRxBcfYzgzaabRqjIOHQ==
+`protect end_protected

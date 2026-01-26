@@ -1,212 +1,287 @@
--------------------------------------------------------------------------------
---
--- File: PkgNiDmaConfig.vhd
--- Author: Glen Sescila
--- Original Project: NI DMA IP
--- Date: 27 May 2010
---
--------------------------------------------------------------------------------
--- (c) 2010 Copyright National Instruments Corporation
--- All Rights Reserved
--- National Instruments Internal Information
--------------------------------------------------------------------------------
---
--- Purpose:
--- Configures the NI DMA IP.  Each design will modify this package based on the
--- bus technology and application requirements.
---
--------------------------------------------------------------------------------
-
-library ieee;
-  use ieee.std_logic_1164.all;
-  use ieee.numeric_std.all;
-
-package PkgNiDmaConfig is
-
-  -------------------------- Data Path Configuration --------------------------
-
-  -- Width of the bus address.  Note that this can be configured based on the
-  -- total address space that needs to be accessible, not necessarily the width
-  -- of address that the bus protocol supports.  For example, an application
-  -- might set this based on the amount of memory actually installed in the
-  -- system.  Care should be taken to consider peer-to-peer use cases since
-  -- that may require accessing address ranges at higher locations than the
-  -- memory.
-  constant kNiDmaAddressWidth : natural := 64;
-
-  -- Width of the bus data.  This must be a power-of-two mutliple of 8.
-  constant kNiDmaDataWidth : natural := 256;
-
-  -- Baggage is used for any bus-specific purpose.  PCIe example uses would be
-  -- Traffic Classes and TLP Steering Tags.  On AXI the Baggage could be used
-  -- to select which master interface the transaction should route to (SAM or
-  -- ACP for example).  Each DMA channel or Direct Master can provide a
-  -- programmable Baggage value but to the NI DMA IP and application hardware
-  -- it serves no purpose.  The design of bus-specific logic determines how the
-  -- Baggage value should be used.
-  constant kNiDmaBaggageWidth : natural := 6;
-
-  -- The maximum transfer size in bytes for Input and Output transactions.
-  -- These must each be a power-of-two multiple of (kNiDmaDataWidth / 8).  The
-  -- multiple must be four or greater.
-  constant kNiDmaInputMaxTransfer  : natural := 1024;
-  constant kNiDmaOutputMaxTransfer : natural := 1024;
-
-  -- The number of Input and Output transactions that can be pending at once in
-  -- the NI DMA IP.  Multiple transactions must be issued simultaneously in
-  -- order to overcome pipeline and processing delays and sustain high
-  -- streaming throughput.  For Output the number of simultaneous transactions
-  -- needs to be set high enough to overcome the entire system round-trip
-  -- latency.  If system round-trip latency is 5 us, then the design needs to
-  -- simultaneously issue at least the number of transactions required to
-  -- transfer 5 us worth of data at the desired bandwidth.  For Input the
-  -- number of transactions necessary depends on characteristics of the bus
-  -- technology.  If the NI DMA IP must wait to receive a response from the
-  -- final destination of write transactions then the situation is no different
-  -- than Output.  In this case Input needs to be configured for the number of
-  -- simultaneous transactions required for the entire system round-trip
-  -- latency.  If the bus technology posts writes and has appropriate ordering
-  -- guarantees then Input can be configured for fewer simultaneous
-  -- transactions.  In this case you only need enough transactions to overcome
-  -- the latency through the NI DMA IP itself because transfers will be
-  -- considered complete as soon as they post to the bus-speciifc logic.
-  constant kNiDmaInputMaxRequests : natural := 16;
-  constant kNiDmaOutputMaxRequests : natural := 64;
-
-  -- The number of max transfer data payloads that can be stored in the NI DMA
-  -- IP Input data path at once.  The NI DMA IP has been designed to provide
-  -- maximum bus streaming throughput even with very little data buffering in
-  -- the NI DMA IP itself.  The key to this concept is that the NI DMA IP is in
-  -- control over when data transfers from the application hardware so there is
-  -- no need for deep buffering in the NI DMA IP.  The minimum allowed value
-  -- for this field is 2 and it shouldn't be necessary to increase it.  This is
-  -- just being made configurable in case testing determines that more data
-  -- buffering is necessary.  No buffering is required in the Output data path
-  -- since the NI DMA IP can transfer received data to application-specic logic
-  -- at will.
-  constant kNiDmaInputDataBuffer : natural := 2;
-
-  -- The number of DMA channels implemented.
-  constant kNiDmaDmaChannels : natural := 64;
-
-  -- The number of Direct Masters that needs to be supported.
-  -- Max 64 DMA Channels + 64 Master Ports (to be split between LabVIEW and Fixed Logic)
-  constant kNiDmaDirectMasters : natural := 128;
-
-  -- This constant specifies the latency between Pop and data on the Input Data
-  -- Interface.  The minimum value is 1 which means data is valid the state
-  -- after Pop.
-  constant kNiDmaInputDataReadLatency : natural := 5;
-
-  -------------------------- RegPort Configuration ----------------------------
-
-  --These set the base address of the dma companion
-  constant kNiDmaIpBaseAddress         : natural := 16#00#;
-  constant kNiDmaIpCompanionWindowSize : natural := 16#4000#;
-  --The entire range between kNiDmaIpBaseAddress and kNiDmaDmaRegBase will be decoded
-  --by the companion, except for the config port and link interface bridge ranges.
-
-  --   The two constants below specify the address range allocated for the DMA
-  -- context memory on RegPort.  InChWORM will respond to this entire range on
-  -- RegPort even if there is more address space than necessary for the number
-  -- of DMA channels implemented.  The unused space will return 0s on reads.
-  -- This allows a fixed address range to be mapped to InChWORM without concern
-  -- that software accesses to unused space in the range will hang or timeout.
-  --   kNiDmaDmaRegBase must be naturally aligned to a boundary of
-  -- kNiDmaDmaRegSize.  The total space should be a power-of-two that is at
-  -- least 256 bytes * (kNiDmaDmaChannels rounded up to the next power-of-two).
-  -- For example, with 5 DMA channels the total address space needed by NI DMA
-  -- IP is 256 * 8 = 2048 bytes even though the register set for 5 channels
-  -- fits in 256 * 5 = 1280 bytes.
-  constant kNiDmaDmaRegBase : natural := 16#4000#;
-  constant kNiDmaDmaRegSize : positive := 16#4000#;  -- 16K supports up to 64 chans
-
-  --These constants specify the address range allocated for HBBIM Registers. The
-  -- NI DMA Companion will not respond to these addresses and the Host Bus BIM logic
-  -- is expected to acknowledge any access in the specified window. These constants
-  -- are only used internally to the InChWORM netlist so it is OK if the version of
-  -- this package used at the TopLevel FPGA does not print these constants.
-  constant kNiDmaHbBimRegBase : natural := 16#1000#;
-  constant kNiDmaHbBimRegSize : natural := 16#200#;
-
-  ---------------------- High Speed Sink Configuration ------------------------
-
-  -- For LvFPGA the high speed sink address width should be the same as the
-  -- RegPort address width + 1. This is a requirement from CHInCh 2. However,
-  -- this requirement may change for a future interface ASIC/IP. In order
-  -- for this package file to support other interfaces in the future, log2
-  -- of the max address of Sink Stream's write window could be used to define
-  -- this constant. Doing so will also maintain backwards compatibility with
-  -- the requirement from CHInCh 2.
-  -- For PCIe InChWORM, AddressWidth just needs to accommodate the largest address
-  --  (i.e. Base + Size - 1).
-  constant kNiDmaHighSpeedSinkAddressWidth : positive := 20;
-
-  -- The two constants below define the address range allocated for writing
-  -- HighSpeedSink FIFOs.  kNiDmaHighSpeedSinkSize needs to be a power-of-two
-  -- and kNiDmaHighSpeedSinkBase needs to be naturally aligned to a boundary of
-  -- kNiDmaHighSpeedSinkSize.
-  constant kNiDmaHighSpeedSinkBase : natural := 16#80000#;
-  constant kNiDmaHighSpeedSinkSize : positive := 16#40000#;  -- 256K = 4K * 64 chans
-
-  -------------------------- Feature Configuration ----------------------------
-
-  constant kNiDmaEnableInput : boolean := true;
-  constant kNiDmaEnableOutput : boolean := true;
-
-  constant kNiDmaEnableByteSwapper : boolean := false;
-
-  constant kNiDmaTtcWidth : natural := 64;
-  constant kNiDmaEnableLatchingTtc : boolean := true;
-
-  constant kNiDmaEnableFullScatterGather : boolean := true;
-
-  -- These constants are only used when kNiDmaEnableFullScatterGather = true.
-  constant kNiDmaMaxChunkyLinkSize : natural := 2048;
-  constant kNiDmaLinkFetchMaxRequests : natural := 1;
-
-  constant kNiDmaEnableDmaInterrupts : boolean := true;
-  constant kNiDmaEnableMessageAndStatusPusher : boolean := true;
-  --This sets the DirectMaster number that is used for the status pusher
-  --Need to use a DmaChannel ID for LabVIEW targets since that is the only way
-  -- to make sure it won't collide with a LabVIEW application as of LabVIEW 2016
-  --Target developer must always reserve this ID from LabVIEW but can use it in
-  -- Fixed Logic for stream requests
-  constant kNiDmaStatusPusherChannel : natural := kNiDmaDmaChannels - 1;
-
-  -------------------------- Optimization Settings ----------------------------
-
-  -- The NI DMA IP needs to do a lot of alignment work on its data paths.  The
-  -- byte lanes on which the user wants data are unrelated to the byte lanes
-  -- where the host bus needs the data.  So the NI DMA IP needs the capability
-  -- to mux every byte lane from the user to every byte lane of the host bus.
-  -- Without pipelining this mux would get slower the wider the bus gets.  The
-  -- kNiDmaMaxMuxWidth constant specifies the maximum width allowed for a
-  -- combinatorial mux in the NI DMA IP.  The design adds pipeline stages such
-  -- that we never have muxes wider than kNiDmaMaxMuxWidth-to-1.  Of course,
-  -- wider buses will have more states of latency.  But that is because there
-  -- is more processing to do and we want the NI DMA IP to support high clock
-  -- rates.
-  --
-  -- The value of this constant must be a power-of-two.  8-to-1 muxes seem to
-  -- be a sweet spot between speed and area in today's FPGAs.  Any wider would
-  -- significantly reduce speed because the mux would not fit within a single
-  -- SLICE.  Muxes narrower than 8-to-1 would not take full advantage of the
-  -- resources available in a SLICE.  For Xilinx families Spartan-6, Virtex-5,
-  -- and later; an 8-to-1 mux can be implemented using two 6-input LUTs and an
-  -- FMUX.  This is one level of LUTs plus the FMUX all within a SLICE.
-  constant kNiDmaMaxMuxWidth : natural := 8;
-
-  -- The two constants below control the selection between LutRAM and BlockRAM.
-  -- These specify thresholds for LutRAM address and data width.  Any RAM
-  -- instance in NiDmaIp will use LutRAM when the address and data width are
-  -- less than or equal to the maximums specified below.  Otherwise the RAM
-  -- instance will use BlockRAM.
-  constant kNiDmaMaxLutRamAddressWidth : natural := 8;
-  constant kNiDmaMaxLutRamDataWidth : natural := 512;
-
-end PkgNiDmaConfig;
-
-package body PkgNiDmaConfig is
-
-end package body PkgNiDmaConfig;
+`protect begin_protected
+`protect version = 2
+`protect encrypt_agent = "NI LabVIEW FPGA" , encrypt_agent_info = "2.0"
+`protect begin_commonblock
+`protect license_proxyname = "NI_LV_proxy"
+`protect license_attributes = "USER,MAC,PROXYINFO=2.0"
+`protect license_keyowner = "NI_LV"
+`protect license_keyname = "NI_LV_2.0"
+`protect license_symmetric_key_method = "aes128-cbc"
+`protect license_public_key_method = "rsa"
+`protect license_public_key
+MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxngMPQrDv/s/Rz/ED4Ri
+j3tGzeObw/Topab4sl+WDRl/up6SWpAfcgdqb2jvLontfkiQS2xnGoq/Ye0JJEp2
+h0NYydCB5GtcEBEe+2n5YJxgiHJ5fGaPguuM6pMX2GcBfKpp3dg8hA/KVTGwvX6a
+L4ThrFgEyCSRe2zVd4DpayOre1LZlFVO8X207BNIJD29reTGSFzj5fbVsHSyRpPl
+kmOpFQiXMjqOtYFAwI9LyVEJpfx2B6GxwA+5zrGC/ZptmaTTj1a3Z815q1GUZu1A
+dpBK2uY9B4wXer6M8yKeqGX0uxDAOW1zh7tvzBysCJoWkZD39OJJWaoaddvhq6HU
+MwIDAQAB
+`protect end_commonblock
+`protect begin_toolblock
+`protect key_keyowner = "Xilinx" , key_keyname = "xilinxt_2021_01"
+`protect key_method = "rsa"
+`protect encoding = ( enctype = "base64" , line_length = 64 , bytes = 256 )
+`protect key_block
+KA9cVevs/0fyPmeNmim17AMCVKqU9BLi3XLi6sBkPfg2MPuQ3yH/0ZuxdfA470z/
+u54/MbaohlfCNjUztKX8uh/OshV2P1mr6kLbI2U3DzVxxNE3QvB0/bOLReH5tfCA
+HwSp0e6TCR85kkGI/HgR4cXz0EbYhkdexeDWFBBJftUcmK1VNoQiZxre1wIX8nBP
+m0e+Ki7I4ALlNyXGt/hU2PrY4OmWC5wImZB1jih5QRQKkS8dXMsi858KKhUGSqxY
+sQxVp5T4KwqY4fvqcGFb4v9IPTv1PaKKL26MFtrgzyWo2COGjTzyA9BIrTUTUtuO
+XeJqFMW4hX9VeupV+aRp7g==
+`protect control xilinx_schematic_visibility = "true"
+`protect rights_digest_method = "sha256"
+`protect end_toolblock="B3YNvCssl4wtuyxkxEE/WbGSszv22Nu5/Dk6+ZOULiw="
+`protect begin_toolblock
+`protect key_keyowner = "Mentor Graphics Corporation" , key_keyname = "MGC-VERIF-SIM-RSA-1"
+`protect key_method = "rsa"
+`protect encoding = ( enctype = "base64" , line_length = 64 , bytes = 128 )
+`protect key_block
+k4ag3TYMGgrSuvellzxiL0xVLm7fSExLGPrQiVAIJQjOhMB7efNsO1toyprwMFky
+lpUdO2SFDcPPBtqHJnMt1l4pzqeGpxb9ujsag+NS3MY9YgQjc3FBgfnhDF83xz3F
+lN6qXDpBcn3SMrfJ1DFAaxEZtrhiJ+oCBmGuxnjq9C0=
+`protect rights_digest_method = "sha256"
+`protect end_toolblock="0ekDx/VTf7Cegpk27kILstUnKeU0jJYj82NrNmdF4Vk="
+`protect data_method = "aes128-cbc"
+`protect encoding = ( enctype = "base64", line_length = 64 , bytes = 11488 )
+`protect data_block
+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
+WsnTLV6qrQJYUmRqGAkOVg==
+`protect end_protected

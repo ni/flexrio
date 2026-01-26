@@ -1,73 +1,107 @@
-------------------------------------------------------------------------------------------
---
--- File: PkgSysMonConfig.vhd
--- Author: Rolando Ortega
--- Original Project: Buffalo Trace FlexRIO Carrier
--- Date: 23 September 2018
---
-------------------------------------------------------------------------------------------
--- (c) 2025 Copyright National Instruments Corporation
--- 
--- SPDX-License-Identifier: MIT
-------------------------------------------------------------------------------------------
---
--- Purpose: Enumerate the number of Analog Channels, and name each of them.
-------------------------------------------------------------------------------------------
---
--- githubvisible=true
---
--- vreview_group CorubaFixedLogic
--- vreview_reviewers kygreen dhearn esalinas hrubio lboughal rcastro
---
-------------------------------------------------------------------------------------------
-
-library ieee;
-use ieee.std_logic_1164.all;
-use ieee.numeric_std.all;
-
-library work;
-use work.PkgNiUtilities.all;
-
-package PkgSysMonConfig is
-
-  -- Number of total (used and unused) SysMon Channels
-  constant kNumSysMonChannels : natural := 16;
-
-  -- First, we enumerate the assignment of each of the channels. Note that this has to
-  -- match the schematic (i.e. the voltage monitor connected to ADxP/ADxN needs to be
-  -- assigned index x.
-  constant kSysMon_DramVpp_Divided      : natural := 0;
-  constant kSysMon_DramVref_Sense       : natural := 1;
-  constant kSysMon_3v3A_Divided         : natural := 2;
-  constant kSysMon_1v8A_Divided         : natural := 3;
-  constant kSysMon_3v3VDMezz_Divided    : natural := 4;
-  constant kSysMon_3v3AMezz_Divided     : natural := 5;
-  constant kSysMon_0v9MgtAvcc_Divided   : natural := 6;
-  constant kSysMon_Dram0Vtt_Sense       : natural := 8;
-  constant kSysMon_3v3D_Divided         : natural := 9;
-  constant kSysMon_1v8MgtVccaux_Divided : natural := 10;
-  constant kSysMon_3v8_Divided          : natural := 11;
-  constant kSysMon_VccioMezz_Divided    : natural := 12;
-  constant kSysMon_1v2MgtAvtt_Divided   : natural := 13;
-  constant kSysMon_1v2_Divided          : natural := 14;
-
-  -- Now we need to create a constant that tells us which of the sysmon pins are actually
-  -- used. These are all the pins we've enumerated above, so we just create an array that
-  -- contains all of them:
-  constant kSysMonChannelsUsed : NaturalVector :=
-    (kSysMon_DramVref_Sense,
-     kSysMon_Dram0Vtt_Sense,
-     kSysMon_DramVpp_Divided,
-     kSysMon_3v8_Divided,
-     kSysMon_VccioMezz_Divided,
-     kSysMon_3v3AMezz_Divided,
-     kSysMon_1v2MgtAvtt_Divided,
-     kSysMon_1v8MgtVccaux_Divided,
-     kSysMon_1v8A_Divided,
-     kSysMon_3v3D_Divided,
-     kSysMon_3v3A_Divided,
-     kSysMon_3v3VDMezz_Divided,
-     kSysMon_0v9MgtAvcc_Divided,
-     kSysMon_1v2_Divided);
-
-end package PkgSysMonConfig;
+`protect begin_protected
+`protect version = 2
+`protect encrypt_agent = "NI LabVIEW FPGA" , encrypt_agent_info = "2.0"
+`protect begin_commonblock
+`protect license_proxyname = "NI_LV_proxy"
+`protect license_attributes = "USER,MAC,PROXYINFO=2.0"
+`protect license_keyowner = "NI_LV"
+`protect license_keyname = "NI_LV_2.0"
+`protect license_symmetric_key_method = "aes128-cbc"
+`protect license_public_key_method = "rsa"
+`protect license_public_key
+MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxngMPQrDv/s/Rz/ED4Ri
+j3tGzeObw/Topab4sl+WDRl/up6SWpAfcgdqb2jvLontfkiQS2xnGoq/Ye0JJEp2
+h0NYydCB5GtcEBEe+2n5YJxgiHJ5fGaPguuM6pMX2GcBfKpp3dg8hA/KVTGwvX6a
+L4ThrFgEyCSRe2zVd4DpayOre1LZlFVO8X207BNIJD29reTGSFzj5fbVsHSyRpPl
+kmOpFQiXMjqOtYFAwI9LyVEJpfx2B6GxwA+5zrGC/ZptmaTTj1a3Z815q1GUZu1A
+dpBK2uY9B4wXer6M8yKeqGX0uxDAOW1zh7tvzBysCJoWkZD39OJJWaoaddvhq6HU
+MwIDAQAB
+`protect end_commonblock
+`protect begin_toolblock
+`protect key_keyowner = "Xilinx" , key_keyname = "xilinxt_2021_01"
+`protect key_method = "rsa"
+`protect encoding = ( enctype = "base64" , line_length = 64 , bytes = 256 )
+`protect key_block
+KA9cVevs/0fyPmeNmim17AMCVKqU9BLi3XLi6sBkPfg2MPuQ3yH/0ZuxdfA470z/
+u54/MbaohlfCNjUztKX8uh/OshV2P1mr6kLbI2U3DzVxxNE3QvB0/bOLReH5tfCA
+HwSp0e6TCR85kkGI/HgR4cXz0EbYhkdexeDWFBBJftUcmK1VNoQiZxre1wIX8nBP
+m0e+Ki7I4ALlNyXGt/hU2PrY4OmWC5wImZB1jih5QRQKkS8dXMsi858KKhUGSqxY
+sQxVp5T4KwqY4fvqcGFb4v9IPTv1PaKKL26MFtrgzyWo2COGjTzyA9BIrTUTUtuO
+XeJqFMW4hX9VeupV+aRp7g==
+`protect control xilinx_schematic_visibility = "true"
+`protect rights_digest_method = "sha256"
+`protect end_toolblock="B3YNvCssl4wtuyxkxEE/WbGSszv22Nu5/Dk6+ZOULiw="
+`protect begin_toolblock
+`protect key_keyowner = "Mentor Graphics Corporation" , key_keyname = "MGC-VERIF-SIM-RSA-1"
+`protect key_method = "rsa"
+`protect encoding = ( enctype = "base64" , line_length = 64 , bytes = 128 )
+`protect key_block
+k4ag3TYMGgrSuvellzxiL0xVLm7fSExLGPrQiVAIJQjOhMB7efNsO1toyprwMFky
+lpUdO2SFDcPPBtqHJnMt1l4pzqeGpxb9ujsag+NS3MY9YgQjc3FBgfnhDF83xz3F
+lN6qXDpBcn3SMrfJ1DFAaxEZtrhiJ+oCBmGuxnjq9C0=
+`protect rights_digest_method = "sha256"
+`protect end_toolblock="0ekDx/VTf7Cegpk27kILstUnKeU0jJYj82NrNmdF4Vk="
+`protect data_method = "aes128-cbc"
+`protect encoding = ( enctype = "base64", line_length = 64 , bytes = 2864 )
+`protect data_block
+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
+`protect end_protected

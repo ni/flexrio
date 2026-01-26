@@ -1,70 +1,96 @@
--------------------------------------------------------------------------------
---
--- File: DualPortRAM.vhd
--- Author: Craig Conway, Siddharth Sethi
--- Original Project: SMC5
--- Date: 7 July 2008
---
--------------------------------------------------------------------------------
--- (c) 2008 Copyright National Instruments Corporation
--- All Rights Reserved
--- National Instruments Internal Information
--------------------------------------------------------------------------------
---
--- Purpose:
---   Wrapper for Vivado inferred version of Dual Port RAM
---   Should implement a block RAM of the specified width/depth.
---
--- vreview_group rams
--- vreview_closed http://review-board.natinst.com/r/79823/
---
--------------------------------------------------------------------------------
-
-library ieee;
-  use ieee.std_logic_1164.all;
-  use ieee.numeric_std.all;
-
-entity DualPortRAM is
-  generic (
-    kAddressWidth : integer := 8;
-    kWidth : integer := 32;
-    kRamReadLatency : integer := 2
-  );
-  port (
-    IClk : in std_logic;
-    iClkEn : in boolean := true;
-    iWrite : in boolean;
-    iAddr : in unsigned(kAddressWidth-1 downto 0);
-    iDataIn : in std_logic_vector(kWidth-1 downto 0);
-
-    OClk : in std_logic;
-    oClkEn : in boolean := true;
-    oReset : in boolean := false;
-    oAddr : in unsigned(kAddressWidth-1 downto 0);
-    oDataOut : out std_logic_vector(kWidth-1 downto 0)
-  );
-end DualPortRAM;
-
-architecture rtl of DualPortRAM is
-
-begin
-
-  --vhook_e DualPortRAM_Vivado InferredRamx
-  InferredRamx: entity work.DualPortRAM_Vivado (rtl)
-    generic map (
-      kAddressWidth   => kAddressWidth,    --integer:=8
-      kWidth          => kWidth,           --integer:=32
-      kRamReadLatency => kRamReadLatency)  --integer range 1:3 :=2
-    port map (
-      IClk     => IClk,      --in  std_logic
-      iClkEn   => iClkEn,    --in  boolean
-      iWrite   => iWrite,    --in  boolean
-      iAddr    => iAddr,     --in  unsigned(kAddressWidth-1:0)
-      iDataIn  => iDataIn,   --in  std_logic_vector(kWidth-1:0)
-      OClk     => OClk,      --in  std_logic
-      oReset   => oReset,    --in  boolean
-      oClkEn   => oClkEn,    --in  boolean
-      oAddr    => oAddr,     --in  unsigned(kAddressWidth-1:0)
-      oDataOut => oDataOut); --out std_logic_vector(kWidth-1:0)
-
-end rtl;
+`protect begin_protected
+`protect version = 2
+`protect encrypt_agent = "NI LabVIEW FPGA" , encrypt_agent_info = "2.0"
+`protect begin_commonblock
+`protect license_proxyname = "NI_LV_proxy"
+`protect license_attributes = "USER,MAC,PROXYINFO=2.0"
+`protect license_keyowner = "NI_LV"
+`protect license_keyname = "NI_LV_2.0"
+`protect license_symmetric_key_method = "aes128-cbc"
+`protect license_public_key_method = "rsa"
+`protect license_public_key
+MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxngMPQrDv/s/Rz/ED4Ri
+j3tGzeObw/Topab4sl+WDRl/up6SWpAfcgdqb2jvLontfkiQS2xnGoq/Ye0JJEp2
+h0NYydCB5GtcEBEe+2n5YJxgiHJ5fGaPguuM6pMX2GcBfKpp3dg8hA/KVTGwvX6a
+L4ThrFgEyCSRe2zVd4DpayOre1LZlFVO8X207BNIJD29reTGSFzj5fbVsHSyRpPl
+kmOpFQiXMjqOtYFAwI9LyVEJpfx2B6GxwA+5zrGC/ZptmaTTj1a3Z815q1GUZu1A
+dpBK2uY9B4wXer6M8yKeqGX0uxDAOW1zh7tvzBysCJoWkZD39OJJWaoaddvhq6HU
+MwIDAQAB
+`protect end_commonblock
+`protect begin_toolblock
+`protect key_keyowner = "Xilinx" , key_keyname = "xilinxt_2021_01"
+`protect key_method = "rsa"
+`protect encoding = ( enctype = "base64" , line_length = 64 , bytes = 256 )
+`protect key_block
+KA9cVevs/0fyPmeNmim17AMCVKqU9BLi3XLi6sBkPfg2MPuQ3yH/0ZuxdfA470z/
+u54/MbaohlfCNjUztKX8uh/OshV2P1mr6kLbI2U3DzVxxNE3QvB0/bOLReH5tfCA
+HwSp0e6TCR85kkGI/HgR4cXz0EbYhkdexeDWFBBJftUcmK1VNoQiZxre1wIX8nBP
+m0e+Ki7I4ALlNyXGt/hU2PrY4OmWC5wImZB1jih5QRQKkS8dXMsi858KKhUGSqxY
+sQxVp5T4KwqY4fvqcGFb4v9IPTv1PaKKL26MFtrgzyWo2COGjTzyA9BIrTUTUtuO
+XeJqFMW4hX9VeupV+aRp7g==
+`protect control xilinx_schematic_visibility = "true"
+`protect rights_digest_method = "sha256"
+`protect end_toolblock="B3YNvCssl4wtuyxkxEE/WbGSszv22Nu5/Dk6+ZOULiw="
+`protect begin_toolblock
+`protect key_keyowner = "Mentor Graphics Corporation" , key_keyname = "MGC-VERIF-SIM-RSA-1"
+`protect key_method = "rsa"
+`protect encoding = ( enctype = "base64" , line_length = 64 , bytes = 128 )
+`protect key_block
+k4ag3TYMGgrSuvellzxiL0xVLm7fSExLGPrQiVAIJQjOhMB7efNsO1toyprwMFky
+lpUdO2SFDcPPBtqHJnMt1l4pzqeGpxb9ujsag+NS3MY9YgQjc3FBgfnhDF83xz3F
+lN6qXDpBcn3SMrfJ1DFAaxEZtrhiJ+oCBmGuxnjq9C0=
+`protect rights_digest_method = "sha256"
+`protect end_toolblock="0ekDx/VTf7Cegpk27kILstUnKeU0jJYj82NrNmdF4Vk="
+`protect data_method = "aes128-cbc"
+`protect encoding = ( enctype = "base64", line_length = 64 , bytes = 2320 )
+`protect data_block
+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
+MGa3DNn2eJv/w6A8Jq0ndw==
+`protect end_protected
