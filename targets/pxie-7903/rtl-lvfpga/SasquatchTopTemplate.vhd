@@ -863,8 +863,6 @@ architecture struct of SasquatchTopTemplate is
 begin  -- architecture struct
 
   -- Tags for software's autogeneration
-  -- These are not used directly for Appleton, but it makes
-  -- software's life easier
   --@@BEGIN LOCAL_SIGNAL_ASSIGNMENT
   --@@END LOCAL_SIGNAL_ASSIGNMENT
 
