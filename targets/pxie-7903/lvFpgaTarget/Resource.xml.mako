@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- githubvisible=true -->
 % if custom_target:   
 <Target name="${lv_target_name}" version="1.0" arbitrationDefault="NeverArbitrate">
 % else:
@@ -23,4 +24,3 @@
   <:Include what="children">Targets/NI/FPGA/RIO/79XXR/PXIe-7903/Sasquatch7903.xml</:Include>
 % endif  
 </Target>
-<!-- githubvisible=true -->

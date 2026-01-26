@@ -1,8 +1,5 @@
-% if false:
-<!-- githubvisible=true -->
-<!-- The GitHub visible tag is removed by mako so the file in the objects folder does not have it -->
-% endif
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- githubvisible=true -->
 <Target>
 % if custom_target:   
   <FPGASourceFilesDirPath>Targets/NI/FPGA/RIO/79XXR/${lv_target_name}/FpgaFiles</FPGASourceFilesDirPath>

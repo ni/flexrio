@@ -11,5 +11,3 @@ __pycache__/
 ~*.pptx
 ~*.docx
 ~*.tmp
-# Ignore dependency files
-deps/

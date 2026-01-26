@@ -6,8 +6,8 @@
 -- Date: 20 December 2011
 --
 ------------------------------------------------------------------------------
--- (c) 2025 Copyright National Instruments Corporation
--- 
+-- (c) 2026 Copyright National Instruments Corporation
+--
 -- SPDX-License-Identifier: MIT
 ------------------------------------------------------------------------------
 --
@@ -16,10 +16,7 @@
 -- clocks and ensure that they are not optimized away.
 --
 ------------------------------------------------------------------------------
-% if false:
 -- githubvisible=true
--- The GitHub visible tag is removed by mako so the file in the objects folder does not have it 
-% endif
 
 library ieee;
 use ieee.std_logic_1164.all;

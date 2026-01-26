@@ -6,18 +6,15 @@
 --
 ------------------------------------------------------------------------------
 -- (c) 2026 Copyright National Instruments Corporation
--- All Rights Reserved
--- National Instruments Internal Information
+--
+-- SPDX-License-Identifier: MIT
 ------------------------------------------------------------------------------
 --
 -- Purpose: This wrapper flattens all record-type ports of TheWindow to
 --          std_logic_vector ports for compatibility.
 --
 ------------------------------------------------------------------------------
-% if false:
 -- githubvisible=true
--- The GitHub visible tag is removed by mako so the file in the objects folder does not have it 
-% endif
 
 library ieee;
   use ieee.std_logic_1164.all;
