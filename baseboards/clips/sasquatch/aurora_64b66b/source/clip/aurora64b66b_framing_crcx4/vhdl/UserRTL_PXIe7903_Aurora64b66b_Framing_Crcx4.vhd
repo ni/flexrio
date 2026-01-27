@@ -25,12 +25,6 @@
 -------------------------------------------------------------------------------
 --
 -- githubvisible=true
---
--- vreview_group Ni7903AuroraStreamingVhdl
--- vreview_closed http://review-board.natinst.com/r/332238/
--- vreview_reviewers kygreen dhearn amoch
---
--------------------------------------------------------------------------------
 
 
 library ieee;
