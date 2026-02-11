@@ -2,6 +2,7 @@
 --
 -- File: PkgTheWindowFlatWrapper.vhd
 -- Author: Auto-generated wrapper
+-- Original Project: FlexRIO
 -- Date: 2 January 2026
 --
 ------------------------------------------------------------------------------

@@ -2,7 +2,7 @@
 --
 -- File: SasquatchTopTemplate.vhd
 -- Author: National Instruments
--- Original Project: 
+-- Original Project: FlexRIO
 -- Date: 09 April 2019
 --
 ------------------------------------------------------------------------------------------
@@ -755,37 +755,37 @@ architecture struct of SasquatchTopTemplate is
   signal dLlbPhyInitDoneForLvfpga: std_logic;
 
   -- Internal signals for flattened types to connect to TheWindowFlatWrapper
-  signal bRegPortIn_flat : std_logic_vector(kRegPortInSize-1 downto 0);
-  signal bRegPortOut_flat : std_logic_vector(kRegPortOutSize-1 downto 0);
+  signal bRegPortInFlat : std_logic_vector(kRegPortInSize-1 downto 0);
+  signal bRegPortOutFlat : std_logic_vector(kRegPortOutSize-1 downto 0);
 
-  signal dInputStreamInterfaceToFifo_flat : std_logic_vector(
+  signal dInputStreamInterfaceToFifoFlat : std_logic_vector(
     Larger(kNumberOfDmaChannels,1)*SizeOf(kInputStreamInterfaceToFifoZero)-1 downto 0);
-  signal dInputStreamInterfaceFromFifo_flat : std_logic_vector(
+  signal dInputStreamInterfaceFromFifoFlat : std_logic_vector(
     Larger(kNumberOfDmaChannels,1)*SizeOf(kInputStreamInterfaceFromFifoZero)-1 downto 0);
-  signal dOutputStreamInterfaceToFifo_flat : std_logic_vector(
+  signal dOutputStreamInterfaceToFifoFlat : std_logic_vector(
     Larger(kNumberOfDmaChannels,1)*SizeOf(kOutputStreamInterfaceToFifoZero)-1 downto 0);
-  signal dOutputStreamInterfaceFromFifo_flat : std_logic_vector(
+  signal dOutputStreamInterfaceFromFifoFlat : std_logic_vector(
     Larger(kNumberOfDmaChannels,1)*SizeOf(kOutputStreamInterfaceFromFifoZero)-1 downto 0);
 
-  signal bIrqToInterface_flat : std_logic_vector(
+  signal bIrqToInterfaceFlat : std_logic_vector(
     Larger(kNumberOfIrqs,1)*kIrqToInterfaceSize*kIrqStatusToInterfaceSize-1 downto 0);
 
-  signal dNiFpgaMasterWriteRequestFromMasterArray_flat : std_logic_vector(
+  signal dNiFpgaMasterWriteRequestFromMasterArrayFlat : std_logic_vector(
     Larger(kNumberOfMasterPorts,1)*SizeOf(kNiFpgaMasterWriteRequestFromMasterZero)-1 downto 0);
-  signal dNiFpgaMasterWriteRequestToMasterArray_flat : std_logic_vector(
+  signal dNiFpgaMasterWriteRequestToMasterArrayFlat : std_logic_vector(
     Larger(kNumberOfMasterPorts,1)*SizeOf(kNiFpgaMasterWriteRequestToMasterZero)-1 downto 0);
-  signal dNiFpgaMasterWriteDataFromMasterArray_flat : std_logic_vector(
+  signal dNiFpgaMasterWriteDataFromMasterArrayFlat : std_logic_vector(
     Larger(kNumberOfMasterPorts,1)*SizeOf(kNiFpgaMasterWriteDataFromMasterZero)-1 downto 0);
-  signal dNiFpgaMasterWriteDataToMasterArray_flat : std_logic_vector(
+  signal dNiFpgaMasterWriteDataToMasterArrayFlat : std_logic_vector(
     Larger(kNumberOfMasterPorts,1)*SizeOf(kNiFpgaMasterWriteDataToMasterZero)-1 downto 0);
-  signal dNiFpgaMasterWriteStatusToMasterArray_flat : std_logic_vector(
+  signal dNiFpgaMasterWriteStatusToMasterArrayFlat : std_logic_vector(
     Larger(kNumberOfMasterPorts,1)*SizeOf(kNiFpgaMasterWriteStatusToMasterZero)-1 downto 0);
 
-  signal dNiFpgaMasterReadRequestFromMasterArray_flat : std_logic_vector(
+  signal dNiFpgaMasterReadRequestFromMasterArrayFlat : std_logic_vector(
     Larger(kNumberOfMasterPorts,1)*SizeOf(kNiFpgaMasterReadRequestFromMasterZero)-1 downto 0);
-  signal dNiFpgaMasterReadRequestToMasterArray_flat : std_logic_vector(
+  signal dNiFpgaMasterReadRequestToMasterArrayFlat : std_logic_vector(
     Larger(kNumberOfMasterPorts,1)*SizeOf(kNiFpgaMasterReadRequestToMasterZero)-1 downto 0);
-  signal dNiFpgaMasterReadDataToMasterArray_flat : std_logic_vector(
+  signal dNiFpgaMasterReadDataToMasterArrayFlat : std_logic_vector(
     Larger(kNumberOfMasterPorts,1)*SizeOf(kNiFpgaMasterReadDataToMasterZero)-1 downto 0);
 
   -- This constant specifies the size of each memory buffer which (2^kSizeOfMemBuffers)
@@ -1405,22 +1405,22 @@ begin  -- architecture struct
   SasquatchWindowWrapper: TheWindowFlatWrapper
     port map (
       aBusReset                           => to_stdlogic(aBusReset),                    --in  std_logic
-      bRegPortIn                          => bRegPortIn_flat,                           --in  RegPortIn_t
-      bRegPortOut                         => bRegPortOut_flat,                          --out RegPortOut_t
+      bRegPortIn                          => bRegPortInFlat,                           --in  RegPortIn_t
+      bRegPortOut                         => bRegPortOutFlat,                          --out RegPortOut_t
       bRegPortTimeout                     => to_stdlogic(bLvWindowRegPortTimeout),      --in  std_logic
-      dInputStreamInterfaceToFifo         => dInputStreamInterfaceToFifo_flat,               --in  InputStreamInterfaceToFifoArray_t(Larger(kNumberOfDmaChannels, 1)-1:0)
-      dInputStreamInterfaceFromFifo       => dInputStreamInterfaceFromFifo_flat,             --out InputStreamInterfaceFromFifoArray_t(Larger(kNumberOfDmaChannels, 1)-1:0)
-      dOutputStreamInterfaceToFifo        => dOutputStreamInterfaceToFifo_flat,              --in  OutputStreamInterfaceToFifoArray_t(Larger(kNumberOfDmaChannels, 1)-1:0)
-      dOutputStreamInterfaceFromFifo      => dOutputStreamInterfaceFromFifo_flat,            --out OutputStreamInterfaceFromFifoArray_t(Larger(kNumberOfDmaChannels, 1)-1:0)
-      bIrqToInterface                     => bIrqToInterface_flat,                           --out IrqToInterfaceArray_t(Larger(kNumberOfIrqs, 1)-1:0)
-      dNiFpgaMasterWriteRequestFromMaster => dNiFpgaMasterWriteRequestFromMasterArray_flat,  --out NiFpgaMasterWriteRequestFromMasterArray_t(Larger(kNumberOfMasterPorts, 1)-1:0)
-      dNiFpgaMasterWriteRequestToMaster   => dNiFpgaMasterWriteRequestToMasterArray_flat,    --in  NiFpgaMasterWriteRequestToMasterArray_t(Larger(kNumberOfMasterPorts, 1)-1:0)
-      dNiFpgaMasterWriteDataFromMaster    => dNiFpgaMasterWriteDataFromMasterArray_flat,     --out NiFpgaMasterWriteDataFromMasterArray_t(Larger(kNumberOfMasterPorts, 1)-1:0)
-      dNiFpgaMasterWriteDataToMaster      => dNiFpgaMasterWriteDataToMasterArray_flat,       --in  NiFpgaMasterWriteDataToMasterArray_t(Larger(kNumberOfMasterPorts, 1)-1:0)
-      dNiFpgaMasterWriteStatusToMaster    => dNiFpgaMasterWriteStatusToMasterArray_flat,     --in  NiFpgaMasterWriteStatusToMasterArray_t(Larger(kNumberOfMasterPorts, 1)-1:0)
-      dNiFpgaMasterReadRequestFromMaster  => dNiFpgaMasterReadRequestFromMasterArray_flat,   --out NiFpgaMasterReadRequestFromMasterArray_t(Larger(kNumberOfMasterPorts, 1)-1:0)
-      dNiFpgaMasterReadRequestToMaster    => dNiFpgaMasterReadRequestToMasterArray_flat,     --in  NiFpgaMasterReadRequestToMasterArray_t(Larger(kNumberOfMasterPorts, 1)-1:0)
-      dNiFpgaMasterReadDataToMaster       => dNiFpgaMasterReadDataToMasterArray_flat,        --in  NiFpgaMasterReadDataToMasterArray_t(Larger(kNumberOfMasterPorts, 1)-1:0)
+      dInputStreamInterfaceToFifo         => dInputStreamInterfaceToFifoFlat,               --in  InputStreamInterfaceToFifoArray_t(Larger(kNumberOfDmaChannels, 1)-1:0)
+      dInputStreamInterfaceFromFifo       => dInputStreamInterfaceFromFifoFlat,             --out InputStreamInterfaceFromFifoArray_t(Larger(kNumberOfDmaChannels, 1)-1:0)
+      dOutputStreamInterfaceToFifo        => dOutputStreamInterfaceToFifoFlat,              --in  OutputStreamInterfaceToFifoArray_t(Larger(kNumberOfDmaChannels, 1)-1:0)
+      dOutputStreamInterfaceFromFifo      => dOutputStreamInterfaceFromFifoFlat,            --out OutputStreamInterfaceFromFifoArray_t(Larger(kNumberOfDmaChannels, 1)-1:0)
+      bIrqToInterface                     => bIrqToInterfaceFlat,                           --out IrqToInterfaceArray_t(Larger(kNumberOfIrqs, 1)-1:0)
+      dNiFpgaMasterWriteRequestFromMaster => dNiFpgaMasterWriteRequestFromMasterArrayFlat,  --out NiFpgaMasterWriteRequestFromMasterArray_t(Larger(kNumberOfMasterPorts, 1)-1:0)
+      dNiFpgaMasterWriteRequestToMaster   => dNiFpgaMasterWriteRequestToMasterArrayFlat,    --in  NiFpgaMasterWriteRequestToMasterArray_t(Larger(kNumberOfMasterPorts, 1)-1:0)
+      dNiFpgaMasterWriteDataFromMaster    => dNiFpgaMasterWriteDataFromMasterArrayFlat,     --out NiFpgaMasterWriteDataFromMasterArray_t(Larger(kNumberOfMasterPorts, 1)-1:0)
+      dNiFpgaMasterWriteDataToMaster      => dNiFpgaMasterWriteDataToMasterArrayFlat,       --in  NiFpgaMasterWriteDataToMasterArray_t(Larger(kNumberOfMasterPorts, 1)-1:0)
+      dNiFpgaMasterWriteStatusToMaster    => dNiFpgaMasterWriteStatusToMasterArrayFlat,     --in  NiFpgaMasterWriteStatusToMasterArray_t(Larger(kNumberOfMasterPorts, 1)-1:0)
+      dNiFpgaMasterReadRequestFromMaster  => dNiFpgaMasterReadRequestFromMasterArrayFlat,   --out NiFpgaMasterReadRequestFromMasterArray_t(Larger(kNumberOfMasterPorts, 1)-1:0)
+      dNiFpgaMasterReadRequestToMaster    => dNiFpgaMasterReadRequestToMasterArrayFlat,     --in  NiFpgaMasterReadRequestToMasterArray_t(Larger(kNumberOfMasterPorts, 1)-1:0)
+      dNiFpgaMasterReadDataToMaster       => dNiFpgaMasterReadDataToMasterArrayFlat,        --in  NiFpgaMasterReadDataToMasterArray_t(Larger(kNumberOfMasterPorts, 1)-1:0)
       DmaClk                              => DmaClk,                                    --in  std_logic
       BusClk                              => BusClk,                                    --in  std_logic
       ReliableClkIn                       => ReliableClk,                               --in  std_logic
@@ -1618,34 +1618,34 @@ begin  -- architecture struct
   -----------------------------------
   -- Convert record inputs to flat
   -----------------------------------
-  bRegPortIn_flat <= to_StdLogicVector(bRegPortIn);
+  bRegPortInFlat <= to_StdLogicVector(bRegPortIn);
 
-  dInputStreamInterfaceToFifo_flat <= FlattenStreamInterface(dInputStreamInterfaceToFifo);
-  dOutputStreamInterfaceToFifo_flat <= FlattenStreamInterface(dOutputStreamInterfaceToFifo);
+  dInputStreamInterfaceToFifoFlat <= FlattenStreamInterface(dInputStreamInterfaceToFifo);
+  dOutputStreamInterfaceToFifoFlat <= FlattenStreamInterface(dOutputStreamInterfaceToFifo);
 
   -- Convert Master Port record inputs to flat
   gen_master_inputs_flat: for i in 0 to Larger(kNumberOfMasterPorts,1)-1 generate
-    dNiFpgaMasterWriteRequestToMasterArray_flat(
+    dNiFpgaMasterWriteRequestToMasterArrayFlat(
       (i+1)*SizeOf(kNiFpgaMasterWriteRequestToMasterZero)-1 downto
       i*SizeOf(kNiFpgaMasterWriteRequestToMasterZero)) <=
         std_logic_vector(FlattenMasterPortInterface(dNiFpgaMasterWriteRequestToMasterArray(i)));
 
-    dNiFpgaMasterWriteDataToMasterArray_flat(
+    dNiFpgaMasterWriteDataToMasterArrayFlat(
       (i+1)*SizeOf(kNiFpgaMasterWriteDataToMasterZero)-1 downto
       i*SizeOf(kNiFpgaMasterWriteDataToMasterZero)) <=
         std_logic_vector(FlattenMasterPortInterface(dNiFpgaMasterWriteDataToMasterArray(i)));
 
-    dNiFpgaMasterWriteStatusToMasterArray_flat(
+    dNiFpgaMasterWriteStatusToMasterArrayFlat(
       (i+1)*SizeOf(kNiFpgaMasterWriteStatusToMasterZero)-1 downto
       i*SizeOf(kNiFpgaMasterWriteStatusToMasterZero)) <=
         std_logic_vector(FlattenMasterPortInterface(dNiFpgaMasterWriteStatusToMasterArray(i)));
 
-    dNiFpgaMasterReadRequestToMasterArray_flat(
+    dNiFpgaMasterReadRequestToMasterArrayFlat(
       (i+1)*SizeOf(kNiFpgaMasterReadRequestToMasterZero)-1 downto
       i*SizeOf(kNiFpgaMasterReadRequestToMasterZero)) <=
         std_logic_vector(FlattenMasterPortInterface(dNiFpgaMasterReadRequestToMasterArray(i)));
 
-    dNiFpgaMasterReadDataToMasterArray_flat(
+    dNiFpgaMasterReadDataToMasterArrayFlat(
       (i+1)*SizeOf(kNiFpgaMasterReadDataToMasterZero)-1 downto
       i*SizeOf(kNiFpgaMasterReadDataToMasterZero)) <=
         std_logic_vector(FlattenMasterPortInterface(dNiFpgaMasterReadDataToMasterArray(i)));
@@ -1654,33 +1654,33 @@ begin  -- architecture struct
   -----------------------------------
   -- Convert flat outputs back to records
   -----------------------------------
-  bLvWindowRegPortOut <= BuildRegPortOut(bRegPortOut_flat);
+  bLvWindowRegPortOut <= BuildRegPortOut(bRegPortOutFlat);
 
-  dInputStreamInterfaceFromFifo <= UnflattenStreamInterface(dInputStreamInterfaceFromFifo_flat);
-  dOutputStreamInterfaceFromFifo <= UnflattenStreamInterface(dOutputStreamInterfaceFromFifo_flat);
+  dInputStreamInterfaceFromFifo <= UnflattenStreamInterface(dInputStreamInterfaceFromFifoFlat);
+  dOutputStreamInterfaceFromFifo <= UnflattenStreamInterface(dOutputStreamInterfaceFromFifoFlat);
 
-  bIrqToInterface <= BuildIrqToInterfaceArray(bIrqToInterface_flat);
+  bIrqToInterface <= BuildIrqToInterfaceArray(bIrqToInterfaceFlat);
 
   -- Convert flat Master Port outputs back to records
   gen_master_outputs_unflatten: for i in 0 to Larger(kNumberOfMasterPorts,1)-1 generate
     dNiFpgaMasterWriteRequestFromMasterArray(i) <=
       UnflattenMasterPortInterface(
         NiFpgaMasterWriteRequestFromMasterFlat_t(
-          dNiFpgaMasterWriteRequestFromMasterArray_flat(
+          dNiFpgaMasterWriteRequestFromMasterArrayFlat(
             (i+1)*SizeOf(kNiFpgaMasterWriteRequestFromMasterZero)-1 downto
             i*SizeOf(kNiFpgaMasterWriteRequestFromMasterZero))));
 
     dNiFpgaMasterWriteDataFromMasterArray(i) <=
       UnflattenMasterPortInterface(
         NiFpgaMasterWriteDataFromMasterFlat_t(
-          dNiFpgaMasterWriteDataFromMasterArray_flat(
+          dNiFpgaMasterWriteDataFromMasterArrayFlat(
             (i+1)*SizeOf(kNiFpgaMasterWriteDataFromMasterZero)-1 downto
             i*SizeOf(kNiFpgaMasterWriteDataFromMasterZero))));
 
     dNiFpgaMasterReadRequestFromMasterArray(i) <=
       UnflattenMasterPortInterface(
         NiFpgaMasterReadRequestFromMasterFlat_t(
-          dNiFpgaMasterReadRequestFromMasterArray_flat(
+          dNiFpgaMasterReadRequestFromMasterArrayFlat(
             (i+1)*SizeOf(kNiFpgaMasterReadRequestFromMasterZero)-1 downto
             i*SizeOf(kNiFpgaMasterReadRequestFromMasterZero))));
   end generate;

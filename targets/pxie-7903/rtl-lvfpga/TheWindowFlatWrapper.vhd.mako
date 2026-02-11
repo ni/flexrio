@@ -2,6 +2,7 @@
 --
 -- File: TheWindowFlatWrapper.vhd
 -- Author: Auto-generated wrapper
+-- Original Project: FlexRIO
 -- Date: 2 January 2026
 --
 ------------------------------------------------------------------------------
@@ -318,41 +319,41 @@ end entity TheWindowFlatWrapper;
 architecture behavioral of TheWindowFlatWrapper is
 
   -- Std logic to boolean
-  signal aBusReset_boolean : boolean;
-  signal bRegPortTimeout_boolean : boolean;
+  signal aBusResetBool : boolean;
+  signal bRegPortTimeoutBool : boolean;
 
   -- Internal signals for record types
-  signal bRegPortIn_internal : RegPortIn_t;
-  signal bRegPortOut_internal : RegPortOut_t;
+  signal bRegPortInInternal : RegPortIn_t;
+  signal bRegPortOutInternal : RegPortOut_t;
 
-  signal dInputStreamInterfaceToFifo_internal : InputStreamInterfaceToFifoArray_t(
+  signal dInputStreamInterfaceToFifoInternal : InputStreamInterfaceToFifoArray_t(
     Larger(kNumberOfDmaChannels,1)-1 downto 0);
-  signal dInputStreamInterfaceFromFifo_internal : InputStreamInterfaceFromFifoArray_t(
+  signal dInputStreamInterfaceFromFifoInternal : InputStreamInterfaceFromFifoArray_t(
     Larger(kNumberOfDmaChannels,1)-1 downto 0);
-  signal dOutputStreamInterfaceToFifo_internal : OutputStreamInterfaceToFifoArray_t(
+  signal dOutputStreamInterfaceToFifoInternal : OutputStreamInterfaceToFifoArray_t(
     Larger(kNumberOfDmaChannels,1)-1 downto 0);
-  signal dOutputStreamInterfaceFromFifo_internal : OutputStreamInterfaceFromFifoArray_t(
+  signal dOutputStreamInterfaceFromFifoInternal : OutputStreamInterfaceFromFifoArray_t(
     Larger(kNumberOfDmaChannels,1)-1 downto 0);
   
-  signal bIrqToInterface_internal : IrqToInterfaceArray_t(
+  signal bIrqToInterfaceInternal : IrqToInterfaceArray_t(
     Larger(kNumberOfIrqs,1)-1 downto 0);
   
-  signal dNiFpgaMasterWriteRequestFromMaster_internal : 
+  signal dNiFpgaMasterWriteRequestFromMasterInternal : 
     NiFpgaMasterWriteRequestFromMasterArray_t(Larger(kNumberOfMasterPorts,1)-1 downto 0);
-  signal dNiFpgaMasterWriteRequestToMaster_internal : 
+  signal dNiFpgaMasterWriteRequestToMasterInternal : 
     NiFpgaMasterWriteRequestToMasterArray_t(Larger(kNumberOfMasterPorts,1)-1 downto 0);
-  signal dNiFpgaMasterWriteDataFromMaster_internal : 
+  signal dNiFpgaMasterWriteDataFromMasterInternal : 
     NiFpgaMasterWriteDataFromMasterArray_t(Larger(kNumberOfMasterPorts,1)-1 downto 0);
-  signal dNiFpgaMasterWriteDataToMaster_internal : 
+  signal dNiFpgaMasterWriteDataToMasterInternal : 
     NiFpgaMasterWriteDataToMasterArray_t(Larger(kNumberOfMasterPorts,1)-1 downto 0);
-  signal dNiFpgaMasterWriteStatusToMaster_internal : 
+  signal dNiFpgaMasterWriteStatusToMasterInternal : 
     NiFpgaMasterWriteStatusToMasterArray_t(Larger(kNumberOfMasterPorts,1)-1 downto 0);
   
-  signal dNiFpgaMasterReadRequestFromMaster_internal : 
+  signal dNiFpgaMasterReadRequestFromMasterInternal : 
     NiFpgaMasterReadRequestFromMasterArray_t(Larger(kNumberOfMasterPorts,1)-1 downto 0);
-  signal dNiFpgaMasterReadRequestToMaster_internal : 
+  signal dNiFpgaMasterReadRequestToMasterInternal : 
     NiFpgaMasterReadRequestToMasterArray_t(Larger(kNumberOfMasterPorts,1)-1 downto 0);
-  signal dNiFpgaMasterReadDataToMaster_internal : 
+  signal dNiFpgaMasterReadDataToMasterInternal : 
     NiFpgaMasterReadDataToMasterArray_t(Larger(kNumberOfMasterPorts,1)-1 downto 0);
 
 begin
@@ -360,48 +361,48 @@ begin
   ----------------------------------
   -- Convert std_logic to boolean
   ----------------------------------
-  aBusReset_boolean <= aBusReset = '1';
-  bRegPortTimeout_boolean <= bRegPortTimeout = '1';
+  aBusResetBool <= aBusReset = '1';
+  bRegPortTimeoutBool <= bRegPortTimeout = '1';
 
   -----------------------------------
   -- Convert flat inputs to records
   -----------------------------------
-  bRegPortIn_internal <= BuildRegPortIn(bRegPortIn);
+  bRegPortInInternal <= BuildRegPortIn(bRegPortIn);
   
-  dInputStreamInterfaceToFifo_internal <= UnflattenStreamInterface(dInputStreamInterfaceToFifo);
-  dOutputStreamInterfaceToFifo_internal <= UnflattenStreamInterface(dOutputStreamInterfaceToFifo);
+  dInputStreamInterfaceToFifoInternal <= UnflattenStreamInterface(dInputStreamInterfaceToFifo);
+  dOutputStreamInterfaceToFifoInternal <= UnflattenStreamInterface(dOutputStreamInterfaceToFifo);
   
   -- Convert flat Master Port inputs
   gen_master_inputs: for i in 0 to Larger(kNumberOfMasterPorts,1)-1 generate
-    dNiFpgaMasterWriteRequestToMaster_internal(i) <= 
+    dNiFpgaMasterWriteRequestToMasterInternal(i) <= 
       UnflattenMasterPortInterface(
         NiFpgaMasterWriteRequestToMasterFlat_t(
           dNiFpgaMasterWriteRequestToMaster(
             (i+1)*SizeOf(kNiFpgaMasterWriteRequestToMasterZero)-1 downto 
             i*SizeOf(kNiFpgaMasterWriteRequestToMasterZero))));
     
-    dNiFpgaMasterWriteDataToMaster_internal(i) <= 
+    dNiFpgaMasterWriteDataToMasterInternal(i) <= 
       UnflattenMasterPortInterface(
         NiFpgaMasterWriteDataToMasterFlat_t(
           dNiFpgaMasterWriteDataToMaster(
             (i+1)*SizeOf(kNiFpgaMasterWriteDataToMasterZero)-1 downto 
             i*SizeOf(kNiFpgaMasterWriteDataToMasterZero))));
     
-    dNiFpgaMasterWriteStatusToMaster_internal(i) <= 
+    dNiFpgaMasterWriteStatusToMasterInternal(i) <= 
       UnflattenMasterPortInterface(
         NiFpgaMasterWriteStatusToMasterFlat_t(
           dNiFpgaMasterWriteStatusToMaster(
             (i+1)*SizeOf(kNiFpgaMasterWriteStatusToMasterZero)-1 downto 
             i*SizeOf(kNiFpgaMasterWriteStatusToMasterZero))));
     
-    dNiFpgaMasterReadRequestToMaster_internal(i) <= 
+    dNiFpgaMasterReadRequestToMasterInternal(i) <= 
       UnflattenMasterPortInterface(
         NiFpgaMasterReadRequestToMasterFlat_t(
           dNiFpgaMasterReadRequestToMaster(
             (i+1)*SizeOf(kNiFpgaMasterReadRequestToMasterZero)-1 downto 
             i*SizeOf(kNiFpgaMasterReadRequestToMasterZero))));
     
-    dNiFpgaMasterReadDataToMaster_internal(i) <= 
+    dNiFpgaMasterReadDataToMasterInternal(i) <= 
       UnflattenMasterPortInterface(
         NiFpgaMasterReadDataToMasterFlat_t(
           dNiFpgaMasterReadDataToMaster(
@@ -413,29 +414,29 @@ begin
   -----------------------------------
   -- Convert record outputs to flat
   -----------------------------------
-  bRegPortOut <= to_StdLogicVector(bRegPortOut_internal);
+  bRegPortOut <= to_StdLogicVector(bRegPortOutInternal);
   
-  dInputStreamInterfaceFromFifo <= FlattenStreamInterface(dInputStreamInterfaceFromFifo_internal);
-  dOutputStreamInterfaceFromFifo <= FlattenStreamInterface(dOutputStreamInterfaceFromFifo_internal);
+  dInputStreamInterfaceFromFifo <= FlattenStreamInterface(dInputStreamInterfaceFromFifoInternal);
+  dOutputStreamInterfaceFromFifo <= FlattenStreamInterface(dOutputStreamInterfaceFromFifoInternal);
   
-  bIrqToInterface <= to_StdLogicVector(bIrqToInterface_internal);
+  bIrqToInterface <= to_StdLogicVector(bIrqToInterfaceInternal);
   
   -- Convert flat Master Port outputs
   gen_master_outputs: for i in 0 to Larger(kNumberOfMasterPorts,1)-1 generate
     dNiFpgaMasterWriteRequestFromMaster(
       (i+1)*SizeOf(kNiFpgaMasterWriteRequestFromMasterZero)-1 downto 
       i*SizeOf(kNiFpgaMasterWriteRequestFromMasterZero)) <= 
-        std_logic_vector(FlattenMasterPortInterface(dNiFpgaMasterWriteRequestFromMaster_internal(i)));
+        std_logic_vector(FlattenMasterPortInterface(dNiFpgaMasterWriteRequestFromMasterInternal(i)));
     
     dNiFpgaMasterWriteDataFromMaster(
       (i+1)*SizeOf(kNiFpgaMasterWriteDataFromMasterZero)-1 downto 
       i*SizeOf(kNiFpgaMasterWriteDataFromMasterZero)) <= 
-        std_logic_vector(FlattenMasterPortInterface(dNiFpgaMasterWriteDataFromMaster_internal(i)));
+        std_logic_vector(FlattenMasterPortInterface(dNiFpgaMasterWriteDataFromMasterInternal(i)));
     
     dNiFpgaMasterReadRequestFromMaster(
       (i+1)*SizeOf(kNiFpgaMasterReadRequestFromMasterZero)-1 downto 
       i*SizeOf(kNiFpgaMasterReadRequestFromMasterZero)) <= 
-        std_logic_vector(FlattenMasterPortInterface(dNiFpgaMasterReadRequestFromMaster_internal(i)));
+        std_logic_vector(FlattenMasterPortInterface(dNiFpgaMasterReadRequestFromMasterInternal(i)));
   end generate;
 
   -----------------------------------
@@ -454,23 +455,23 @@ begin
       -----------------------------------
       -- Communication interface ports
       -----------------------------------
-      aBusReset => aBusReset_boolean,
-      bRegPortIn => bRegPortIn_internal,
-      bRegPortOut => bRegPortOut_internal,
-      bRegPortTimeout => bRegPortTimeout_boolean,
-      dInputStreamInterfaceToFifo => dInputStreamInterfaceToFifo_internal,
-      dInputStreamInterfaceFromFifo => dInputStreamInterfaceFromFifo_internal,
-      dOutputStreamInterfaceToFifo => dOutputStreamInterfaceToFifo_internal,
-      dOutputStreamInterfaceFromFifo => dOutputStreamInterfaceFromFifo_internal,
-      bIrqToInterface => bIrqToInterface_internal,
-      dNiFpgaMasterWriteRequestFromMaster => dNiFpgaMasterWriteRequestFromMaster_internal,
-      dNiFpgaMasterWriteRequestToMaster => dNiFpgaMasterWriteRequestToMaster_internal,
-      dNiFpgaMasterWriteDataFromMaster => dNiFpgaMasterWriteDataFromMaster_internal,
-      dNiFpgaMasterWriteDataToMaster => dNiFpgaMasterWriteDataToMaster_internal,
-      dNiFpgaMasterWriteStatusToMaster => dNiFpgaMasterWriteStatusToMaster_internal,
-      dNiFpgaMasterReadRequestFromMaster => dNiFpgaMasterReadRequestFromMaster_internal,
-      dNiFpgaMasterReadRequestToMaster => dNiFpgaMasterReadRequestToMaster_internal,
-      dNiFpgaMasterReadDataToMaster => dNiFpgaMasterReadDataToMaster_internal,
+      aBusReset => aBusResetBool,
+      bRegPortIn => bRegPortInInternal,
+      bRegPortOut => bRegPortOutInternal,
+      bRegPortTimeout => bRegPortTimeoutBool,
+      dInputStreamInterfaceToFifo => dInputStreamInterfaceToFifoInternal,
+      dInputStreamInterfaceFromFifo => dInputStreamInterfaceFromFifoInternal,
+      dOutputStreamInterfaceToFifo => dOutputStreamInterfaceToFifoInternal,
+      dOutputStreamInterfaceFromFifo => dOutputStreamInterfaceFromFifoInternal,
+      bIrqToInterface => bIrqToInterfaceInternal,
+      dNiFpgaMasterWriteRequestFromMaster => dNiFpgaMasterWriteRequestFromMasterInternal,
+      dNiFpgaMasterWriteRequestToMaster => dNiFpgaMasterWriteRequestToMasterInternal,
+      dNiFpgaMasterWriteDataFromMaster => dNiFpgaMasterWriteDataFromMasterInternal,
+      dNiFpgaMasterWriteDataToMaster => dNiFpgaMasterWriteDataToMasterInternal,
+      dNiFpgaMasterWriteStatusToMaster => dNiFpgaMasterWriteStatusToMasterInternal,
+      dNiFpgaMasterReadRequestFromMaster => dNiFpgaMasterReadRequestFromMasterInternal,
+      dNiFpgaMasterReadRequestToMaster => dNiFpgaMasterReadRequestToMasterInternal,
+      dNiFpgaMasterReadDataToMaster => dNiFpgaMasterReadDataToMasterInternal,
       
       -----------------------------------
       -- Clocks from TopLevel
