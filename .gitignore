@@ -1,0 +1,15 @@
+# All objects folders should be ignored
+objects/
+# Ignore things modelsim creates
+modelsim/
+transcript
+# Ignore Python bytecode cache files
+__pycache__/
+.Xil/
+# Ignore temporary MS Office files
+~*.xlsx
+~*.pptx
+~*.docx
+~*.tmp
+# Ignore Deps folder
+deps/
