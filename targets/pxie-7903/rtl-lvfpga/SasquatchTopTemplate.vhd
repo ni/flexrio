@@ -1162,6 +1162,9 @@ begin  -- architecture struct
 
   --vhook_e IoRefClkSelect
   IoRefClkSelectx: entity work.IoRefClkSelect (rtl)
+    generic map (
+      kEnableFamClockSync => kEnableFamClockSync,  --std_logic
+      kFamClockSrcSel     => kFamClockSrcSel)      --std_logic
     port map (
       BusClk                   => BusClk,                    --in  std_logic
       abDiagramReset           => abDiagramReset,            --in  boolean
@@ -1391,7 +1394,7 @@ begin  -- architecture struct
   ---------------------------------------------------------------------------------------
   -- The Window (aka LVFPGA world)
   ---------------------------------------------------------------------------------------
-  -- The BEGIN COMPONENT_SIGNAL_ASSIGNMENT and END COMPONENT_SIGNAL_ASSIGNMENT tags are 
+  -- The BEGIN COMPONENT_SIGNAL_ASSIGNMENT and END COMPONENT_SIGNAL_ASSIGNMENT tags are
   -- around the MGT IO becaue TheWindow that's generated from LV FPGA will put the needed
   -- MGT IO in its port.  This file is called SasquatchTopTemplate because it is processed
   -- by LV FPGA to add the MGT signals.  This base file uses a stub TheWindow component
