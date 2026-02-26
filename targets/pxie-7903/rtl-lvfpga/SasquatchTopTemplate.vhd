@@ -817,17 +817,17 @@ architecture struct of SasquatchTopTemplate is
   --
   -- By default, this template is set up to use the CLIP socket interface, so these constants get set to the values
   -- defined in PkgLvFpgaConst.vhd.
-  constant kExpectedTbIdGeneric : std_logic_vector(31 downto 0) := kExpectedTbId;
-  constant kEnableFamClockSyncGeneric : std_logic := kEnableFamClockSync;
-  constant kFamClockSrcSelGeneric : std_logic := kFamClockSrcSel;
+  constant kExpectedTbIdConst : std_logic_vector(31 downto 0) := kExpectedTbId;
+  constant kEnableFamClockSyncConst : std_logic := kEnableFamClockSync;
+  constant kFamClockSrcSelConst : std_logic := kFamClockSrcSel;
   --
   -- If you are not using the CLIP socket interface because you are interfacing with the board IO directly from
-  -- this HDL file, you must set kExpectedTbIdGeneric to X"10937AEC" so that the TbId check matches.  And we set the
+  -- this HDL file, you must set kExpectedTbIdConst to X"10937AEC" so that the TbId check matches.  And we set the
   -- clocking constants to enable the 100 MHz clock.
   --
-  -- constant kExpectedTbIdGeneric : std_logic_vector(31 downto 0) := X"10937AEC";
-  -- constant kEnableFamClockSyncGeneric : std_logic := '1';
-  -- constant kFamClockSrcSelGeneric : std_logic := '1';
+  -- constant kExpectedTbIdConst : std_logic_vector(31 downto 0) := X"10937AEC";
+  -- constant kEnableFamClockSyncConst : std_logic := '1';
+  -- constant kFamClockSrcSelConst : std_logic := '1';
 
   -- Disable automatic io_buffer creation for FAM MGTs and signals that will instantiate
   -- their own.
@@ -1062,8 +1062,9 @@ begin  -- architecture struct
   --vhook_a a3v3APwrGood '1'
   --vhook_a a1v8APwrGood '1'
   --vhook_a aPxiTrigExtTri aPxiTrigDir
+  --vhook_g kExpectedTbIdGeneric kExpectedTbIdConst
   FixedLogicWrapperx: entity work.FixedLogicWrapper (struct)
-    generic map (kExpectedTbIdGeneric => kExpectedTbIdGeneric)  --std_logic_vector(31:0)
+    generic map (kExpectedTbIdGeneric => kExpectedTbIdConst)  --std_logic_vector(31:0)
     port map (
       aPonReset                          => aPonReset,                           --in  boolean
       aBusReset                          => aBusReset,                           --in  boolean
@@ -1192,10 +1193,12 @@ begin  -- architecture struct
                       others                       => '0');
 
   --vhook_e IoRefClkSelect
+  --vhook_g kEnableFamClockSync kEnableFamClockSyncConst
+  --vhook_g kFamClockSrcSel kFamClockSrcSelConst
   IoRefClkSelectx: entity work.IoRefClkSelect (rtl)
     generic map (
-      kEnableFamClockSync => kEnableFamClockSync,  --std_logic
-      kFamClockSrcSel     => kFamClockSrcSel)      --std_logic
+      kEnableFamClockSync => kEnableFamClockSyncConst,  --std_logic
+      kFamClockSrcSel     => kFamClockSrcSelConst)      --std_logic
     port map (
       BusClk                   => BusClk,                    --in  std_logic
       abDiagramReset           => abDiagramReset,            --in  boolean
