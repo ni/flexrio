@@ -799,6 +799,36 @@ architecture struct of SasquatchTopTemplate is
   constant kDram2DPBaseAddress  : unsigned(kAlignedAddressWidth - 1 downto 0) := to_unsigned(work.PkgLvFpgaConst.kDram2DPBaseAddress / 4, kAlignedAddressWidth);
   constant kDram2DPAddressMask  : unsigned(kAlignedAddressWidth - 1 downto 0) := to_unsigned(16#1FC# / 4, kAlignedAddressWidth);
 
+  -- ******************************************************************************************************************
+  -- ********************** MODIFY THESE CONSTANTS IF NOT USING THE CLIP SOCKET INTERFACE  ****************************
+  -- ******************************************************************************************************************
+  --
+  -- If you are using the CLIP socket interface, you should use the following constant for kExpectedTbIdGeneric
+  -- because LabVIEW FPGA will generate the PkgLvFpgaConst.vhd that contains kExpectedTbId based on what CLIP
+  -- is used in the LabVIEW FPGA project.  When the FPGA bitfile runs, it compares kExpectedTbIdGeneric to a
+  -- value read from the EEPROM on the board to make sure that the CLIP used in LabVIEW FPGA is compatible with
+  -- this board.  If the TbId does not match, the clocks to the board IO will not be enabled.
+  --
+  -- When using a CLIP node in LabVIEW FPGA, the user can configure which clock is enabled to the board IO logic.
+  -- This becomes kEnableFamClockSync and kFamClockSrcSel which are also defined in PkgLvFpgaConst.vhd.
+  --
+  -- kFamClockSrcSel selects between the 10 MHz and 100 MHz clocks (0 = 10 Mhz, 1 = 100 MHz) and kEnableFamClockSync
+  -- enables the clock to the board IO logic.
+  --
+  -- By default, this template is set up to use the CLIP socket interface, so these constants get set to the values
+  -- defined in PkgLvFpgaConst.vhd.
+  constant kExpectedTbIdGeneric : std_logic_vector(31 downto 0) := kExpectedTbId;
+  constant kEnableFamClockSyncGeneric : std_logic := kEnableFamClockSync;
+  constant kFamClockSrcSelGeneric : std_logic := kFamClockSrcSel;
+  --
+  -- If you are not using the CLIP socket interface because you are interfacing with the board IO directly from
+  -- this HDL file, you must set kExpectedTbIdGeneric to X"10937AEC" so that the TbId check matches.  And we set the
+  -- clocking constants to enable the 100 MHz clock.
+  --
+  -- constant kExpectedTbIdGeneric : std_logic_vector(31 downto 0) := X"10937AEC";
+  -- constant kEnableFamClockSyncGeneric : std_logic := '1';
+  -- constant kFamClockSrcSelGeneric : std_logic := '1';
+
   -- Disable automatic io_buffer creation for FAM MGTs and signals that will instantiate
   -- their own.
   attribute io_buffer_type : string;
@@ -1033,6 +1063,7 @@ begin  -- architecture struct
   --vhook_a a1v8APwrGood '1'
   --vhook_a aPxiTrigExtTri aPxiTrigDir
   FixedLogicWrapperx: entity work.FixedLogicWrapper (struct)
+    generic map (kExpectedTbIdGeneric => kExpectedTbIdGeneric)  --std_logic_vector(31:0)
     port map (
       aPonReset                          => aPonReset,                           --in  boolean
       aBusReset                          => aBusReset,                           --in  boolean
@@ -1162,6 +1193,9 @@ begin  -- architecture struct
 
   --vhook_e IoRefClkSelect
   IoRefClkSelectx: entity work.IoRefClkSelect (rtl)
+    generic map (
+      kEnableFamClockSync => kEnableFamClockSync,  --std_logic
+      kFamClockSrcSel     => kFamClockSrcSel)      --std_logic
     port map (
       BusClk                   => BusClk,                    --in  std_logic
       abDiagramReset           => abDiagramReset,            --in  boolean
@@ -1391,7 +1425,7 @@ begin  -- architecture struct
   ---------------------------------------------------------------------------------------
   -- The Window (aka LVFPGA world)
   ---------------------------------------------------------------------------------------
-  -- The BEGIN COMPONENT_SIGNAL_ASSIGNMENT and END COMPONENT_SIGNAL_ASSIGNMENT tags are 
+  -- The BEGIN COMPONENT_SIGNAL_ASSIGNMENT and END COMPONENT_SIGNAL_ASSIGNMENT tags are
   -- around the MGT IO becaue TheWindow that's generated from LV FPGA will put the needed
   -- MGT IO in its port.  This file is called SasquatchTopTemplate because it is processed
   -- by LV FPGA to add the MGT signals.  This base file uses a stub TheWindow component
