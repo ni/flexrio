@@ -803,9 +803,9 @@ architecture struct of SasquatchTopTemplate is
   -- ********************** MODIFY THESE CONSTANTS IF NOT USING THE CLIP SOCKET INTERFACE  ****************************
   -- ******************************************************************************************************************
   --
-  -- If you are using the CLIP socket interface, you should use the following constant for kExpectedTbIdGeneric
+  -- If you are using the CLIP socket interface, you should use the following constant for kExpectedTbIdConst
   -- because LabVIEW FPGA will generate the PkgLvFpgaConst.vhd that contains kExpectedTbId based on what CLIP
-  -- is used in the LabVIEW FPGA project.  When the FPGA bitfile runs, it compares kExpectedTbIdGeneric to a
+  -- is used in the LabVIEW FPGA project.  When the FPGA bitfile runs, it compares kExpectedTbIdConst to a
   -- value read from the EEPROM on the board to make sure that the CLIP used in LabVIEW FPGA is compatible with
   -- this board.  If the TbId does not match, the clocks to the board IO will not be enabled.
   --
