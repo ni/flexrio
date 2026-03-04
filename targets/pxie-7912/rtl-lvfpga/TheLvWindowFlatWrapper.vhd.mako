@@ -1,6 +1,6 @@
 ------------------------------------------------------------------------------
 --
--- File: TheWindowFlatWrapper.vhd
+-- File: TheLvWindowFlatWrapper.vhd
 -- Author: Auto-generated wrapper
 -- Original Project: FlexRIO
 -- Date: 2 January 2026
@@ -31,7 +31,7 @@ Library work;
   use work.PkgDmaPortCommIfcMasterPort.all;
   use work.PkgDmaPortCommIfcMasterPortFlatTypes.all;
 
-entity TheWindowFlatWrapper is
+entity TheLvWindowFlatWrapper is
    port(
      -----------------------------------
     -- CUSTOM BOARD IO
@@ -313,9 +313,9 @@ entity TheWindowFlatWrapper is
     rGatedBaseClksValid : in std_logic := '1';
     aSafeToEnableGatedClks : out std_logic
   );
-end entity TheWindowFlatWrapper;
+end entity TheLvWindowFlatWrapper;
 
-architecture behavioral of TheWindowFlatWrapper is
+architecture behavioral of TheLvWindowFlatWrapper is
 
   signal aBusResetBool : boolean;
   signal bRegPortTimeoutBool : boolean;
@@ -424,7 +424,7 @@ begin
         std_logic_vector(FlattenMasterPortInterface(dNiFpgaMasterReadRequestFromMasterInternal(i)));
   end generate;
 
-  TheWindowWrapper : entity work.TheWindow (behavioral)
+  TheLvWindow : entity work.TheWindow (behavioral)
     port map(
 % if include_custom_io:
 % for signal in custom_signals:

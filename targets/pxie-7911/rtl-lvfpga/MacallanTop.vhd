@@ -45,7 +45,7 @@ use work.PkgDmaPortCommIfcMasterPortFlatTypes.all;
 use work.PkgLvFpgaConst.all;
 
 -- The Window Component Instantiation
-use work.PkgTheWindowFlatWrapper.all;
+use work.PkgTheLvWindowFlatWrapper.all;
 
 -- Instruction Fifo
 use work.PkgInstructionFifo.all;
@@ -272,7 +272,7 @@ architecture struct of MacallanTop is
       adlyReset          : out boolean);
   end component;
 
-  -- Internal signals for flattened types to connect to TheWindowFlatWrapper
+  -- Internal signals for flattened types to connect to TheLvWindowFlatWrapper
   signal bRegPortInFlat : std_logic_vector(kRegPortInSize-1 downto 0);
   signal bRegPortOutFlat : std_logic_vector(kRegPortOutSize-1 downto 0);
 
@@ -1005,7 +1005,7 @@ begin  -- architecture struct
   ---------------------------------------------------------------------------------------
   -- The Window (aka LVFPGA world)
   ---------------------------------------------------------------------------------------
-  --vhook_i TheWindowFlatWrapper        LvWindowWrapper
+  --vhook_i TheLvWindowFlatWrapper        TheLvWindowWrapper
   --vhook_# Clocking
   --vhook_a aBusReset                   to_StdLogic(abBusReset)
   --vhook_a ReliableClkIn               ReliableClk
@@ -1039,7 +1039,7 @@ begin  -- architecture struct
   --vhook_a sTdcDeassert                open
   --vhook_a dHmbDmaClkSocket            DmaClk
   --vhook_a dLlbDmaClkSocket            DmaClk
-  LvWindowWrapper: TheWindowFlatWrapper
+  TheLvWindowWrapper: TheLvWindowFlatWrapper
     port map (
       aBusReset                           => to_StdLogic(abBusReset),                       --in  std_logic
       bRegPortIn                          => bRegPortInFlat,                                --in  std_logic_vector(kRegPortInSize-1:0)

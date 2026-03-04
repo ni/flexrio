@@ -1,6 +1,6 @@
 ------------------------------------------------------------------------------
 --
--- File: PkgTheWindowFlatWrapper.vhd
+-- File: PkgTheLvWindowFlatWrapper.vhd
 -- Author: Auto-generated wrapper
 -- Original Project: FlexRIO
 -- Date: 2 January 2026
@@ -31,9 +31,9 @@ Library work;
   use work.PkgDmaPortCommIfcMasterPort.all;
   use work.PkgDmaPortCommIfcMasterPortFlatTypes.all;
 
-package PkgTheWindowFlatWrapper is
+package PkgTheLvWindowFlatWrapper is
 
-  component TheWindowFlatWrapper is
+  component TheLvWindowFlatWrapper is
     port(
       -----------------------------------
       -- CUSTOM BOARD IO
@@ -99,11 +99,6 @@ package PkgTheWindowFlatWrapper is
       PllClk80 :  in std_logic;
       DlyRefClk :  in std_logic;
       PxieClk100 :  in std_logic;
-      DramClkLvFpga :  in std_logic;
-      Dram0ClkSocket :  in std_logic;
-      Dram1ClkSocket :  in std_logic;
-      Dram0ClkUser :  in std_logic;
-      Dram1ClkUser :  in std_logic;
       dHmbDmaClkSocket :  in std_logic;
       dLlbDmaClkSocket :  in std_logic;
 
@@ -319,45 +314,7 @@ package PkgTheWindowFlatWrapper is
       MgtRefClk_p       : in  std_logic_vector(2 downto 0);
       MgtRefClk_n       : in  std_logic_vector(2 downto 0);
       ExportedMgtRefClk : out std_logic;
-
-      --Nanopitch I/O
-      DioMgtRefClk_p              : in  std_logic;
-      DioMgtRefClk_n              : in  std_logic;
-      DioMgtRefClkFromFam         : in  std_logic;
-      DioMgtRX_n                  : in  std_logic_vector(3 downto 0);
-      DioMgtRX_p                  : in  std_logic_vector(3 downto 0);
-      DioMgtTX_n                  : out std_logic_vector(3 downto 0);
-      DioMgtTX_p                  : out std_logic_vector(3 downto 0);
-      SocketClk80                 : in  std_logic;
-      sDioMgtRefClkFromFamPresent : in  std_logic;
   % endif
-
-      -----------------------------------------------------------------------------
-      --Dram Interface
-      -----------------------------------------------------------------------------
-      aDramReady : in std_logic;
-      du0DramAddrFifoAddr : out std_logic_vector(28 downto 0);
-      du0DramAddrFifoCmd : out std_logic_vector(2 downto 0);
-      du0DramAddrFifoFull : in std_logic;
-      du0DramAddrFifoWrEn : out std_logic;
-      du0DramPhyInitDone : in std_logic;
-      du0DramRdDataValid : in std_logic;
-      du0DramRdFifoDataOut : in std_logic_vector(255 downto 0);
-      du0DramWrFifoDataIn : out std_logic_vector(255 downto 0);
-      du0DramWrFifoFull : in std_logic;
-      du0DramWrFifoMaskData : out std_logic_vector(31 downto 0);
-      du0DramWrFifoWrEn : out std_logic;
-      du1DramAddrFifoAddr : out std_logic_vector(28 downto 0);
-      du1DramAddrFifoCmd : out std_logic_vector(2 downto 0);
-      du1DramAddrFifoFull : in std_logic;
-      du1DramAddrFifoWrEn : out std_logic;
-      du1DramPhyInitDone : in std_logic;
-      du1DramRdDataValid : in std_logic;
-      du1DramRdFifoDataOut : in std_logic_vector(255 downto 0);
-      du1DramWrFifoDataIn : out std_logic_vector(255 downto 0);
-      du1DramWrFifoFull : in std_logic;
-      du1DramWrFifoMaskData : out std_logic_vector(31 downto 0);
-      du1DramWrFifoWrEn : out std_logic;
 
       -----------------------------------------------------------------------------
       --HMB Interface
@@ -404,4 +361,4 @@ package PkgTheWindowFlatWrapper is
     );
   end component;
 
-end package PkgTheWindowFlatWrapper;
+end package PkgTheLvWindowFlatWrapper;

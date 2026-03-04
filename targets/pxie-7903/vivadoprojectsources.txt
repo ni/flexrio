@@ -1,4 +1,4 @@
-objects/GeneratedHDL/PkgTheWindowFlatWrapper.vhd
+objects/GeneratedHDL/PkgTheLvWindowFlatWrapper.vhd
+objects/GeneratedHDL/TheLvWindowFlatWrapper.vhd
 objects/GeneratedHDL/TheWindow.vhd
-objects/GeneratedHDL/TheWindowFlatWrapper.vhd
 rtl-lvfpga/SasquatchTopTemplate.vhd

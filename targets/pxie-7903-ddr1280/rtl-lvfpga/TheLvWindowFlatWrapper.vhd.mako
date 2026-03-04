@@ -1,6 +1,6 @@
 ------------------------------------------------------------------------------
 --
--- File: TheWindowFlatWrapper.vhd
+-- File: TheLvWindowFlatWrapper.vhd
 -- Author: Auto-generated wrapper
 -- Original Project: FlexRIO
 -- Date: 2 January 2026
@@ -31,7 +31,7 @@ Library work;
   use work.PkgDmaPortCommIfcMasterPort.all;
   use work.PkgDmaPortCommIfcMasterPortFlatTypes.all;
 
-entity TheWindowFlatWrapper is
+entity TheLvWindowFlatWrapper is
    port(
      -----------------------------------
     -- CUSTOM BOARD IO
@@ -254,10 +254,10 @@ entity TheWindowFlatWrapper is
     du0DramAddrFifoWrEn : out std_logic;
     du0DramPhyInitDone : in std_logic;
     du0DramRdDataValid : in std_logic;
-    du0DramRdFifoDataOut : in std_logic_vector(639 downto 0);
-    du0DramWrFifoDataIn : out std_logic_vector(639 downto 0);
+    du0DramRdFifoDataOut : in std_logic_vector(1279 downto 0);
+    du0DramWrFifoDataIn : out std_logic_vector(1279 downto 0);
     du0DramWrFifoFull : in std_logic;
-    du0DramWrFifoMaskData : out std_logic_vector(79 downto 0);
+    du0DramWrFifoMaskData : out std_logic_vector(159 downto 0);
     du0DramWrFifoWrEn : out std_logic;
     du1DramAddrFifoAddr : out std_logic_vector(29 downto 0);
     du1DramAddrFifoCmd : out std_logic_vector(2 downto 0);
@@ -265,10 +265,10 @@ entity TheWindowFlatWrapper is
     du1DramAddrFifoWrEn : out std_logic;
     du1DramPhyInitDone : in std_logic;
     du1DramRdDataValid : in std_logic;
-    du1DramRdFifoDataOut : in std_logic_vector(639 downto 0);
-    du1DramWrFifoDataIn : out std_logic_vector(639 downto 0);
+    du1DramRdFifoDataOut : in std_logic_vector(1279 downto 0);
+    du1DramWrFifoDataIn : out std_logic_vector(1279 downto 0);
     du1DramWrFifoFull : in std_logic;
-    du1DramWrFifoMaskData : out std_logic_vector(79 downto 0);
+    du1DramWrFifoMaskData : out std_logic_vector(159 downto 0);
     du1DramWrFifoWrEn : out std_logic;
 
     -----------------------------------------------------------------------------
@@ -314,9 +314,9 @@ entity TheWindowFlatWrapper is
     rGatedBaseClksValid : in std_logic := '1';
     aSafeToEnableGatedClks : out std_logic
   );
-end entity TheWindowFlatWrapper;
+end entity TheLvWindowFlatWrapper;
 
-architecture behavioral of TheWindowFlatWrapper is
+architecture behavioral of TheLvWindowFlatWrapper is
 
   -- Std logic to boolean
   signal aBusResetBool : boolean;
@@ -442,7 +442,7 @@ begin
   -----------------------------------
   -- Instantiate TheWindow
   -----------------------------------
-  SasquatchWindow : entity work.TheWindow (behavioral)
+  TheLvWindow : entity work.TheWindow (behavioral)
     port map(
      -----------------------------------
     -- CUSTOM BOARD IO

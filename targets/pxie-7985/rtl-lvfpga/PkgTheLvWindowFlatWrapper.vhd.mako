@@ -1,6 +1,6 @@
 ------------------------------------------------------------------------------
 --
--- File: PkgTheWindowFlatWrapper.vhd
+-- File: PkgTheLvWindowFlatWrapper.vhd
 -- Author: Auto-generated wrapper
 -- Original Project: FlexRIO
 -- Date: 2 January 2026
@@ -31,9 +31,9 @@ Library work;
   use work.PkgDmaPortCommIfcMasterPort.all;
   use work.PkgDmaPortCommIfcMasterPortFlatTypes.all;
 
-package PkgTheWindowFlatWrapper is
+package PkgTheLvWindowFlatWrapper is
 
-  component TheWindowFlatWrapper is
+  component TheLvWindowFlatWrapper is
     port(
       -----------------------------------
       -- CUSTOM BOARD IO
@@ -404,4 +404,4 @@ package PkgTheWindowFlatWrapper is
     );
   end component;
 
-end package PkgTheWindowFlatWrapper;
+end package PkgTheLvWindowFlatWrapper;
