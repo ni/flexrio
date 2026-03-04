@@ -1,6 +1,6 @@
 ------------------------------------------------------------------------------
 --
--- File: TheWindowFlatWrapper.vhd
+-- File: TheLvWindowFlatWrapper.vhd
 -- Author: Auto-generated wrapper
 -- Original Project: FlexRIO
 -- Date: 2 January 2026
@@ -31,7 +31,7 @@ Library work;
   use work.PkgDmaPortCommIfcMasterPort.all;
   use work.PkgDmaPortCommIfcMasterPortFlatTypes.all;
 
-entity TheWindowFlatWrapper is
+entity TheLvWindowFlatWrapper is
    port(
      -----------------------------------
     -- CUSTOM BOARD IO
@@ -108,6 +108,72 @@ entity TheWindowFlatWrapper is
     -----------------------------------
     -- IO Node ports
     -----------------------------------
+% if include_clip_socket:
+    aLvAuxDio0OutputData   : out std_logic;
+    aLvAuxDio0InputData    : in  std_logic;
+    aLvAuxDio0OutputEnable : out std_logic;
+    oClkaLvAuxDio0         : in  std_logic;
+    aoResetaLvAuxDio0      : in  std_logic;
+    oDoneaLvAuxDio0        : in  std_logic;
+    oDirectionaLvAuxDio0   : out std_logic;
+    oRequestaLvAuxDio0     : out std_logic;
+    aLvAuxDio1OutputData   : out std_logic;
+    aLvAuxDio1InputData    : in  std_logic;
+    aLvAuxDio1OutputEnable : out std_logic;
+    oClkaLvAuxDio1         : in  std_logic;
+    aoResetaLvAuxDio1      : in  std_logic;
+    oDoneaLvAuxDio1        : in  std_logic;
+    oDirectionaLvAuxDio1   : out std_logic;
+    oRequestaLvAuxDio1     : out std_logic;
+    aLvAuxDio2OutputData   : out std_logic;
+    aLvAuxDio2InputData    : in  std_logic;
+    aLvAuxDio2OutputEnable : out std_logic;
+    oClkaLvAuxDio2         : in  std_logic;
+    aoResetaLvAuxDio2      : in  std_logic;
+    oDoneaLvAuxDio2        : in  std_logic;
+    oDirectionaLvAuxDio2   : out std_logic;
+    oRequestaLvAuxDio2     : out std_logic;
+    aLvAuxDio3OutputData   : out std_logic;
+    aLvAuxDio3InputData    : in  std_logic;
+    aLvAuxDio3OutputEnable : out std_logic;
+    oClkaLvAuxDio3         : in  std_logic;
+    aoResetaLvAuxDio3      : in  std_logic;
+    oDoneaLvAuxDio3        : in  std_logic;
+    oDirectionaLvAuxDio3   : out std_logic;
+    oRequestaLvAuxDio3     : out std_logic;
+    aLvAuxDio4OutputData   : out std_logic;
+    aLvAuxDio4InputData    : in  std_logic;
+    aLvAuxDio4OutputEnable : out std_logic;
+    oClkaLvAuxDio4         : in  std_logic;
+    aoResetaLvAuxDio4      : in  std_logic;
+    oDoneaLvAuxDio4        : in  std_logic;
+    oDirectionaLvAuxDio4   : out std_logic;
+    oRequestaLvAuxDio4     : out std_logic;
+    aLvAuxDio5OutputData   : out std_logic;
+    aLvAuxDio5InputData    : in  std_logic;
+    aLvAuxDio5OutputEnable : out std_logic;
+    oClkaLvAuxDio5         : in  std_logic;
+    aoResetaLvAuxDio5      : in  std_logic;
+    oDoneaLvAuxDio5        : in  std_logic;
+    oDirectionaLvAuxDio5   : out std_logic;
+    oRequestaLvAuxDio5     : out std_logic;
+    aLvAuxDio6OutputData   : out std_logic;
+    aLvAuxDio6InputData    : in  std_logic;
+    aLvAuxDio6OutputEnable : out std_logic;
+    oClkaLvAuxDio6         : in  std_logic;
+    aoResetaLvAuxDio6      : in  std_logic;
+    oDoneaLvAuxDio6        : in  std_logic;
+    oDirectionaLvAuxDio6   : out std_logic;
+    oRequestaLvAuxDio6     : out std_logic;
+    aLvAuxDio7OutputData   : out std_logic;
+    aLvAuxDio7InputData    : in  std_logic;
+    aLvAuxDio7OutputEnable : out std_logic;
+    oClkaLvAuxDio7         : in  std_logic;
+    aoResetaLvAuxDio7      : in  std_logic;
+    oDoneaLvAuxDio7        : in  std_logic;
+    oDirectionaLvAuxDio7   : out std_logic;
+    oRequestaLvAuxDio7     : out std_logic;
+% endif
     pIntSync100 : in std_logic;
     aIntClk10 : in std_logic;
 
@@ -139,7 +205,9 @@ entity TheWindowFlatWrapper is
     ----------------------------------------
     PxieClk100Trigger : in std_logic;
     pIntSync100Trigger : in std_logic;
+    dTdcAssert : out std_logic;
     dDevClkEn : in std_logic;
+    sTdcDeassert : out std_logic;
     aIntClk10Trigger : in std_logic;
     bRoutingClipPresent : out std_logic;
     bRoutingClipNiCompatible : out std_logic;
@@ -207,68 +275,86 @@ entity TheWindowFlatWrapper is
     xClipAxi4LiteMasterWValid  : out std_logic;
     xClipAxi4LiteInterrupt     : in  std_logic;
 
+    --Configuration Interface
+    -- Config Interface TX
+    aConfigTxClkLvds          : out std_logic;
+    aConfigTxClkSe            : out std_logic;
+    aConfigTxDataSe           : out std_logic_vector(6 downto 0);
+
+    -- Config Interface RX
+    aConfigRxClkLvds          : in std_logic;
+    aConfigRxClkSe            : in std_logic;
+    aConfigRxDataSe           : in std_logic_vector(6 downto 0);
+
+    -- Reserved GPIO
+    aRsrvGpio_n              : inout std_logic_vector(4 downto 0);
+    aRsrvGpio_p              : inout std_logic_vector(4 downto 0);
+
     --Reserved CLIP Signals
+    aReservedToClip          : in std_logic_vector(15 downto 0);
+    aReservedFromClip        : out std_logic_vector(15 downto 0);
     stIoModuleSupportsFRAGLs : out std_logic;
 
-    -- RefClks
-    MgtRefClk_p               : in    std_logic_vector (11 downto 0);
-    MgtRefClk_n               : in    std_logic_vector (11 downto 0);
-    -- MGTs
-    MgtPortRx_p               : in    std_logic_vector (47 downto 0);
-    MgtPortRx_n               : in    std_logic_vector (47 downto 0);
-    MgtPortTx_p               : out   std_logic_vector (47 downto 0);
-    MgtPortTx_n               : out   std_logic_vector (47 downto 0);
+    --General purpose Synchronization Signals
+    aGpoSync                 : out std_logic_vector(1 downto 0);
+    aTriggerIn               : in  std_logic;
+    aTriggerOut              : out std_logic;
 
-    -- Base board DIO
-    aDio                      : inout std_logic_vector(7 downto 0);
+    --Synchronization Signals
+    DeviceClk            : in  std_logic;
+    aJesd204SyncReqIn_n  : in  std_logic;
+    aJesd204SyncReqOut_n : out std_logic;
+    dvJesd204SysRef      : in  std_logic;
+    dvTdcAssert          : out std_logic;
+    dtTdcAssert          : in  std_logic;
+    dtDevClkEn           : out std_logic;
 
-    -- Configuration
-    aLmkI2cSda            : inout std_logic;
-    aLmkI2cScl            : inout std_logic;
-    aLmk1Pdn_n            : out std_logic;
-    aLmk2Pdn_n            : out std_logic;
-    aLmk1Gpio0            : out std_logic;
-    aLmk2Gpio0            : out std_logic;
-    aLmk1Status0          : in std_logic;
-    aLmk1Status1          : in std_logic;
-    aLmk2Status0          : in std_logic;
-    aLmk2Status1          : in std_logic;
-    aIPassVccPowerFault_n : in std_logic;
-    aIPassPrsnt_n         : in std_logic_vector(7 downto 0);
-    aIPassIntr_n          : in std_logic_vector(7 downto 0);
-    aIPassSCL             : inout std_logic_vector(11 downto 0);
-    aIPassSDA             : inout std_logic_vector(11 downto 0);
-    aPortExpReset_n       : out std_logic;
-    aPortExpIntr_n        : in std_logic;
-    aPortExpSda           : inout std_logic;
-    aPortExpScl           : inout std_logic;
+    --IO MGT Ports
+    MgtPortRx_n       : in  std_logic_vector(7 downto 0);
+    MgtPortRx_p       : in  std_logic_vector(7 downto 0);
+    MgtPortTx_n       : out std_logic_vector(7 downto 0);
+    MgtPortTx_p       : out std_logic_vector(7 downto 0);
+    MgtRefClk_p       : in  std_logic_vector(2 downto 0);
+    MgtRefClk_n       : in  std_logic_vector(2 downto 0);
+    ExportedMgtRefClk : out std_logic;
+
+    --Nanopitch I/O
+    DioMgtRefClk_p              : in  std_logic;
+    DioMgtRefClk_n              : in  std_logic;
+    DioMgtRefClkFromFam         : in  std_logic;
+    DioMgtRX_n                  : in  std_logic_vector(3 downto 0);
+    DioMgtRX_p                  : in  std_logic_vector(3 downto 0);
+    DioMgtTX_n                  : out std_logic_vector(3 downto 0);
+    DioMgtTX_p                  : out std_logic_vector(3 downto 0);
+    SocketClk80                 : in  std_logic;
+    sDioMgtRefClkFromFamPresent : in  std_logic;
 % endif
 
     -----------------------------------------------------------------------------
     --Dram Interface
     -----------------------------------------------------------------------------
     aDramReady : in std_logic;
-    du0DramAddrFifoAddr : out std_logic_vector(29 downto 0);
+    du0DramAddrFifoAddr : out std_logic_vector(28 downto 0);
     du0DramAddrFifoCmd : out std_logic_vector(2 downto 0);
     du0DramAddrFifoFull : in std_logic;
     du0DramAddrFifoWrEn : out std_logic;
     du0DramPhyInitDone : in std_logic;
     du0DramRdDataValid : in std_logic;
-    du0DramRdFifoDataOut : in std_logic_vector(639 downto 0);
-    du0DramWrFifoDataIn : out std_logic_vector(639 downto 0);
+    du0DramRdFifoDataOut : in std_logic_vector(255 downto 0);
+    du0DramWrFifoDataIn : out std_logic_vector(255 downto 0);
     du0DramWrFifoFull : in std_logic;
-    du0DramWrFifoMaskData : out std_logic_vector(79 downto 0);
+    du0DramWrFifoMaskData : out std_logic_vector(31 downto 0);
     du0DramWrFifoWrEn : out std_logic;
-    du1DramAddrFifoAddr : out std_logic_vector(29 downto 0);
+    du1DramAddrFifoAddr : out std_logic_vector(28 downto 0);
     du1DramAddrFifoCmd : out std_logic_vector(2 downto 0);
     du1DramAddrFifoFull : in std_logic;
     du1DramAddrFifoWrEn : out std_logic;
     du1DramPhyInitDone : in std_logic;
     du1DramRdDataValid : in std_logic;
-    du1DramRdFifoDataOut : in std_logic_vector(639 downto 0);
-    du1DramWrFifoDataIn : out std_logic_vector(639 downto 0);
+    du1DramRdFifoDataOut : in std_logic_vector(255 downto 0);
+    du1DramWrFifoDataIn : out std_logic_vector(255 downto 0);
     du1DramWrFifoFull : in std_logic;
-    du1DramWrFifoMaskData : out std_logic_vector(79 downto 0);
+    du1DramWrFifoMaskData : out std_logic_vector(31 downto 0);
     du1DramWrFifoWrEn : out std_logic;
 
     -----------------------------------------------------------------------------
@@ -314,9 +400,9 @@ entity TheWindowFlatWrapper is
     rGatedBaseClksValid : in std_logic := '1';
     aSafeToEnableGatedClks : out std_logic
   );
-end entity TheWindowFlatWrapper;
+end entity TheLvWindowFlatWrapper;
 
-architecture behavioral of TheWindowFlatWrapper is
+architecture behavioral of TheLvWindowFlatWrapper is
 
   -- Std logic to boolean
   signal aBusResetBool : boolean;
@@ -334,26 +420,26 @@ architecture behavioral of TheWindowFlatWrapper is
     Larger(kNumberOfDmaChannels,1)-1 downto 0);
   signal dOutputStreamInterfaceFromFifoInternal : OutputStreamInterfaceFromFifoArray_t(
     Larger(kNumberOfDmaChannels,1)-1 downto 0);
-  
+
   signal bIrqToInterfaceInternal : IrqToInterfaceArray_t(
     Larger(kNumberOfIrqs,1)-1 downto 0);
-  
-  signal dNiFpgaMasterWriteRequestFromMasterInternal : 
+
+  signal dNiFpgaMasterWriteRequestFromMasterInternal :
     NiFpgaMasterWriteRequestFromMasterArray_t(Larger(kNumberOfMasterPorts,1)-1 downto 0);
-  signal dNiFpgaMasterWriteRequestToMasterInternal : 
+  signal dNiFpgaMasterWriteRequestToMasterInternal :
     NiFpgaMasterWriteRequestToMasterArray_t(Larger(kNumberOfMasterPorts,1)-1 downto 0);
-  signal dNiFpgaMasterWriteDataFromMasterInternal : 
+  signal dNiFpgaMasterWriteDataFromMasterInternal :
     NiFpgaMasterWriteDataFromMasterArray_t(Larger(kNumberOfMasterPorts,1)-1 downto 0);
-  signal dNiFpgaMasterWriteDataToMasterInternal : 
+  signal dNiFpgaMasterWriteDataToMasterInternal :
     NiFpgaMasterWriteDataToMasterArray_t(Larger(kNumberOfMasterPorts,1)-1 downto 0);
-  signal dNiFpgaMasterWriteStatusToMasterInternal : 
+  signal dNiFpgaMasterWriteStatusToMasterInternal :
     NiFpgaMasterWriteStatusToMasterArray_t(Larger(kNumberOfMasterPorts,1)-1 downto 0);
-  
-  signal dNiFpgaMasterReadRequestFromMasterInternal : 
+
+  signal dNiFpgaMasterReadRequestFromMasterInternal :
     NiFpgaMasterReadRequestFromMasterArray_t(Larger(kNumberOfMasterPorts,1)-1 downto 0);
-  signal dNiFpgaMasterReadRequestToMasterInternal : 
+  signal dNiFpgaMasterReadRequestToMasterInternal :
     NiFpgaMasterReadRequestToMasterArray_t(Larger(kNumberOfMasterPorts,1)-1 downto 0);
-  signal dNiFpgaMasterReadDataToMasterInternal : 
+  signal dNiFpgaMasterReadDataToMasterInternal :
     NiFpgaMasterReadDataToMasterArray_t(Larger(kNumberOfMasterPorts,1)-1 downto 0);
 
 begin
@@ -368,45 +454,45 @@ begin
   -- Convert flat inputs to records
   -----------------------------------
   bRegPortInInternal <= BuildRegPortIn(bRegPortIn);
-  
+
   dInputStreamInterfaceToFifoInternal <= UnflattenStreamInterface(dInputStreamInterfaceToFifo);
   dOutputStreamInterfaceToFifoInternal <= UnflattenStreamInterface(dOutputStreamInterfaceToFifo);
-  
+
   -- Convert flat Master Port inputs
   gen_master_inputs: for i in 0 to Larger(kNumberOfMasterPorts,1)-1 generate
-    dNiFpgaMasterWriteRequestToMasterInternal(i) <= 
+    dNiFpgaMasterWriteRequestToMasterInternal(i) <=
       UnflattenMasterPortInterface(
         NiFpgaMasterWriteRequestToMasterFlat_t(
           dNiFpgaMasterWriteRequestToMaster(
-            (i+1)*SizeOf(kNiFpgaMasterWriteRequestToMasterZero)-1 downto 
+            (i+1)*SizeOf(kNiFpgaMasterWriteRequestToMasterZero)-1 downto
             i*SizeOf(kNiFpgaMasterWriteRequestToMasterZero))));
-    
-    dNiFpgaMasterWriteDataToMasterInternal(i) <= 
+
+    dNiFpgaMasterWriteDataToMasterInternal(i) <=
       UnflattenMasterPortInterface(
         NiFpgaMasterWriteDataToMasterFlat_t(
           dNiFpgaMasterWriteDataToMaster(
-            (i+1)*SizeOf(kNiFpgaMasterWriteDataToMasterZero)-1 downto 
+            (i+1)*SizeOf(kNiFpgaMasterWriteDataToMasterZero)-1 downto
             i*SizeOf(kNiFpgaMasterWriteDataToMasterZero))));
-    
-    dNiFpgaMasterWriteStatusToMasterInternal(i) <= 
+
+    dNiFpgaMasterWriteStatusToMasterInternal(i) <=
       UnflattenMasterPortInterface(
         NiFpgaMasterWriteStatusToMasterFlat_t(
           dNiFpgaMasterWriteStatusToMaster(
-            (i+1)*SizeOf(kNiFpgaMasterWriteStatusToMasterZero)-1 downto 
+            (i+1)*SizeOf(kNiFpgaMasterWriteStatusToMasterZero)-1 downto
             i*SizeOf(kNiFpgaMasterWriteStatusToMasterZero))));
-    
-    dNiFpgaMasterReadRequestToMasterInternal(i) <= 
+
+    dNiFpgaMasterReadRequestToMasterInternal(i) <=
       UnflattenMasterPortInterface(
         NiFpgaMasterReadRequestToMasterFlat_t(
           dNiFpgaMasterReadRequestToMaster(
-            (i+1)*SizeOf(kNiFpgaMasterReadRequestToMasterZero)-1 downto 
+            (i+1)*SizeOf(kNiFpgaMasterReadRequestToMasterZero)-1 downto
             i*SizeOf(kNiFpgaMasterReadRequestToMasterZero))));
-    
-    dNiFpgaMasterReadDataToMasterInternal(i) <= 
+
+    dNiFpgaMasterReadDataToMasterInternal(i) <=
       UnflattenMasterPortInterface(
         NiFpgaMasterReadDataToMasterFlat_t(
           dNiFpgaMasterReadDataToMaster(
-            (i+1)*SizeOf(kNiFpgaMasterReadDataToMasterZero)-1 downto 
+            (i+1)*SizeOf(kNiFpgaMasterReadDataToMasterZero)-1 downto
             i*SizeOf(kNiFpgaMasterReadDataToMasterZero))));
   end generate;
 
@@ -415,34 +501,34 @@ begin
   -- Convert record outputs to flat
   -----------------------------------
   bRegPortOut <= to_StdLogicVector(bRegPortOutInternal);
-  
+
   dInputStreamInterfaceFromFifo <= FlattenStreamInterface(dInputStreamInterfaceFromFifoInternal);
   dOutputStreamInterfaceFromFifo <= FlattenStreamInterface(dOutputStreamInterfaceFromFifoInternal);
-  
+
   bIrqToInterface <= to_StdLogicVector(bIrqToInterfaceInternal);
-  
+
   -- Convert flat Master Port outputs
   gen_master_outputs: for i in 0 to Larger(kNumberOfMasterPorts,1)-1 generate
     dNiFpgaMasterWriteRequestFromMaster(
-      (i+1)*SizeOf(kNiFpgaMasterWriteRequestFromMasterZero)-1 downto 
-      i*SizeOf(kNiFpgaMasterWriteRequestFromMasterZero)) <= 
+      (i+1)*SizeOf(kNiFpgaMasterWriteRequestFromMasterZero)-1 downto
+      i*SizeOf(kNiFpgaMasterWriteRequestFromMasterZero)) <=
         std_logic_vector(FlattenMasterPortInterface(dNiFpgaMasterWriteRequestFromMasterInternal(i)));
-    
+
     dNiFpgaMasterWriteDataFromMaster(
-      (i+1)*SizeOf(kNiFpgaMasterWriteDataFromMasterZero)-1 downto 
-      i*SizeOf(kNiFpgaMasterWriteDataFromMasterZero)) <= 
+      (i+1)*SizeOf(kNiFpgaMasterWriteDataFromMasterZero)-1 downto
+      i*SizeOf(kNiFpgaMasterWriteDataFromMasterZero)) <=
         std_logic_vector(FlattenMasterPortInterface(dNiFpgaMasterWriteDataFromMasterInternal(i)));
-    
+
     dNiFpgaMasterReadRequestFromMaster(
-      (i+1)*SizeOf(kNiFpgaMasterReadRequestFromMasterZero)-1 downto 
-      i*SizeOf(kNiFpgaMasterReadRequestFromMasterZero)) <= 
+      (i+1)*SizeOf(kNiFpgaMasterReadRequestFromMasterZero)-1 downto
+      i*SizeOf(kNiFpgaMasterReadRequestFromMasterZero)) <=
         std_logic_vector(FlattenMasterPortInterface(dNiFpgaMasterReadRequestFromMasterInternal(i)));
   end generate;
 
   -----------------------------------
   -- Instantiate TheWindow
   -----------------------------------
-  SasquatchWindow : entity work.TheWindow (behavioral)
+  TheLvWindow : entity work.TheWindow (behavioral)
     port map(
      -----------------------------------
     -- CUSTOM BOARD IO
@@ -451,7 +537,7 @@ begin
 % for signal in custom_signals:
     ${signal['name']} => ${signal['name']},
 % endfor
-% endif      
+% endif
       -----------------------------------
       -- Communication interface ports
       -----------------------------------
@@ -472,7 +558,7 @@ begin
       dNiFpgaMasterReadRequestFromMaster => dNiFpgaMasterReadRequestFromMasterInternal,
       dNiFpgaMasterReadRequestToMaster => dNiFpgaMasterReadRequestToMasterInternal,
       dNiFpgaMasterReadDataToMaster => dNiFpgaMasterReadDataToMasterInternal,
-      
+
       -----------------------------------
       -- Clocks from TopLevel
       -----------------------------------
@@ -489,10 +575,76 @@ begin
       Dram1ClkUser => Dram1ClkUser,
       dHmbDmaClkSocket => dHmbDmaClkSocket,
       dLlbDmaClkSocket => dLlbDmaClkSocket,
-      
+
       -----------------------------------
       -- IO Node ports
       -----------------------------------
+% if include_clip_socket:
+      aLvAuxDio0OutputData => aLvAuxDio0OutputData,
+      aLvAuxDio0InputData => aLvAuxDio0InputData,
+      aLvAuxDio0OutputEnable => aLvAuxDio0OutputEnable,
+      oClkaLvAuxDio0 => oClkaLvAuxDio0,
+      aoResetaLvAuxDio0 => aoResetaLvAuxDio0,
+      oDoneaLvAuxDio0 => oDoneaLvAuxDio0,
+      oDirectionaLvAuxDio0 => oDirectionaLvAuxDio0,
+      oRequestaLvAuxDio0 => oRequestaLvAuxDio0,
+      aLvAuxDio1OutputData => aLvAuxDio1OutputData,
+      aLvAuxDio1InputData => aLvAuxDio1InputData,
+      aLvAuxDio1OutputEnable => aLvAuxDio1OutputEnable,
+      oClkaLvAuxDio1 => oClkaLvAuxDio1,
+      aoResetaLvAuxDio1 => aoResetaLvAuxDio1,
+      oDoneaLvAuxDio1 => oDoneaLvAuxDio1,
+      oDirectionaLvAuxDio1 => oDirectionaLvAuxDio1,
+      oRequestaLvAuxDio1 => oRequestaLvAuxDio1,
+      aLvAuxDio2OutputData => aLvAuxDio2OutputData,
+      aLvAuxDio2InputData => aLvAuxDio2InputData,
+      aLvAuxDio2OutputEnable => aLvAuxDio2OutputEnable,
+      oClkaLvAuxDio2 => oClkaLvAuxDio2,
+      aoResetaLvAuxDio2 => aoResetaLvAuxDio2,
+      oDoneaLvAuxDio2 => oDoneaLvAuxDio2,
+      oDirectionaLvAuxDio2 => oDirectionaLvAuxDio2,
+      oRequestaLvAuxDio2 => oRequestaLvAuxDio2,
+      aLvAuxDio3OutputData => aLvAuxDio3OutputData,
+      aLvAuxDio3InputData => aLvAuxDio3InputData,
+      aLvAuxDio3OutputEnable => aLvAuxDio3OutputEnable,
+      oClkaLvAuxDio3 => oClkaLvAuxDio3,
+      aoResetaLvAuxDio3 => aoResetaLvAuxDio3,
+      oDoneaLvAuxDio3 => oDoneaLvAuxDio3,
+      oDirectionaLvAuxDio3 => oDirectionaLvAuxDio3,
+      oRequestaLvAuxDio3 => oRequestaLvAuxDio3,
+      aLvAuxDio4OutputData => aLvAuxDio4OutputData,
+      aLvAuxDio4InputData => aLvAuxDio4InputData,
+      aLvAuxDio4OutputEnable => aLvAuxDio4OutputEnable,
+      oClkaLvAuxDio4 => oClkaLvAuxDio4,
+      aoResetaLvAuxDio4 => aoResetaLvAuxDio4,
+      oDoneaLvAuxDio4 => oDoneaLvAuxDio4,
+      oDirectionaLvAuxDio4 => oDirectionaLvAuxDio4,
+      oRequestaLvAuxDio4 => oRequestaLvAuxDio4,
+      aLvAuxDio5OutputData => aLvAuxDio5OutputData,
+      aLvAuxDio5InputData => aLvAuxDio5InputData,
+      aLvAuxDio5OutputEnable => aLvAuxDio5OutputEnable,
+      oClkaLvAuxDio5 => oClkaLvAuxDio5,
+      aoResetaLvAuxDio5 => aoResetaLvAuxDio5,
+      oDoneaLvAuxDio5 => oDoneaLvAuxDio5,
+      oDirectionaLvAuxDio5 => oDirectionaLvAuxDio5,
+      oRequestaLvAuxDio5 => oRequestaLvAuxDio5,
+      aLvAuxDio6OutputData => aLvAuxDio6OutputData,
+      aLvAuxDio6InputData => aLvAuxDio6InputData,
+      aLvAuxDio6OutputEnable => aLvAuxDio6OutputEnable,
+      oClkaLvAuxDio6 => oClkaLvAuxDio6,
+      aoResetaLvAuxDio6 => aoResetaLvAuxDio6,
+      oDoneaLvAuxDio6 => oDoneaLvAuxDio6,
+      oDirectionaLvAuxDio6 => oDirectionaLvAuxDio6,
+      oRequestaLvAuxDio6 => oRequestaLvAuxDio6,
+      aLvAuxDio7OutputData => aLvAuxDio7OutputData,
+      aLvAuxDio7InputData => aLvAuxDio7InputData,
+      aLvAuxDio7OutputEnable => aLvAuxDio7OutputEnable,
+      oClkaLvAuxDio7 => oClkaLvAuxDio7,
+      aoResetaLvAuxDio7 => aoResetaLvAuxDio7,
+      oDoneaLvAuxDio7 => oDoneaLvAuxDio7,
+      oDirectionaLvAuxDio7 => oDirectionaLvAuxDio7,
+      oRequestaLvAuxDio7 => oRequestaLvAuxDio7,
+% endif
       pIntSync100 => pIntSync100,
       aIntClk10 => aIntClk10,
 
@@ -524,7 +676,9 @@ begin
       ----------------------------------------
       PxieClk100Trigger => PxieClk100Trigger,
       pIntSync100Trigger => pIntSync100Trigger,
+      dTdcAssert => dTdcAssert,
       dDevClkEn => dDevClkEn,
+      sTdcDeassert => sTdcDeassert,
       aIntClk10Trigger => aIntClk10Trigger,
       bRoutingClipPresent => bRoutingClipPresent,
       bRoutingClipNiCompatible => bRoutingClipNiCompatible,
@@ -584,33 +738,43 @@ begin
       xClipAxi4LiteMasterWStrb => xClipAxi4LiteMasterWStrb,
       xClipAxi4LiteMasterWValid => xClipAxi4LiteMasterWValid,
       xClipAxi4LiteInterrupt => xClipAxi4LiteInterrupt,
+      aConfigTxClkLvds => aConfigTxClkLvds,
+      aConfigTxClkSe => aConfigTxClkSe,
+      aConfigTxDataSe => aConfigTxDataSe,
+      aConfigRxClkLvds => aConfigRxClkLvds,
+      aConfigRxClkSe => aConfigRxClkSe,
+      aConfigRxDataSe => aConfigRxDataSe,
+      aRsrvGpio_n => aRsrvGpio_n,
+      aRsrvGpio_p => aRsrvGpio_p,
+      aReservedToClip => aReservedToClip,
+      aReservedFromClip => aReservedFromClip,
       stIoModuleSupportsFRAGLs => stIoModuleSupportsFRAGLs,
+      aGpoSync => aGpoSync,
+      aTriggerIn => aTriggerIn,
+      aTriggerOut => aTriggerOut,
+      DeviceClk => DeviceClk,
+      aJesd204SyncReqIn_n => aJesd204SyncReqIn_n,
+      aJesd204SyncReqOut_n => aJesd204SyncReqOut_n,
+      dvJesd204SysRef => dvJesd204SysRef,
+      dvTdcAssert => dvTdcAssert,
+      dtTdcAssert => dtTdcAssert,
+      dtDevClkEn => dtDevClkEn,
+      MgtPortRx_n => MgtPortRx_n,
+      MgtPortRx_p => MgtPortRx_p,
+      MgtPortTx_n => MgtPortTx_n,
+      MgtPortTx_p => MgtPortTx_p,
       MgtRefClk_p => MgtRefClk_p,
       MgtRefClk_n => MgtRefClk_n,
-      MgtPortRx_p => MgtPortRx_p,
-      MgtPortRx_n => MgtPortRx_n,
-      MgtPortTx_p => MgtPortTx_p,
-      MgtPortTx_n => MgtPortTx_n,
-      aDio => aDio,
-      aLmkI2cSda => aLmkI2cSda,
-      aLmkI2cScl => aLmkI2cScl,
-      aLmk1Pdn_n => aLmk1Pdn_n,
-      aLmk2Pdn_n => aLmk2Pdn_n,
-      aLmk1Gpio0 => aLmk1Gpio0,
-      aLmk2Gpio0 => aLmk2Gpio0,
-      aLmk1Status0 => aLmk1Status0,
-      aLmk1Status1 => aLmk1Status1,
-      aLmk2Status0 => aLmk2Status0,
-      aLmk2Status1 => aLmk2Status1,
-      aIPassVccPowerFault_n => aIPassVccPowerFault_n,
-      aIPassPrsnt_n => aIPassPrsnt_n,
-      aIPassIntr_n => aIPassIntr_n,
-      aIPassSCL => aIPassSCL,
-      aIPassSDA => aIPassSDA,
-      aPortExpReset_n => aPortExpReset_n,
-      aPortExpIntr_n => aPortExpIntr_n,
-      aPortExpSda => aPortExpSda,
-      aPortExpScl => aPortExpScl,
+      ExportedMgtRefClk => ExportedMgtRefClk,
+      DioMgtRefClk_p => DioMgtRefClk_p,
+      DioMgtRefClk_n => DioMgtRefClk_n,
+      DioMgtRefClkFromFam => DioMgtRefClkFromFam,
+      DioMgtRX_n => DioMgtRX_n,
+      DioMgtRX_p => DioMgtRX_p,
+      DioMgtTX_n => DioMgtTX_n,
+      DioMgtTX_p => DioMgtTX_p,
+      SocketClk80 => SocketClk80,
+      sDioMgtRefClkFromFamPresent => sDioMgtRefClkFromFamPresent,
 % endif
 
       -----------------------------------------------------------------------------
