@@ -696,8 +696,11 @@ begin  -- architecture struct
   --vhook_a {bd.*IoRefClk.*}                    open            mode=out
   --vhook_a {bd.*IoRefClk.*}                    '0'             mode=in
   --vhook_g kExpectedTbIdGeneric kExpectedTbId
+  --vhook_g kAuxDioDefaultVoltageGeneric kAuxDioDefaultVoltage
   FixedLogicWrapperx: entity work.FixedLogicWrapper (struct)
-    generic map (kExpectedTbIdGeneric => kExpectedTbId)  --std_logic_vector(31:0)
+    generic map (
+      kExpectedTbIdGeneric         => kExpectedTbId,          --std_logic_vector(31:0)
+      kAuxDioDefaultVoltageGeneric => kAuxDioDefaultVoltage)  --natural
     port map (
       aPonReset                          => aPonReset,                           --in  boolean
       aBusReset                          => aBusReset,                           --in  boolean

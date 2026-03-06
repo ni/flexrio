@@ -558,6 +558,25 @@ architecture struct of MacallanTop is
   constant kDram2DPBaseAddress  : unsigned(kAlignedAddressWidth - 1 downto 0) := to_unsigned(work.PkgLvFpgaConst.kDram2DPBaseAddress / 4, kAlignedAddressWidth);
   constant kDram2DPAddressMask  : unsigned(kAlignedAddressWidth - 1 downto 0) := to_unsigned(16#1FC# / 4, kAlignedAddressWidth);
 
+  -- ******************************************************************************************************************
+  -- ********************** MODIFY THESE CONSTANTS IF NOT USING THE DIO FROM LV PROJECT *******************************
+  -- ******************************************************************************************************************
+  --
+  -- The default voltage level for the AUX DIO lines is set in the LabVIEW FPGA project and gets generated into
+  -- kAuxDioDefaultVoltage in PkgLvFpgaConst.vhd.  If you are controlling the AUX DIO from this HDL file instead of
+  -- the LV project node, you can set kAuxDioDefaultVoltageConst to what you need.  This constant is the voltage level
+  -- in milivolts.  The ONLY valid values are:
+  --                          3300 (for 3.3V), 2500 (for 2.5v), 1800 (for 1.8V), and 1100 (for 1.1V).
+  --
+  -- By default, this template is set up to use the CLIP socket interface, so these constants get set to the values
+  -- defined in PkgLvFpgaConst.vhd.
+  constant kAuxDioDefaultVoltageConst : natural := kAuxDioDefaultVoltage;
+  --
+  -- If you are not using the DIO from the LabVIEW project because you are interfacing with the board IO directly from this
+  -- HDL file, then you can comment out the line above and uncomment the line below and set the constant to the voltage
+  -- level you need for the AUX DIO lines.
+  -- constant kAuxDioDefaultVoltageConst : natural := 3300;
+
   -- Disable automatic io_buffer creation for FAM MGTs and signals that will instantiate
   -- their own.
   attribute io_buffer_type : string;
@@ -806,8 +825,11 @@ begin  -- architecture struct
   --vhook_a {bd.*IoRefClk.*}                    open            mode=out
   --vhook_a {bd.*IoRefClk.*}                    '0'             mode=in
   --vhook_g kExpectedTbIdGeneric kExpectedTbId
+  --vhook_g kAuxDioDefaultVoltageGeneric kAuxDioDefaultVoltageConst
   FixedLogicWrapperx: entity work.FixedLogicWrapper (struct)
-    generic map (kExpectedTbIdGeneric => kExpectedTbId)  --std_logic_vector(31:0)
+    generic map (
+      kExpectedTbIdGeneric         => kExpectedTbId,               --std_logic_vector(31:0)
+      kAuxDioDefaultVoltageGeneric => kAuxDioDefaultVoltageConst)  --natural
     port map (
       aPonReset                          => aPonReset,                           --in  boolean
       aBusReset                          => aBusReset,                           --in  boolean
