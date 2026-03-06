@@ -1,0 +1,4 @@
+objects/GeneratedHDL/PkgTheLvWindowFlatWrapper.vhd
+objects/GeneratedHDL/TheLvWindowFlatWrapper.vhd
+objects/GeneratedHDL/TheWindow.vhd
+rtl-lvfpga/AppletonTopTemplate.vhd

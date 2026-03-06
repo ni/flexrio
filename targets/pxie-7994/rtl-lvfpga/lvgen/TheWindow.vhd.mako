@@ -123,73 +123,6 @@ entity TheWindow is
     -----------------------------------
     -- IO Node ports
     -----------------------------------
-% if include_clip_socket:    
-    aLvAuxDio0OutputData   : out   std_logic;
-    aLvAuxDio0InputData    : in    std_logic;
-    aLvAuxDio0OutputEnable : out   std_logic;
-    oClkaLvAuxDio0         : in    std_logic;
-    aoResetaLvAuxDio0      : in    std_logic;
-    oDoneaLvAuxDio0        : in    std_logic;
-    oDirectionaLvAuxDio0   : out   std_logic := '0';
-    oRequestaLvAuxDio0     : out   std_logic := '1';
-    aLvAuxDio1OutputData   : out   std_logic;
-    aLvAuxDio1InputData    : in    std_logic;
-    aLvAuxDio1OutputEnable : out   std_logic;
-    oClkaLvAuxDio1         : in    std_logic;
-    aoResetaLvAuxDio1      : in    std_logic;
-    oDoneaLvAuxDio1        : in    std_logic;
-    oDirectionaLvAuxDio1   : out   std_logic := '0';
-    oRequestaLvAuxDio1     : out   std_logic := '1';
-    aLvAuxDio2OutputData   : out   std_logic;
-    aLvAuxDio2InputData    : in    std_logic;
-    aLvAuxDio2OutputEnable : out   std_logic;
-    oClkaLvAuxDio2         : in    std_logic;
-    aoResetaLvAuxDio2      : in    std_logic;
-    oDoneaLvAuxDio2        : in    std_logic;
-    oDirectionaLvAuxDio2   : out   std_logic := '0';
-    oRequestaLvAuxDio2     : out   std_logic := '1';
-    aLvAuxDio3OutputData   : out   std_logic;
-    aLvAuxDio3InputData    : in    std_logic;
-    aLvAuxDio3OutputEnable : out   std_logic;
-    oClkaLvAuxDio3         : in    std_logic;
-    aoResetaLvAuxDio3      : in    std_logic;
-    oDoneaLvAuxDio3        : in    std_logic;
-    oDirectionaLvAuxDio3   : out   std_logic := '0';
-    oRequestaLvAuxDio3     : out   std_logic := '1';
-    aLvAuxDio4OutputData   : out   std_logic;
-    aLvAuxDio4InputData    : in    std_logic;
-    aLvAuxDio4OutputEnable : out   std_logic;
-    oClkaLvAuxDio4         : in    std_logic;
-    aoResetaLvAuxDio4      : in    std_logic;
-    oDoneaLvAuxDio4        : in    std_logic;
-    oDirectionaLvAuxDio4   : out   std_logic := '0';
-    oRequestaLvAuxDio4     : out   std_logic := '1';
-    aLvAuxDio5OutputData   : out   std_logic;
-    aLvAuxDio5InputData    : in    std_logic;
-    aLvAuxDio5OutputEnable : out   std_logic;
-    oClkaLvAuxDio5         : in    std_logic;
-    aoResetaLvAuxDio5      : in    std_logic;
-    oDoneaLvAuxDio5        : in    std_logic;
-    oDirectionaLvAuxDio5   : out   std_logic := '0';
-    oRequestaLvAuxDio5     : out   std_logic := '1';
-    aLvAuxDio6OutputData   : out   std_logic;
-    aLvAuxDio6InputData    : in    std_logic;
-    aLvAuxDio6OutputEnable : out   std_logic;
-    oClkaLvAuxDio6         : in    std_logic;
-    aoResetaLvAuxDio6      : in    std_logic;
-    oDoneaLvAuxDio6        : in    std_logic;
-    oDirectionaLvAuxDio6   : out   std_logic := '0';
-    oRequestaLvAuxDio6     : out   std_logic := '1';
-    aLvAuxDio7OutputData   : out   std_logic;
-    aLvAuxDio7InputData    : in    std_logic;
-    aLvAuxDio7OutputEnable : out   std_logic;
-    oClkaLvAuxDio7         : in    std_logic;
-    aoResetaLvAuxDio7      : in    std_logic;
-    oDoneaLvAuxDio7        : in    std_logic;
-    oDirectionaLvAuxDio7   : out   std_logic := '0';
-    oRequestaLvAuxDio7     : out   std_logic := '1';
-% endif
-
     pIntSync100            : in    std_logic;
     aIntClk10              : in    std_logic;
 
@@ -256,8 +189,8 @@ entity TheWindow is
     -----------------------------------
 
     -- AxiClk is the same as BusCLk is the same as PllClk80
-    AxiClk : in std_logic;
-
+    AxiClk                          : in  std_logic;
+    -- Diagram AxiStream
     xDiagramAxiStreamFromClipTData  : out std_logic_vector(31 downto 0);
     xDiagramAxiStreamFromClipTLast  : out std_logic;
     xDiagramAxiStreamFromClipTReady : out std_logic;
@@ -266,93 +199,100 @@ entity TheWindow is
     xDiagramAxiStreamToClipTLast    : in  std_logic;
     xDiagramAxiStreamToClipTReady   : in  std_logic;
     xDiagramAxiStreamToClipTValid   : in  std_logic;
-
-    xHostAxiStreamFromClipTData  : out std_logic_vector(31 downto 0);
-    xHostAxiStreamFromClipTLast  : out std_logic;
-    xHostAxiStreamFromClipTReady : out std_logic;
-    xHostAxiStreamFromClipTValid : out std_logic;
-    xHostAxiStreamToClipTData    : in  std_logic_vector(31 downto 0);
-    xHostAxiStreamToClipTLast    : in  std_logic;
-    xHostAxiStreamToClipTReady   : in  std_logic;
-    xHostAxiStreamToClipTValid   : in  std_logic;
-
-
+    -- Diagram Host AxiStream
+    xHostAxiStreamFromClipTData     : out std_logic_vector(31 downto 0);
+    xHostAxiStreamFromClipTLast     : out std_logic;
+    xHostAxiStreamFromClipTReady    : out std_logic;
+    xHostAxiStreamFromClipTValid    : out std_logic;
+    xHostAxiStreamToClipTData       : in  std_logic_vector(31 downto 0);
+    xHostAxiStreamToClipTLast       : in  std_logic;
+    xHostAxiStreamToClipTReady      : in  std_logic;
+    xHostAxiStreamToClipTValid      : in  std_logic;
     -- Axi4Lite Interface from the CLIP to FixedLogic
-    xClipAxi4LiteMasterARAddr  : out std_logic_vector(31 downto 0);
-    xClipAxi4LiteMasterARProt  : out std_logic_vector(2 downto 0);
-    xClipAxi4LiteMasterARReady : in  std_logic;
-    xClipAxi4LiteMasterARValid : out std_logic;
-    xClipAxi4LiteMasterAWAddr  : out std_logic_vector(31 downto 0);
-    xClipAxi4LiteMasterAWProt  : out std_logic_vector(2 downto 0);
-    xClipAxi4LiteMasterAWReady : in  std_logic;
-    xClipAxi4LiteMasterAWValid : out std_logic;
-    xClipAxi4LiteMasterBReady  : out std_logic;
-    xClipAxi4LiteMasterBResp   : in  std_logic_vector(1 downto 0);
-    xClipAxi4LiteMasterBValid  : in  std_logic;
-    xClipAxi4LiteMasterRData   : in  std_logic_vector(31 downto 0);
-    xClipAxi4LiteMasterRReady  : out std_logic;
-    xClipAxi4LiteMasterRResp   : in  std_logic_vector(1 downto 0);
-    xClipAxi4LiteMasterRValid  : in  std_logic;
-    xClipAxi4LiteMasterWData   : out std_logic_vector(31 downto 0);
-    xClipAxi4LiteMasterWReady  : in  std_logic;
-    xClipAxi4LiteMasterWStrb   : out std_logic_vector(3 downto 0);
-    xClipAxi4LiteMasterWValid  : out std_logic;
-    xClipAxi4LiteInterrupt     : in  std_logic;
+    xClipAxi4LiteMasterARAddr       : out std_logic_vector(31 downto 0);
+    xClipAxi4LiteMasterARProt       : out std_logic_vector(2 downto 0);
+    xClipAxi4LiteMasterARReady      : in  std_logic;
+    xClipAxi4LiteMasterARValid      : out std_logic;
+    xClipAxi4LiteMasterAWAddr       : out std_logic_vector(31 downto 0);
+    xClipAxi4LiteMasterAWProt       : out std_logic_vector(2 downto 0);
+    xClipAxi4LiteMasterAWReady      : in  std_logic;
+    xClipAxi4LiteMasterAWValid      : out std_logic;
+    xClipAxi4LiteMasterBReady       : out std_logic;
+    xClipAxi4LiteMasterBResp        : in  std_logic_vector(1 downto 0);
+    xClipAxi4LiteMasterBValid       : in  std_logic;
+    xClipAxi4LiteMasterRData        : in  std_logic_vector(31 downto 0);
+    xClipAxi4LiteMasterRReady       : out std_logic;
+    xClipAxi4LiteMasterRResp        : in  std_logic_vector(1 downto 0);
+    xClipAxi4LiteMasterRValid       : in  std_logic;
+    xClipAxi4LiteMasterWData        : out std_logic_vector(31 downto 0);
+    xClipAxi4LiteMasterWReady       : in  std_logic;
+    xClipAxi4LiteMasterWStrb        : out std_logic_vector(3 downto 0);
+    xClipAxi4LiteMasterWValid       : out std_logic;
+    xClipAxi4LiteInterrupt          : in  std_logic;
+    -- Reserved CLIP Signals
+    aReservedToClip                 : in  std_logic_vector(15 downto 0);
+    aReservedFromClip               : out std_logic_vector(15 downto 0);
+    -- CLIP Status/Configuration
+    stIoModuleSupportsFRAGLs        : out std_logic;
+    xIoPresent                      : in  std_logic;
+    xIoReady                        : in  std_logic;
+    xIoOutputEnable                 : in  std_logic;
+    -- Synchronization
+    dvTdcAssert                     : out std_logic;
+    dtTdcAssert                     : in  std_logic;
+    dtDevClkEn                      : out std_logic;
 
-    --Configuration Interface
-    -- Config Interface TX
-    aConfigTxClkLvds          : out std_logic;
-    aConfigTxClkSe            : out std_logic;
-    aConfigTxDataSe           : out std_logic_vector(6 downto 0);
+    -------------------------------------------------------------------------------------
+    -- Base IO
+    -------------------------------------------------------------------------------------
 
-    -- Config Interface RX
-    aConfigRxClkLvds          : in std_logic;
-    aConfigRxClkSe            : in std_logic;
-    aConfigRxDataSe           : in std_logic_vector(6 downto 0);
+    -- Base board I2C
+    aBaseI2cSclIn                   : in    std_logic;
+    aBaseI2cSclOut                  : out   std_logic;
+    aBaseI2cSclTri                  : out   std_logic;
+    aBaseI2cSdaIn                   : in    std_logic;
+    aBaseI2cSdaOut                  : out   std_logic;
+    aBaseI2cSdaTri                  : out   std_logic;
 
-    -- Reserved GPIO
-    aRsrvGpio_n              : inout std_logic_vector(4 downto 0);
-    aRsrvGpio_p              : inout std_logic_vector(4 downto 0);
+    aBaseConfigReset                : out   std_logic;
 
-    --Reserved CLIP Signals
-    aReservedToClip          : in std_logic_vector(15 downto 0);
-    aReservedFromClip        : out std_logic_vector(15 downto 0);
-    stIoModuleSupportsFRAGLs : out std_logic;
+    -- Base board DIO
+    aBaseDioIn                      : in    std_logic_vector(31 downto 0);
+    aBaseDioOut                     : out   std_logic_vector(31 downto 0);
+    aBaseDioOutEn                   : out   std_logic_vector(31 downto 0);
+    aBaseExClk                      : in    std_logic;
 
-    --General purpose Synchronization Signals
-    aGpoSync                 : out   std_logic_vector(1 downto 0);
-    aTriggerIn               : in    std_logic;
-    aTriggerOut              : out   std_logic;
+    -- MGTs for QSFP ports
+    Qsfp0MgtRx_p                    : in    std_logic_vector(3 downto 0);
+    Qsfp0MgtRx_n                    : in    std_logic_vector(3 downto 0);
+    Qsfp0MgtTx_p                    : out   std_logic_vector(3 downto 0);
+    Qsfp0MgtTx_n                    : out   std_logic_vector(3 downto 0);
+    Qsfp0MgtRefClk_p                : in    std_logic_vector(1 downto 0);
+    Qsfp0MgtRefClk_n                : in    std_logic_vector(1 downto 0);
 
-    --Synchronization Signals
-    DeviceClk            : in  std_logic;
-    aJesd204SyncReqIn_n  : in  std_logic;
-    aJesd204SyncReqOut_n : out std_logic;
-    dvJesd204SysRef      : in  std_logic;
-    dvTdcAssert          : out std_logic;
-    dtTdcAssert          : in  std_logic;
-    dtDevClkEn           : out std_logic;
+    Qsfp1MgtRx_p                    : in    std_logic_vector(3 downto 0);
+    Qsfp1MgtRx_n                    : in    std_logic_vector(3 downto 0);
+    Qsfp1MgtTx_p                    : out   std_logic_vector(3 downto 0);
+    Qsfp1MgtTx_n                    : out   std_logic_vector(3 downto 0);
+    Qsfp1MgtRefClk_p                : in    std_logic_vector(1 downto 0);
+    Qsfp1MgtRefClk_n                : in    std_logic_vector(1 downto 0);
 
-    --IO MGT Ports
-    MgtPortRx_n       : in  std_logic_vector(7 downto 0);
-    MgtPortRx_p       : in  std_logic_vector(7 downto 0);
-    MgtPortTx_n       : out std_logic_vector(7 downto 0);
-    MgtPortTx_p       : out std_logic_vector(7 downto 0);
-    MgtRefClk_p       : in  std_logic_vector(2 downto 0);
-    MgtRefClk_n       : in  std_logic_vector(2 downto 0);
-    ExportedMgtRefClk : out std_logic;
+    Qsfp0SocketClk80                : in    std_logic;
+    Qsfp1SocketClk80                : in    std_logic;
 
-    --Nanopitch I/O
-    DioMgtRefClk_p              : in  std_logic;
-    DioMgtRefClk_n              : in  std_logic;
-    DioMgtRefClkFromFam         : in  std_logic;
-    DioMgtRX_n                  : in  std_logic_vector(3 downto 0);
-    DioMgtRX_p                  : in  std_logic_vector(3 downto 0);
-    DioMgtTX_n                  : out std_logic_vector(3 downto 0);
-    DioMgtTX_p                  : out std_logic_vector(3 downto 0);
-    SocketClk80                 : in  std_logic;
-    --Synchronous to SocketClk80
-    sDioMgtRefClkFromFamPresent : in  std_logic;
+    -------------------------------------------------------------------------------------
+    -- IoModule Socketed CLIP - IoModule physical interface
+    -------------------------------------------------------------------------------------
+    -- Configuration / Single-Ended
+    aSeGpio                         : inout std_logic_vector(29 downto 0);
+    -------------------------------------------------------------------------------------
+    -- GPIO
+    aDiffGpio_p                     : inout std_logic_vector(69 downto 0);
+    aDiffGpio_n                     : inout std_logic_vector(69 downto 0);
+    -------------------------------------------------------------------------------------
+    -- Clocking
+    SampleClk                       : in    std_logic;
+    DeviceClk                       : in    std_logic;
 % endif
 
     -----------------------------------------------------------------------------

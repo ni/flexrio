@@ -1,7 +1,7 @@
 ------------------------------------------------------------------------------
 --
 -- File: DmaPortWindowTemplate.vhd
--- Author: NI
+-- Author: Daria Tioc-Deac
 -- Original Project: DmaPort Communication Interface
 -- Date: 20 December 2011
 --
@@ -123,7 +123,7 @@ entity TheWindow is
     -----------------------------------
     -- IO Node ports
     -----------------------------------
-% if include_clip_socket:    
+% if include_clip_socket:
     aLvAuxDio0OutputData   : out   std_logic;
     aLvAuxDio0InputData    : in    std_logic;
     aLvAuxDio0OutputEnable : out   std_logic;
@@ -189,7 +189,6 @@ entity TheWindow is
     oDirectionaLvAuxDio7   : out   std_logic := '0';
     oRequestaLvAuxDio7     : out   std_logic := '1';
 % endif
-
     pIntSync100            : in    std_logic;
     aIntClk10              : in    std_logic;
 
@@ -325,32 +324,35 @@ entity TheWindow is
     aTriggerOut              : out   std_logic;
 
     --Synchronization Signals
-    DeviceClk            : in  std_logic;
-    aJesd204SyncReqIn_n  : in  std_logic;
-    aJesd204SyncReqOut_n : out std_logic;
-    dvJesd204SysRef      : in  std_logic;
-    dvTdcAssert          : out std_logic;
-    dtTdcAssert          : in  std_logic;
-    dtDevClkEn           : out std_logic;
+    DeviceClk              : in  std_logic;
+    aJesd204SyncReqIn_n    : in  std_logic;
+    aJesd204SyncReqOut_n   : out std_logic;
+    dvJesd204SysRef        : in  std_logic;
+    dvTdcAssert            : out std_logic;
+    dtTdcAssert            : in  std_logic;
+    dtDevClkEn             : out std_logic;
 
-    --IO MGT Ports
-    MgtPortRx_n       : in  std_logic_vector(7 downto 0);
-    MgtPortRx_p       : in  std_logic_vector(7 downto 0);
-    MgtPortTx_n       : out std_logic_vector(7 downto 0);
-    MgtPortTx_p       : out std_logic_vector(7 downto 0);
-    MgtRefClk_p       : in  std_logic_vector(2 downto 0);
-    MgtRefClk_n       : in  std_logic_vector(2 downto 0);
+    --MGT Reference Clocks
+    MgtRefClk_p       : in  std_logic_vector(3 downto 0);
+    MgtRefClk_n       : in  std_logic_vector(3 downto 0);
     ExportedMgtRefClk : out std_logic;
 
-    --Nanopitch I/O
     DioMgtRefClk_p              : in  std_logic;
     DioMgtRefClk_n              : in  std_logic;
-    DioMgtRefClkFromFam         : in  std_logic;
-    DioMgtRX_n                  : in  std_logic_vector(3 downto 0);
-    DioMgtRX_p                  : in  std_logic_vector(3 downto 0);
-    DioMgtTX_n                  : out std_logic_vector(3 downto 0);
-    DioMgtTX_p                  : out std_logic_vector(3 downto 0);
-    SocketClk80                 : in  std_logic;
+    DioMgtRefClkFromFam      : in    std_logic;
+
+    --MGT Ports
+    MgtPortRx_n       : in  std_logic_vector(15 downto 0);
+    MgtPortRx_p       : in  std_logic_vector(15 downto 0);
+    MgtPortTx_n       : out std_logic_vector(15 downto 0);
+    MgtPortTx_p       : out std_logic_vector(15 downto 0);
+
+    --Nanopitch I/O
+    DioMgtRX_n               : in    std_logic_vector(3 downto 0);
+    DioMgtRX_p               : in    std_logic_vector(3 downto 0);
+    DioMgtTX_n               : out   std_logic_vector(3 downto 0);
+    DioMgtTX_p               : out   std_logic_vector(3 downto 0);
+    SocketClk80              : in    std_logic;
     --Synchronous to SocketClk80
     sDioMgtRefClkFromFamPresent : in  std_logic;
 % endif
@@ -365,10 +367,10 @@ entity TheWindow is
     du0DramAddrFifoWrEn      : out   std_logic;
     du0DramPhyInitDone       : in    std_logic;
     du0DramRdDataValid       : in    std_logic;
-    du0DramRdFifoDataOut     : in    std_logic_vector(255 downto 0);
-    du0DramWrFifoDataIn      : out   std_logic_vector(255 downto 0);
+    du0DramRdFifoDataOut     : in    std_logic_vector(511 downto 0);
+    du0DramWrFifoDataIn      : out   std_logic_vector(511 downto 0);
     du0DramWrFifoFull        : in    std_logic;
-    du0DramWrFifoMaskData    : out   std_logic_vector(31 downto 0);
+    du0DramWrFifoMaskData    : out   std_logic_vector(63 downto 0);
     du0DramWrFifoWrEn        : out   std_logic;
     du1DramAddrFifoAddr      : out   std_logic_vector(28 downto 0);
     du1DramAddrFifoCmd       : out   std_logic_vector(2 downto 0);
@@ -376,10 +378,10 @@ entity TheWindow is
     du1DramAddrFifoWrEn      : out   std_logic;
     du1DramPhyInitDone       : in    std_logic;
     du1DramRdDataValid       : in    std_logic;
-    du1DramRdFifoDataOut     : in    std_logic_vector(255 downto 0);
-    du1DramWrFifoDataIn      : out   std_logic_vector(255 downto 0);
+    du1DramRdFifoDataOut     : in    std_logic_vector(511 downto 0);
+    du1DramWrFifoDataIn      : out   std_logic_vector(511 downto 0);
     du1DramWrFifoFull        : in    std_logic;
-    du1DramWrFifoMaskData    : out   std_logic_vector(31 downto 0);
+    du1DramWrFifoMaskData    : out   std_logic_vector(63 downto 0);
     du1DramWrFifoWrEn        : out   std_logic;
 
     -----------------------------------------------------------------------------
