@@ -4378,6 +4378,45 @@ set_input_delay -clock [get_clocks $isoClk] -clock_fall -add_delay \
 -min [expr 0 - ($tosk + $tpcb)] \
 [get_ports $isoData]
 
+#########################################################################################
+# Outside LV Window DMA Port Crossings
+#
+# These constraints are provided by LV FPGA code generation along with TheWindow clock crossing
+# constraints.  However, these actually apply to paths that are outside TheWindow.  We have
+# moved TheWindow into a component and require set_instance to make the constraint paths work.
+# So we must move these constriants outside the group of TheWindow constraints so that they are
+# outside TheWindow set_instance group.
+
+set DmaPortCommCrossingFrom [get_cells {HostInterfacex/*/*DmaPortCommIfcIrqInterfacex/DoubleSyncSLx*iDlySigx/*FDCPEx} -filter {IS_SEQUENTIAL==true}]
+set DmaPortCommCrossingTo [get_cells {HostInterfacex/*/*DmaPortCommIfcIrqInterfacex/DoubleSyncSLx*DoubleSyncAsyncInBasex/oSig_msx/*FDCPEx} -filter {IS_SEQUENTIAL==true}]
+
+set_max_delay -from $DmaPortCommCrossingFrom -to $DmaPortCommCrossingTo -datapath_only 100.0000000000
+#########################################################################################
+
+
+#########################################################################################
+# Dram2DP Crossings
+#
+# These constraints are normally provided by LV FPGA that places Dram2DP.xdc in the generated files
+# folder.  However, Macallan needs to customize these constraints so must add them here.  The old
+# constraints provided by LV FPGA and Dram2DP.xdc will be ignored by Vivado.
+#
+
+set_false_path -from [get_pins -hierarchical {*bNumOfMemBuffers*/C}] \
+-to   [all_registers -edge_triggered]
+
+set_false_path -from [get_pins -hierarchical {*bLowLatencyBuffer*/C}] \
+-to   [all_registers -edge_triggered]
+
+set_false_path -from [get_pins -hierarchical {*bBaseAddrTable*/C}] \
+-to   [all_registers -edge_triggered]
+
+set_false_path -from [get_pins -hierarchical {*bBaggageBits*/C}] \
+-to   [all_registers -edge_triggered]
+
+set_false_path -from [get_pins -hierarchical {*Dram2DP*ClearFDCP*/C}] \
+-to   [all_registers -edge_triggered]
+#########################################################################################
 
 ## Start add from file TimingMacallanConfig.xdc
 # #############################################################################
@@ -5127,6 +5166,8 @@ add_cells_to_pblock [get_pblocks $pciePblock] [get_cells TimingEnginex/TimingPci
 
 # BEGIN_LV_FPGA_CONSTRAINTS
 
+set lvfpga_saved_instance [current_instance]
+
 # BEGIN_LV_FPGA_PERIOD_CONSTRAINTS
 
 #LabVIEWFPGA_Macro macro_periodConstraints
@@ -5139,18 +5180,13 @@ add_cells_to_pblock [get_pblocks $pciePblock] [get_cells TimingEnginex/TimingPci
 
 # END_LV_FPGA_CLIP_CONSTRAINTS
 
-set TopInstance0 [current_instance .]
-current_instance TheLvWindowWrapper
-
 # BEGIN_LV_FPGA_FROM_TO_CONSTRAINTS
 
 #LabVIEWFPGA_Macro macro_fromToConstraints
 
 # END_LV_FPGA_FROM_TO_CONSTRAINTS
 
-current_instance -quiet
-current_instance $TopInstance0
-
+current_instance $lvfpga_saved_instance
 
 # END_LV_FPGA_CONSTRAINTS
 ################################################################################

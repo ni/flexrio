@@ -1228,7 +1228,7 @@ begin  -- architecture struct
   ---------------------------------------------------------------------------------------
   --vhook_i TheLvWindowFlatWrapper        TheLvWindowWrapper
   --vhook_# Clocking
-  --vhook_a aBusReset                   to_StdLogic(abBusReset)
+  --vhook_a aBusReset                   to_StdLogic(aBusReset)
   --vhook_a ReliableClkIn               ReliableClk
   --vhook_a PllClk80                    BusClk
   --vhook_a {^d(Input|Output)StreamInterface(To|From)Fifo$} d$1StreamInterface$2FifoFlat
@@ -1277,7 +1277,7 @@ begin  -- architecture struct
   --vhook_a dLlbDmaClkSocket            DmaClk
   TheLvWindowWrapper: TheLvWindowFlatWrapper
     port map (
-      aBusReset                           => to_StdLogic(abBusReset),                       --in  std_logic
+      aBusReset                           => to_StdLogic(aBusReset),                        --in  std_logic
       bRegPortIn                          => bRegPortInFlat,                                --in  std_logic_vector(kRegPortInSize-1:0)
       bRegPortOut                         => bRegPortOutFlat,                               --out std_logic_vector(kRegPortOutSize-1:0)
       bRegPortTimeout                     => to_stdlogic(bLvWindowRegPortTimeout),          --in  std_logic
