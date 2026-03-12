@@ -1,4 +1,7 @@
-objects/GeneratedHDL/PkgTheWindowFlatWrapper.vhd
+../objects/deps/ni.hw-flexrio.dram.26.0.0.9-ci-passed-main-d/source/virtexultrascaleplus/sasquatch/rtl-lvfpga/SasquatchBank0Dram.vhd
+../objects/deps/ni.hw-flexrio.dram.26.0.0.9-ci-passed-main-d/source/virtexultrascaleplus/sasquatch/rtl-lvfpga/SasquatchBank1Dram.vhd
+../objects/deps/ni.hw-flexrio.dram.26.0.0.9-ci-passed-main-d/source/virtexultrascaleplus/sasquatch/rtl-lvfpga/SasquatchDram.vhd
+../objects/deps/ni.hw-flexrio.dram.26.0.0.9-ci-passed-main-d/source/virtexultrascaleplus/sasquatch/rtl-lvfpga/SasquatchDramWrapper.vhd
+../objects/deps/ni.hw-flexrio.dram.26.0.0.9-ci-passed-main-d/source/virtexultrascaleplus/sasquatch/rtl-lvfpga/SasquatchEmptyDram.vhd
 objects/GeneratedHDL/TheWindow.vhd
-objects/GeneratedHDL/TheWindowFlatWrapper.vhd
 rtl-lvfpga/SasquatchTopTemplate.vhd

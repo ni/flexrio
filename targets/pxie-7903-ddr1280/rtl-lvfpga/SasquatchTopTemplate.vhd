@@ -646,10 +646,10 @@ architecture struct of SasquatchTopTemplate is
   signal du0DramAddrFifoWrEn: std_logic;
   signal du0DramPhyInitDone: std_logic;
   signal du0DramRdDataValid: std_logic;
-  signal du0DramRdFifoDataOut: std_logic_vector(639 downto 0);
-  signal du0DramWrFifoDataIn: std_logic_vector(639 downto 0);
+  signal du0DramRdFifoDataOut: std_logic_vector(1279 downto 0);
+  signal du0DramWrFifoDataIn: std_logic_vector(1279 downto 0);
   signal du0DramWrFifoFull: std_logic;
-  signal du0DramWrFifoMaskData: std_logic_vector(79 downto 0);
+  signal du0DramWrFifoMaskData: std_logic_vector(159 downto 0);
   signal du0DramWrFifoWrEn: std_logic;
   signal du1DramAddrFifoAddr: std_logic_vector(29 downto 0);
   signal du1DramAddrFifoCmd: std_logic_vector(2 downto 0);
@@ -657,10 +657,10 @@ architecture struct of SasquatchTopTemplate is
   signal du1DramAddrFifoWrEn: std_logic;
   signal du1DramPhyInitDone: std_logic;
   signal du1DramRdDataValid: std_logic;
-  signal du1DramRdFifoDataOut: std_logic_vector(639 downto 0);
-  signal du1DramWrFifoDataIn: std_logic_vector(639 downto 0);
+  signal du1DramRdFifoDataOut: std_logic_vector(1279 downto 0);
+  signal du1DramWrFifoDataIn: std_logic_vector(1279 downto 0);
   signal du1DramWrFifoFull: std_logic;
-  signal du1DramWrFifoMaskData: std_logic_vector(79 downto 0);
+  signal du1DramWrFifoMaskData: std_logic_vector(159 downto 0);
   signal du1DramWrFifoWrEn: std_logic;
   signal pIntSync100: std_logic;
   signal PxieClk100: std_logic;
@@ -688,7 +688,7 @@ architecture struct of SasquatchTopTemplate is
   signal xHostAxiStreamToClipTReady: std_logic;
   signal xHostAxiStreamToClipTValid: std_logic;
 
-  -- DMA engine Reset
+  -- Inchworm Reset
   signal aBusReset : boolean := true;
 
   signal dFlatHighSpeedSinkFromDma : FlatNiDmaHighSpeedSinkFromDma_t;
@@ -1237,10 +1237,10 @@ begin  -- architecture struct
       du0DramAddrFifoWrEn   => du0DramAddrFifoWrEn,    --in  std_logic
       du0DramWrFifoFull     => du0DramWrFifoFull,      --out std_logic
       du0DramWrFifoWrEn     => du0DramWrFifoWrEn,      --in  std_logic
-      du0DramWrFifoDataIn   => du0DramWrFifoDataIn,    --in  std_logic_vector(639:0)
-      du0DramWrFifoMaskData => du0DramWrFifoMaskData,  --in  std_logic_vector(79:0)
+      du0DramWrFifoDataIn   => du0DramWrFifoDataIn,    --in  std_logic_vector(1279:0)
+      du0DramWrFifoMaskData => du0DramWrFifoMaskData,  --in  std_logic_vector(159:0)
       du0DramRdDataValid    => du0DramRdDataValid,     --out std_logic
-      du0DramRdFifoDataOut  => du0DramRdFifoDataOut,   --out std_logic_vector(639:0)
+      du0DramRdFifoDataOut  => du0DramRdFifoDataOut,   --out std_logic_vector(1279:0)
       Dram1Clk_p            => Dram1Clk_p,             --out std_logic
       Dram1Clk_n            => Dram1Clk_n,             --out std_logic
       dr1DramCs_n           => dr1DramCs_n,            --out std_logic
@@ -1264,10 +1264,10 @@ begin  -- architecture struct
       du1DramAddrFifoWrEn   => du1DramAddrFifoWrEn,    --in  std_logic
       du1DramWrFifoFull     => du1DramWrFifoFull,      --out std_logic
       du1DramWrFifoWrEn     => du1DramWrFifoWrEn,      --in  std_logic
-      du1DramWrFifoDataIn   => du1DramWrFifoDataIn,    --in  std_logic_vector(639:0)
-      du1DramWrFifoMaskData => du1DramWrFifoMaskData,  --in  std_logic_vector(79:0)
+      du1DramWrFifoDataIn   => du1DramWrFifoDataIn,    --in  std_logic_vector(1279:0)
+      du1DramWrFifoMaskData => du1DramWrFifoMaskData,  --in  std_logic_vector(159:0)
       du1DramRdDataValid    => du1DramRdDataValid,     --out std_logic
-      du1DramRdFifoDataOut  => du1DramRdFifoDataOut);  --out std_logic_vector(639:0)
+      du1DramRdFifoDataOut  => du1DramRdFifoDataOut);  --out std_logic_vector(1279:0)
 
   bRegPortOut.Data <= bLvWindowRegPortOut.Data or
                       bRegPortOutDram2DP.Data;

@@ -4,7 +4,7 @@
 % if custom_target:   
   <FPGASourceFilesDirPath>Targets/NI/FPGA/RIO/79XXR/${lv_target_name}/FpgaFiles</FPGASourceFilesDirPath>
 % else:
-  <FPGASourceFilesDirPath>Targets/NI/FPGA/RIO/79XXR/PXIe-7903/FpgaFiles</FPGASourceFilesDirPath>
+  <FPGASourceFilesDirPath>Targets/NI/FPGA/RIO/79XXR/PXIe-7903-DDR1280/FpgaFiles</FPGASourceFilesDirPath>
 % endif
   <DeviceIDs>0x7AEC</DeviceIDs>
   <FPGASynthesisSourceFileList>
@@ -32,14 +32,14 @@
 % if custom_target:   
         <XdcFilePath>Targets/NI/FPGA/RIO/79XXR/${lv_target_name}/FpgaFiles/constraints_place.xdc</XdcFilePath>
 % else:
-        <XdcFilePath>Targets/NI/FPGA/RIO/79XXR/PXIe-7903/FpgaFiles/constraints_place.xdc</XdcFilePath>
+  <XdcFilePath>Targets/NI/FPGA/RIO/79XXR/PXIe-7903-DDR1280/FpgaFiles/constraints_place.xdc</XdcFilePath>
 % endif
       </Process>
     </ProcessPropertyList>
   </FPGACompilation>
 
   <!-- Optional Features -->
-  <:Include what="children">Targets/NI/FPGA/RIO/79XXR/Common/Resource/AppletonDramUtilities.xml</:Include>
+  <:Include what="children">Targets/NI/FPGA/RIO/79XXR/Common/Resource/SasquatchDdr1280DramUtilities.xml</:Include>
 
   <!-- Clocks -->
   <ClockList>
@@ -56,7 +56,7 @@
 % if include_clip_socket:
     <:Include what="children">Targets/NI/FPGA/RIO/79XXR/Common/Resource/SasquatchMgtSocket.xml</:Include>
 % endif
-    <:Include what="children">Targets/NI/FPGA/RIO/79XXR/Common/Resource/SasquatchDramSocketType.xml</:Include>
+    <:Include what="children">Targets/NI/FPGA/RIO/79XXR/Common/Resource/SasquatchDdr1280DramSocketType.xml</:Include>
     <:Include what="children">Targets/NI/FPGA/RIO/79XXR/Common/Resource/RoutingSocket.xml</:Include>
   </CLIPSocketTypeList>
 
