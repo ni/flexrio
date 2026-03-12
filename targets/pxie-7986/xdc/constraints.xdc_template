@@ -11,165 +11,144 @@
 ## 
 ##
 ###################################################################################
-## Start add from file SasquatchBank0Dram.xdc
+## Start add from file AppletonBank0Dram.xdc
 # DRAM Clock creation
 # The DRAM Reference Clock is 133.33 MHz for now
 create_clock -name DramRefClk0 -period 7.5 [get_ports Dram0RefClk_p]
 
 # Treat Vivado schizophrenia by manually locking MMCM and BUFG to the correct bank where DRAM refclk is located
-#set_property LOC MMCM_X0Y5   [get_cells SasquatchDramx/GenBank0.Bank0Dram/Bank0Dram/ddr4_0x/inst/u_ddr4_infrastructure/gen_mmcme4.u_mmcme_adv_inst]
-set_property CLOCK_DEDICATED_ROUTE SAME_CMT_COLUMN [get_nets {SasquatchDramx/GenBank0.Bank0Dram/Bank0Dram/DramRefClk}]
+#set_property LOC MMCM_X0Y5   [get_cells AppletonDramx/GenBank0.Bank0Dram/Bank0Dram/ddr4_0x/inst/u_ddr4_infrastructure/gen_mmcme4.u_mmcme_adv_inst]
+set_property CLOCK_DEDICATED_ROUTE SAME_CMT_COLUMN [get_nets {AppletonDramx/GenBank0.Bank0Dram/Bank0Dram/DramRefClk}]
 
-#set_property DONT_TOUCH TRUE [get_cells SasquatchDramx/GenBank0.Bank0Dram/Bank0Dram/ddr4_0x/inst/u_ddr4_infrastructure/gen_mmcme4.u_mmcme_adv_inst]
-#set_property DONT_TOUCH TRUE [get_nets  SasquatchDramx/GenBank0.Bank0Dram/Bank0Dram/DramRefClkPin]
-#set_property CLOCK_REGION X2Y5 [get_cells -hier -filter {NAME =~ SasquatchDramx/GenBank0.Bank0Dram/Bank0Dram/DramRefClkBufg}]
+#set_property DONT_TOUCH TRUE [get_cells AppletonDramx/GenBank0.Bank0Dram/Bank0Dram/ddr4_0x/inst/u_ddr4_infrastructure/gen_mmcme4.u_mmcme_adv_inst]
+#set_property DONT_TOUCH TRUE [get_nets  AppletonDramx/GenBank0.Bank0Dram/Bank0Dram/DramRefClkPin]
+#set_property CLOCK_REGION X2Y5 [get_cells -hier -filter {NAME =~ AppletonDramx/GenBank0.Bank0Dram/Bank0Dram/DramRefClkBufg}]
 
-set_property IS_LOC_FIXED 0 [get_cells {SasquatchDramx/GenBank0.Bank0Dram/Bank0Dram/ddr4_0x/inst/u_ddr4_infrastructure/gen_mmcme4.u_mmcme_adv_inst}]
-set_property LOC {} [get_cells {SasquatchDramx/GenBank0.Bank0Dram/Bank0Dram/ddr4_0x/inst/u_ddr4_infrastructure/gen_mmcme4.u_mmcme_adv_inst}]
+set_property IS_LOC_FIXED 0 [get_cells {AppletonDramx/GenBank0.Bank0Dram/Bank0Dram/ddr4_0x/inst/u_ddr4_infrastructure/gen_mmcme4.u_mmcme_adv_inst}]
+set_property LOC {} [get_cells {AppletonDramx/GenBank0.Bank0Dram/Bank0Dram/ddr4_0x/inst/u_ddr4_infrastructure/gen_mmcme4.u_mmcme_adv_inst}]
+
 
 # Pins
+set_property PACKAGE_PIN  F29   [get_ports Dram0RefClk_n            ]
+set_property PACKAGE_PIN  F28   [get_ports Dram0RefClk_p            ]
+set_property PACKAGE_PIN  H25   [get_ports Dram0Clk_n               ]
+set_property PACKAGE_PIN  J25   [get_ports Dram0Clk_p               ]
 
-set_property PACKAGE_PIN N16 [get_ports dr0DramAct_n]
-set_property PACKAGE_PIN P13 [get_ports {dr0DramAddr[0]}]
-set_property PACKAGE_PIN P16 [get_ports {dr0DramAddr[10]}]
-set_property PACKAGE_PIN K16 [get_ports {dr0DramAddr[11]}]
-set_property PACKAGE_PIN M16 [get_ports {dr0DramAddr[12]}]
-set_property PACKAGE_PIN R15 [get_ports {dr0DramAddr[13]}]
-set_property PACKAGE_PIN D14 [get_ports {dr0DramAddr[14]}]
-set_property PACKAGE_PIN J13 [get_ports {dr0DramAddr[15]}]
-set_property PACKAGE_PIN H13 [get_ports {dr0DramAddr[16]}]
-set_property PACKAGE_PIN L13 [get_ports {dr0DramAddr[1]}]
-set_property PACKAGE_PIN P14 [get_ports {dr0DramAddr[2]}]
-set_property PACKAGE_PIN M14 [get_ports {dr0DramAddr[3]}]
-set_property PACKAGE_PIN P15 [get_ports {dr0DramAddr[4]}]
-set_property PACKAGE_PIN N14 [get_ports {dr0DramAddr[5]}]
-set_property PACKAGE_PIN H16 [get_ports {dr0DramAddr[6]}]
-set_property PACKAGE_PIN R16 [get_ports {dr0DramAddr[7]}]
-set_property PACKAGE_PIN K15 [get_ports {dr0DramAddr[8]}]
-set_property PACKAGE_PIN N13 [get_ports {dr0DramAddr[9]}]
-set_property PACKAGE_PIN H17 [get_ports {dr0DramBankAddr[0]}]
-set_property PACKAGE_PIN K13 [get_ports {dr0DramBankAddr[1]}]
-set_property PACKAGE_PIN F14 [get_ports {dr0DramBg[0]}]
-set_property PACKAGE_PIN J16 [get_ports {Dram0Clk_p}]
-set_property PACKAGE_PIN J15 [get_ports {Dram0Clk_n}]
-set_property PACKAGE_PIN C13 [get_ports {dr0DramClkEn}]
-set_property PACKAGE_PIN L15 [get_ports {dr0DramCs_n}]
-set_property PACKAGE_PIN G14 [get_ports {dr0DramDmDbi_n[0]}]
-set_property PACKAGE_PIN D13 [get_ports {dr0DramDmDbi_n[1]}]
-set_property PACKAGE_PIN N17 [get_ports {dr0DramDmDbi_n[2]}]
-set_property PACKAGE_PIN L17 [get_ports {dr0DramDmDbi_n[3]}]
-set_property PACKAGE_PIN H19 [get_ports {dr0DramDmDbi_n[4]}]
-set_property PACKAGE_PIN D19 [get_ports {dr0DramDmDbi_n[5]}]
-set_property PACKAGE_PIN R21 [get_ports {dr0DramDmDbi_n[6]}]
-set_property PACKAGE_PIN L25 [get_ports {dr0DramDmDbi_n[7]}]
-set_property PACKAGE_PIN G25 [get_ports {dr0DramDmDbi_n[8]}]
-set_property PACKAGE_PIN C22 [get_ports {dr0DramDmDbi_n[9]}]
-set_property PACKAGE_PIN E13 [get_ports {dr0DramDq[0]}]
-set_property PACKAGE_PIN A13 [get_ports {dr0DramDq[10]}]
-set_property PACKAGE_PIN A17 [get_ports {dr0DramDq[11]}]
-set_property PACKAGE_PIN B14 [get_ports {dr0DramDq[12]}]
-set_property PACKAGE_PIN B16 [get_ports {dr0DramDq[13]}]
-set_property PACKAGE_PIN C14 [get_ports {dr0DramDq[14]}]
-set_property PACKAGE_PIN B17 [get_ports {dr0DramDq[15]}]
-set_property PACKAGE_PIN P18 [get_ports {dr0DramDq[16]}]
-set_property PACKAGE_PIN M19 [get_ports {dr0DramDq[17]}]
-set_property PACKAGE_PIN N18 [get_ports {dr0DramDq[18]}]
-set_property PACKAGE_PIN M20 [get_ports {dr0DramDq[19]}]
-set_property PACKAGE_PIN D15 [get_ports {dr0DramDq[1]}]
-set_property PACKAGE_PIN P20 [get_ports {dr0DramDq[20]}]
-set_property PACKAGE_PIN N21 [get_ports {dr0DramDq[21]}]
-set_property PACKAGE_PIN R20 [get_ports {dr0DramDq[22]}]
-set_property PACKAGE_PIN M21 [get_ports {dr0DramDq[23]}]
-set_property PACKAGE_PIN L20 [get_ports {dr0DramDq[24]}]
-set_property PACKAGE_PIN J20 [get_ports {dr0DramDq[25]}]
-set_property PACKAGE_PIN L18 [get_ports {dr0DramDq[26]}]
-set_property PACKAGE_PIN J18 [get_ports {dr0DramDq[27]}]
-set_property PACKAGE_PIN L19 [get_ports {dr0DramDq[28]}]
-set_property PACKAGE_PIN K20 [get_ports {dr0DramDq[29]}]
-set_property PACKAGE_PIN F15 [get_ports {dr0DramDq[2]}]
-set_property PACKAGE_PIN K18 [get_ports {dr0DramDq[30]}]
-set_property PACKAGE_PIN J19 [get_ports {dr0DramDq[31]}]
-set_property PACKAGE_PIN F17 [get_ports {dr0DramDq[32]}]
-set_property PACKAGE_PIN F20 [get_ports {dr0DramDq[33]}]
-set_property PACKAGE_PIN F19 [get_ports {dr0DramDq[34]}]
-set_property PACKAGE_PIN E21 [get_ports {dr0DramDq[35]}]
-set_property PACKAGE_PIN F18 [get_ports {dr0DramDq[36]}]
-set_property PACKAGE_PIN G19 [get_ports {dr0DramDq[37]}]
-set_property PACKAGE_PIN E20 [get_ports {dr0DramDq[38]}]
-set_property PACKAGE_PIN G20 [get_ports {dr0DramDq[39]}]
-set_property PACKAGE_PIN D16 [get_ports {dr0DramDq[3]}]
-set_property PACKAGE_PIN A20 [get_ports {dr0DramDq[40]}]
-set_property PACKAGE_PIN B21 [get_ports {dr0DramDq[41]}]
-set_property PACKAGE_PIN B20 [get_ports {dr0DramDq[42]}]
-set_property PACKAGE_PIN D20 [get_ports {dr0DramDq[43]}]
-set_property PACKAGE_PIN B19 [get_ports {dr0DramDq[44]}]
-set_property PACKAGE_PIN C21 [get_ports {dr0DramDq[45]}]
-set_property PACKAGE_PIN A19 [get_ports {dr0DramDq[46]}]
-set_property PACKAGE_PIN D21 [get_ports {dr0DramDq[47]}]
-set_property PACKAGE_PIN N23 [get_ports {dr0DramDq[48]}]
-set_property PACKAGE_PIN P25 [get_ports {dr0DramDq[49]}]
-set_property PACKAGE_PIN F13 [get_ports {dr0DramDq[4]}]
-set_property PACKAGE_PIN M25 [get_ports {dr0DramDq[50]}]
-set_property PACKAGE_PIN R25 [get_ports {dr0DramDq[51]}]
-set_property PACKAGE_PIN N22 [get_ports {dr0DramDq[52]}]
-set_property PACKAGE_PIN P23 [get_ports {dr0DramDq[53]}]
-set_property PACKAGE_PIN M24 [get_ports {dr0DramDq[54]}]
-set_property PACKAGE_PIN M22 [get_ports {dr0DramDq[55]}]
-set_property PACKAGE_PIN J24 [get_ports {dr0DramDq[56]}]
-set_property PACKAGE_PIN K22 [get_ports {dr0DramDq[57]}]
-set_property PACKAGE_PIN J23 [get_ports {dr0DramDq[58]}]
-set_property PACKAGE_PIN K23 [get_ports {dr0DramDq[59]}]
-set_property PACKAGE_PIN E16 [get_ports {dr0DramDq[5]}]
-set_property PACKAGE_PIN H23 [get_ports {dr0DramDq[60]}]
-set_property PACKAGE_PIN L23 [get_ports {dr0DramDq[61]}]
-set_property PACKAGE_PIN H24 [get_ports {dr0DramDq[62]}]
-set_property PACKAGE_PIN L22 [get_ports {dr0DramDq[63]}]
-set_property PACKAGE_PIN G22 [get_ports {dr0DramDq[64]}]
-set_property PACKAGE_PIN D24 [get_ports {dr0DramDq[65]}]
-set_property PACKAGE_PIN F22 [get_ports {dr0DramDq[66]}]
-set_property PACKAGE_PIN D23 [get_ports {dr0DramDq[67]}]
-set_property PACKAGE_PIN F24 [get_ports {dr0DramDq[68]}]
-set_property PACKAGE_PIN E25 [get_ports {dr0DramDq[69]}]
-set_property PACKAGE_PIN G15 [get_ports {dr0DramDq[6]}]
-set_property PACKAGE_PIN F23 [get_ports {dr0DramDq[70]}]
-set_property PACKAGE_PIN D25 [get_ports {dr0DramDq[71]}]
-set_property PACKAGE_PIN A24 [get_ports {dr0DramDq[72]}]
-set_property PACKAGE_PIN A25 [get_ports {dr0DramDq[73]}]
-set_property PACKAGE_PIN B24 [get_ports {dr0DramDq[74]}]
-set_property PACKAGE_PIN B26 [get_ports {dr0DramDq[75]}]
-set_property PACKAGE_PIN C23 [get_ports {dr0DramDq[76]}]
-set_property PACKAGE_PIN B25 [get_ports {dr0DramDq[77]}]
-set_property PACKAGE_PIN C24 [get_ports {dr0DramDq[78]}]
-set_property PACKAGE_PIN C26 [get_ports {dr0DramDq[79]}]
-set_property PACKAGE_PIN E15 [get_ports {dr0DramDq[7]}]
-set_property PACKAGE_PIN A14 [get_ports {dr0DramDq[8]}]
-set_property PACKAGE_PIN C16 [get_ports {dr0DramDq[9]}]
-set_property PACKAGE_PIN G17 [get_ports {dr0DramDqs_p[0]}]
-set_property PACKAGE_PIN G16 [get_ports {dr0DramDqs_n[0]}]
-set_property PACKAGE_PIN B15 [get_ports {dr0DramDqs_p[1]}]
-set_property PACKAGE_PIN A15 [get_ports {dr0DramDqs_n[1]}]
-set_property PACKAGE_PIN P19 [get_ports {dr0DramDqs_p[2]}]
-set_property PACKAGE_PIN N19 [get_ports {dr0DramDqs_n[2]}]
-set_property PACKAGE_PIN J21 [get_ports {dr0DramDqs_p[3]}]
-set_property PACKAGE_PIN H21 [get_ports {dr0DramDqs_n[3]}]
-set_property PACKAGE_PIN E18 [get_ports {dr0DramDqs_p[4]}]
-set_property PACKAGE_PIN E17 [get_ports {dr0DramDqs_n[4]}]
-set_property PACKAGE_PIN D18 [get_ports {dr0DramDqs_p[5]}]
-set_property PACKAGE_PIN C18 [get_ports {dr0DramDqs_n[5]}]
-set_property PACKAGE_PIN P24 [get_ports {dr0DramDqs_p[6]}]
-set_property PACKAGE_PIN N24 [get_ports {dr0DramDqs_n[6]}]
-set_property PACKAGE_PIN K25 [get_ports {dr0DramDqs_p[7]}]
-set_property PACKAGE_PIN J25 [get_ports {dr0DramDqs_n[7]}]
-set_property PACKAGE_PIN E23 [get_ports {dr0DramDqs_p[8]}]
-set_property PACKAGE_PIN E22 [get_ports {dr0DramDqs_n[8]}]
-set_property PACKAGE_PIN A23 [get_ports {dr0DramDqs_p[9]}]
-set_property PACKAGE_PIN A22 [get_ports {dr0DramDqs_n[9]}]
-set_property PACKAGE_PIN L14 [get_ports {dr0DramOdt}]
-set_property PACKAGE_PIN F25 [get_ports dr0DramReset_n]
-set_property PACKAGE_PIN J14 [get_ports Dram0RefClk_p]
-set_property PACKAGE_PIN H14 [get_ports Dram0RefClk_n]
+set_property PACKAGE_PIN  A26   [get_ports dr0DramAct_n             ]
+set_property PACKAGE_PIN  F31   [get_ports dr0DramAddr[0]           ]
+set_property PACKAGE_PIN  E30   [get_ports dr0DramAddr[1]           ]
+set_property PACKAGE_PIN  C29   [get_ports dr0DramAddr[10]          ]
+set_property PACKAGE_PIN  E29   [get_ports dr0DramAddr[11]          ]
+set_property PACKAGE_PIN  J28   [get_ports dr0DramAddr[12]          ]
+set_property PACKAGE_PIN  F27   [get_ports dr0DramAddr[13]          ]
+set_property PACKAGE_PIN  D26   [get_ports dr0DramAddr[14]          ]
+set_property PACKAGE_PIN  B31   [get_ports dr0DramAddr[15]          ]
+set_property PACKAGE_PIN  D30   [get_ports dr0DramAddr[16]          ]
+set_property PACKAGE_PIN  D28   [get_ports dr0DramAddr[2]           ]
+set_property PACKAGE_PIN  A31   [get_ports dr0DramAddr[3]           ]
+set_property PACKAGE_PIN  G30   [get_ports dr0DramAddr[4]           ]
+set_property PACKAGE_PIN  G31   [get_ports dr0DramAddr[5]           ]
+set_property PACKAGE_PIN  A28   [get_ports dr0DramAddr[6]           ]
+set_property PACKAGE_PIN  E31   [get_ports dr0DramAddr[7]           ]
+set_property PACKAGE_PIN  C27   [get_ports dr0DramAddr[8]           ]
+set_property PACKAGE_PIN  H30   [get_ports dr0DramAddr[9]           ]
+set_property PACKAGE_PIN  B27   [get_ports dr0DramBankAddr[0]       ]
+set_property PACKAGE_PIN  A29   [get_ports dr0DramBankAddr[1]       ]
+set_property PACKAGE_PIN  A27   [get_ports dr0DramBg[0]             ]
+set_property PACKAGE_PIN  E28   [get_ports dr0DramClkEn             ]
+set_property PACKAGE_PIN  B29   [get_ports dr0DramCs_n              ]
+set_property PACKAGE_PIN  J15   [get_ports dr0DramDmDbi_n[0]        ]
+set_property PACKAGE_PIN  M16   [get_ports dr0DramDmDbi_n[1]        ]
+set_property PACKAGE_PIN  C22   [get_ports dr0DramDmDbi_n[2]        ]
+set_property PACKAGE_PIN  F23   [get_ports dr0DramDmDbi_n[3]        ]
+set_property PACKAGE_PIN  J22   [get_ports dr0DramDmDbi_n[4]        ]
+set_property PACKAGE_PIN  M21   [get_ports dr0DramDmDbi_n[5]        ]
+set_property PACKAGE_PIN  C18   [get_ports dr0DramDmDbi_n[6]        ]
+set_property PACKAGE_PIN  F19   [get_ports dr0DramDmDbi_n[7]        ]
+set_property PACKAGE_PIN  G17   [get_ports dr0DramDq[0]             ]
+set_property PACKAGE_PIN  H14   [get_ports dr0DramDq[1]             ]
+set_property PACKAGE_PIN  K19   [get_ports dr0DramDq[10]            ]
+set_property PACKAGE_PIN  K15   [get_ports dr0DramDq[11]            ]
+set_property PACKAGE_PIN  L19   [get_ports dr0DramDq[12]            ]
+set_property PACKAGE_PIN  J16   [get_ports dr0DramDq[13]            ]
+set_property PACKAGE_PIN  L18   [get_ports dr0DramDq[14]            ]
+set_property PACKAGE_PIN  K16   [get_ports dr0DramDq[15]            ]
+set_property PACKAGE_PIN  A24   [get_ports dr0DramDq[16]            ]
+set_property PACKAGE_PIN  A23   [get_ports dr0DramDq[17]            ]
+set_property PACKAGE_PIN  B24   [get_ports dr0DramDq[18]            ]
+set_property PACKAGE_PIN  A21   [get_ports dr0DramDq[19]            ]
+set_property PACKAGE_PIN  G16   [get_ports dr0DramDq[2]             ]
+set_property PACKAGE_PIN  B25   [get_ports dr0DramDq[20]            ]
+set_property PACKAGE_PIN  B20   [get_ports dr0DramDq[21]            ]
+set_property PACKAGE_PIN  B21   [get_ports dr0DramDq[22]            ]
+set_property PACKAGE_PIN  C20   [get_ports dr0DramDq[23]            ]
+set_property PACKAGE_PIN  E25   [get_ports dr0DramDq[24]            ]
+set_property PACKAGE_PIN  D21   [get_ports dr0DramDq[25]            ]
+set_property PACKAGE_PIN  D25   [get_ports dr0DramDq[26]            ]
+set_property PACKAGE_PIN  E21   [get_ports dr0DramDq[27]            ]
+set_property PACKAGE_PIN  E24   [get_ports dr0DramDq[28]            ]
+set_property PACKAGE_PIN  E20   [get_ports dr0DramDq[29]            ]
+set_property PACKAGE_PIN  G14   [get_ports dr0DramDq[3]             ]
+set_property PACKAGE_PIN  E23   [get_ports dr0DramDq[30]            ]
+set_property PACKAGE_PIN  D20   [get_ports dr0DramDq[31]            ]
+set_property PACKAGE_PIN  F21   [get_ports dr0DramDq[32]            ]
+set_property PACKAGE_PIN  J21   [get_ports dr0DramDq[33]            ]
+set_property PACKAGE_PIN  G21   [get_ports dr0DramDq[34]            ]
+set_property PACKAGE_PIN  G24   [get_ports dr0DramDq[35]            ]
+set_property PACKAGE_PIN  F22   [get_ports dr0DramDq[36]            ]
+set_property PACKAGE_PIN  H24   [get_ports dr0DramDq[37]            ]
+set_property PACKAGE_PIN  G22   [get_ports dr0DramDq[38]            ]
+set_property PACKAGE_PIN  J20   [get_ports dr0DramDq[39]            ]
+set_property PACKAGE_PIN  H18   [get_ports dr0DramDq[4]             ]
+set_property PACKAGE_PIN  M20   [get_ports dr0DramDq[40]            ]
+set_property PACKAGE_PIN  L23   [get_ports dr0DramDq[41]            ]
+set_property PACKAGE_PIN  M19   [get_ports dr0DramDq[42]            ]
+set_property PACKAGE_PIN  K23   [get_ports dr0DramDq[43]            ]
+set_property PACKAGE_PIN  K21   [get_ports dr0DramDq[44]            ]
+set_property PACKAGE_PIN  L24   [get_ports dr0DramDq[45]            ]
+set_property PACKAGE_PIN  K20   [get_ports dr0DramDq[46]            ]
+set_property PACKAGE_PIN  K24   [get_ports dr0DramDq[47]            ]
+set_property PACKAGE_PIN  A17   [get_ports dr0DramDq[48]            ]
+set_property PACKAGE_PIN  C14   [get_ports dr0DramDq[49]            ]
+set_property PACKAGE_PIN  H17   [get_ports dr0DramDq[5]             ]
+set_property PACKAGE_PIN  A16   [get_ports dr0DramDq[50]            ]
+set_property PACKAGE_PIN  B17   [get_ports dr0DramDq[51]            ]
+set_property PACKAGE_PIN  A18   [get_ports dr0DramDq[52]            ]
+set_property PACKAGE_PIN  C15   [get_ports dr0DramDq[53]            ]
+set_property PACKAGE_PIN  A19   [get_ports dr0DramDq[54]            ]
+set_property PACKAGE_PIN  B19   [get_ports dr0DramDq[55]            ]
+set_property PACKAGE_PIN  D17   [get_ports dr0DramDq[56]            ]
+set_property PACKAGE_PIN  E18   [get_ports dr0DramDq[57]            ]
+set_property PACKAGE_PIN  D18   [get_ports dr0DramDq[58]            ]
+set_property PACKAGE_PIN  D15   [get_ports dr0DramDq[59]            ]
+set_property PACKAGE_PIN  G19   [get_ports dr0DramDq[6]             ]
+set_property PACKAGE_PIN  E19   [get_ports dr0DramDq[60]            ]
+set_property PACKAGE_PIN  F16   [get_ports dr0DramDq[61]            ]
+set_property PACKAGE_PIN  D16   [get_ports dr0DramDq[62]            ]
+set_property PACKAGE_PIN  F17   [get_ports dr0DramDq[63]            ]
+set_property PACKAGE_PIN  H19   [get_ports dr0DramDq[7]             ]
+set_property PACKAGE_PIN  K18   [get_ports dr0DramDq[8]             ]
+set_property PACKAGE_PIN  K14   [get_ports dr0DramDq[9]             ]
+set_property PACKAGE_PIN  F14   [get_ports dr0DramDqs_n[0]          ]
+set_property PACKAGE_PIN  L16   [get_ports dr0DramDqs_n[1]          ]
+set_property PACKAGE_PIN  A22   [get_ports dr0DramDqs_n[2]          ]
+set_property PACKAGE_PIN  D23   [get_ports dr0DramDqs_n[3]          ]
+set_property PACKAGE_PIN  G20   [get_ports dr0DramDqs_n[4]          ]
+set_property PACKAGE_PIN  L22   [get_ports dr0DramDqs_n[5]          ]
+set_property PACKAGE_PIN  B15   [get_ports dr0DramDqs_n[6]          ]
+set_property PACKAGE_PIN  E15   [get_ports dr0DramDqs_n[7]          ]
+set_property PACKAGE_PIN  G15   [get_ports dr0DramDqs_p[0]          ]
+set_property PACKAGE_PIN  L17   [get_ports dr0DramDqs_p[1]          ]
+set_property PACKAGE_PIN  B22   [get_ports dr0DramDqs_p[2]          ]
+set_property PACKAGE_PIN  D22   [get_ports dr0DramDqs_p[3]          ]
+set_property PACKAGE_PIN  H20   [get_ports dr0DramDqs_p[4]          ]
+set_property PACKAGE_PIN  L21   [get_ports dr0DramDqs_p[5]          ]
+set_property PACKAGE_PIN  B16   [get_ports dr0DramDqs_p[6]          ]
+set_property PACKAGE_PIN  E16   [get_ports dr0DramDqs_p[7]          ]
+set_property PACKAGE_PIN  C28   [get_ports dr0DramOdt               ]
+set_property PACKAGE_PIN  D31   [get_ports dr0DramReset_n           ]
+set_property PACKAGE_PIN  M26   [get_ports dr0DramTestMode          ]
 
-set_property PACKAGE_PIN H22    [get_ports dr0DramTestMode          ]
 
 ######################################################
 # Pin Properties
@@ -276,165 +255,144 @@ set_property INTERFACE Ddr4_Bank0 \
 [get_ports dr0DramTestMode]
 
 
-## Start add from file SasquatchBank1Dram.xdc
+## Start add from file AppletonBank1Dram.xdc
 # DRAM Clock creation
 # The DRAM Reference Clock is 133.33 MHz for now
 create_clock -name DramRefClk1 -period 7.5 [get_ports Dram1RefClk_p]
 
 # Treat Vivado schizophrenia by manually locking MMCM and BUFG to the correct bank where DRAM refclk is located
-#set_property LOC MMCM_X0Y2   [get_cells SasquatchDramx/GenBank1.Bank1Dram/Bank1Dram/ddr4_0x/inst/u_ddr4_infrastructure/gen_mmcme4.u_mmcme_adv_inst]
-set_property CLOCK_DEDICATED_ROUTE SAME_CMT_COLUMN [get_nets {SasquatchDramx/GenBank1.Bank1Dram/Bank1Dram/DramRefClk}]
+#set_property LOC MMCM_X0Y2   [get_cells AppletonDramx/GenBank1.Bank1Dram/Bank1Dram/ddr4_0x/inst/u_ddr4_infrastructure/gen_mmcme4.u_mmcme_adv_inst]
+set_property CLOCK_DEDICATED_ROUTE SAME_CMT_COLUMN [get_nets {AppletonDramx/GenBank1.Bank1Dram/Bank1Dram/DramRefClk}]
 
-#set_property DONT_TOUCH TRUE [get_cells SasquatchDramx/GenBank1.Bank1Dram/Bank1Dram/ddr4_0x/inst/u_ddr4_infrastructure/gen_mmcme4.u_mmcme_adv_inst]
-#set_property DONT_TOUCH TRUE [get_nets  SasquatchDramx/GenBank1.Bank1Dram/Bank1Dram/DramRefClkPin]
-#set_property CLOCK_REGION X2Y2 [get_cells -hier -filter {NAME =~ SasquatchDramx/GenBank1.Bank1Dram/Bank1Dram/DramRefClkBufg}]
+#set_property DONT_TOUCH TRUE [get_cells AppletonDramx/GenBank1.Bank1Dram/Bank1Dram/ddr4_0x/inst/u_ddr4_infrastructure/gen_mmcme4.u_mmcme_adv_inst]
+#set_property DONT_TOUCH TRUE [get_nets  AppletonDramx/GenBank1.Bank1Dram/Bank1Dram/DramRefClkPin]
+#set_property CLOCK_REGION X2Y2 [get_cells -hier -filter {NAME =~ AppletonDramx/GenBank1.Bank1Dram/Bank1Dram/DramRefClkBufg}]
 
-set_property IS_LOC_FIXED 0 [get_cells {SasquatchDramx/GenBank1.Bank1Dram/Bank1Dram/ddr4_0x/inst/u_ddr4_infrastructure/gen_mmcme4.u_mmcme_adv_inst}]
-set_property LOC {} [get_cells {SasquatchDramx/GenBank1.Bank1Dram/Bank1Dram/ddr4_0x/inst/u_ddr4_infrastructure/gen_mmcme4.u_mmcme_adv_inst}]
+set_property IS_LOC_FIXED 0 [get_cells {AppletonDramx/GenBank1.Bank1Dram/Bank1Dram/ddr4_0x/inst/u_ddr4_infrastructure/gen_mmcme4.u_mmcme_adv_inst}]
+set_property LOC {} [get_cells {AppletonDramx/GenBank1.Bank1Dram/Bank1Dram/ddr4_0x/inst/u_ddr4_infrastructure/gen_mmcme4.u_mmcme_adv_inst}]
+
 
 # Pins
+set_property PACKAGE_PIN  AM24  [get_ports Dram1RefClk_n            ]
+set_property PACKAGE_PIN  AM23  [get_ports Dram1RefClk_p            ]
+set_property PACKAGE_PIN  AH27  [get_ports Dram1Clk_n               ]
+set_property PACKAGE_PIN  AH26  [get_ports Dram1Clk_p               ]
 
-set_property PACKAGE_PIN U31 [get_ports {dr1DramAct_n}]
-set_property PACKAGE_PIN V33 [get_ports {dr1DramAddr[0]}]
-set_property PACKAGE_PIN U34 [get_ports {dr1DramAddr[10]}]
-set_property PACKAGE_PIN V31 [get_ports {dr1DramAddr[11]}]
-set_property PACKAGE_PIN T30 [get_ports {dr1DramAddr[12]}]
-set_property PACKAGE_PIN R33 [get_ports {dr1DramAddr[13]}]
-set_property PACKAGE_PIN M32 [get_ports {dr1DramAddr[14]}]
-set_property PACKAGE_PIN R31 [get_ports {dr1DramAddr[15]}]
-set_property PACKAGE_PIN P30 [get_ports {dr1DramAddr[16]}]
-set_property PACKAGE_PIN T34 [get_ports {dr1DramAddr[1]}]
-set_property PACKAGE_PIN V32 [get_ports {dr1DramAddr[2]}]
-set_property PACKAGE_PIN T32 [get_ports {dr1DramAddr[3]}]
-set_property PACKAGE_PIN U32 [get_ports {dr1DramAddr[4]}]
-set_property PACKAGE_PIN P33 [get_ports {dr1DramAddr[5]}]
-set_property PACKAGE_PIN M34 [get_ports {dr1DramAddr[6]}]
-set_property PACKAGE_PIN P34 [get_ports {dr1DramAddr[7]}]
-set_property PACKAGE_PIN N34 [get_ports {dr1DramAddr[8]}]
-set_property PACKAGE_PIN T33 [get_ports {dr1DramAddr[9]}]
-set_property PACKAGE_PIN L34 [get_ports {dr1DramBankAddr[0]}]
-set_property PACKAGE_PIN R32 [get_ports {dr1DramBankAddr[1]}]
-set_property PACKAGE_PIN K34 [get_ports {dr1DramBg[0]}]
-set_property PACKAGE_PIN P31 [get_ports {Dram1Clk_p}]
-set_property PACKAGE_PIN N31 [get_ports {Dram1Clk_n}]
-set_property PACKAGE_PIN F30 [get_ports {dr1DramClkEn}]
-set_property PACKAGE_PIN R30 [get_ports {dr1DramCs_n}]
-set_property PACKAGE_PIN M31 [get_ports {dr1DramDmDbi_n[0]}]
-set_property PACKAGE_PIN G30 [get_ports {dr1DramDmDbi_n[1]}]
-set_property PACKAGE_PIN H37 [get_ports {dr1DramDmDbi_n[2]}]
-set_property PACKAGE_PIN E40 [get_ports {dr1DramDmDbi_n[3]}]
-set_property PACKAGE_PIN C36 [get_ports {dr1DramDmDbi_n[4]}]
-set_property PACKAGE_PIN B34 [get_ports {dr1DramDmDbi_n[5]}]
-set_property PACKAGE_PIN T28 [get_ports {dr1DramDmDbi_n[6]}]
-set_property PACKAGE_PIN M29 [get_ports {dr1DramDmDbi_n[7]}]
-set_property PACKAGE_PIN J26 [get_ports {dr1DramDmDbi_n[8]}]
-set_property PACKAGE_PIN C27 [get_ports {dr1DramDmDbi_n[9]}]
-set_property PACKAGE_PIN J31 [get_ports {dr1DramDq[0]}]
-set_property PACKAGE_PIN F33 [get_ports {dr1DramDq[10]}]
-set_property PACKAGE_PIN G32 [get_ports {dr1DramDq[11]}]
-set_property PACKAGE_PIN E33 [get_ports {dr1DramDq[12]}]
-set_property PACKAGE_PIN H31 [get_ports {dr1DramDq[13]}]
-set_property PACKAGE_PIN E32 [get_ports {dr1DramDq[14]}]
-set_property PACKAGE_PIN G31 [get_ports {dr1DramDq[15]}]
-set_property PACKAGE_PIN G37 [get_ports {dr1DramDq[16]}]
-set_property PACKAGE_PIN F35 [get_ports {dr1DramDq[17]}]
-set_property PACKAGE_PIN F37 [get_ports {dr1DramDq[18]}]
-set_property PACKAGE_PIN F34 [get_ports {dr1DramDq[19]}]
-set_property PACKAGE_PIN K31 [get_ports {dr1DramDq[1]}]
-set_property PACKAGE_PIN J35 [get_ports {dr1DramDq[20]}]
-set_property PACKAGE_PIN G34 [get_ports {dr1DramDq[21]}]
-set_property PACKAGE_PIN J36 [get_ports {dr1DramDq[22]}]
-set_property PACKAGE_PIN H34 [get_ports {dr1DramDq[23]}]
-set_property PACKAGE_PIN E39 [get_ports {dr1DramDq[24]}]
-set_property PACKAGE_PIN C38 [get_ports {dr1DramDq[25]}]
-set_property PACKAGE_PIN D39 [get_ports {dr1DramDq[26]}]
-set_property PACKAGE_PIN C39 [get_ports {dr1DramDq[27]}]
-set_property PACKAGE_PIN E38 [get_ports {dr1DramDq[28]}]
-set_property PACKAGE_PIN D38 [get_ports {dr1DramDq[29]}]
-set_property PACKAGE_PIN K33 [get_ports {dr1DramDq[2]}]
-set_property PACKAGE_PIN B40 [get_ports {dr1DramDq[30]}]
-set_property PACKAGE_PIN A40 [get_ports {dr1DramDq[31]}]
-set_property PACKAGE_PIN A38 [get_ports {dr1DramDq[32]}]
-set_property PACKAGE_PIN A35 [get_ports {dr1DramDq[33]}]
-set_property PACKAGE_PIN A37 [get_ports {dr1DramDq[34]}]
-set_property PACKAGE_PIN B35 [get_ports {dr1DramDq[35]}]
-set_property PACKAGE_PIN E36 [get_ports {dr1DramDq[36]}]
-set_property PACKAGE_PIN E35 [get_ports {dr1DramDq[37]}]
-set_property PACKAGE_PIN D36 [get_ports {dr1DramDq[38]}]
-set_property PACKAGE_PIN D35 [get_ports {dr1DramDq[39]}]
-set_property PACKAGE_PIN M30 [get_ports {dr1DramDq[3]}]
-set_property PACKAGE_PIN C34 [get_ports {dr1DramDq[40]}]
-set_property PACKAGE_PIN B32 [get_ports {dr1DramDq[41]}]
-set_property PACKAGE_PIN D33 [get_ports {dr1DramDq[42]}]
-set_property PACKAGE_PIN C31 [get_ports {dr1DramDq[43]}]
-set_property PACKAGE_PIN D34 [get_ports {dr1DramDq[44]}]
-set_property PACKAGE_PIN C32 [get_ports {dr1DramDq[45]}]
-set_property PACKAGE_PIN C33 [get_ports {dr1DramDq[46]}]
-set_property PACKAGE_PIN D31 [get_ports {dr1DramDq[47]}]
-set_property PACKAGE_PIN P26 [get_ports {dr1DramDq[48]}]
-set_property PACKAGE_PIN R26 [get_ports {dr1DramDq[49]}]
-set_property PACKAGE_PIN K32 [get_ports {dr1DramDq[4]}]
-set_property PACKAGE_PIN N26 [get_ports {dr1DramDq[50]}]
-set_property PACKAGE_PIN T26 [get_ports {dr1DramDq[51]}]
-set_property PACKAGE_PIN P28 [get_ports {dr1DramDq[52]}]
-set_property PACKAGE_PIN T27 [get_ports {dr1DramDq[53]}]
-set_property PACKAGE_PIN N28 [get_ports {dr1DramDq[54]}]
-set_property PACKAGE_PIN R27 [get_ports {dr1DramDq[55]}]
-set_property PACKAGE_PIN H27 [get_ports {dr1DramDq[56]}]
-set_property PACKAGE_PIN L28 [get_ports {dr1DramDq[57]}]
-set_property PACKAGE_PIN J28 [get_ports {dr1DramDq[58]}]
-set_property PACKAGE_PIN K28 [get_ports {dr1DramDq[59]}]
-set_property PACKAGE_PIN L30 [get_ports {dr1DramDq[5]}]
-set_property PACKAGE_PIN H28 [get_ports {dr1DramDq[60]}]
-set_property PACKAGE_PIN M27 [get_ports {dr1DramDq[61]}]
-set_property PACKAGE_PIN J29 [get_ports {dr1DramDq[62]}]
-set_property PACKAGE_PIN L27 [get_ports {dr1DramDq[63]}]
-set_property PACKAGE_PIN E28 [get_ports {dr1DramDq[64]}]
-set_property PACKAGE_PIN F27 [get_ports {dr1DramDq[65]}]
-set_property PACKAGE_PIN G29 [get_ports {dr1DramDq[66]}]
-set_property PACKAGE_PIN E27 [get_ports {dr1DramDq[67]}]
-set_property PACKAGE_PIN D28 [get_ports {dr1DramDq[68]}]
-set_property PACKAGE_PIN G27 [get_ports {dr1DramDq[69]}]
-set_property PACKAGE_PIN L33 [get_ports {dr1DramDq[6]}]
-set_property PACKAGE_PIN H29 [get_ports {dr1DramDq[70]}]
-set_property PACKAGE_PIN G26 [get_ports {dr1DramDq[71]}]
-set_property PACKAGE_PIN B30 [get_ports {dr1DramDq[72]}]
-set_property PACKAGE_PIN B29 [get_ports {dr1DramDq[73]}]
-set_property PACKAGE_PIN A30 [get_ports {dr1DramDq[74]}]
-set_property PACKAGE_PIN C29 [get_ports {dr1DramDq[75]}]
-set_property PACKAGE_PIN D30 [get_ports {dr1DramDq[76]}]
-set_property PACKAGE_PIN D29 [get_ports {dr1DramDq[77]}]
-set_property PACKAGE_PIN E30 [get_ports {dr1DramDq[78]}]
-set_property PACKAGE_PIN A29 [get_ports {dr1DramDq[79]}]
-set_property PACKAGE_PIN L32 [get_ports {dr1DramDq[7]}]
-set_property PACKAGE_PIN F32 [get_ports {dr1DramDq[8]}]
-set_property PACKAGE_PIN H32 [get_ports {dr1DramDq[9]}]
-set_property PACKAGE_PIN K30 [get_ports {dr1DramDqs_p[0]}]
-set_property PACKAGE_PIN J30 [get_ports {dr1DramDqs_n[0]}]
-set_property PACKAGE_PIN J33 [get_ports {dr1DramDqs_p[1]}]
-set_property PACKAGE_PIN H33 [get_ports {dr1DramDqs_n[1]}]
-set_property PACKAGE_PIN H36 [get_ports {dr1DramDqs_p[2]}]
-set_property PACKAGE_PIN G36 [get_ports {dr1DramDqs_n[2]}]
-set_property PACKAGE_PIN B39 [get_ports {dr1DramDqs_p[3]}]
-set_property PACKAGE_PIN A39 [get_ports {dr1DramDqs_n[3]}]
-set_property PACKAGE_PIN B36 [get_ports {dr1DramDqs_p[4]}]
-set_property PACKAGE_PIN B37 [get_ports {dr1DramDqs_n[4]}]
-set_property PACKAGE_PIN A32 [get_ports {dr1DramDqs_p[5]}]
-set_property PACKAGE_PIN A33 [get_ports {dr1DramDqs_n[5]}]
-set_property PACKAGE_PIN P29 [get_ports {dr1DramDqs_p[6]}]
-set_property PACKAGE_PIN N29 [get_ports {dr1DramDqs_n[6]}]
-set_property PACKAGE_PIN K26 [get_ports {dr1DramDqs_p[7]}]
-set_property PACKAGE_PIN K27 [get_ports {dr1DramDqs_n[7]}]
-set_property PACKAGE_PIN F28 [get_ports {dr1DramDqs_p[8]}]
-set_property PACKAGE_PIN F29 [get_ports {dr1DramDqs_n[8]}]
-set_property PACKAGE_PIN A27 [get_ports {dr1DramDqs_p[9]}]
-set_property PACKAGE_PIN A28 [get_ports {dr1DramDqs_n[9]}]
-set_property PACKAGE_PIN U30 [get_ports {dr1DramOdt}]
-set_property PACKAGE_PIN B31 [get_ports dr1DramReset_n]
-set_property PACKAGE_PIN N32 [get_ports Dram1RefClk_p]
-set_property PACKAGE_PIN N33 [get_ports Dram1RefClk_n]
+set_property PACKAGE_PIN  AK27  [get_ports dr1DramAct_n             ]
+set_property PACKAGE_PIN  AR24  [get_ports dr1DramAddr[0]           ]
+set_property PACKAGE_PIN  AJ25  [get_ports dr1DramAddr[1]           ]
+set_property PACKAGE_PIN  AT26  [get_ports dr1DramAddr[10]          ]
+set_property PACKAGE_PIN  AJ24  [get_ports dr1DramAddr[11]          ]
+set_property PACKAGE_PIN  AN26  [get_ports dr1DramAddr[12]          ]
+set_property PACKAGE_PIN  AK23  [get_ports dr1DramAddr[13]          ]
+set_property PACKAGE_PIN  AL26  [get_ports dr1DramAddr[14]          ]
+set_property PACKAGE_PIN  AJ26  [get_ports dr1DramAddr[15]          ]
+set_property PACKAGE_PIN  AL27  [get_ports dr1DramAddr[16]          ]
+set_property PACKAGE_PIN  AK22  [get_ports dr1DramAddr[2]           ]
+set_property PACKAGE_PIN  AT25  [get_ports dr1DramAddr[3]           ]
+set_property PACKAGE_PIN  AW24  [get_ports dr1DramAddr[4]           ]
+set_property PACKAGE_PIN  AL24  [get_ports dr1DramAddr[5]           ]
+set_property PACKAGE_PIN  AH23  [get_ports dr1DramAddr[6]           ]
+set_property PACKAGE_PIN  AR23  [get_ports dr1DramAddr[7]           ]
+set_property PACKAGE_PIN  AN23  [get_ports dr1DramAddr[8]           ]
+set_property PACKAGE_PIN  AJ23  [get_ports dr1DramAddr[9]           ]
+set_property PACKAGE_PIN  AK26  [get_ports dr1DramBankAddr[0]       ]
+set_property PACKAGE_PIN  AL25  [get_ports dr1DramBankAddr[1]       ]
+set_property PACKAGE_PIN  AH25  [get_ports dr1DramBg[0]             ]
+set_property PACKAGE_PIN  AN27  [get_ports dr1DramClkEn             ]
+set_property PACKAGE_PIN  AK28  [get_ports dr1DramCs_n              ]
+set_property PACKAGE_PIN  AR37  [get_ports dr1DramDmDbi_n[0]        ]
+set_property PACKAGE_PIN  AV35  [get_ports dr1DramDmDbi_n[1]        ]
+set_property PACKAGE_PIN  AR34  [get_ports dr1DramDmDbi_n[2]        ]
+set_property PACKAGE_PIN  AU28  [get_ports dr1DramDmDbi_n[3]        ]
+set_property PACKAGE_PIN  AM37  [get_ports dr1DramDmDbi_n[4]        ]
+set_property PACKAGE_PIN  AK33  [get_ports dr1DramDmDbi_n[5]        ]
+set_property PACKAGE_PIN  AH30  [get_ports dr1DramDmDbi_n[6]        ]
+set_property PACKAGE_PIN  AM28  [get_ports dr1DramDmDbi_n[7]        ]
+set_property PACKAGE_PIN  AR38  [get_ports dr1DramDq[0]             ]
+set_property PACKAGE_PIN  AU37  [get_ports dr1DramDq[1]             ]
+set_property PACKAGE_PIN  AU35  [get_ports dr1DramDq[10]            ]
+set_property PACKAGE_PIN  AW34  [get_ports dr1DramDq[11]            ]
+set_property PACKAGE_PIN  AT35  [get_ports dr1DramDq[12]            ]
+set_property PACKAGE_PIN  AU32  [get_ports dr1DramDq[13]            ]
+set_property PACKAGE_PIN  AT36  [get_ports dr1DramDq[14]            ]
+set_property PACKAGE_PIN  AW35  [get_ports dr1DramDq[15]            ]
+set_property PACKAGE_PIN  AR32  [get_ports dr1DramDq[16]            ]
+set_property PACKAGE_PIN  AP36  [get_ports dr1DramDq[17]            ]
+set_property PACKAGE_PIN  AP33  [get_ports dr1DramDq[18]            ]
+set_property PACKAGE_PIN  AR31  [get_ports dr1DramDq[19]            ]
+set_property PACKAGE_PIN  AU39  [get_ports dr1DramDq[2]             ]
+set_property PACKAGE_PIN  AT32  [get_ports dr1DramDq[20]            ]
+set_property PACKAGE_PIN  AR33  [get_ports dr1DramDq[21]            ]
+set_property PACKAGE_PIN  AT31  [get_ports dr1DramDq[22]            ]
+set_property PACKAGE_PIN  AR36  [get_ports dr1DramDq[23]            ]
+set_property PACKAGE_PIN  AT30  [get_ports dr1DramDq[24]            ]
+set_property PACKAGE_PIN  AU29  [get_ports dr1DramDq[25]            ]
+set_property PACKAGE_PIN  AU30  [get_ports dr1DramDq[26]            ]
+set_property PACKAGE_PIN  AW31  [get_ports dr1DramDq[27]            ]
+set_property PACKAGE_PIN  AT29  [get_ports dr1DramDq[28]            ]
+set_property PACKAGE_PIN  AW29  [get_ports dr1DramDq[29]            ]
+set_property PACKAGE_PIN  AV37  [get_ports dr1DramDq[3]             ]
+set_property PACKAGE_PIN  AV31  [get_ports dr1DramDq[30]            ]
+set_property PACKAGE_PIN  AW28  [get_ports dr1DramDq[31]            ]
+set_property PACKAGE_PIN  AL37  [get_ports dr1DramDq[32]            ]
+set_property PACKAGE_PIN  AL39  [get_ports dr1DramDq[33]            ]
+set_property PACKAGE_PIN  AK39  [get_ports dr1DramDq[34]            ]
+set_property PACKAGE_PIN  AM38  [get_ports dr1DramDq[35]            ]
+set_property PACKAGE_PIN  AJ39  [get_ports dr1DramDq[36]            ]
+set_property PACKAGE_PIN  AM39  [get_ports dr1DramDq[37]            ]
+set_property PACKAGE_PIN  AL36  [get_ports dr1DramDq[38]            ]
+set_property PACKAGE_PIN  AN38  [get_ports dr1DramDq[39]            ]
+set_property PACKAGE_PIN  AT39  [get_ports dr1DramDq[4]             ]
+set_property PACKAGE_PIN  AH33  [get_ports dr1DramDq[40]            ]
+set_property PACKAGE_PIN  AM35  [get_ports dr1DramDq[41]            ]
+set_property PACKAGE_PIN  AJ34  [get_ports dr1DramDq[42]            ]
+set_property PACKAGE_PIN  AM34  [get_ports dr1DramDq[43]            ]
+set_property PACKAGE_PIN  AJ33  [get_ports dr1DramDq[44]            ]
+set_property PACKAGE_PIN  AL35  [get_ports dr1DramDq[45]            ]
+set_property PACKAGE_PIN  AL34  [get_ports dr1DramDq[46]            ]
+set_property PACKAGE_PIN  AK35  [get_ports dr1DramDq[47]            ]
+set_property PACKAGE_PIN  AJ30  [get_ports dr1DramDq[48]            ]
+set_property PACKAGE_PIN  AH32  [get_ports dr1DramDq[49]            ]
+set_property PACKAGE_PIN  AR39  [get_ports dr1DramDq[5]             ]
+set_property PACKAGE_PIN  AH31  [get_ports dr1DramDq[50]            ]
+set_property PACKAGE_PIN  AK32  [get_ports dr1DramDq[51]            ]
+set_property PACKAGE_PIN  AJ29  [get_ports dr1DramDq[52]            ]
+set_property PACKAGE_PIN  AM32  [get_ports dr1DramDq[53]            ]
+set_property PACKAGE_PIN  AL32  [get_ports dr1DramDq[54]            ]
+set_property PACKAGE_PIN  AM33  [get_ports dr1DramDq[55]            ]
+set_property PACKAGE_PIN  AL29  [get_ports dr1DramDq[56]            ]
+set_property PACKAGE_PIN  AN32  [get_ports dr1DramDq[57]            ]
+set_property PACKAGE_PIN  AM30  [get_ports dr1DramDq[58]            ]
+set_property PACKAGE_PIN  AP29  [get_ports dr1DramDq[59]            ]
+set_property PACKAGE_PIN  AP38  [get_ports dr1DramDq[6]             ]
+set_property PACKAGE_PIN  AM29  [get_ports dr1DramDq[60]            ]
+set_property PACKAGE_PIN  AP28  [get_ports dr1DramDq[61]            ]
+set_property PACKAGE_PIN  AL30  [get_ports dr1DramDq[62]            ]
+set_property PACKAGE_PIN  AN33  [get_ports dr1DramDq[63]            ]
+set_property PACKAGE_PIN  AP39  [get_ports dr1DramDq[7]             ]
+set_property PACKAGE_PIN  AU34  [get_ports dr1DramDq[8]             ]
+set_property PACKAGE_PIN  AU33  [get_ports dr1DramDq[9]             ]
+set_property PACKAGE_PIN  AV38  [get_ports dr1DramDqs_n[0]          ]
+set_property PACKAGE_PIN  AV33  [get_ports dr1DramDqs_n[1]          ]
+set_property PACKAGE_PIN  AP35  [get_ports dr1DramDqs_n[2]          ]
+set_property PACKAGE_PIN  AW30  [get_ports dr1DramDqs_n[3]          ]
+set_property PACKAGE_PIN  AK38  [get_ports dr1DramDqs_n[4]          ]
+set_property PACKAGE_PIN  AN36  [get_ports dr1DramDqs_n[5]          ]
+set_property PACKAGE_PIN  AL31  [get_ports dr1DramDqs_n[6]          ]
+set_property PACKAGE_PIN  AN31  [get_ports dr1DramDqs_n[7]          ]
+set_property PACKAGE_PIN  AU38  [get_ports dr1DramDqs_p[0]          ]
+set_property PACKAGE_PIN  AV32  [get_ports dr1DramDqs_p[1]          ]
+set_property PACKAGE_PIN  AP34  [get_ports dr1DramDqs_p[2]          ]
+set_property PACKAGE_PIN  AV30  [get_ports dr1DramDqs_p[3]          ]
+set_property PACKAGE_PIN  AK37  [get_ports dr1DramDqs_p[4]          ]
+set_property PACKAGE_PIN  AN35  [get_ports dr1DramDqs_p[5]          ]
+set_property PACKAGE_PIN  AK31  [get_ports dr1DramDqs_p[6]          ]
+set_property PACKAGE_PIN  AN30  [get_ports dr1DramDqs_p[7]          ]
+set_property PACKAGE_PIN  AJ28  [get_ports dr1DramOdt               ]
+set_property PACKAGE_PIN  AK24  [get_ports dr1DramReset_n           ]
+set_property PACKAGE_PIN  AM25  [get_ports dr1DramTestMode          ]
 
-set_property PACKAGE_PIN  E26   [get_ports dr1DramTestMode          ]
 
 ######################################################
 # Pin Properties
@@ -541,15 +499,14 @@ set_property INTERFACE Ddr4_Bank1 \
 [get_ports dr1DramTestMode]
 
 
-
 set ddr4_00 [current_instance .]
-current_instance SasquatchDramx/GenBank0.Bank0Dram/Bank0Dram/ddr4_0x
+current_instance AppletonDramx/GenBank0.Bank0Dram/Bank0Dram/ddr4_0x
 ## Start add from file ddr4_0_mod.xdc
 set ddr4_0Inst [current_instance .]
 
 ####################################################################################
 # Generated by Vivado 2021.1 built on 'Thu Jun 10 19:36:07 MDT 2021' by 'xbuild'
-# Command Used: write_xdc -force -exclude_physical /home/rfmibuild/myagent/_work/1731/s/hw-flexrio/ipcores/vendorip/dram/objects/tool/synth_dram/virtexultrascaleplus/sasquatch/ddr4_0/vivado/output/constraint/ddr4_0.xdc
+# Command Used: write_xdc -force -exclude_physical /home/rfmibuild/myagent/_work/1731/s/hw-flexrio/ipcores/vendorip/dram/objects/tool/synth_dram/kintexultrascaleplus/appleton/ddr4_0/vivado/output/constraint/ddr4_0.xdc
 ####################################################################################
 
 
@@ -638,13 +595,13 @@ current_instance $ddr4_0Inst
 current_instance -quiet
 current_instance $ddr4_00
 set ddr4_00 [current_instance .]
-current_instance SasquatchDramx/GenBank1.Bank1Dram/Bank1Dram/ddr4_0x
+current_instance AppletonDramx/GenBank1.Bank1Dram/Bank1Dram/ddr4_0x
 ## Start add from file ddr4_0_mod.xdc
 set ddr4_0Inst [current_instance .]
 
 ####################################################################################
 # Generated by Vivado 2021.1 built on 'Thu Jun 10 19:36:07 MDT 2021' by 'xbuild'
-# Command Used: write_xdc -force -exclude_physical /home/rfmibuild/myagent/_work/1731/s/hw-flexrio/ipcores/vendorip/dram/objects/tool/synth_dram/virtexultrascaleplus/sasquatch/ddr4_0/vivado/output/constraint/ddr4_0.xdc
+# Command Used: write_xdc -force -exclude_physical /home/rfmibuild/myagent/_work/1731/s/hw-flexrio/ipcores/vendorip/dram/objects/tool/synth_dram/kintexultrascaleplus/appleton/ddr4_0/vivado/output/constraint/ddr4_0.xdc
 ####################################################################################
 
 
@@ -735,7 +692,7 @@ current_instance $ddr4_00
 
 
 
-## Start include, file cfmake_uspg3x8_vu11p.xml
+## Start include, file cfmake_uspg3x8_ku15p.xml
 ## Start add from file ClockingUltrascalePlus.xdc
 ##################### TIMING CONSTRAINTS #######################
 
@@ -773,7 +730,7 @@ set DmaClk [get_clocks -of [get_nets DmaClk]]
 ## constrain them, and then Xilinx complains that they're not constrained. *Sigh*
 
 
-set SasquatchTopTemplate1 [current_instance .]
+set AppletonTopTemplate1 [current_instance .]
 current_instance HostInterfacex/Inchwormx/InchwormNetlist
 ## Start add from file InchwormNetlistTiming.xdc
 
@@ -1267,29 +1224,29 @@ current_instance $InchwormNetlist0
 
 
 
-set SasquatchTopTemplate2 [current_instance .]
+set AppletonTopTemplate2 [current_instance .]
 current_instance PcieIpWrapper/PcieIp/inst
 
-set_property LOC PCIE40E4_X0Y0 [get_cells pcie4_uscale_plus_0_pcie_4_0_pipe_inst/pcie_4_0_e4_inst]
-set_property USER_CLOCK_ROOT X7Y0 [get_nets -of_objects [get_pins bufg_gt_sysclk/O]]
-set_property USER_CLOCK_ROOT X7Y0 [get_nets -of_objects [get_pins -hierarchical -filter NAME=~*/phy_clk_i/bufg_gt_intclk/O]]
-set_property USER_CLOCK_ROOT X7Y0 [get_nets -of_objects [get_pins -hierarchical -filter NAME=~*/phy_clk_i/bufg_gt_coreclk/O]]
-set_property USER_CLOCK_ROOT X7Y0 [get_nets -of_objects [get_pins -hierarchical -filter NAME=~*/phy_clk_i/bufg_gt_userclk/O]]
-set_property USER_CLOCK_ROOT X7Y0 [get_nets -of_objects [get_pins -hierarchical -filter NAME=~*/phy_clk_i/bufg_gt_pclk/O]]
-set_property USER_CLOCK_ROOT X7Y0 [get_nets -of_objects [get_pins -hierarchical -filter NAME=~*/phy_clk_i/bufg_gt_mcapclk/O]]
+set_property LOC PCIE40E4_X1Y0 [get_cells pcie_4_0_pipe_inst/pcie_4_0_e4_inst]
+set_property USER_CLOCK_ROOT CLOCK_REGION_X3Y0 [get_nets -of_objects [get_pins bufg_gt_sysclk/O]]
+set_property USER_CLOCK_ROOT CLOCK_REGION_X3Y0 [get_nets -of_objects [get_pins -hierarchical -filter NAME=~*/phy_clk_i/bufg_gt_intclk/O]]
+set_property USER_CLOCK_ROOT CLOCK_REGION_X3Y0 [get_nets -of_objects [get_pins -hierarchical -filter NAME=~*/phy_clk_i/bufg_gt_coreclk/O]]
+set_property USER_CLOCK_ROOT CLOCK_REGION_X3Y0 [get_nets -of_objects [get_pins -hierarchical -filter NAME=~*/phy_clk_i/bufg_gt_userclk/O]]
+set_property USER_CLOCK_ROOT CLOCK_REGION_X3Y0 [get_nets -of_objects [get_pins -hierarchical -filter NAME=~*/phy_clk_i/bufg_gt_pclk/O]]
+set_property USER_CLOCK_ROOT CLOCK_REGION_X3Y0 [get_nets -of_objects [get_pins -hierarchical -filter NAME=~*/phy_clk_i/bufg_gt_mcapclk/O]]
 
 
 current_instance -quiet
-current_instance $SasquatchTopTemplate2
+current_instance $AppletonTopTemplate2
 
 current_instance -quiet
-current_instance $SasquatchTopTemplate1
+current_instance $AppletonTopTemplate1
 
 # In order to simplify constraint-writing, we want to give DmaClk a "DmaClk" name.
 set DmaClkPins [get_pins -of [get_clocks -of [get_nets DmaClk]]]
 create_generated_clock -name DmaClk     $DmaClkPins
 
-set SasquatchTopTemplate1 [current_instance .]
+set AppletonTopTemplate1 [current_instance .]
 current_instance HostInterfacex/IFifox/IFifoNetlistx
 ## Start add from file MacallanIFifoN.xdc
 
@@ -2248,11 +2205,11 @@ set_false_path -from [get_cells RsdBusClk/acReset_reg] -to [get_clocks -of [get_
 
 
 current_instance -quiet
-current_instance $SasquatchTopTemplate1
+current_instance $AppletonTopTemplate1
 
 
-## Start include, file cfmakesasquatch_common.xml
-set SasquatchTopTemplate1 [current_instance .]
+## Start include, file cfmakeappleton_common.xml
+set AppletonTopTemplate1 [current_instance .]
 current_instance HostInterfacex/IwCompanionx/IwCompanionNx
 ## Start add from file IwCompanion.xdc
 
@@ -2497,8 +2454,8 @@ current_instance $IwCompanion0
 
 
 current_instance -quiet
-current_instance $SasquatchTopTemplate1
-set SasquatchTopTemplate1 [current_instance .]
+current_instance $AppletonTopTemplate1
+set AppletonTopTemplate1 [current_instance .]
 current_instance TimingEnginex
 ## Start add from file PxieUspTimingEngine.xdc
 
@@ -3519,8 +3476,8 @@ set_property CLOCK_DELAY_GROUP MicroBlazeClockGrp [get_nets {TimingStage1x/Relia
 
 
 current_instance -quiet
-current_instance $SasquatchTopTemplate1
-set SasquatchTopTemplate1 [current_instance .]
+current_instance $AppletonTopTemplate1
+set AppletonTopTemplate1 [current_instance .]
 current_instance FixedLogicWrapperx/MacallanFixedLogicx
 ## Start add from file MacallanFixedLogic.xdc
 
@@ -3636,6 +3593,59 @@ set BasePath $ResetSyncDeassertPath
 
 
 set BasePath BusClkDiagramRSD
+## Start include, file ResetSyncDeassert.xml
+set ResetSyncDeassertPath $BasePath
+set BasePath $BasePath/DoubleSyncBoolAsyncInx
+## Start include, file DoubleSyncBoolAsyncIn.xml
+set DoubleSyncBoolAsyncInPath $BasePath
+set BasePath $BasePath/DoubleSyncSlAsyncInx
+## Start include, file DoubleSyncSlAsyncIn.xml
+set DoubleSyncSlAsyncInPath $BasePath
+set BasePath $BasePath/DoubleSyncAsyncInBasex
+## Start add from file DoubleSyncAsyncInBase.xdc
+# ---------------------------------------------------------------------------------------
+# DoubleSyncAsyncInBase
+# ---------------------------------------------------------------------------------------
+# Save incoming path
+set DoubleSyncAsyncInBasePath $BasePath
+
+# First create the groups that will be needed in the -from/to constraints
+set TNM_DS_oSig_ms [get_cells "$BasePath/oSig_msx/*" -filter {IS_SEQUENTIAL==true}]
+set TNM_DS_oSig_ms_pin [get_pins -of $TNM_DS_oSig_ms -filter {REF_PIN_NAME==D}]
+set TNM_DS_oSig    [get_cells "$BasePath/oSigx/*"    -filter {IS_SEQUENTIAL==true}]
+#Second, find out the period of the clocks related to the previous groups
+set T_OClkMin [expr "min([join [get_property PERIOD [get_clocks -of $TNM_DS_oSig]] ,])"]
+# False path coming in through the D pin.
+set_false_path -to $TNM_DS_oSig_ms       -through $TNM_DS_oSig_ms_pin
+# Half-cycle max-delay from metastable to stable flop, to give time for metastability to
+# settle out.
+set_max_delay  -from $TNM_DS_oSig_ms     -to $TNM_DS_oSig     -datapath_only [expr 0.5 * $T_OClkMin]
+
+
+set BasePath $DoubleSyncSlAsyncInPath
+
+
+set BasePath $DoubleSyncBoolAsyncInPath
+
+
+
+# There is an implicit assumption that aReset coming into ResetSyncDeassert can always
+# be treated as fully-asynchronous. This will certainly be the case if the signal is
+# coming from a pin. But even if it's coming from an internal FF, it is never useful
+# to treat is as synchronous. If the signal were synchronous to the output clock, we
+# would have no need for the ResetSyncDeassert in the first place. So it's safe to
+# except the reset path into the DoubleSync Preset (ResetSyncDeasserts always reset
+# true), and avoid the potential for spurious Reset Recovery analysis on that path.
+
+
+set TNM_oSigs [get_cells "$DoubleSyncAsyncInBasePath/oSig*x/*" -filter {IS_SEQUENTIAL==true}]
+set TNM_Prst  [get_pins -of $TNM_oSigs                         -filter {REF_PIN_NAME==PRE}]
+set_false_path -to $TNM_oSigs -through $TNM_Prst
+
+set BasePath $ResetSyncDeassertPath
+
+
+set BasePath FastTdcClkRSD
 ## Start include, file ResetSyncDeassert.xml
 set ResetSyncDeassertPath $BasePath
 set BasePath $BasePath/DoubleSyncBoolAsyncInx
@@ -3842,6 +3852,79 @@ set BasePath $HandshakeSlvRsdPath
 current_instance -quiet
 current_instance $MacallanFixedLogic0
 set MacallanFixedLogic0 [current_instance .]
+current_instance TdcRegistersx
+set BasePath ExpandedPulseCapture.ClockCrossing.TdcInvertedDS
+## Start include, file DoubleSyncSL_RSD.xml
+set DoubleSyncSlRsdPath $BasePath
+set BasePath $BasePath/DoubleSyncBasex
+## Start add from file DoubleSyncBase.xdc
+# ---------------------------------------------------------------------------------------
+# DoubleSyncBase
+# ---------------------------------------------------------------------------------------
+# Save Incoming path
+set DoubleSyncBasePath $BasePath
+
+# First create the groups that will be needed in the -from/to constraints
+set TNM_DS_iSig    [get_cells "$BasePath/iDlySigx/*"                        -filter {IS_SEQUENTIAL==true}]
+set TNM_DS_oSig_ms [get_cells "$BasePath/DoubleSyncAsyncInBasex/oSig_msx/*" -filter {IS_SEQUENTIAL==true}]
+set TNM_DS_oSig    [get_cells "$BasePath/DoubleSyncAsyncInBasex/oSigx/*"    -filter {IS_SEQUENTIAL==true}]
+
+#Second, find out the period of the clocks related to the previous groups
+set T_OClkMin [expr "min([join [get_property PERIOD [get_clocks -of $TNM_DS_oSig]] ,])"]
+
+set_false_path -from $TNM_DS_iSig        -to $TNM_DS_oSig_ms
+set_max_delay  -from $TNM_DS_oSig_ms     -to $TNM_DS_oSig     -datapath_only [expr 0.5 * $T_OClkMin]
+
+
+set BasePath $DoubleSyncSlRsdPath
+
+
+set BasePath ExpandedPulseCapture.ClockCrossing.MeasurementHS
+## Start include, file HandshakeSLV_RSD.xml
+set HandshakeSlvRsdPath $BasePath
+set BasePath $BasePath/HBx
+## Start add from file HandshakeBaseRSD.xdc
+# ---------------------------------------------------------------------------------------
+# HandshakeBaseRSD
+# ---------------------------------------------------------------------------------------
+# Save incoming path
+set HandshakeBaseRsdPath $BasePath
+
+# Data
+set TNM_HS_iData   [get_cells "$BasePath/BlkIn.iStoredDatax/*/*"      -filter {IS_SEQUENTIAL==true}]
+set TNM_HS_oData   [get_cells "$BasePath/*oDataFlopx/*/*"        -filter {IS_SEQUENTIAL==true}]
+# Toggle
+set TNM_HS_iTog    [get_cells "$BasePath/*iPushTogglex/*"        -filter {IS_SEQUENTIAL==true}]
+set TNM_HS_oTog_ms [get_cells "$BasePath/*oPushToggle0_msx/*"    -filter {IS_SEQUENTIAL==true}]
+set TNM_HS_oTog    [get_cells "$BasePath/*oPushToggle1x/*"       -filter {IS_SEQUENTIAL==true}]
+# Ready
+set TNM_HS_oRdy    [get_cells "$BasePath/*oPushToggleToReadyx/*" -filter {IS_SEQUENTIAL==true}]
+set TNM_HS_iRdy_ms [get_cells "$BasePath/*iRdyPushToggle_msx/*"  -filter {IS_SEQUENTIAL==true}]
+set TNM_HS_iRdy    [get_cells "$BasePath/*iRdyPushTogglex/*"     -filter {IS_SEQUENTIAL==true}]
+
+# Find out the minimum period of the clocks related to the previous groups.
+set T_IClkMin [expr "min([join [get_property PERIOD [get_clocks -of $TNM_HS_iData]] ,])"]
+set T_OClkMin [expr "min([join [get_property PERIOD [get_clocks -of $TNM_HS_oData]] ,])"]
+
+# The datapath clock crossings must be less than 2X the period of the destination clock.
+set_max_delay  -from $TNM_HS_iData   -to $TNM_HS_oData -datapath_only [expr 2 * $T_OClkMin - 0.5]
+
+# Toggle
+set_false_path -from $TNM_HS_iTog    -to $TNM_HS_oTog_ms
+set_max_delay  -from $TNM_HS_oTog_ms -to $TNM_HS_oTog -datapath_only [expr 0.5 * $T_OClkMin]
+
+# The return ready path isn't very important here.
+set_false_path -from $TNM_HS_oRdy    -to $TNM_HS_iRdy_ms
+set_max_delay  -from $TNM_HS_iRdy_ms -to $TNM_HS_iRdy -datapath_only [expr 0.5 * $T_IClkMin]
+
+
+set BasePath $HandshakeSlvRsdPath
+
+
+
+current_instance -quiet
+current_instance $MacallanFixedLogic0
+set MacallanFixedLogic0 [current_instance .]
 current_instance BoardControlx
 set BasePath IrqFromFixedLogicDS
 ## Start include, file DoubleSyncSL_RSD.xml
@@ -3873,10 +3956,8 @@ set BasePath $DoubleSyncSlRsdPath
 current_instance -quiet
 current_instance $MacallanFixedLogic0
 ## Start add from file FixedLogic.xdc
+## BoardControl.xdc placeholder
 
-set_property LOC SYSMONE4_X0Y0 [get_cells BoardControlx/SysMon0/SYSMONE1x]
-set_property LOC SYSMONE4_X0Y1 [get_cells BoardControlx/SysMon1/SYSMONE1x]
-set_property LOC SYSMONE4_X0Y2 [get_cells BoardControlx/SysMon2/SYSMONE1x]
 
 
 
@@ -3886,7 +3967,7 @@ set MacallanFixedLogicInst [current_instance .]
 
 ####################################################################################
 # Generated by Vivado 2021.1 built on 'Thu Jun 10 19:36:07 MDT 2021' by 'xbuild'
-# Command Used: write_xdc -force -exclude_physical /mnt/Work/myagent/_work/621/s/hw-flexrio/fixedlogic/objects/tool/synth_sasquatchfixedlogic/output/MacallanFixedLogic.xdc
+# Command Used: write_xdc -force -exclude_physical /mnt/Work/myagent/_work/621/s/hw-flexrio/fixedlogic/objects/tool/synth_appletonfixedlogic/output/MacallanFixedLogic.xdc
 ####################################################################################
 
 
@@ -4019,7 +4100,7 @@ current_instance $MacallanFixedLogicInst
 
 
 current_instance -quiet
-current_instance $SasquatchTopTemplate1
+current_instance $AppletonTopTemplate1
 ## Start add from file TimingCommon.xdc
 ##################### TIMING CONSTRAINTS #######################
 
@@ -4062,7 +4143,7 @@ set_output_delay \
 # False path FAM output enable to all the pins
 set_false_path -from [get_pins FixedLogicWrapperx/MacallanFixedLogicx/BoardControlx/BoardControlAxiRegistersx/CommonAxiRegistersx/bFamOutputsEnabledLcl_reg/C] -to [get_ports]
 
-## Start add from file TimingSasquatch.xdc
+## Start add from file TimingAppleton.xdc
 ###################
 ## PXIe Sync and clock generation
 ###################
@@ -4115,6 +4196,23 @@ set LvpeclFlopTh        0.5
 
 set PxiClk100BufSkewMax 0.28
 
+set OutputClock  [get_clocks PxieClk100]
+set OutputPorts  pClk10GenD;                    # List of input ports
+
+set MaxDataDelay [expr $SignalPropMax + $PxiClk100BufSkewMax + $LvpeclFlopTsu]
+set MinClockDelay [expr $SignalPropMin]
+
+set MinDataDelay [expr $SignalPropMin + $LvpeclFlopTh]
+set MaxClockDelay [expr $SignalPropMax + $PxiClk100BufSkewMax]
+
+set_output_delay -clock $OutputClock \
+-max [expr $MaxDataDelay - $MinClockDelay] \
+[get_ports $OutputPorts]
+
+set_output_delay -clock $OutputClock \
+-min [expr $MinDataDelay - $MaxClockDelay] \
+[get_ports $OutputPorts]
+
 #########################################################################################
 # Global Address
 #
@@ -4125,12 +4223,10 @@ set PxiClk100BufSkewMax 0.28
 set InputPorts [get_ports {aPxiGa[?]}]
 set_input_delay -max -5 [get_ports $InputPorts]
 set_input_delay -min 5 [get_ports $InputPorts]
+
 #########################################################################################
-
-
 # Stage 1 output tristates
-set_false_path -through [get_nets SasquatchIoBuffersStage1x/aStage2Enabled]
-
+set_false_path -through [get_nets AppletonIoBuffersStage1x/aStage2Enabled]
 
 #########################################################################################
 # Outside LV Window DMA Port Crossings
@@ -4152,7 +4248,7 @@ set_max_delay -from $DmaPortCommCrossingFrom -to $DmaPortCommCrossingTo -datapat
 # Dram2DP Crossings
 #
 # These constraints are normally provided by LV FPGA that places Dram2DP.xdc in the generated files
-# folder.  However, Sasquatch needs to customize these constraints so must add them here.  The old
+# folder.  However, Appleton needs to customize these constraints so must add them here.  The old
 # constraints provided by LV FPGA and Dram2DP.xdc will be ignored by Vivado.
 #
 
@@ -4172,7 +4268,122 @@ set_false_path -from [get_pins -hierarchical {*Dram2DP*ClearFDCP*/C}] \
 -to   [all_registers -edge_triggered]
 #########################################################################################
 
-## Start add from file PinsSasquatch.xdc
+## Start add from file TimingAppletonConfig.xdc
+# #############################################################################
+# Config Interface Timing Parameters for the Appleton Baseboard
+#
+# The typical parameters were extracted from hyperlinx boardsim. Min and Max
+# parameters are generated by applying a 5% tolerance to account for process
+# variation. These parameters are to be used by the CLIP so the CLIP can
+# constrain the config interface.
+# #############################################################################
+
+set aConfigRxDataSe0_Tpd_Typ 0.221
+set aConfigRxDataSe0_Tpd_Max [expr 0.221 * 1.05]
+set aConfigRxDataSe0_Tpd_Min [expr 0.221 * 0.95]
+
+set aConfigRxDataSe1_Tpd_Typ 0.213
+set aConfigRxDataSe1_Tpd_Max [expr 0.213 * 1.05]
+set aConfigRxDataSe1_Tpd_Min [expr 0.213 * 0.95]
+
+set aConfigRxDataSe2_Tpd_Typ 0.212
+set aConfigRxDataSe2_Tpd_Max [expr 0.212 * 1.05]
+set aConfigRxDataSe2_Tpd_Min [expr 0.212 * 0.95]
+
+set aConfigRxDataSe3_Tpd_Typ 0.203
+set aConfigRxDataSe3_Tpd_Max [expr 0.203 * 1.05]
+set aConfigRxDataSe3_Tpd_Min [expr 0.203 * 0.95]
+
+set aConfigRxDataSe4_Tpd_Typ 0.198
+set aConfigRxDataSe4_Tpd_Max [expr 0.198 * 1.05]
+set aConfigRxDataSe4_Tpd_Min [expr 0.198 * 0.95]
+
+set aConfigRxDataSe5_Tpd_Typ 0.199
+set aConfigRxDataSe5_Tpd_Max [expr 0.199 * 1.05]
+set aConfigRxDataSe5_Tpd_Min [expr 0.199 * 0.95]
+
+set aConfigRxDataSe6_Tpd_Typ 0.200
+set aConfigRxDataSe6_Tpd_Max [expr 0.200 * 1.05]
+set aConfigRxDataSe6_Tpd_Min [expr 0.200 * 0.95]
+
+set aConfigRxClkSe_Tpd_Typ   0.223
+set aConfigRxClkSe_Tpd_Max   [expr 0.223 * 1.05]
+set aConfigRxClkSe_Tpd_Min   [expr 0.223 * 0.95]
+
+set aConfigRxClkLvds_Tpd_Typ 0.202
+set aConfigRxClkLvds_Tpd_Max [expr 0.202 * 1.05]
+set aConfigRxClkLvds_Tpd_Min [expr 0.202 * 0.95]
+
+set aConfigTxDataSe0_Tpd_Typ 0.263
+set aConfigTxDataSe0_Tpd_Max [expr 0.263 * 1.05]
+set aConfigTxDataSe0_Tpd_Min [expr 0.263 * 0.95]
+
+set aConfigTxDataSe1_Tpd_Typ 0.220
+set aConfigTxDataSe1_Tpd_Max [expr 0.220 * 1.05]
+set aConfigTxDataSe1_Tpd_Min [expr 0.220 * 0.95]
+
+set aConfigTxDataSe2_Tpd_Typ 0.211
+set aConfigTxDataSe2_Tpd_Max [expr 0.211 * 1.05]
+set aConfigTxDataSe2_Tpd_Min [expr 0.211 * 0.95]
+
+set aConfigTxDataSe3_Tpd_Typ 0.244
+set aConfigTxDataSe3_Tpd_Max [expr 0.244 * 1.05]
+set aConfigTxDataSe3_Tpd_Min [expr 0.244 * 0.95]
+
+set aConfigTxDataSe4_Tpd_Typ 0.227
+set aConfigTxDataSe4_Tpd_Max [expr 0.227 * 1.05]
+set aConfigTxDataSe4_Tpd_Min [expr 0.227 * 0.95]
+
+set aConfigTxDataSe5_Tpd_Typ 0.210
+set aConfigTxDataSe5_Tpd_Max [expr 0.210 * 1.05]
+set aConfigTxDataSe5_Tpd_Min [expr 0.210 * 0.95]
+
+set aConfigTxDataSe6_Tpd_Typ 0.230
+set aConfigTxDataSe6_Tpd_Max [expr 0.230 * 1.05]
+set aConfigTxDataSe6_Tpd_Min [expr 0.230 * 0.95]
+
+set aConfigTxClkSe_Tpd_Typ   0.255
+set aConfigTxClkSe_Tpd_Max   [expr 0.255 * 1.05]
+set aConfigTxClkSe_Tpd_Min   [expr 0.255 * 0.95]
+
+set aConfigTxClkLvds_Tpd_Typ 0.198
+set aConfigTxClkLvds_Tpd_Max [expr 0.198 * 1.05]
+set aConfigTxClkLvds_Tpd_Min [expr 0.198 * 0.95]
+
+set aGpoSync0_Tpd_Typ 0.172
+set aGpoSync0_Tpd_Max [expr 0.172 * 1.05]
+set aGpoSync0_Tpd_Min [expr 0.172 * 0.95]
+
+set aGpoSync1_Tpd_Typ 0.202
+set aGpoSync1_Tpd_Max [expr 0.202 * 1.05]
+set aGpoSync1_Tpd_Min [expr 0.202 * 0.95]
+
+set dtJesd204SysRef_Tpd_Typ 0.185
+set dtJesd204SysRef_Tpd_Max [expr 0.185 * 1.05]
+set dtJesd204SysRef_Tpd_Min [expr 0.185 * 0.95]
+
+set dtJesd204SyncReqOut_n_Tpd_Typ 0.150
+set dtJesd204SyncReqOut_n_Tpd_Max [expr 0.150 * 1.05]
+set dtJesd204SyncReqOut_n_Tpd_Min [expr 0.150 * 0.95]
+
+set dtJesd204SyncReqIn_n_Tpd_Typ 0.137
+set dtJesd204SyncReqIn_n_Tpd_Max [expr 0.137 * 1.05]
+set dtJesd204SyncReqIn_n_Tpd_Min [expr 0.137 * 0.95]
+
+set SY89833_Tpd_Max   0.600
+set SY89833_Tpd_Min   0.330
+set DataClk_Tpd_Max   [expr 0.594 * 1.05 + $SY89833_Tpd_Max]
+set DataClk_Tpd_Min   [expr 0.594 * 0.95 + $SY89833_Tpd_Min]
+
+set aTriggerOut_Tpd_Typ 0.140
+set aTriggerOut_Tpd_Max [expr 0.140 * 1.05]
+set aTriggerOut_Tpd_Min [expr 0.140 * 0.95]
+
+set aTriggerIn_Tpd_Typ 0.110
+set aTriggerIn_Tpd_Max [expr 0.110 * 1.05]
+set aTriggerIn_Tpd_Min [expr 0.110 * 0.95]
+
+## Start add from file PinsAppleton.xdc
 ######################################################
 # Configuration setup
 ######################################################
@@ -4184,267 +4395,294 @@ set_property CONFIG_VOLTAGE 1.8 [current_design]
 set_property config_mode S_SELECTMAP [current_design]
 
 # CSO_B may NOT be used in stage 2 logic for Tandem PROM using slave SelectMap
-set_property PROHIBIT TRUE [get_sites  AL28 ]
+set_property PROHIBIT TRUE [get_sites  AM13 ]
+
+set_property PROHIBIT TRUE [get_sites GTHE4_COMMON_X0Y2  ]
+set_property PROHIBIT TRUE [get_sites GTHE4_CHANNEL_X0Y8 ]
+set_property PROHIBIT TRUE [get_sites GTHE4_CHANNEL_X0Y9 ]
+set_property PROHIBIT TRUE [get_sites GTHE4_CHANNEL_X0Y10]
+set_property PROHIBIT TRUE [get_sites GTHE4_CHANNEL_X0Y11]
+
+set_property PROHIBIT TRUE [get_sites GTHE4_COMMON_X0Y3  ]
+set_property PROHIBIT TRUE [get_sites GTHE4_CHANNEL_X0Y12]
+set_property PROHIBIT TRUE [get_sites GTHE4_CHANNEL_X0Y13]
+set_property PROHIBIT TRUE [get_sites GTHE4_CHANNEL_X0Y14]
+set_property PROHIBIT TRUE [get_sites GTHE4_CHANNEL_X0Y15]
+
+set_property PROHIBIT TRUE [get_sites GTHE4_COMMON_X0Y4  ]
+set_property PROHIBIT TRUE [get_sites GTHE4_CHANNEL_X0Y16]
+set_property PROHIBIT TRUE [get_sites GTHE4_CHANNEL_X0Y17]
+set_property PROHIBIT TRUE [get_sites GTHE4_CHANNEL_X0Y18]
+set_property PROHIBIT TRUE [get_sites GTHE4_CHANNEL_X0Y19]
+
+set_property PROHIBIT TRUE [get_sites GTHE4_COMMON_X0Y5  ]
+set_property PROHIBIT TRUE [get_sites GTHE4_CHANNEL_X0Y20]
+set_property PROHIBIT TRUE [get_sites GTHE4_CHANNEL_X0Y21]
+set_property PROHIBIT TRUE [get_sites GTHE4_CHANNEL_X0Y22]
+set_property PROHIBIT TRUE [get_sites GTHE4_CHANNEL_X0Y23]
+
+set_property PROHIBIT TRUE [get_sites GTHE4_COMMON_X0Y6  ]
+set_property PROHIBIT TRUE [get_sites GTHE4_CHANNEL_X0Y24]
+set_property PROHIBIT TRUE [get_sites GTHE4_CHANNEL_X0Y25]
+set_property PROHIBIT TRUE [get_sites GTHE4_CHANNEL_X0Y26]
+set_property PROHIBIT TRUE [get_sites GTHE4_CHANNEL_X0Y27]
+
+set_property PROHIBIT TRUE [get_sites GTHE4_COMMON_X0Y7  ]
+set_property PROHIBIT TRUE [get_sites GTHE4_CHANNEL_X0Y28]
+set_property PROHIBIT TRUE [get_sites GTHE4_CHANNEL_X0Y29]
+set_property PROHIBIT TRUE [get_sites GTHE4_CHANNEL_X0Y30]
+set_property PROHIBIT TRUE [get_sites GTHE4_CHANNEL_X0Y31]
+
+set_property PROHIBIT TRUE [get_sites GTYE4_COMMON_X0Y5  ]
+set_property PROHIBIT TRUE [get_sites GTYE4_CHANNEL_X0Y20]
+set_property PROHIBIT TRUE [get_sites GTYE4_CHANNEL_X0Y21]
+set_property PROHIBIT TRUE [get_sites GTYE4_CHANNEL_X0Y22]
+set_property PROHIBIT TRUE [get_sites GTYE4_CHANNEL_X0Y23]
 
 ###################################################
-# HSS
+# FAM
 ###################################################
-set_property PACKAGE_PIN BA40 [get_ports MgtRefClk_p[0]]
-set_property PACKAGE_PIN AV38 [get_ports MgtRefClk_p[1]]
-set_property PACKAGE_PIN AR36 [get_ports MgtRefClk_p[2]]
-set_property PACKAGE_PIN AL36 [get_ports MgtRefClk_p[3]]
-set_property PACKAGE_PIN AD11 [get_ports MgtRefClk_p[4]]
-set_property PACKAGE_PIN Y11  [get_ports MgtRefClk_p[5]]
-set_property PACKAGE_PIN T11  [get_ports MgtRefClk_p[6]]
-set_property PACKAGE_PIN M11  [get_ports MgtRefClk_p[7]]
-set_property PACKAGE_PIN AG36 [get_ports MgtRefClk_p[8]]
-set_property PACKAGE_PIN AC36 [get_ports MgtRefClk_p[9]]
-set_property PACKAGE_PIN W36  [get_ports MgtRefClk_p[10]]
-set_property PACKAGE_PIN R36  [get_ports MgtRefClk_p[11]]
 
-# The zHD connector signals TX0 and TX1 as well as RX0 and RX1 are swapped on the schematic,
-# similar to all other cabled PCIe NI products, to simplify the layout routing
-set_property PACKAGE_PIN BD42 [get_ports MgtPortTxLane0_p]
-set_property PACKAGE_PIN BF42 [get_ports MgtPortTxLane1_p]
-set_property PACKAGE_PIN BB42 [get_ports MgtPortTxLane2_p]
-set_property PACKAGE_PIN AW40 [get_ports MgtPortTxLane3_p]
-set_property PACKAGE_PIN AT38 [get_ports MgtPortTxLane4_p]
-set_property PACKAGE_PIN AU40 [get_ports MgtPortTxLane5_p]
-set_property PACKAGE_PIN AR40 [get_ports MgtPortTxLane6_p]
-set_property PACKAGE_PIN AP38 [get_ports MgtPortTxLane7_p]
-set_property PACKAGE_PIN AM38 [get_ports MgtPortTxLane8_p]
-set_property PACKAGE_PIN AN40 [get_ports MgtPortTxLane9_p]
-set_property PACKAGE_PIN AL40 [get_ports MgtPortTxLane10_p]
-set_property PACKAGE_PIN AK38 [get_ports MgtPortTxLane11_p]
-set_property PACKAGE_PIN AH38 [get_ports MgtPortTxLane12_p]
-set_property PACKAGE_PIN AJ40 [get_ports MgtPortTxLane13_p]
-set_property PACKAGE_PIN AG40 [get_ports MgtPortTxLane14_p]
-set_property PACKAGE_PIN AF38 [get_ports MgtPortTxLane15_p]
-set_property PACKAGE_PIN AD7  [get_ports MgtPortTxLane16_p]
-set_property PACKAGE_PIN AE9  [get_ports MgtPortTxLane17_p]
-set_property PACKAGE_PIN AC9  [get_ports MgtPortTxLane18_p]
-set_property PACKAGE_PIN AB7  [get_ports MgtPortTxLane19_p]
-set_property PACKAGE_PIN Y7   [get_ports MgtPortTxLane20_p]
-set_property PACKAGE_PIN AA9  [get_ports MgtPortTxLane21_p]
-set_property PACKAGE_PIN W9   [get_ports MgtPortTxLane22_p]
-set_property PACKAGE_PIN V7   [get_ports MgtPortTxLane23_p]
-set_property PACKAGE_PIN T7   [get_ports MgtPortTxLane24_p]
-set_property PACKAGE_PIN U9   [get_ports MgtPortTxLane25_p]
-set_property PACKAGE_PIN R9   [get_ports MgtPortTxLane26_p]
-set_property PACKAGE_PIN P7   [get_ports MgtPortTxLane27_p]
-set_property PACKAGE_PIN M7   [get_ports MgtPortTxLane28_p]
-set_property PACKAGE_PIN N9   [get_ports MgtPortTxLane29_p]
-set_property PACKAGE_PIN L9   [get_ports MgtPortTxLane30_p]
-set_property PACKAGE_PIN K7   [get_ports MgtPortTxLane31_p]
-set_property PACKAGE_PIN AD38 [get_ports MgtPortTxLane32_p]
-set_property PACKAGE_PIN AE40 [get_ports MgtPortTxLane33_p]
-set_property PACKAGE_PIN AC40 [get_ports MgtPortTxLane34_p]
-set_property PACKAGE_PIN AB38 [get_ports MgtPortTxLane35_p]
-set_property PACKAGE_PIN Y38  [get_ports MgtPortTxLane36_p]
-set_property PACKAGE_PIN AA40 [get_ports MgtPortTxLane37_p]
-set_property PACKAGE_PIN W40  [get_ports MgtPortTxLane38_p]
-set_property PACKAGE_PIN V38  [get_ports MgtPortTxLane39_p]
-set_property PACKAGE_PIN T38  [get_ports MgtPortTxLane40_p]
-set_property PACKAGE_PIN U40  [get_ports MgtPortTxLane41_p]
-set_property PACKAGE_PIN R40  [get_ports MgtPortTxLane42_p]
-set_property PACKAGE_PIN P38  [get_ports MgtPortTxLane43_p]
-set_property PACKAGE_PIN M38  [get_ports MgtPortTxLane44_p]
-set_property PACKAGE_PIN N40  [get_ports MgtPortTxLane45_p]
-set_property PACKAGE_PIN L40  [get_ports MgtPortTxLane46_p]
-set_property PACKAGE_PIN J40  [get_ports MgtPortTxLane47_p]
+set_property PACKAGE_PIN  AJ21  [get_ports aModulePresent_n         ]
+set_property PACKAGE_PIN  AT20  [get_ports aFamPowerGood            ]
 
-# The zHD connector signals TX0 and TX1 as well as RX0 and RX1 are swapped on the schematic,
-# similar to all other cabled PCIe NI products, to simplify the layout routing
-set_property PACKAGE_PIN BA45 [get_ports MgtPortRxLane0_p]
-set_property PACKAGE_PIN BC45 [get_ports MgtPortRxLane1_p]
-set_property PACKAGE_PIN AW45 [get_ports MgtPortRxLane2_p]
-set_property PACKAGE_PIN AV43 [get_ports MgtPortRxLane3_p]
-set_property PACKAGE_PIN AT43 [get_ports MgtPortRxLane4_p]
-set_property PACKAGE_PIN AU45 [get_ports MgtPortRxLane5_p]
-set_property PACKAGE_PIN AR45 [get_ports MgtPortRxLane6_p]
-set_property PACKAGE_PIN AP43 [get_ports MgtPortRxLane7_p]
-set_property PACKAGE_PIN AM43 [get_ports MgtPortRxLane8_p]
-set_property PACKAGE_PIN AN45 [get_ports MgtPortRxLane9_p]
-set_property PACKAGE_PIN AL45 [get_ports MgtPortRxLane10_p]
-set_property PACKAGE_PIN AK43 [get_ports MgtPortRxLane11_p]
-set_property PACKAGE_PIN AH43 [get_ports MgtPortRxLane12_p]
-set_property PACKAGE_PIN AJ45 [get_ports MgtPortRxLane13_p]
-set_property PACKAGE_PIN AG45 [get_ports MgtPortRxLane14_p]
-set_property PACKAGE_PIN AF43 [get_ports MgtPortRxLane15_p]
-set_property PACKAGE_PIN AD2  [get_ports MgtPortRxLane16_p]
-set_property PACKAGE_PIN AE4  [get_ports MgtPortRxLane17_p]
-set_property PACKAGE_PIN AC4  [get_ports MgtPortRxLane18_p]
-set_property PACKAGE_PIN AB2  [get_ports MgtPortRxLane19_p]
-set_property PACKAGE_PIN Y2   [get_ports MgtPortRxLane20_p]
-set_property PACKAGE_PIN AA4  [get_ports MgtPortRxLane21_p]
-set_property PACKAGE_PIN W4   [get_ports MgtPortRxLane22_p]
-set_property PACKAGE_PIN V2   [get_ports MgtPortRxLane23_p]
-set_property PACKAGE_PIN T2   [get_ports MgtPortRxLane24_p]
-set_property PACKAGE_PIN U4   [get_ports MgtPortRxLane25_p]
-set_property PACKAGE_PIN R4   [get_ports MgtPortRxLane26_p]
-set_property PACKAGE_PIN P2   [get_ports MgtPortRxLane27_p]
-set_property PACKAGE_PIN M2   [get_ports MgtPortRxLane28_p]
-set_property PACKAGE_PIN N4   [get_ports MgtPortRxLane29_p]
-set_property PACKAGE_PIN L4   [get_ports MgtPortRxLane30_p]
-set_property PACKAGE_PIN K2   [get_ports MgtPortRxLane31_p]
-set_property PACKAGE_PIN AD43 [get_ports MgtPortRxLane32_p]
-set_property PACKAGE_PIN AE45 [get_ports MgtPortRxLane33_p]
-set_property PACKAGE_PIN AC45 [get_ports MgtPortRxLane34_p]
-set_property PACKAGE_PIN AB43 [get_ports MgtPortRxLane35_p]
-set_property PACKAGE_PIN Y43  [get_ports MgtPortRxLane36_p]
-set_property PACKAGE_PIN AA45 [get_ports MgtPortRxLane37_p]
-set_property PACKAGE_PIN W45  [get_ports MgtPortRxLane38_p]
-set_property PACKAGE_PIN V43  [get_ports MgtPortRxLane39_p]
-set_property PACKAGE_PIN T43  [get_ports MgtPortRxLane40_p]
-set_property PACKAGE_PIN U45  [get_ports MgtPortRxLane41_p]
-set_property PACKAGE_PIN R45  [get_ports MgtPortRxLane42_p]
-set_property PACKAGE_PIN P43  [get_ports MgtPortRxLane43_p]
-set_property PACKAGE_PIN M43  [get_ports MgtPortRxLane44_p]
-set_property PACKAGE_PIN N45  [get_ports MgtPortRxLane45_p]
-set_property PACKAGE_PIN L45  [get_ports MgtPortRxLane46_p]
-set_property PACKAGE_PIN K43  [get_ports MgtPortRxLane47_p]
+set_property PACKAGE_PIN  AP18  [get_ports aConfigRxClkSe           ]
+set_property PACKAGE_PIN  AM17  [get_ports aConfigRxDataSe[0]       ]
+set_property PACKAGE_PIN  AH17  [get_ports aConfigRxDataSe[1]       ]
+set_property PACKAGE_PIN  AH18  [get_ports aConfigRxDataSe[2]       ]
+set_property PACKAGE_PIN  AJ20  [get_ports aConfigRxDataSe[3]       ]
+set_property PACKAGE_PIN  AM22  [get_ports aConfigRxDataSe[4]       ]
+set_property PACKAGE_PIN  AL22  [get_ports aConfigRxDataSe[5]       ]
+set_property PACKAGE_PIN  AN22  [get_ports aConfigRxDataSe[6]       ]
+set_property PACKAGE_PIN  AR19  [get_ports aConfigRxClkLvds_n       ]
+set_property PACKAGE_PIN  AP19  [get_ports aConfigRxClkLvds_p       ]
 
-set_property PACKAGE_PIN BF13 [get_ports aLmkI2cSda]
-set_property PACKAGE_PIN BF14 [get_ports aLmkI2cScl]
-set_property IOSTANDARD LVCMOS18 [get_ports aLmkI2cSda]
-set_property IOSTANDARD LVCMOS18 [get_ports aLmkI2cScl]
+set_property PACKAGE_PIN  AN18  [get_ports aConfigTxClkSe           ]
+set_property PACKAGE_PIN  AR17  [get_ports aConfigTxDataSe[0]       ]
+set_property PACKAGE_PIN  AU18  [get_ports aConfigTxDataSe[1]       ]
+set_property PACKAGE_PIN  AR18  [get_ports aConfigTxDataSe[2]       ]
+set_property PACKAGE_PIN  AU17  [get_ports aConfigTxDataSe[3]       ]
+set_property PACKAGE_PIN  AT17  [get_ports aConfigTxDataSe[4]       ]
+set_property PACKAGE_PIN  AT19  [get_ports aConfigTxDataSe[5]       ]
+set_property PACKAGE_PIN  AU19  [get_ports aConfigTxDataSe[6]       ]
+set_property PACKAGE_PIN  AK18  [get_ports aConfigTxClkLvds_n       ]
+set_property PACKAGE_PIN  AK19  [get_ports aConfigTxClkLvds_p       ]
 
-set_property PACKAGE_PIN BB24 [get_ports aLmk1Pdn_n]
-set_property PACKAGE_PIN BA24 [get_ports aLmk2Pdn_n]
-set_property PACKAGE_PIN BC22 [get_ports aLmk1Gpio0]
-set_property PACKAGE_PIN BB22 [get_ports aLmk2Gpio0]
-set_property PACKAGE_PIN BA23 [get_ports aLmk1Status0]
-set_property PACKAGE_PIN BA22 [get_ports aLmk1Status1]
-set_property PACKAGE_PIN AY22 [get_ports aLmk2Status0]
-set_property PACKAGE_PIN AY23 [get_ports aLmk2Status1]
+set_property PACKAGE_PIN  C2    [get_ports bIoSmbScl                ]
+set_property PACKAGE_PIN  B4    [get_ports bIoSmbSda                ]
+set_property PACKAGE_PIN  B2    [get_ports aIoSmbAlert_n            ]
 
-set_property IOSTANDARD LVCMOS18 [get_ports aLmk1Pdn_n]
-set_property IOSTANDARD LVCMOS18 [get_ports aLmk2Pdn_n]
-set_property IOSTANDARD LVCMOS18 [get_ports aLmk1Gpio0]
-set_property IOSTANDARD LVCMOS18 [get_ports aLmk2Gpio0]
-set_property IOSTANDARD LVCMOS18 [get_ports aLmk1Status0]
-set_property IOSTANDARD LVCMOS18 [get_ports aLmk1Status1]
-set_property IOSTANDARD LVCMOS18 [get_ports aLmk2Status0]
-set_property IOSTANDARD LVCMOS18 [get_ports aLmk2Status1]
+set_property PACKAGE_PIN  V28   [get_ports MgtRefClk_n[0]           ]
+set_property PACKAGE_PIN  V27   [get_ports MgtRefClk_p[0]           ]
+set_property PACKAGE_PIN  Y28   [get_ports MgtRefClk_n[1]           ]
+set_property PACKAGE_PIN  Y27   [get_ports MgtRefClk_p[1]           ]
+set_property PACKAGE_PIN  AB28  [get_ports MgtRefClk_n[2]           ]
+set_property PACKAGE_PIN  AB27  [get_ports MgtRefClk_p[2]           ]
+set_property PACKAGE_PIN  AE30  [get_ports MgtRefClk_n[3]           ]
+set_property PACKAGE_PIN  AE29  [get_ports MgtRefClk_p[3]           ]
 
-set_property PACKAGE_PIN BE15 [get_ports  aIPassVccPowerFault_n]
-set_property IOSTANDARD LVCMOS18 [get_ports aIPassVccPowerFault_n]
+set_property PACKAGE_PIN  L34   [get_ports MgtPortTxLane0_n         ]
+set_property PACKAGE_PIN  L33   [get_ports MgtPortTxLane0_p         ]
+set_property PACKAGE_PIN  AA34  [get_ports MgtPortTxLane10_n        ]
+set_property PACKAGE_PIN  AA33  [get_ports MgtPortTxLane10_p        ]
+set_property PACKAGE_PIN  AB32  [get_ports MgtPortTxLane11_n        ]
+set_property PACKAGE_PIN  AB31  [get_ports MgtPortTxLane11_p        ]
+set_property PACKAGE_PIN  AC34  [get_ports MgtPortTxLane12_n        ]
+set_property PACKAGE_PIN  AC33  [get_ports MgtPortTxLane12_p        ]
+set_property PACKAGE_PIN  AD32  [get_ports MgtPortTxLane13_n        ]
+set_property PACKAGE_PIN  AD31  [get_ports MgtPortTxLane13_p        ]
+set_property PACKAGE_PIN  AE34  [get_ports MgtPortTxLane14_n        ]
+set_property PACKAGE_PIN  AE33  [get_ports MgtPortTxLane14_p        ]
+set_property PACKAGE_PIN  AF32  [get_ports MgtPortTxLane15_n        ]
+set_property PACKAGE_PIN  AF31  [get_ports MgtPortTxLane15_p        ]
+set_property PACKAGE_PIN  M32   [get_ports MgtPortTxLane1_n         ]
+set_property PACKAGE_PIN  M31   [get_ports MgtPortTxLane1_p         ]
+set_property PACKAGE_PIN  N34   [get_ports MgtPortTxLane2_n         ]
+set_property PACKAGE_PIN  N33   [get_ports MgtPortTxLane2_p         ]
+set_property PACKAGE_PIN  P32   [get_ports MgtPortTxLane3_n         ]
+set_property PACKAGE_PIN  P31   [get_ports MgtPortTxLane3_p         ]
+set_property PACKAGE_PIN  R34   [get_ports MgtPortTxLane4_n         ]
+set_property PACKAGE_PIN  R33   [get_ports MgtPortTxLane4_p         ]
+set_property PACKAGE_PIN  T32   [get_ports MgtPortTxLane5_n         ]
+set_property PACKAGE_PIN  T31   [get_ports MgtPortTxLane5_p         ]
+set_property PACKAGE_PIN  U34   [get_ports MgtPortTxLane6_n         ]
+set_property PACKAGE_PIN  U33   [get_ports MgtPortTxLane6_p         ]
+set_property PACKAGE_PIN  V32   [get_ports MgtPortTxLane7_n         ]
+set_property PACKAGE_PIN  V31   [get_ports MgtPortTxLane7_p         ]
+set_property PACKAGE_PIN  W34   [get_ports MgtPortTxLane8_n         ]
+set_property PACKAGE_PIN  W33   [get_ports MgtPortTxLane8_p         ]
+set_property PACKAGE_PIN  Y32   [get_ports MgtPortTxLane9_n         ]
+set_property PACKAGE_PIN  Y31   [get_ports MgtPortTxLane9_p         ]
 
-set_property PACKAGE_PIN BD20 [get_ports  aIPassPrsnt_n[0]]
-set_property PACKAGE_PIN BF23 [get_ports  aIPassPrsnt_n[1]]
-set_property PACKAGE_PIN BD24 [get_ports  aIPassPrsnt_n[2]]
-set_property PACKAGE_PIN AR23 [get_ports  aIPassPrsnt_n[3]]
-set_property PACKAGE_PIN AP24 [get_ports  aIPassPrsnt_n[4]]
-set_property PACKAGE_PIN AM22 [get_ports  aIPassPrsnt_n[5]]
-set_property PACKAGE_PIN AM24 [get_ports  aIPassPrsnt_n[6]]
-set_property PACKAGE_PIN AM21 [get_ports  aIPassPrsnt_n[7]]
-set_property IOSTANDARD LVCMOS18 [get_ports aIPassPrsnt_n[*]]
+set_property PACKAGE_PIN  N39   [get_ports MgtPortRxLane0_n         ]
+set_property PACKAGE_PIN  N38   [get_ports MgtPortRxLane0_p         ]
+set_property PACKAGE_PIN  AC39  [get_ports MgtPortRxLane10_n        ]
+set_property PACKAGE_PIN  AC38  [get_ports MgtPortRxLane10_p        ]
+set_property PACKAGE_PIN  AD37  [get_ports MgtPortRxLane11_n        ]
+set_property PACKAGE_PIN  AD36  [get_ports MgtPortRxLane11_p        ]
+set_property PACKAGE_PIN  AE39  [get_ports MgtPortRxLane12_n        ]
+set_property PACKAGE_PIN  AE38  [get_ports MgtPortRxLane12_p        ]
+set_property PACKAGE_PIN  AF37  [get_ports MgtPortRxLane13_n        ]
+set_property PACKAGE_PIN  AF36  [get_ports MgtPortRxLane13_p        ]
+set_property PACKAGE_PIN  AG39  [get_ports MgtPortRxLane14_n        ]
+set_property PACKAGE_PIN  AG38  [get_ports MgtPortRxLane14_p        ]
+set_property PACKAGE_PIN  AH37  [get_ports MgtPortRxLane15_n        ]
+set_property PACKAGE_PIN  AH36  [get_ports MgtPortRxLane15_p        ]
+set_property PACKAGE_PIN  P37   [get_ports MgtPortRxLane1_n         ]
+set_property PACKAGE_PIN  P36   [get_ports MgtPortRxLane1_p         ]
+set_property PACKAGE_PIN  R39   [get_ports MgtPortRxLane2_n         ]
+set_property PACKAGE_PIN  R38   [get_ports MgtPortRxLane2_p         ]
+set_property PACKAGE_PIN  T37   [get_ports MgtPortRxLane3_n         ]
+set_property PACKAGE_PIN  T36   [get_ports MgtPortRxLane3_p         ]
+set_property PACKAGE_PIN  U39   [get_ports MgtPortRxLane4_n         ]
+set_property PACKAGE_PIN  U38   [get_ports MgtPortRxLane4_p         ]
+set_property PACKAGE_PIN  V37   [get_ports MgtPortRxLane5_n         ]
+set_property PACKAGE_PIN  V36   [get_ports MgtPortRxLane5_p         ]
+set_property PACKAGE_PIN  W39   [get_ports MgtPortRxLane6_n         ]
+set_property PACKAGE_PIN  W38   [get_ports MgtPortRxLane6_p         ]
+set_property PACKAGE_PIN  Y37   [get_ports MgtPortRxLane7_n         ]
+set_property PACKAGE_PIN  Y36   [get_ports MgtPortRxLane7_p         ]
+set_property PACKAGE_PIN  AA39  [get_ports MgtPortRxLane8_n         ]
+set_property PACKAGE_PIN  AA38  [get_ports MgtPortRxLane8_p         ]
+set_property PACKAGE_PIN  AB37  [get_ports MgtPortRxLane9_n         ]
+set_property PACKAGE_PIN  AB36  [get_ports MgtPortRxLane9_p         ]
 
-set_property PACKAGE_PIN BE20 [get_ports  aIPassIntr_n[0]]
-set_property PACKAGE_PIN BF22 [get_ports  aIPassIntr_n[1]]
-set_property PACKAGE_PIN BE22 [get_ports  aIPassIntr_n[2]]
-set_property PACKAGE_PIN AT23 [get_ports  aIPassIntr_n[3]]
-set_property PACKAGE_PIN AN24 [get_ports  aIPassIntr_n[4]]
-set_property PACKAGE_PIN AL22 [get_ports  aIPassIntr_n[5]]
-set_property PACKAGE_PIN AL24 [get_ports  aIPassIntr_n[6]]
-set_property PACKAGE_PIN AL21 [get_ports  aIPassIntr_n[7]]
-set_property IOSTANDARD LVCMOS18 [get_ports aIPassIntr_n[*]]
+set_property PACKAGE_PIN  AN20  [get_ports DeviceClk_n              ]
+set_property PACKAGE_PIN  AN21  [get_ports DeviceClk_p              ]
 
-set_property PACKAGE_PIN BD21 [get_ports  aIPassSCL[0]]
-set_property PACKAGE_PIN BE21 [get_ports  aIPassSDA[0]]
-set_property PACKAGE_PIN BF24 [get_ports  aIPassSCL[1]]
-set_property PACKAGE_PIN BE23 [get_ports  aIPassSDA[1]]
-set_property PACKAGE_PIN BD23 [get_ports  aIPassSCL[2]]
-set_property PACKAGE_PIN BC21 [get_ports  aIPassSDA[2]]
-set_property PACKAGE_PIN BC24 [get_ports  aIPassSCL[3]]
-set_property PACKAGE_PIN BB21 [get_ports  aIPassSDA[3]]
-set_property PACKAGE_PIN BB20 [get_ports  aIPassSCL[4]]
-set_property PACKAGE_PIN BA20 [get_ports  aIPassSDA[4]]
-set_property PACKAGE_PIN AN21 [get_ports  aIPassSCL[5]]
-set_property PACKAGE_PIN AN22 [get_ports  aIPassSDA[5]]
-set_property PACKAGE_PIN AU24 [get_ports  aIPassSCL[6]]
-set_property PACKAGE_PIN AT24 [get_ports  aIPassSDA[6]]
-set_property PACKAGE_PIN AP23 [get_ports  aIPassSCL[7]]
-set_property PACKAGE_PIN AN23 [get_ports  aIPassSDA[7]]
-set_property PACKAGE_PIN BA30 [get_ports  aIPassSCL[8] ]
-set_property PACKAGE_PIN BA32 [get_ports  aIPassSDA[8] ]
-set_property PACKAGE_PIN BB29 [get_ports  aIPassSCL[9] ]
-set_property PACKAGE_PIN BE30 [get_ports  aIPassSDA[9] ]
-set_property PACKAGE_PIN BB32 [get_ports  aIPassSCL[10]]
-set_property PACKAGE_PIN BA29 [get_ports  aIPassSDA[10]]
-set_property PACKAGE_PIN BE32 [get_ports  aIPassSCL[11]]
-set_property PACKAGE_PIN BD31 [get_ports  aIPassSDA[11]]
-set_property IOSTANDARD LVCMOS18 [get_ports aIPassSCL[*]]
-set_property IOSTANDARD LVCMOS18 [get_ports aIPassSDA[*]]
+set_property PACKAGE_PIN  AP20  [get_ports dvJesd204SysRef_n        ]
+set_property PACKAGE_PIN  AP21  [get_ports dvJesd204SysRef_p        ]
+set_property PACKAGE_PIN  AH21  [get_ports aJesd204SyncReqIn_n      ]
+set_property PACKAGE_PIN  AM19  [get_ports aJesd204SyncReqOut_n     ]
 
-set_property PACKAGE_PIN AL30 [get_ports  aPortExpReset_n]
-set_property PACKAGE_PIN AN31 [get_ports  aPortExpIntr_n ]
-set_property PACKAGE_PIN AY32 [get_ports  aPortExpSda    ]
-set_property PACKAGE_PIN AY30 [get_ports  aPortExpScl    ]
+set_property PACKAGE_PIN  AJ19  [get_ports aGpoSync[0]              ]
+set_property PACKAGE_PIN  AL19  [get_ports aGpoSync[1]              ]
+set_property PACKAGE_PIN  AV22  [get_ports aTriggerIn_n             ]
+set_property PACKAGE_PIN  AU22  [get_ports aTriggerIn_p             ]
+set_property PACKAGE_PIN  AV20  [get_ports aTriggerOut_n            ]
+set_property PACKAGE_PIN  AU20  [get_ports aTriggerOut_p            ]
 
-set_property IOSTANDARD LVCMOS18 [get_ports  aPortExpReset_n]
-set_property IOSTANDARD LVCMOS18 [get_ports  aPortExpIntr_n ]
-set_property IOSTANDARD LVCMOS18 [get_ports  aPortExpSda    ]
-set_property IOSTANDARD LVCMOS18 [get_ports  aPortExpScl    ]
+set_property PACKAGE_PIN  AW18  [get_ports aRsrvGpio_n[0]           ]
+set_property PACKAGE_PIN  AR21  [get_ports aRsrvGpio_n[1]           ]
+set_property PACKAGE_PIN  AW19  [get_ports aRsrvGpio_n[2]           ]
+set_property PACKAGE_PIN  AT21  [get_ports aRsrvGpio_n[3]           ]
+set_property PACKAGE_PIN  AW21  [get_ports aRsrvGpio_n[4]           ]
+set_property PACKAGE_PIN  AV18  [get_ports aRsrvGpio_p[0]           ]
+set_property PACKAGE_PIN  AR22  [get_ports aRsrvGpio_p[1]           ]
+set_property PACKAGE_PIN  AW20  [get_ports aRsrvGpio_p[2]           ]
+set_property PACKAGE_PIN  AT22  [get_ports aRsrvGpio_p[3]           ]
+set_property PACKAGE_PIN  AV21  [get_ports aRsrvGpio_p[4]           ]
+
+
+set_property IOSTANDARD LVCMOS18 [get_ports aModulePresent_n]
+set_property IOSTANDARD LVCMOS18 [get_ports aFamPowerGood]
+set_property PULLTYPE   PULLDOWN [get_ports aFamPowerGood]
+
+set_property IOSTANDARD LVCMOS18 [get_ports aConfigRxClkSe]
+set_property IOSTANDARD LVCMOS18 [get_ports aConfigRxDataSe*]
+set_property IOSTANDARD LVDS     [get_ports aConfigRxClkLvds_p]
+make_diff_pair_ports aConfigRxClkLvds_p aConfigRxClkLvds_n -quiet
+
+set_property IOSTANDARD LVDCI_18 [get_ports aConfigTxClkSe]
+set_property IOSTANDARD LVDCI_18 [get_ports aConfigTxDataSe*]
+set_property IOSTANDARD LVDS     [get_ports aConfigTxClkLvds_p]
+set_property OUTPUT_IMPEDANCE RDRV_48_48 [get_ports aConfigTxClkSe]
+set_property OUTPUT_IMPEDANCE RDRV_48_48 [get_ports aConfigTxDataSe*]
+make_diff_pair_ports aConfigTxClkLvds_p aConfigTxClkLvds_n -quiet
+
+set_property IOSTANDARD LVCMOS18 [get_ports bIoSmbScl    ]
+set_property IOSTANDARD LVCMOS18 [get_ports bIoSmbSda    ]
+set_property IOSTANDARD LVCMOS18 [get_ports aIoSmbAlert_n]
+
+set_property IOSTANDARD LVDS     [get_ports DeviceClk_p]
+set_property DIFF_TERM_ADV TERM_100 [get_ports DeviceClk_p]
+make_diff_pair_ports DeviceClk_p  DeviceClk_n -quiet
+
+set_property IOSTANDARD LVDS     [get_ports dvJesd204SysRef_p]
+set_property IOSTANDARD LVCMOS18 [get_ports aJesd204SyncReq*_n]
+set_property DIFF_TERM_ADV TERM_100 [get_ports dvJesd204SysRef_p]
+make_diff_pair_ports dvJesd204SysRef_p  dvJesd204SysRef_n -quiet
+
+set_property IOSTANDARD LVCMOS18 [get_ports aGpoSync*]
+set_property IOSTANDARD LVDS     [get_ports aTriggerIn_p]
+set_property IOSTANDARD LVDS     [get_ports aTriggerOut_p]
+make_diff_pair_ports aTriggerIn_p aTriggerIn_n -quiet
+make_diff_pair_ports aTriggerOut_p aTriggerOut_n -quiet
+
+set_property IOSTANDARD LVCMOS18 [get_ports aRsrvGpio_*]
+#set_property IOSTANDARD LVDS     [get_ports aRsrvGpio_*]
 
 ###################################################
 # Management
 ###################################################
-set_property PACKAGE_PIN AY26 [get_ports Osc100ClkIn]
 
-set_property PACKAGE_PIN BE16 [get_ports bBaseSmbScl]
-set_property PACKAGE_PIN BF15 [get_ports bBaseSmbSda]
-set_property PACKAGE_PIN AR13 [get_ports aBaseSmbAlert_n]
+set_property PACKAGE_PIN  AP15  [get_ports Osc100ClkIn              ]
 
-set_property PACKAGE_PIN AP31 [get_ports  bMezzSmbScl]
-set_property PACKAGE_PIN AP29 [get_ports  bMezzSmbSda]
+set_property PACKAGE_PIN  B11   [get_ports aFpgaHwRevision[0]       ]
+set_property PACKAGE_PIN  A11   [get_ports aFpgaHwRevision[1]       ]
+set_property PACKAGE_PIN  B10   [get_ports aFpgaHwRevision[2]       ]
+set_property PACKAGE_PIN  A9    [get_ports aFpgaHwRevision[3]       ]
 
-set_property PACKAGE_PIN BE13 [get_ports bConfigI2cScl]
-set_property PACKAGE_PIN BD13 [get_ports bConfigI2cSda]
+set_property PACKAGE_PIN  A3    [get_ports bBaseSmbScl              ]
+set_property PACKAGE_PIN  B5    [get_ports bBaseSmbSda              ]
+set_property PACKAGE_PIN  A6    [get_ports aBaseSmbAlert_n          ]
 
-set_property PACKAGE_PIN BB15 [get_ports bPwrSupplyPmbScl]
-set_property PACKAGE_PIN BB16 [get_ports bPwrSupplyPmbSda]
-set_property PACKAGE_PIN AY16 [get_ports aPwrSupplyPmbAlert_n]
+set_property PACKAGE_PIN  F4    [get_ports bConfigI2cScl            ]
+set_property PACKAGE_PIN  E3    [get_ports bConfigI2cSda            ]
 
-set_property PACKAGE_PIN AR16 [get_ports aIoRefClk100En]
+set_property PACKAGE_PIN  D3    [get_ports bPwrSupplyPmbScl         ]
+set_property PACKAGE_PIN  C5    [get_ports bPwrSupplyPmbSda         ]
+set_property PACKAGE_PIN  D2    [get_ports aPwrSupplyPmbAlert_n     ]
 
-set_property PACKAGE_PIN BA28 [get_ports aAuthSda]
+set_property PACKAGE_PIN  AK14  [get_ports bDigiPotSclk             ]
+set_property PACKAGE_PIN  AM14  [get_ports bDigiPotMosi             ]
+set_property PACKAGE_PIN  AR11  [get_ports bDigiPotMiso             ]
+set_property PACKAGE_PIN  AP11  [get_ports bDigiPotSync_n           ]
 
-set_property PACKAGE_PIN AW23 [get_ports SidebandClk]
-set_property PACKAGE_PIN AV23 [get_ports {sSidebandDataOut[0]}]
-set_property PACKAGE_PIN AU22 [get_ports {sSidebandDataOut[1]}]
-set_property PACKAGE_PIN AV22 [get_ports {sSidebandDataOut[2]}]
-set_property PACKAGE_PIN AT22 [get_ports {sSidebandDataOut[3]}]
-set_property PACKAGE_PIN AV24 [get_ports aSidebandDataIn]
-set_property PACKAGE_PIN AR22 [get_ports aSidebandFifoFull]
-#schematic signal name is Fpga_Cpld_Spare
-set_property PACKAGE_PIN AW24 [get_ports aFpgaStage2Done]
+set_property PACKAGE_PIN  E4    [get_ports aIoRefClk100En           ]
+set_property PACKAGE_PIN  E5    [get_ports aIoRefClk10En            ]
+set_property PACKAGE_PIN  F6    [get_ports aIoRefSelClk100          ]
 
-set_property PACKAGE_PIN AM14 [get_ports aFldUpdJtagSel]
-set_property PACKAGE_PIN AN13 [get_ports bFldUpdJtagTck]
-set_property PACKAGE_PIN AL15 [get_ports bFldUpdJtagTdi]
-set_property PACKAGE_PIN AM15 [get_ports aFldUpdJtagTdo]
-set_property PACKAGE_PIN AL14 [get_ports bFldUpdJtagTms]
+set_property PACKAGE_PIN  AK16  [get_ports aAuthSda                 ]
+
+set_property PACKAGE_PIN  AU15  [get_ports SidebandClk              ]
+set_property PACKAGE_PIN  AT15  [get_ports sSidebandDataOut[0]      ]
+set_property PACKAGE_PIN  AW15  [get_ports sSidebandDataOut[1]      ]
+set_property PACKAGE_PIN  AV15  [get_ports sSidebandDataOut[2]      ]
+set_property PACKAGE_PIN  AR16  [get_ports sSidebandDataOut[3]      ]
+set_property PACKAGE_PIN  AR14  [get_ports aSidebandDataIn          ]
+set_property PACKAGE_PIN  AT14  [get_ports aSidebandFifoFull        ]
+set_property PACKAGE_PIN  AP16  [get_ports aFpgaStage2Done          ]
+
+set_property PACKAGE_PIN  AV10  [get_ports aFldUpdJtagSel           ]
+set_property PACKAGE_PIN  AU13  [get_ports bFldUpdJtagTck           ]
+set_property PACKAGE_PIN  AV12  [get_ports bFldUpdJtagTdi           ]
+set_property PACKAGE_PIN  AV13  [get_ports aFldUpdJtagTdo           ]
+set_property PACKAGE_PIN  AU14  [get_ports bFldUpdJtagTms           ]
 
 
-set_property PROHIBIT TRUE [get_sites AM26 ];  # fFpgaConfigData[4]
-set_property PROHIBIT TRUE [get_sites AN26 ];  # fFpgaConfigData[5]
-set_property PROHIBIT TRUE [get_sites AL25 ];  # fFpgaConfigData[6]
-set_property PROHIBIT TRUE [get_sites AM25 ];  # fFpgaConfigData[7]
+set_property PROHIBIT TRUE [get_sites  AM12 ];  # fFpgaConfigData[4]
+set_property PROHIBIT TRUE [get_sites  AN12 ];  # fFpgaConfigData[5]
+set_property PROHIBIT TRUE [get_sites  AR13 ];  # fFpgaConfigData[6]
+set_property PROHIBIT TRUE [get_sites  AR12 ];  # fFpgaConfigData[7]
 
 set_property IOSTANDARD LVCMOS18 [get_ports Osc100ClkIn]
 
+set_property IOSTANDARD LVCMOS18 [get_ports aFpgaHwRevision*]
+set_property PULLTYPE   PULLUP   [get_ports aFpgaHwRevision*]
+
 set_property IOSTANDARD LVCMOS18 [get_ports bBaseSmb*]
 set_property IOSTANDARD LVCMOS18 [get_ports aBaseSmbAlert_n]
-
-set_property IOSTANDARD LVCMOS18 [get_ports bMezzSmb*]
 
 set_property IOSTANDARD LVCMOS18 [get_ports bConfigI2c*]
 
 set_property IOSTANDARD LVCMOS18 [get_ports bPwrSupplyPmb*]
 set_property IOSTANDARD LVCMOS18 [get_ports aPwrSupplyPmbAlert_n]
 
+set_property IOSTANDARD LVCMOS18 [get_ports bDigiPot*]
+
 set_property IOSTANDARD LVCMOS18 [get_ports aIoRefClk*]
+set_property IOSTANDARD LVCMOS18 [get_ports aIoRefSelClk100]
 
 set_property IOSTANDARD LVCMOS18 [get_ports aAuthSda]
 
@@ -4456,82 +4694,46 @@ set_property IOSTANDARD LVCMOS18 [get_ports aFpgaStage2Done]
 
 set_property IOSTANDARD LVCMOS18 [get_ports *FldUpdJtag*]
 
-set_property PACKAGE_PIN BD14 [get_ports  aI2cBusEnable]
-set_property IOSTANDARD LVCMOS18 [get_ports  aI2cBusEnable]
-
-set_property PACKAGE_PIN BA12 [get_ports  a3v3VDPwrSync  ]
-set_property PACKAGE_PIN AP13 [get_ports  a1v2PwrSync    ]
-set_property PACKAGE_PIN AY11 [get_ports  a0v9PwrSync    ]
-set_property PACKAGE_PIN BC13 [get_ports  aDdr4VttPwrEn  ]
-set_property PACKAGE_PIN AP14 [get_ports  aMgtavttPwrSync]
-set_property PACKAGE_PIN BB12 [get_ports  a0v85PwrSync   ]
-set_property PACKAGE_PIN BD15 [get_ports  a1v8fpgaPwrSync]
-set_property PACKAGE_PIN AN14 [get_ports  a3v8PwrSync    ]
-set_property PACKAGE_PIN AY31 [get_ports  a3v3OptPwrSync ]
-
-
-set_property IOSTANDARD LVCMOS18 [get_ports  a3v3VDPwrSync  ]
-set_property IOSTANDARD LVCMOS18 [get_ports  a1v2PwrSync    ]
-set_property IOSTANDARD LVCMOS18 [get_ports  a0v9PwrSync    ]
-set_property IOSTANDARD LVCMOS18 [get_ports  aDdr4VttPwrEn  ]
-set_property IOSTANDARD LVCMOS18 [get_ports  aMgtavttPwrSync]
-set_property IOSTANDARD LVCMOS18 [get_ports  a0v85PwrSync   ]
-set_property IOSTANDARD LVCMOS18 [get_ports  a1v8fpgaPwrSync]
-set_property IOSTANDARD LVCMOS18 [get_ports  a3v8PwrSync    ]
-set_property IOSTANDARD LVCMOS18 [get_ports  a3v3OptPwrSync ]
-
-set_property PACKAGE_PIN AW30 [get_ports aFpgaB2bSpare1]
-set_property PACKAGE_PIN AM31 [get_ports aFpgaB2bSpare2]
-set_property IOSTANDARD LVCMOS18 [get_ports aFpgaB2bSpare*]
-
-set_property PACKAGE_PIN A18 [get_ports dr0DramAlert_n]
-set_property PACKAGE_PIN C28 [get_ports dr1DramAlert_n]
-set_property IOSTANDARD LVCMOS12 [get_ports dr*DramAlert_n]
-
-set_property PACKAGE_PIN AP21 [get_ports aPllCtrlStatusEn_n]
-set_property IOSTANDARD LVCMOS18 [get_ports aPllCtrlStatusEn_n]
-
 ######################################################
 # PCIe
 ######################################################
-set_property PACKAGE_PIN AR26 [get_ports aPcieRst_n]
-set_property PACKAGE_PIN AT10 [get_ports PcieRefClk_n]
-set_property PACKAGE_PIN AT11 [get_ports PcieRefClk_p]
+set_property PACKAGE_PIN  AP10  [get_ports aPcieRst_n               ]
+set_property PACKAGE_PIN  AJ11  [get_ports PcieRefClk_n             ]
+set_property PACKAGE_PIN  AJ12  [get_ports PcieRefClk_p             ]
 
-set_property package_pin BF4 [get_ports PcieTx_n[0]]
-set_property package_pin BF5 [get_ports PcieTx_p[0]]
-set_property package_pin BD4 [get_ports PcieTx_n[1]]
-set_property package_pin BD5 [get_ports PcieTx_p[1]]
-set_property package_pin BB4 [get_ports PcieTx_n[2]]
-set_property package_pin BB5 [get_ports PcieTx_p[2]]
-set_property package_pin AV6 [get_ports PcieTx_n[3]]
-set_property package_pin AV7 [get_ports PcieTx_p[3]]
-set_property package_pin AU8 [get_ports PcieTx_n[4]]
-set_property package_pin AU9 [get_ports PcieTx_p[4]]
-set_property package_pin AT6 [get_ports PcieTx_n[5]]
-set_property package_pin AT7 [get_ports PcieTx_p[5]]
-set_property package_pin AR8 [get_ports PcieTx_n[6]]
-set_property package_pin AR9 [get_ports PcieTx_p[6]]
-set_property package_pin AP6 [get_ports PcieTx_n[7]]
-set_property package_pin AP7 [get_ports PcieTx_p[7]]
+set_property PACKAGE_PIN  AW7   [get_ports PcieTx_n[0]                ]
+set_property PACKAGE_PIN  AW8   [get_ports PcieTx_p[0]                ]
+set_property PACKAGE_PIN  AV5   [get_ports PcieTx_n[1]                ]
+set_property PACKAGE_PIN  AV6   [get_ports PcieTx_p[1]                ]
+set_property PACKAGE_PIN  AU7   [get_ports PcieTx_n[2]                ]
+set_property PACKAGE_PIN  AU8   [get_ports PcieTx_p[2]                ]
+set_property PACKAGE_PIN  AT5   [get_ports PcieTx_n[3]                ]
+set_property PACKAGE_PIN  AT6   [get_ports PcieTx_p[3]                ]
+set_property PACKAGE_PIN  AR7   [get_ports PcieTx_n[4]                ]
+set_property PACKAGE_PIN  AR8   [get_ports PcieTx_p[4]                ]
+set_property PACKAGE_PIN  AP5   [get_ports PcieTx_n[5]                ]
+set_property PACKAGE_PIN  AP6   [get_ports PcieTx_p[5]                ]
+set_property PACKAGE_PIN  AN7   [get_ports PcieTx_n[6]                ]
+set_property PACKAGE_PIN  AN8   [get_ports PcieTx_p[6]                ]
+set_property PACKAGE_PIN  AM5   [get_ports PcieTx_n[7]                ]
+set_property PACKAGE_PIN  AM6   [get_ports PcieTx_p[7]                ]
 
-set_property package_pin BC1 [get_ports PcieRx_n[0]]
-set_property package_pin BC2 [get_ports PcieRx_p[0]]
-set_property package_pin BA1 [get_ports PcieRx_n[1]]
-set_property package_pin BA2 [get_ports PcieRx_p[1]]
-set_property package_pin AW3 [get_ports PcieRx_n[2]]
-set_property package_pin AW4 [get_ports PcieRx_p[2]]
-set_property package_pin AV1 [get_ports PcieRx_n[3]]
-set_property package_pin AV2 [get_ports PcieRx_p[3]]
-set_property package_pin AU3 [get_ports PcieRx_n[4]]
-set_property package_pin AU4 [get_ports PcieRx_p[4]]
-set_property package_pin AT1 [get_ports PcieRx_n[5]]
-set_property package_pin AT2 [get_ports PcieRx_p[5]]
-set_property package_pin AR3 [get_ports PcieRx_n[6]]
-set_property package_pin AR4 [get_ports PcieRx_p[6]]
-set_property package_pin AP1 [get_ports PcieRx_n[7]]
-set_property package_pin AP2 [get_ports PcieRx_p[7]]
-
+set_property PACKAGE_PIN  AW3   [get_ports PcieRx_n[0]                ]
+set_property PACKAGE_PIN  AW4   [get_ports PcieRx_p[0]                ]
+set_property PACKAGE_PIN  AV1   [get_ports PcieRx_n[1]                ]
+set_property PACKAGE_PIN  AV2   [get_ports PcieRx_p[1]                ]
+set_property PACKAGE_PIN  AU3   [get_ports PcieRx_n[2]                ]
+set_property PACKAGE_PIN  AU4   [get_ports PcieRx_p[2]                ]
+set_property PACKAGE_PIN  AT1   [get_ports PcieRx_n[3]                ]
+set_property PACKAGE_PIN  AT2   [get_ports PcieRx_p[3]                ]
+set_property PACKAGE_PIN  AR3   [get_ports PcieRx_n[4]                ]
+set_property PACKAGE_PIN  AR4   [get_ports PcieRx_p[4]                ]
+set_property PACKAGE_PIN  AP1   [get_ports PcieRx_n[5]                ]
+set_property PACKAGE_PIN  AP2   [get_ports PcieRx_p[5]                ]
+set_property PACKAGE_PIN  AN3   [get_ports PcieRx_n[6]                ]
+set_property PACKAGE_PIN  AN4   [get_ports PcieRx_p[6]                ]
+set_property PACKAGE_PIN  AM1   [get_ports PcieRx_n[7]                ]
+set_property PACKAGE_PIN  AM2   [get_ports PcieRx_p[7]                ]
 
 
 set_property IOSTANDARD LVCMOS18 [get_ports aPcieRst_n]
@@ -4544,42 +4746,41 @@ set_property INTERFACE PCIe [get_ports { PcieRx_p[7] PcieRx_p[6] PcieRx_p[5] Pci
 ##############
 # PXI
 ##############
-set_property PACKAGE_PIN AV13 [get_ports {aPxiTrigData[0]}]
-set_property PACKAGE_PIN AT14 [get_ports {aPxiTrigData[1]}]
-set_property PACKAGE_PIN AU13 [get_ports {aPxiTrigData[2]}]
-set_property PACKAGE_PIN AU16 [get_ports {aPxiTrigData[3]}]
-set_property PACKAGE_PIN AP15 [get_ports {aPxiTrigData[4]}]
-set_property PACKAGE_PIN BB14 [get_ports {aPxiTrigData[5]}]
-set_property PACKAGE_PIN AY15 [get_ports {aPxiTrigData[6]}]
-set_property PACKAGE_PIN AW16 [get_ports {aPxiTrigData[7]}]
-set_property PACKAGE_PIN AU15 [get_ports {aPxiTrigDir[0]}]
-set_property PACKAGE_PIN AT13 [get_ports {aPxiTrigDir[1]}]
-set_property PACKAGE_PIN AY12 [get_ports {aPxiTrigDir[2]}]
-set_property PACKAGE_PIN AV16 [get_ports {aPxiTrigDir[3]}]
-set_property PACKAGE_PIN AW15 [get_ports {aPxiTrigDir[4]}]
-set_property PACKAGE_PIN BC14 [get_ports {aPxiTrigDir[5]}]
-set_property PACKAGE_PIN BA14 [get_ports {aPxiTrigDir[6]}]
-set_property PACKAGE_PIN AY13 [get_ports {aPxiTrigDir[7]}]
-set_property PACKAGE_PIN AT15 [get_ports aPxiTrigOutEn_n]
+set_property PACKAGE_PIN  AJ14  [get_ports aPxiTrigDir[0]           ]
+set_property PACKAGE_PIN  AW11  [get_ports aPxiTrigData[0]          ]
+set_property PACKAGE_PIN  AJ15  [get_ports aPxiTrigDir[1]           ]
+set_property PACKAGE_PIN  AT11  [get_ports aPxiTrigData[1]          ]
+set_property PACKAGE_PIN  AJ16  [get_ports aPxiTrigDir[2]           ]
+set_property PACKAGE_PIN  AT12  [get_ports aPxiTrigData[2]          ]
+set_property PACKAGE_PIN  AT10  [get_ports aPxiTrigDir[3]           ]
+set_property PACKAGE_PIN  AP13  [get_ports aPxiTrigData[3]          ]
+set_property PACKAGE_PIN  AU10  [get_ports aPxiTrigDir[4]           ]
+set_property PACKAGE_PIN  AN15  [get_ports aPxiTrigData[4]          ]
+set_property PACKAGE_PIN  AN13  [get_ports aPxiTrigDir[5]           ]
+set_property PACKAGE_PIN  AL16  [get_ports aPxiTrigData[5]          ]
+set_property PACKAGE_PIN  AM15  [get_ports aPxiTrigDir[6]           ]
+set_property PACKAGE_PIN  AT16  [get_ports aPxiTrigData[6]          ]
+set_property PACKAGE_PIN  AK17  [get_ports aPxiTrigDir[7]           ]
+set_property PACKAGE_PIN  AL17  [get_ports aPxiTrigData[7]          ]
+set_property PACKAGE_PIN  F7    [get_ports aPxiTrigOutEn_n          ]
 
-set_property PACKAGE_PIN BF25 [get_ports {aPxiGa[0]}]
-set_property PACKAGE_PIN BE25 [get_ports {aPxiGa[1]}]
-set_property PACKAGE_PIN BE26 [get_ports {aPxiGa[2]}]
-set_property PACKAGE_PIN BD26 [get_ports {aPxiGa[3]}]
-set_property PACKAGE_PIN BE28 [get_ports {aPxiGa[4]}]
+set_property PACKAGE_PIN  D5    [get_ports aPxiGa[0]                ]
+set_property PACKAGE_PIN  F1    [get_ports aPxiGa[1]                ]
+set_property PACKAGE_PIN  D6    [get_ports aPxiGa[2]                ]
+set_property PACKAGE_PIN  F2    [get_ports aPxiGa[3]                ]
+set_property PACKAGE_PIN  E1    [get_ports aPxiGa[4]                ]
+set_property PACKAGE_PIN  AP14  [get_ports aPxiStar                 ]
 
-set_property PACKAGE_PIN BA15 [get_ports aPxiStarData]
+set_property PACKAGE_PIN  AV11  [get_ports aPxieDStarB_n            ]
+set_property PACKAGE_PIN  AU12  [get_ports aPxieDStarB_p            ]
+set_property PACKAGE_PIN  AW13  [get_ports aPxieDStarC_n            ]
+set_property PACKAGE_PIN  AW14  [get_ports aPxieDStarC_p            ]
 
-set_property PACKAGE_PIN AW14 [get_ports aPxieDStarB_p]
-set_property PACKAGE_PIN AW13 [get_ports aPxieDStarB_n]
-set_property PACKAGE_PIN AU14 [get_ports aPxieDStarC_p]
-set_property PACKAGE_PIN AV14 [get_ports aPxieDStarC_n]
-
-
-set_property PACKAGE_PIN AW28 [get_ports PxieClk100_p]
-set_property PACKAGE_PIN AY28 [get_ports PxieClk100_n]
-set_property PACKAGE_PIN BB25 [get_ports pPxieSync100_n]
-set_property PACKAGE_PIN BA25 [get_ports pPxieSync100_p]
+set_property PACKAGE_PIN  AL14  [get_ports PxieClk100_n             ]
+set_property PACKAGE_PIN  AL15  [get_ports PxieClk100_p             ]
+set_property PACKAGE_PIN  AW16  [get_ports pPxieSync100_n           ]
+set_property PACKAGE_PIN  AV16  [get_ports pPxieSync100_p           ]
+set_property PACKAGE_PIN  AM18  [get_ports pClk10GenD               ]
 
 
 set_property IOSTANDARD LVCMOS18 [get_ports aPxiTrigDir[*] ]
@@ -4587,7 +4788,7 @@ set_property IOSTANDARD LVCMOS18 [get_ports aPxiTrigData[*]]
 set_property IOSTANDARD LVCMOS18 [get_ports aPxiTrigOutEn_n]
 
 set_property IOSTANDARD LVCMOS18 [get_ports aPxiGa[*]]
-set_property IOSTANDARD LVCMOS18 [get_ports aPxiStarData ]
+set_property IOSTANDARD LVCMOS18 [get_ports aPxiStar ]
 
 set_property IOSTANDARD LVDS     [get_ports aPxieDStarB_p   ]
 set_property IOSTANDARD LVDS     [get_ports aPxieDStarC_p   ]
@@ -4597,80 +4798,157 @@ make_diff_pair_ports aPxieDStarC_p aPxieDStarC_n -quiet
 
 set_property IOSTANDARD LVDS     [get_ports PxieClk100_p  ]
 set_property IOSTANDARD LVDS     [get_ports pPxieSync100_p]
+set_property IOSTANDARD LVCMOS18 [get_ports pClk10GenD    ]
 make_diff_pair_ports PxieClk100_p PxieClk100_n -quiet
 make_diff_pair_ports pPxieSync100_p pPxieSync100_n -quiet
 
 create_interface PXI
-set_property INTERFACE PXI [get_ports { aPxiGa[4] aPxiGa[3] aPxiGa[2] aPxiGa[1] aPxiGa[0] aPxiStarData aPxiTrigData[7] aPxiTrigData[6] aPxiTrigData[5] aPxiTrigData[4] aPxiTrigData[3] aPxiTrigData[2] aPxiTrigData[1] aPxiTrigData[0] aPcieRst_n aPxieDStarB_n aPxieDStarB_p aPxieDStarC_n aPxieDStarC_p pPxieSync100_n pPxieSync100_p PxieClk100_p PxieClk100_n Osc100ClkIn}]
-
-##############
-# DIO
-##############
-set_property PACKAGE_PIN AR31 [get_ports  aDio[0]]
-set_property PACKAGE_PIN AT29 [get_ports  aDio[1]]
-set_property PACKAGE_PIN AU29 [get_ports  aDio[2]]
-set_property PACKAGE_PIN AT30 [get_ports  aDio[3]]
-set_property PACKAGE_PIN AV29 [get_ports  aDio[4]]
-set_property PACKAGE_PIN AU31 [get_ports  aDio[5]]
-set_property PACKAGE_PIN AW29 [get_ports  aDio[6]]
-set_property PACKAGE_PIN AU30 [get_ports  aDio[7]]
-set_property IOSTANDARD LVCMOS18 [get_ports aDio[*]]
-
-set_property PACKAGE_PIN AL29 [get_ports  aFpgaReady_n]
-set_property IOSTANDARD LVCMOS18 [get_ports aFpgaReady_n]
-
+set_property INTERFACE PXI [get_ports { aPxiGa[4] aPxiGa[3] aPxiGa[2] aPxiGa[1] aPxiGa[0] aPxiStar aPxiTrigData[7] aPxiTrigData[6] aPxiTrigData[5] aPxiTrigData[4] aPxiTrigData[3] aPxiTrigData[2] aPxiTrigData[1] aPxiTrigData[0] aPcieRst_n aPxieDStarB_n aPxieDStarB_p aPxieDStarC_n aPxieDStarC_p pPxieSync100_n pPxieSync100_p PxieClk100_p PxieClk100_n Osc100ClkIn}]
 
 ###################################################
-# System Monitor
+# Power
 ###################################################
-set_property PACKAGE_PIN AY18 [get_ports aSysMon_3v3AMezz_Divided_p];     # AD5
-set_property PACKAGE_PIN BA18 [get_ports aSysMon_3v3AMezz_Divided_n];     # AGND
+set_property PACKAGE_PIN  P15   [get_ports aSysMon_MgtAvcc_Divided_n  ];  # AGND
+set_property PACKAGE_PIN  R15   [get_ports aSysMon_MgtAvcc_Divided_p  ];  # AD11
 
-set_property PACKAGE_PIN AV21 [get_ports aSysMon_3v3VDMezz_Divided_p];    # AD4
-set_property PACKAGE_PIN AW21 [get_ports aSysMon_3v3VDMezz_Divided_n];    # AGND
+set_property PACKAGE_PIN  R13   [get_ports aSysMon_Dram0Vref_Sense_n  ];  # AGND
+set_property PACKAGE_PIN  R14   [get_ports aSysMon_Dram0Vref_Sense_p  ];  # AD10
 
-set_property PACKAGE_PIN AW20 [get_ports aSysMon_VccioMezz_Divided_p];    # AD12
-set_property PACKAGE_PIN AY20 [get_ports aSysMon_VccioMezz_Divided_n];    # AGND
+set_property PACKAGE_PIN  P12   [get_ports aSysMon_MgtVccaux_Divided_n];  # AGND
+set_property PACKAGE_PIN  P13   [get_ports aSysMon_MgtVccaux_Divided_p];  # AD9
 
-set_property PACKAGE_PIN BB19 [get_ports aSysMon_0v9MgtAvcc_Divided_p];   # AD6
-set_property PACKAGE_PIN BC18 [get_ports aSysMon_0v9MgtAvcc_Divided_n];   # AGND
+set_property PACKAGE_PIN  P10   [get_ports aSysMon_MgtAvtt_Divided_n  ];  # AGND
+set_property PACKAGE_PIN  P11   [get_ports aSysMon_MgtAvtt_Divided_p  ];  # AD8
 
-set_property PACKAGE_PIN AY17 [get_ports aSysMon_1v2MgtAvtt_Divided_p];   # AD13
-set_property PACKAGE_PIN BA17 [get_ports aSysMon_1v2MgtAvtt_Divided_n];   # AGND
+set_property PACKAGE_PIN  N14   [get_ports aSysMon_Dram0Vtt_Sense_n   ];  # AGND
+set_property PACKAGE_PIN  N15   [get_ports aSysMon_Dram0Vtt_Sense_p   ];  # AD7
 
-set_property PACKAGE_PIN AP20 [get_ports aSysMon_3v3A_Divided_p];         # AD2
-set_property PACKAGE_PIN AR20 [get_ports aSysMon_3v3A_Divided_n];         # AGND
+set_property PACKAGE_PIN  N12   [get_ports aSysMon_5vAux_Divided_n    ];  # AGND
+set_property PACKAGE_PIN  N13   [get_ports aSysMon_5vAux_Divided_p    ];  # AD6
 
-set_property PACKAGE_PIN AT18 [get_ports aSysMon_3v8_Divided_p];          # AD11
-set_property PACKAGE_PIN AU17 [get_ports aSysMon_3v8_Divided_n];          # AGND
+set_property PACKAGE_PIN  L14   [get_ports aSysMon_3v8Int_Divided_n   ];  # AGND
+set_property PACKAGE_PIN  M14   [get_ports aSysMon_3v8Int_Divided_p   ];  # AD5
 
-set_property PACKAGE_PIN AN18 [get_ports aSysMon_3v3D_Divided_p];         # AD9
-set_property PACKAGE_PIN AN17 [get_ports aSysMon_3v3D_Divided_n];         # AGND
+set_property PACKAGE_PIN  M11   [get_ports aSysMon_3v3Clk_Divided_n   ];  # AGND
+set_property PACKAGE_PIN  M12   [get_ports aSysMon_3v3Clk_Divided_p   ];  # AD4
 
-set_property PACKAGE_PIN AL17 [get_ports aSysMon_DramVpp_Divided_p];      # AD0
-set_property PACKAGE_PIN AM17 [get_ports aSysMon_DramVpp_Divided_n];      # AGND
+set_property PACKAGE_PIN  M10   [get_ports aSysMon_Dram0Vpp_Divided_n ];  # AGND
+set_property PACKAGE_PIN  N10   [get_ports aSysMon_Dram0Vpp_Divided_p ];  # AD3
 
-set_property PACKAGE_PIN AR17 [get_ports aSysMon_1v8A_Divided_p];         # AD3
-set_property PACKAGE_PIN AT17 [get_ports aSysMon_1v8A_Divided_n];         # AGND
+set_property PACKAGE_PIN  K13   [get_ports aSysMon_3v3Aux_Divided_n   ];  # AGND
+set_property PACKAGE_PIN  L13   [get_ports aSysMon_3v3Aux_Divided_p   ];  # AD2
 
-set_property PACKAGE_PIN AM16 [get_ports aSysMon_Dram0Vtt_Sense_p];       # AD8
-set_property PACKAGE_PIN AN16 [get_ports aSysMon_Dram0Vtt_Sense_n];       # AGND
+set_property PACKAGE_PIN  L11   [get_ports aSysMon_3v3Cpld_Divided_n  ];  # AGND
+set_property PACKAGE_PIN  L12   [get_ports aSysMon_3v3Cpld_Divided_p  ];  # AD1
 
-set_property PACKAGE_PIN AP18 [get_ports aSysMon_1v8MgtVccaux_Divided_p]; # AD10
-set_property PACKAGE_PIN AR18 [get_ports aSysMon_1v8MgtVccaux_Divided_n]; # AGND
+set_property PACKAGE_PIN  K10   [get_ports aSysMon_VccAuxA_Divided_n  ];  # AGND
+set_property PACKAGE_PIN  K11   [get_ports aSysMon_VccAuxA_Divided_p  ];  # AD0
 
-set_property PACKAGE_PIN AN19 [get_ports aSysMon_DramVref_Sense_p];       # AD1
-set_property PACKAGE_PIN AP19 [get_ports aSysMon_DramVref_Sense_n];       # AGND
+set_property PACKAGE_PIN  J10   [get_ports aSysMon_Dram1Vref_Sense_n  ];  # AGND
+set_property PACKAGE_PIN  J11   [get_ports aSysMon_Dram1Vref_Sense_p  ];  # AD14
 
-set_property PACKAGE_PIN BB17 [get_ports aSysMon_1v2_Divided_p];          # AD14
-set_property PACKAGE_PIN BC17 [get_ports aSysMon_1v2_Divided_n];          # AGND
+set_property PACKAGE_PIN  H12   [get_ports aSysMon_Dram1Vtt_Sense_n   ];  # AGND
+set_property PACKAGE_PIN  H13   [get_ports aSysMon_Dram1Vtt_Sense_p   ];  # AD13
+
+set_property PACKAGE_PIN  G10   [get_ports aSysMon_Dram1Vpp_Divided_n ];  # AGND
+set_property PACKAGE_PIN  H10   [get_ports aSysMon_Dram1Vpp_Divided_p ];  # AD12
+
+set_property PACKAGE_PIN  B7    [get_ports aAux3v3Enable              ]
+set_property PACKAGE_PIN  A8    [get_ports aAux5vEnable               ]
+set_property PACKAGE_PIN  C10   [get_ports aAuxVccAEnable             ]
+set_property PACKAGE_PIN  B6    [get_ports aAux3v3Fault_n             ]
+
+set_property PROHIBIT TRUE [get_sites  AV17 ];  # FPGA_VRP_64
+set_property PROHIBIT TRUE [get_sites  AU27 ];  # FPGA_VRP_66
+set_property PROHIBIT TRUE [get_sites  AR29 ];  # FPGA_VRP_67
+set_property PROHIBIT TRUE [get_sites  AP30 ];  # FPGA_VRP_68
+set_property PROHIBIT TRUE [get_sites  K25  ];  # FPGA_VRP_69
+set_property PROHIBIT TRUE [get_sites  J23  ];  # FPGA_VRP_70
+set_property PROHIBIT TRUE [get_sites  J17  ];  # FPGA_VRP_71
+
+
 
 set_property IOSTANDARD ANALOG [get_ports {aSysMon_*}]
 
+set_property IOSTANDARD LVCMOS18 [get_ports aAux3v3Enable]
+set_property IOSTANDARD LVCMOS18 [get_ports aAux5vEnable]
+set_property IOSTANDARD LVCMOS18 [get_ports aAuxVccAEnable]
+set_property IOSTANDARD LVCMOS18 [get_ports aAux3v3Fault_n]
+
+###################################################
+# TDC
+###################################################
+set_property PACKAGE_PIN  E6    [get_ports aTdcAllPeclEn            ]
+set_property PACKAGE_PIN  AL21  [get_ports dvTdcAssert              ]
+set_property PACKAGE_PIN  AK21  [get_ports sTdcDeassert             ]
+set_property PACKAGE_PIN  AM20  [get_ports aTdcExpandedPulse_n      ]
+set_property PACKAGE_PIN  AL20  [get_ports aTdcExpandedPulse_p      ]
+
+
+set_property IOSTANDARD LVCMOS18 [get_ports aTdcAllPeclEn      ]
+set_property IOSTANDARD LVCMOS18 [get_ports dvTdcAssert        ]
+set_property IOSTANDARD LVCMOS18 [get_ports sTdcDeassert       ]
+set_property IOSTANDARD LVDS     [get_ports aTdcExpandedPulse_p]
+make_diff_pair_ports aTdcExpandedPulse_p aTdcExpandedPulse_n -quiet
+
+###################################################
+# Aux IO MGTs
+###################################################
+set_property PACKAGE_PIN  J34   [get_ports AuxIoMgtTxLane0_n          ]
+set_property PACKAGE_PIN  J33   [get_ports AuxIoMgtTxLane0_p          ]
+set_property PACKAGE_PIN  G34   [get_ports AuxIoMgtTxLane1_n          ]
+set_property PACKAGE_PIN  G33   [get_ports AuxIoMgtTxLane1_p          ]
+set_property PACKAGE_PIN  F36   [get_ports AuxIoMgtTxLane2_n          ]
+set_property PACKAGE_PIN  F35   [get_ports AuxIoMgtTxLane2_p          ]
+set_property PACKAGE_PIN  E34   [get_ports AuxIoMgtTxLane3_n          ]
+set_property PACKAGE_PIN  E33   [get_ports AuxIoMgtTxLane3_p          ]
+
+set_property PACKAGE_PIN  M37   [get_ports AuxIoMgtRxLane0_n          ]
+set_property PACKAGE_PIN  M36   [get_ports AuxIoMgtRxLane0_p          ]
+set_property PACKAGE_PIN  L39   [get_ports AuxIoMgtRxLane1_n          ]
+set_property PACKAGE_PIN  L38   [get_ports AuxIoMgtRxLane1_p          ]
+set_property PACKAGE_PIN  K37   [get_ports AuxIoMgtRxLane2_n          ]
+set_property PACKAGE_PIN  K36   [get_ports AuxIoMgtRxLane2_p          ]
+set_property PACKAGE_PIN  J39   [get_ports AuxIoMgtRxLane3_n          ]
+set_property PACKAGE_PIN  J38   [get_ports AuxIoMgtRxLane3_p          ]
+
+set_property PACKAGE_PIN  T28   [get_ports AuxIoMgtRefClk_n           ]
+set_property PACKAGE_PIN  T27   [get_ports AuxIoMgtRefClk_p           ]
+
+###################################################
+# Aux IO DIO
+###################################################
+set_property PACKAGE_PIN  A7    [get_ports aAuxIoEnable_n           ]
+
+set_property PACKAGE_PIN  G12   [get_ports aAuxIoData[0]            ]
+set_property PACKAGE_PIN  G11   [get_ports aAuxIoData[1]            ]
+set_property PACKAGE_PIN  F13   [get_ports aAuxIoData[2]            ]
+set_property PACKAGE_PIN  F12   [get_ports aAuxIoData[3]            ]
+set_property PACKAGE_PIN  B12   [get_ports aAuxIoData[4]            ]
+set_property PACKAGE_PIN  C13   [get_ports aAuxIoData[5]            ]
+set_property PACKAGE_PIN  A12   [get_ports aAuxIoData[6]            ]
+set_property PACKAGE_PIN  A13   [get_ports aAuxIoData[7]            ]
+
+set_property PACKAGE_PIN  F11   [get_ports aAuxIoOutputEn[0]        ]
+set_property PACKAGE_PIN  E11   [get_ports aAuxIoOutputEn[1]        ]
+set_property PACKAGE_PIN  E13   [get_ports aAuxIoOutputEn[2]        ]
+set_property PACKAGE_PIN  D13   [get_ports aAuxIoOutputEn[3]        ]
+set_property PACKAGE_PIN  J13   [get_ports aAuxIoOutputEn[4]        ]
+set_property PACKAGE_PIN  J12   [get_ports aAuxIoOutputEn[5]        ]
+set_property PACKAGE_PIN  A14   [get_ports aAuxIoOutputEn[6]        ]
+set_property PACKAGE_PIN  B14   [get_ports aAuxIoOutputEn[7]        ]
+
+
+set_property IOSTANDARD LVCMOS18 [get_ports aAuxIoEnable_n]
+
+set_property IOSTANDARD LVCMOS18 [get_ports {aAuxIoData*}]
+
+set_property IOSTANDARD LVCMOS18 [get_ports {aAuxIoOutputEn*}]
 
 
 
-## Start add from file PBlocksVU11P.xdc
+
+## Start add from file PBlocksKU15P.xdc
 ############################
 # TANDEM CONSTRAINTS SECTION
 ############################
@@ -4680,15 +4958,20 @@ set_property IOSTANDARD ANALOG [get_ports {aSysMon_*}]
 ## -------------------------------------------------
 set pciePblock [create_pblock  PcieGen3x8_USP_HardIp_Stage1_main]
 
-resize_pblock $pciePblock -add {SLICE_X217Y0:SLICE_X232Y119 \
-RAMB18_X12Y0:RAMB18_X13Y47 \
-RAMB36_X12Y0:RAMB36_X13Y23 \
-DSP48E2_X31Y0:DSP48E2_X31Y47 \
-GTYE4_CHANNEL_X1Y0:GTYE4_CHANNEL_X1Y7 \
-GTYE4_COMMON_X1Y0:GTYE4_COMMON_X1Y1 \
-PCIE40E4_X0Y0 \
-CONFIG_SITE_X0Y0 \
-LAGUNA_X28Y0:LAGUNA_X31Y119 \
+## 3 slice ranges below are as follows:
+## SLICE_X88Y0    : SLICE_X104Y59 : Slices around PCIE40E4
+## SLICE_X91Y119  : SLICE_X100Y60 : Slices around CONFIG_SITE
+## SLICE_X101Y119 : SLICE_X104Y60 : Slices left of GTHE4 tiles
+
+resize_pblock $pciePblock -add { \
+SLICE_X77Y0:SLICE_X104Y119   \
+DSP48E2_X7Y0:DSP48E2_X7Y47 \
+RAMB18_X6Y0:RAMB18_X7Y47 \
+RAMB36_X6Y0:RAMB36_X7Y23 \
+GTHE4_CHANNEL_X0Y0:GTHE4_CHANNEL_X0Y7 \
+GTHE4_COMMON_X0Y0:GTHE4_COMMON_X0Y1 \
+PCIE40E4_X1Y0 \
+CONFIG_SITE_X0Y0
 }
 
 ## -------------------------------------------------
@@ -4696,11 +4979,23 @@ LAGUNA_X28Y0:LAGUNA_X31Y119 \
 ## -------------------------------------------------
 set cfgiobPblock [create_pblock  Stage1_cfgiob]
 
-resize_pblock $cfgiobPblock -quiet -add [get_sites -of_objects [get_tiles -pu -of_objects [get_tiles -of_objects [get_sites MMCM_X0Y1]]]]
+resize_pblock $cfgiobPblock -add { \
+IOB_X0Y52:IOB_X0Y103    \
+SLICE_X41Y119:SLICE_X41Y60    \
+MMCM_X0Y1 \
+PLL_X0Y3:PLL_X0Y2 \
+PLL_SELECT_SITE_X0Y8:PLL_SELECT_SITE_X0Y15 \
+BITSLICE_CONTROL_X0Y8:BITSLICE_CONTROL_X0Y15 \
+BITSLICE_TX_X0Y8:BITSLICE_TX_X0Y15 \
+BITSLICE_RX_TX_X0Y52:BITSLICE_RX_TX_X0Y103 \
+XIPHY_FEEDTHROUGH_X0Y4:XIPHY_FEEDTHROUGH_X0Y7 \
+RIU_OR_X0Y4:RIU_OR_X0Y7 \
+}
+
+set_property PROHIBIT TRUE [get_sites -range SLICE_X77Y119:SLICE_X104Y119]
 
 
-
-## Start add from file TandemSasquatch.xdc
+## Start add from file TandemAppleton.xdc
 ## -------------------------------------------------
 ## Tandem IP_BLOCK Properties
 ## -------------------------------------------------
@@ -4758,12 +5053,25 @@ set_property HD.TANDEM 1 $cfgiobPorts
 
 # Add specific clocking and I/O cells that need to be in the Stage1 PBlock but give us trouble when we're trying to use a cover-all constraint in Vivado 2015.4. They're all conveniently packed into appropriately named cells.
 set cfgiobCellsTiming [get_cells TimingEnginex/TimingStage1x ]
-set cfgiobCellsIO     [get_cells SasquatchIoBuffersStage1x/*]
+set cfgiobCellsIO     [get_cells AppletonIoBuffersStage1x/*]
 
 # Add to Tandem and Pblock
 set_property HD.TANDEM 1 $cfgiobCellsTiming
 set_property HD.TANDEM 1 $cfgiobCellsIO
 add_cells_to_pblock      $cfgiobPblock $cfgiobCellsTiming $cfgiobCellsIO
+
+## -------------------------------------------------
+## Special cells connected to IOs on bank 65 that constitute a macro with the IOB and must be placed together.
+## [Place 30-781] Some instances may violate an exclude pblock as they
+## constitute a macro with another instance that belongs to the exclude pblock.
+## -------------------------------------------------
+set_property HD.TANDEM 1 [get_cells FixedLogicWrapperx/MacallanFixedLogicx/BoardControlx/BoardControlMicroblaze_i/axi_quad_spi_0/U0/NO_DUAL_QUAD_MODE.QSPI_NORMAL/QSPI_LEGACY_MD_GEN.QSPI_CORE_INTERFACE_I/LOGIC_FOR_MD_0_GEN.SPI_MODULE_I/RATIO_NOT_EQUAL_4_GENERATE.SCK_O_NQ_4_NO_STARTUP_USED.SCK_O_NE_4_FDRE_INST]
+set_property HD.TANDEM 1 [get_cells FixedLogicWrapperx/MacallanFixedLogicx/BoardControlx/BoardControlMicroblaze_i/axi_quad_spi_0/U0/NO_DUAL_QUAD_MODE.QSPI_NORMAL/IO1_I_REG]
+set_property HD.TANDEM 1 [get_cells FixedLogicWrapperx/MacallanFixedLogicx/BoardControlx/AxiStreamCpldSidebandx/SidebandTxx/ODDRE1x]
+add_cells_to_pblock $cfgiobPblock [get_cells FixedLogicWrapperx/MacallanFixedLogicx/BoardControlx/BoardControlMicroblaze_i/axi_quad_spi_0/U0/NO_DUAL_QUAD_MODE.QSPI_NORMAL/QSPI_LEGACY_MD_GEN.QSPI_CORE_INTERFACE_I/LOGIC_FOR_MD_0_GEN.SPI_MODULE_I/RATIO_NOT_EQUAL_4_GENERATE.SCK_O_NQ_4_NO_STARTUP_USED.SCK_O_NE_4_FDRE_INST]
+add_cells_to_pblock $cfgiobPblock [get_cells FixedLogicWrapperx/MacallanFixedLogicx/BoardControlx/BoardControlMicroblaze_i/axi_quad_spi_0/U0/NO_DUAL_QUAD_MODE.QSPI_NORMAL/IO1_I_REG]
+add_cells_to_pblock $cfgiobPblock [get_cells FixedLogicWrapperx/MacallanFixedLogicx/BoardControlx/AxiStreamCpldSidebandx/SidebandTxx/ODDRE1x]
+
 
 ## -------------------------------------------------
 ## PCIe Block
@@ -4836,6 +5144,56 @@ add_cells_to_pblock [get_pblocks $pciePblock] [get_cells TimingEnginex/TimingPci
 ################################################################################
 
 
+## Start add from file TimingTdc.xdc
+
+#########################################################################################
+## TClk and TDC
+#########################################################################################
+# Board trace lengths
+set FpgaDevClkLen  2.239
+set TdcDevClkLen   3.916
+set TdcAssertLen   1.599
+set FpgaClk100Len  2.108
+set TdcClk100Len   4.290
+set TdcDeassertLen 1.375
+
+# DeviceClkBuffer is SY89833LMG -
+# http://ww1.microchip.com/downloads/en/devicedoc/sy89833l.pdf
+set DevClkBufDelayMax 0.020
+set DevClkBufDelayMin 0.0
+
+# PXIeClk100 buffer is ADCLK946
+# http://www.analog.com/media/en/technical-documentation/data-sheets/ADCLK946.pdf
+set PxieClk100BufDelayMax 0.028
+set PxieClk100BufDelayMin 0.0
+
+#NB4L52 Setup/hold
+set NB4L52Setup 0.1
+set NB4L52Hold  0.05
+
+# dvTdcAssert output delay calculations
+set MaxDevClkDelay [expr $DevClkBufDelayMax + ($TdcDevClkLen * 0.180)]
+set MinDevClkDelay [expr $DevClkBufDelayMin + ($TdcDevClkLen * 0.120)]
+set MaxTdcAssertDelay [expr $DevClkBufDelayMax + (($FpgaDevClkLen + $TdcAssertLen) * 0.180)]
+set MinTdcAssertDelay [expr $DevClkBufDelayMin + (($FpgaDevClkLen + $TdcAssertLen) * 0.120)]
+
+set TdcAssertMaxDelay [expr $NB4L52Setup  + $MaxTdcAssertDelay - $MinDevClkDelay]
+set TdcAssertMinDelay [expr -$NB4L52Hold  + $MinTdcAssertDelay - $MaxDevClkDelay]
+set_output_delay -clock [get_clocks -of_objects [get_ports DeviceClk_p]] -max $TdcAssertMaxDelay [get_ports dvTdcAssert]
+set_output_delay -clock [get_clocks -of_objects [get_ports DeviceClk_p]] -min $TdcAssertMinDelay [get_ports dvTdcAssert]
+
+# sTdcDeassert output delay calculations
+set MaxClk100Delay [expr $PxieClk100BufDelayMax + ($TdcClk100Len * 0.180)]
+set MinClk100Delay [expr $PxieClk100BufDelayMin + ($TdcClk100Len * 0.120)]
+set MaxTdcDeassertDelay [expr $PxieClk100BufDelayMax + (($FpgaClk100Len + $TdcDeassertLen) * 0.180)]
+set MinTdcDeassertDelay [expr $PxieClk100BufDelayMin + (($FpgaClk100Len + $TdcDeassertLen) * 0.120)]
+
+set TdcDeassertMaxDelay [expr $NB4L52Setup  + $MaxTdcDeassertDelay - $MinClk100Delay]
+set TdcDeassertMinDelay [expr -$NB4L52Hold  + $MinTdcDeassertDelay - $MaxClk100Delay]
+set_output_delay -clock [get_clocks -of_objects [get_ports PxieClk100_p]] -max $TdcDeassertMaxDelay [get_ports sTdcDeassert]
+set_output_delay -clock [get_clocks -of_objects [get_ports PxieClk100_p]] -min $TdcDeassertMinDelay [get_ports sTdcDeassert]
+
+
 ## Start add from file TimingPxiTrigs.xdc
 # This constraints file assumes that there's a Routing CLIP, and that said routing CLIP creates amongst its constraints two variables:
 
@@ -4854,13 +5212,16 @@ set SignalPropMax 0.8
 set PxiClk100BufPropMin 0.15
 set PxiClk100BufPropMax 0.22
 
-# Triggers go through a translation buffer (https://agiledatasheets.natinst.com/TI/SN74LVC1T45.pdf)
-# Tranlation buffer VCCA=1.8V, VCCB=3.3V, FpgaToBp = A -> B, BpToFpga = B -> A
-set TrigTransBufFpgaToBpPropMax 8.3
-set TrigTransBufFpgaToBpPropMin 1.7
+# Triggers go through a 5V tolerant buffer (https://agiledatasheets.natinst.com/TI/SN74CB3T3245.pdf) and translation buffer (https://agiledatasheets.natinst.com/TI/SN74AVC4T774.pdf)
+set Trig5vBufPropMax 0.25
+set Trig5vBufPropMin 0.15
 
-set TrigTransBufBpToFpgaPropMax 15.5
-set TrigTransBufBpToFpgaPropMin 2.0
+# Tranlation buffer VCCA=1.8V, VCCB=3.3V, FpgaToBp = A -> B, BpToFpga = B -> A
+set TrigTransBufFpgaToBpPropMax 3.3
+set TrigTransBufFpgaToBpPropMin 0.1
+
+set TrigTransBufBpToFpgaPropMax 3.7
+set TrigTransBufBpToFpgaPropMin 0.1
 
 # The external clock goes through a buffer and some propagation delays.
 set Clk100DlyMax [expr $PxiClk100BufPropMax + $SignalPropMax]
@@ -4869,7 +5230,7 @@ set Clk100DlyMin [expr $PxiClk100BufPropMin + $SignalPropMin]
 ########## Port Definitions
 
 set PxiTrigs [get_ports aPxiTrigData*]
-set PxiStar  [get_ports aPxiStarData]
+set PxiStar  [get_ports aPxiStar]
 set Clk100   [get_clocks PxieClk100]
 
 ########## FPGA to Backplane
@@ -4892,8 +5253,8 @@ set_multicycle_path -hold 9 -from [get_cells $TriggerClipSyncPulseSrc] \
 
 # The data is externally slowed down by the 5V tolerant buffer, the translation buffer,
 # and by its own propagation delay through the board.
-set DataDlyMax [expr $TrigTransBufFpgaToBpPropMax + $SignalPropMax]
-set DataDlyMin [expr $TrigTransBufFpgaToBpPropMin + $SignalPropMin]
+set DataDlyMax [expr $Trig5vBufPropMax + $TrigTransBufFpgaToBpPropMax + $SignalPropMax]
+set DataDlyMin [expr $Trig5vBufPropMin + $TrigTransBufFpgaToBpPropMin + $SignalPropMin]
 
 # For the Max output delay, all our timing budget is in the TcoMax. So our Max delay
 # starts with 100 ns (Clk10 period) - TcoMax. From there, we need to add everything that
@@ -4931,8 +5292,8 @@ set Clk10Th  2
 
 # The data is externally slowed down by the 5V tolerant buffer, the translation buffer,
 # and by its own propagation delay through the board.
-set DataDlyMax [expr $TrigTransBufBpToFpgaPropMax + $SignalPropMax]
-set DataDlyMin [expr $TrigTransBufBpToFpgaPropMin + $SignalPropMin]
+set DataDlyMax [expr $Trig5vBufPropMax + $TrigTransBufBpToFpgaPropMax + $SignalPropMax]
+set DataDlyMin [expr $Trig5vBufPropMin + $TrigTransBufBpToFpgaPropMin + $SignalPropMin]
 
 # Just like in the output version, Clk10Tsu is the extent of our timing budget. So our Max
 # delay starts with 100 ns (Clk10 period) - Tsu., the rest of our helpful stuff will
@@ -4975,7 +5336,7 @@ set_input_delay -clock $Clk100 \
 # The tristate control for the Pxi Triggers comes directly from a BaRegPort, and we don't
 # want timing analyzed there. So we'll false-path through the output Tristate pin on the
 # iobuffers.
-set pxibuffers [get_cells SasquatchIoBuffersx/GenTriggers[*].PxiTrigBuf]
+set pxibuffers [get_cells AppletonIoBuffersStage1x/GenPxiTrig[*].PxiTrigIoBuf]
 set pxibuffersTpins [get_pins -of $pxibuffers -filter {REF_PIN_NAME == T}]
 set_false_path -through $pxibuffersTpins
 
