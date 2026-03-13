@@ -123,7 +123,7 @@ entity TheWindow is
     -----------------------------------
     -- IO Node ports
     -----------------------------------
-% if include_clip_socket:
+% if include_target_io:
     aLvAuxDio0OutputData   : out   std_logic;
     aLvAuxDio0InputData    : in    std_logic;
     aLvAuxDio0OutputEnable : out   std_logic;
@@ -189,6 +189,7 @@ entity TheWindow is
     oDirectionaLvAuxDio7   : out   std_logic := '0';
     oRequestaLvAuxDio7     : out   std_logic := '1';
 % endif
+
     pIntSync100            : in    std_logic;
     aIntClk10              : in    std_logic;
 
@@ -249,7 +250,7 @@ entity TheWindow is
     aPxieDstarB            : in    std_logic;
     aPxieDstarC            : out   std_logic;
 
-% if include_clip_socket:
+% if include_target_io:
     -----------------------------------
     -- CLIP Socket ports
     -----------------------------------

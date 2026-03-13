@@ -118,7 +118,7 @@ entity TheWindow is
     -----------------------------------
     -- IO Node ports
     -----------------------------------
-% if include_clip_socket:
+% if include_target_io:
     aLvAuxDio0OutputData   : out   std_logic;
     aLvAuxDio0InputData    : in    std_logic;
     aLvAuxDio0OutputEnable : out   std_logic;
@@ -245,7 +245,7 @@ entity TheWindow is
     aPxieDstarB            : in    std_logic;
     aPxieDstarC            : out   std_logic;
 
-% if include_clip_socket:
+% if include_target_io:
     -----------------------------------
     -- CLIP Socket ports
     -----------------------------------

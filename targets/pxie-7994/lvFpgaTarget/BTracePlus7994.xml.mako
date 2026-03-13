@@ -55,13 +55,13 @@
 
   <!-- CLIPs -->
   <CLIPSocketTypeList>
-% if include_clip_socket:
+% if include_target_io:
     <:Include what="children">Targets/NI/FPGA/RIO/79XXR/Common/Resource/BTracePlusIoModule.xml</:Include>
+    <:Include what="children">Targets/NI/FPGA/RIO/79XXR/Common/Resource/BTracePlusQsfp0MgtSocket.xml</:Include>
+    <:Include what="children">Targets/NI/FPGA/RIO/79XXR/Common/Resource/BTracePlusQsfp1MgtSocket.xml</:Include>    
 % endif
     <:Include what="children">Targets/NI/FPGA/RIO/79XXR/Common/Resource/MacallanDramSocketTypePxi.xml</:Include>
     <:Include what="children">Targets/NI/FPGA/RIO/79XXR/Common/Resource/RoutingSocket.xml</:Include>
-    <:Include what="children">Targets/NI/FPGA/RIO/79XXR/Common/Resource/BTracePlusQsfp0MgtSocket.xml</:Include>
-    <:Include what="children">Targets/NI/FPGA/RIO/79XXR/Common/Resource/BTracePlusQsfp1MgtSocket.xml</:Include>
   </CLIPSocketTypeList>
 
 % if include_custom_io:

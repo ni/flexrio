@@ -49,6 +49,8 @@
   <!-- CLIPs -->
   <CLIPSocketTypeList>
     <:Include what="children">Targets/NI/FPGA/RIO/79XXR/Common/Resource/RoutingSocket.xml</:Include>
+    <!-- Not sure why the DIO voltage socket is here because the 7911 does not have DIO -->
+    <!-- Leaving this in here because we don't want to mess with it and accidentally break something -->
     <:Include what="children">Targets/NI/FPGA/RIO/79XXR/Common/Resource/MacallanDioVoltageSocket.xml</:Include>
     <CLIPSocketType name="DRAM">
       <DramAddressBitAlignment>3</DramAddressBitAlignment>
