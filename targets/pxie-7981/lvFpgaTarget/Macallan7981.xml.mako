@@ -41,7 +41,9 @@
   </FPGACompilation>
 
   <!-- Optional Features -->
+% if include_target_io:
   <:Include what="children">Targets/NI/FPGA/RIO/79XXR/Common/Resource/MacallanDio.xml</:Include>
+% endif
 
   <!-- Clocks -->
   <ClockList>
@@ -54,11 +56,11 @@
 
   <!-- CLIPs -->
   <CLIPSocketTypeList>
-% if include_clip_socket:
+% if include_target_io:
     <:Include what="children">Targets/NI/FPGA/RIO/79XXR/Common/Resource/MacallanIoModule.xml</:Include>
+    <:Include what="children">Targets/NI/FPGA/RIO/79XXR/Common/Resource/MacallanDioVoltageSocket.xml</:Include>    
 % endif
     <:Include what="children">Targets/NI/FPGA/RIO/79XXR/Common/Resource/RoutingSocket.xml</:Include>
-    <:Include what="children">Targets/NI/FPGA/RIO/79XXR/Common/Resource/MacallanDioVoltageSocket.xml</:Include>
     <CLIPSocketType name="DRAM">
       <DramAddressBitAlignment>3</DramAddressBitAlignment>
       <CustomWizardUI>

@@ -42,7 +42,9 @@
 
   <!-- Optional Features -->
   <:Include what="children">Targets/NI/FPGA/RIO/79XXR/Common/Resource/MacallanDramUtilities.xml</:Include>
+% if include_target_io:
   <:Include what="children">Targets/NI/FPGA/RIO/79XXR/Common/Resource/MacallanDio.xml</:Include>
+% endif
 
     <!-- Clocks -->
   <ClockList>
@@ -56,12 +58,12 @@
 
   <!-- CLIPs -->
   <CLIPSocketTypeList>
-% if include_clip_socket:
+% if include_target_io:
     <:Include what="children">Targets/NI/FPGA/RIO/79XXR/Common/Resource/MacallanDioMgtsSocket.xml</:Include>
+    <:Include what="children">Targets/NI/FPGA/RIO/79XXR/Common/Resource/MacallanDioVoltageSocket.xml</:Include>    
 % endif
     <:Include what="children">Targets/NI/FPGA/RIO/79XXR/Common/Resource/MacallanDramSocketTypePxi.xml</:Include>
     <:Include what="children">Targets/NI/FPGA/RIO/79XXR/Common/Resource/RoutingSocket.xml</:Include>
-    <:Include what="children">Targets/NI/FPGA/RIO/79XXR/Common/Resource/MacallanDioVoltageSocket.xml</:Include>
   </CLIPSocketTypeList>
 
 % if include_custom_io:

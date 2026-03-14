@@ -124,6 +124,7 @@ entity TheWindow is
     -----------------------------------
     -- IO Node ports
     -----------------------------------
+% if include_target_io:
     aLvAuxDio0OutputData   : out   std_logic;
     aLvAuxDio0InputData    : in    std_logic;
     aLvAuxDio0OutputEnable : out   std_logic;
@@ -190,6 +191,7 @@ entity TheWindow is
     oRequestaLvAuxDio7     : out   std_logic := '1';
     pIntSync100            : in    std_logic;
     aIntClk10              : in    std_logic;
+% endif
 
     -----------------------------------
     -- Target Method and Properties ports
@@ -209,6 +211,7 @@ entity TheWindow is
     bdAxiStreamWrToClipTLast    : out std_logic;
     bdAxiStreamWrToClipTValid   : out std_logic;
     bdAxiStreamWrFromClipTReady : in  std_logic;
+
 
     -----------------------------------
     -- Pass through LabVIEW FPGA ports
