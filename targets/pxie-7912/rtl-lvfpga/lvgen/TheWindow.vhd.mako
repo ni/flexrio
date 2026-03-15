@@ -254,7 +254,7 @@ entity TheWindow is
     -----------------------------------
     -- CLIP Socket ports
     -----------------------------------
-
+% if include_target_io:
     --Nanopitch I/O
     DioMgtRefClk_p              : in  std_logic;
     DioMgtRefClk_n              : in  std_logic;
@@ -266,6 +266,7 @@ entity TheWindow is
     SocketClk80              : in    std_logic;
     --Synchronous to SocketClk80
     sDioMgtRefClkFromFamPresent : in  std_logic;
+% endif
 
     -----------------------------------------------------------------------------
     --Dram Interface

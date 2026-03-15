@@ -250,11 +250,11 @@ entity TheWindow is
     aPxieDstarB            : in    std_logic;
     aPxieDstarC            : out   std_logic;
 
-% if include_target_io:
+
     -----------------------------------
     -- CLIP Socket ports
     -----------------------------------
-
+% if include_target_io:    
     --Nanopitch I/O
     DioMgtRefClk_p              : in  std_logic;
     DioMgtRefClk_n              : in  std_logic;
