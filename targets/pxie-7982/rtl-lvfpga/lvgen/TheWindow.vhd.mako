@@ -56,13 +56,17 @@ use work.PkgDmaPortCommIfcMasterPortFlatTypes.all;
 entity TheWindow is
   port(
 
+% if include_custom_io:
     -----------------------------------
     -- CUSTOM BOARD IO
     -----------------------------------
-% if include_custom_io:
 % for signal in custom_signals:
     ${signal['name']} : ${signal['direction']} ${signal['type']}; -- ${signal['lv_name']}
 % endfor
+% else:
+      -----------------------------------
+      -- CUSTOM BOARD IO NOT USED
+      -----------------------------------
 % endif
 
     -----------------------------------
@@ -119,11 +123,17 @@ entity TheWindow is
     -- clocks on external clocks
     -----------------------------------
 
+    -----------------------------------
+    -- Clock/Sync IO Node ports
+    -----------------------------------
+    pIntSync100            : in    std_logic;
+    aIntClk10              : in    std_logic;
 
+
+% if include_target_io:
     -----------------------------------
     -- IO Node ports
     -----------------------------------
-% if include_target_io:
     aLvAuxDio0OutputData   : out   std_logic;
     aLvAuxDio0InputData    : in    std_logic;
     aLvAuxDio0OutputEnable : out   std_logic;
@@ -188,69 +198,7 @@ entity TheWindow is
     oDoneaLvAuxDio7        : in    std_logic;
     oDirectionaLvAuxDio7   : out   std_logic := '0';
     oRequestaLvAuxDio7     : out   std_logic := '1';
-% endif
 
-    pIntSync100            : in    std_logic;
-    aIntClk10              : in    std_logic;
-
-    -----------------------------------
-    -- Target Method and Properties ports
-    -----------------------------------
-    bdIFifoRdData               : out std_logic_vector(63 downto 0);
-    bdIFifoRdDataValid          : out std_logic;
-    bdIFifoRdReadyForInput      : in  std_logic;
-    bdIFifoRdIsError            : out std_logic;
-    bdIFifoWrData               : in  std_logic_vector(63 downto 0);
-    bdIFifoWrDataValid          : in  std_logic;
-    bdIFifoWrReadyForOutput     : out std_logic;
-    bdAxiStreamRdFromClipTData  : in  std_logic_vector(31 downto 0);
-    bdAxiStreamRdFromClipTLast  : in  std_logic;
-    bdAxiStreamRdFromClipTValid : in  std_logic;
-    bdAxiStreamRdToClipTReady   : out std_logic;
-    bdAxiStreamWrToClipTData    : out std_logic_vector(31 downto 0);
-    bdAxiStreamWrToClipTLast    : out std_logic;
-    bdAxiStreamWrToClipTValid   : out std_logic;
-    bdAxiStreamWrFromClipTReady : in  std_logic;
-
-    -----------------------------------
-    -- Pass through LabVIEW FPGA ports
-    -----------------------------------
-
-    ----------------------------------------
-    -- Trigger Routing Socketed CLIP
-    ----------------------------------------
-    PxieClk100Trigger  : in  std_logic;
-    pIntSync100Trigger : in  std_logic;
-    dTdcAssert         : out std_logic;
-    dDevClkEn          : in  std_logic;
-    sTdcDeassert       : out std_logic;
-    aIntClk10Trigger   : in  std_logic;
-    --ID Signals from Routing CLIP
-    bRoutingClipPresent      : out std_logic;
-    bRoutingClipNiCompatible : out std_logic;
-
-    BusClkTrigger : in std_logic;
-    abBusResetTrigger : in std_logic;
-
-    -- From PkgBaRegPort
-    -- RegPortIn_t Size = Address 28 Data 64 WrStrobes 8 RdStrobes 8 = 108
-    -- RegPortOut_t Size = Data 64 + Ack 1 = 65
-    bTriggerRoutingBaRegPortInAddress  : in std_logic_vector(27 downto 0);
-    bTriggerRoutingBaRegPortInData     : in std_logic_vector(63 downto 0);
-    bTriggerRoutingBaRegPortInWtStrobe : in std_logic_vector(7 downto 0);
-    bTriggerRoutingBaRegPortInRdStrobe : in std_logic_vector(7 downto 0);
-
-    bTriggerRoutingBaRegPortOutData : out std_logic_vector(63 downto 0);
-    bTriggerRoutingBaRegPortOutAck  : out std_logic;
-
-    aPxiTrigDataIn         : in  std_logic_vector(7 downto 0);
-    aPxiTrigDataOut        : out std_logic_vector(7 downto 0);
-    aPxiTrigDataTri        : out std_logic_vector(7 downto 0);
-    aPxiStarData           : in    std_logic;
-    aPxieDstarB            : in    std_logic;
-    aPxieDstarC            : out   std_logic;
-
-% if include_target_io:
     -----------------------------------
     -- CLIP Socket ports
     -----------------------------------
@@ -353,7 +301,70 @@ entity TheWindow is
     SocketClk80                 : in  std_logic;
     --Synchronous to SocketClk80
     sDioMgtRefClkFromFamPresent : in  std_logic;
+
+% else:
+      -----------------------------------
+      -- TARGET IO AND CLIP PORTS NOT USED
+      -----------------------------------
 % endif
+
+    -----------------------------------
+    -- Target Method and Properties ports
+    -----------------------------------
+    bdIFifoRdData               : out std_logic_vector(63 downto 0);
+    bdIFifoRdDataValid          : out std_logic;
+    bdIFifoRdReadyForInput      : in  std_logic;
+    bdIFifoRdIsError            : out std_logic;
+    bdIFifoWrData               : in  std_logic_vector(63 downto 0);
+    bdIFifoWrDataValid          : in  std_logic;
+    bdIFifoWrReadyForOutput     : out std_logic;
+    bdAxiStreamRdFromClipTData  : in  std_logic_vector(31 downto 0);
+    bdAxiStreamRdFromClipTLast  : in  std_logic;
+    bdAxiStreamRdFromClipTValid : in  std_logic;
+    bdAxiStreamRdToClipTReady   : out std_logic;
+    bdAxiStreamWrToClipTData    : out std_logic_vector(31 downto 0);
+    bdAxiStreamWrToClipTLast    : out std_logic;
+    bdAxiStreamWrToClipTValid   : out std_logic;
+    bdAxiStreamWrFromClipTReady : in  std_logic;
+
+    -----------------------------------
+    -- Pass through LabVIEW FPGA ports
+    -----------------------------------
+
+    ----------------------------------------
+    -- Trigger Routing Socketed CLIP
+    ----------------------------------------
+    PxieClk100Trigger  : in  std_logic;
+    pIntSync100Trigger : in  std_logic;
+    dTdcAssert         : out std_logic;
+    dDevClkEn          : in  std_logic;
+    sTdcDeassert       : out std_logic;
+    aIntClk10Trigger   : in  std_logic;
+    --ID Signals from Routing CLIP
+    bRoutingClipPresent      : out std_logic;
+    bRoutingClipNiCompatible : out std_logic;
+
+    BusClkTrigger : in std_logic;
+    abBusResetTrigger : in std_logic;
+
+    -- From PkgBaRegPort
+    -- RegPortIn_t Size = Address 28 Data 64 WrStrobes 8 RdStrobes 8 = 108
+    -- RegPortOut_t Size = Data 64 + Ack 1 = 65
+    bTriggerRoutingBaRegPortInAddress  : in std_logic_vector(27 downto 0);
+    bTriggerRoutingBaRegPortInData     : in std_logic_vector(63 downto 0);
+    bTriggerRoutingBaRegPortInWtStrobe : in std_logic_vector(7 downto 0);
+    bTriggerRoutingBaRegPortInRdStrobe : in std_logic_vector(7 downto 0);
+
+    bTriggerRoutingBaRegPortOutData : out std_logic_vector(63 downto 0);
+    bTriggerRoutingBaRegPortOutAck  : out std_logic;
+
+    aPxiTrigDataIn         : in  std_logic_vector(7 downto 0);
+    aPxiTrigDataOut        : out std_logic_vector(7 downto 0);
+    aPxiTrigDataTri        : out std_logic_vector(7 downto 0);
+    aPxiStarData           : in    std_logic;
+    aPxieDstarB            : in    std_logic;
+    aPxieDstarC            : out   std_logic;
+
 
     -----------------------------------------------------------------------------
     --Dram Interface
