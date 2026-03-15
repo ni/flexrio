@@ -56,13 +56,17 @@ use work.PkgDmaPortCommIfcMasterPortFlatTypes.all;
 entity TheWindow is
   port(
 
+% if include_custom_io:
     -----------------------------------
     -- CUSTOM BOARD IO
     -----------------------------------
-% if include_custom_io:
 % for signal in custom_signals:
     ${signal['name']} : ${signal['direction']} ${signal['type']}; -- ${signal['lv_name']}
 % endfor
+% else:
+      -----------------------------------
+      -- CUSTOM BOARD IO NOT USED
+      -----------------------------------
 % endif
 
     -----------------------------------
@@ -119,11 +123,16 @@ entity TheWindow is
     -- clocks on external clocks
     -----------------------------------
 
+    -----------------------------------
+    -- Clock/Sync IO Node ports
+    -----------------------------------
+    pIntSync100            : in    std_logic;
+    aIntClk10              : in    std_logic;
 
+% if include_target_io:
     -----------------------------------
     -- IO Node ports
     -----------------------------------
-% if include_target_io:
     aLvAuxDio0OutputData   : out   std_logic;
     aLvAuxDio0InputData    : in    std_logic;
     aLvAuxDio0OutputEnable : out   std_logic;
@@ -188,10 +197,27 @@ entity TheWindow is
     oDoneaLvAuxDio7        : in    std_logic;
     oDirectionaLvAuxDio7   : out   std_logic := '0';
     oRequestaLvAuxDio7     : out   std_logic := '1';
-% endif
 
-    pIntSync100            : in    std_logic;
-    aIntClk10              : in    std_logic;
+    -----------------------------------
+    -- MGT CLIP Socket ports
+    -----------------------------------  
+    --Nanopitch I/O
+    DioMgtRefClk_p              : in  std_logic;
+    DioMgtRefClk_n              : in  std_logic;
+    DioMgtRefClkFromFam      : in    std_logic;
+    DioMgtRX_n               : in    std_logic_vector(3 downto 0);
+    DioMgtRX_p               : in    std_logic_vector(3 downto 0);
+    DioMgtTX_n               : out   std_logic_vector(3 downto 0);
+    DioMgtTX_p               : out   std_logic_vector(3 downto 0);
+    SocketClk80              : in    std_logic;
+    --Synchronous to SocketClk80
+    sDioMgtRefClkFromFamPresent : in  std_logic;
+
+% else:
+      -----------------------------------
+      -- TARGET IO AND CLIP PORTS NOT USED
+      -----------------------------------
+% endif
 
     -----------------------------------
     -- Target Method and Properties ports
@@ -250,23 +276,6 @@ entity TheWindow is
     aPxieDstarB            : in    std_logic;
     aPxieDstarC            : out   std_logic;
 
-% if include_target_io:
-    -----------------------------------
-    -- CLIP Socket ports
-    -----------------------------------
-
-    --Nanopitch I/O
-    DioMgtRefClk_p              : in  std_logic;
-    DioMgtRefClk_n              : in  std_logic;
-    DioMgtRefClkFromFam      : in    std_logic;
-    DioMgtRX_n               : in    std_logic_vector(3 downto 0);
-    DioMgtRX_p               : in    std_logic_vector(3 downto 0);
-    DioMgtTX_n               : out   std_logic_vector(3 downto 0);
-    DioMgtTX_p               : out   std_logic_vector(3 downto 0);
-    SocketClk80              : in    std_logic;
-    --Synchronous to SocketClk80
-    sDioMgtRefClkFromFamPresent : in  std_logic;
-% endif
 
     -----------------------------------------------------------------------------
     --Dram Interface
