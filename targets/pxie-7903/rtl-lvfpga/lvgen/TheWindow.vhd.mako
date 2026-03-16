@@ -56,17 +56,13 @@ use work.PkgDmaPortCommIfcMasterPortFlatTypes.all;
 entity TheWindow is
   port(
 
-% if include_custom_io:
-    -----------------------------------
+     -----------------------------------
     -- CUSTOM BOARD IO
     -----------------------------------
+% if include_custom_io:
 % for signal in custom_signals:
     ${signal['name']} : ${signal['direction']} ${signal['type']}; -- ${signal['lv_name']}
 % endfor
-% else:
-      -----------------------------------
-      -- CUSTOM BOARD IO NOT USED
-      -----------------------------------
 % endif
 
     -----------------------------------
@@ -125,7 +121,7 @@ entity TheWindow is
 
 
     -----------------------------------
-    -- Clock/Sync IO Node ports
+    -- IO Node ports
     -----------------------------------
     pIntSync100            : in    std_logic;
     aIntClk10              : in    std_logic;
@@ -185,7 +181,7 @@ entity TheWindow is
     aPxieDstarB            : in    std_logic;
     aPxieDstarC            : out   std_logic;
 
-% if include_target_io:
+% if include_clip_socket:
     -----------------------------------
     -- CLIP Socket ports
     -----------------------------------
@@ -269,11 +265,6 @@ entity TheWindow is
     aPortExpIntr_n        : in std_logic;
     aPortExpSda           : inout std_logic;
     aPortExpScl           : inout std_logic;
-
-% else:
-      -----------------------------------
-      -- TARGET IO AND CLIP PORTS NOT USED
-      -----------------------------------
 % endif
 
     -----------------------------------------------------------------------------

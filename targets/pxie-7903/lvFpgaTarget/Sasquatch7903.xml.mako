@@ -19,10 +19,6 @@
   <!-- Compilation -->
   <FPGACompilation>
     <:Include what="children">Targets/NI/FPGA/RIO/79XXR/Common/Resource/SasquatchCompileOptions.xml</:Include>
-    <NetPathToTheWindow>${net_path_to_the_window}</NetPathToTheWindow>
-% if include_current_instance_path_for_window:
-    <CurrentInstancePathForLvFpgaXdcConstraints>${current_instance_path_for_window}</CurrentInstancePathForLvFpgaXdcConstraints>
-% endif
     <FPGADevice>xcvu11p</FPGADevice>
     <SpeedGrade>-2</SpeedGrade>
     <Package>flgb2104</Package>
@@ -33,7 +29,7 @@
         <XdcFilePath>Targets/NI/FPGA/RIO/79XXR/${lv_target_name}/FpgaFiles/constraints_place.xdc</XdcFilePath>
 % else:
         <XdcFilePath>Targets/NI/FPGA/RIO/79XXR/PXIe-7903/FpgaFiles/constraints_place.xdc</XdcFilePath>
-% endif
+% endif      
       </Process>
     </ProcessPropertyList>
   </FPGACompilation>
@@ -53,7 +49,7 @@
 
   <!-- CLIPs -->
   <CLIPSocketTypeList>
-% if include_target_io:
+% if include_clip_socket:
     <:Include what="children">Targets/NI/FPGA/RIO/79XXR/Common/Resource/SasquatchMgtSocket.xml</:Include>
 % endif
     <:Include what="children">Targets/NI/FPGA/RIO/79XXR/Common/Resource/SasquatchDramSocketType.xml</:Include>
