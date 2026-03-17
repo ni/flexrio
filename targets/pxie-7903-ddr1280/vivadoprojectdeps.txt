@@ -60,12 +60,13 @@
 ../../deps/flexrio-deps/encrypted/ni.hw-flexrio.common_source.iwcompanion.26.3.0.3-ci-passed-main-d/iwcompanion/synth/IwCompanionN.edf
 ../../deps/flexrio-deps/encrypted/ni.hw-flexrio.common_source.rtl.26.3.0.3-ci-passed-main-d/us-usp/packages/PkgBaRegPortConfig.vhd
 ../../deps/flexrio-deps/encrypted/ni.hw-flexrio.common_source.timingengine.26.3.0.3-ci-passed-main-d/pxieultrascaleplus/synth/PxieUspTimingEngine.edf
-../../deps/flexrio-deps/encrypted/ni.hw-flexrio.dram.26.0.0.10-ci-passed-main-d/deliverables/virtexultrascaleplus/sasquatch/ddr4_0/netlist/ddr4_0.edf
-../../deps/flexrio-deps/encrypted/ni.hw-flexrio.dram.26.0.0.10-ci-passed-main-d/source/virtexultrascaleplus/sasquatch/rtl-lvfpga/SasquatchBank0Dram.vhd
-../../deps/flexrio-deps/encrypted/ni.hw-flexrio.dram.26.0.0.10-ci-passed-main-d/source/virtexultrascaleplus/sasquatch/rtl-lvfpga/SasquatchBank1Dram.vhd
-../../deps/flexrio-deps/encrypted/ni.hw-flexrio.dram.26.0.0.10-ci-passed-main-d/source/virtexultrascaleplus/sasquatch/rtl-lvfpga/SasquatchDram.vhd
-../../deps/flexrio-deps/encrypted/ni.hw-flexrio.dram.26.0.0.10-ci-passed-main-d/source/virtexultrascaleplus/sasquatch/rtl-lvfpga/SasquatchDramWrapper.vhd
-../../deps/flexrio-deps/encrypted/ni.hw-flexrio.dram.26.0.0.10-ci-passed-main-d/source/virtexultrascaleplus/sasquatch/rtl-lvfpga/SasquatchEmptyDram.vhd
+../../deps/flexrio-deps/encrypted/ni.hw-flexrio.dram.26.0.0.10-ci-passed-main-d/deliverables/virtexultrascaleplus/sasquatch_ddr1280/ddr4_0/netlist/ddr4_0.edf
+../../deps/flexrio-deps/encrypted/ni.hw-flexrio.dram.26.0.0.10-ci-passed-main-d/source/virtexultrascaleplus/sasquatch_ddr1280/rtl-lvfpga/DramShim.vhd
+../../deps/flexrio-deps/encrypted/ni.hw-flexrio.dram.26.0.0.10-ci-passed-main-d/source/virtexultrascaleplus/sasquatch_ddr1280/rtl-lvfpga/SasquatchBank0Dram.vhd
+../../deps/flexrio-deps/encrypted/ni.hw-flexrio.dram.26.0.0.10-ci-passed-main-d/source/virtexultrascaleplus/sasquatch_ddr1280/rtl-lvfpga/SasquatchBank1Dram.vhd
+../../deps/flexrio-deps/encrypted/ni.hw-flexrio.dram.26.0.0.10-ci-passed-main-d/source/virtexultrascaleplus/sasquatch_ddr1280/rtl-lvfpga/SasquatchDram.vhd
+../../deps/flexrio-deps/encrypted/ni.hw-flexrio.dram.26.0.0.10-ci-passed-main-d/source/virtexultrascaleplus/sasquatch_ddr1280/rtl-lvfpga/SasquatchDramWrapper.vhd
+../../deps/flexrio-deps/encrypted/ni.hw-flexrio.dram.26.0.0.10-ci-passed-main-d/source/virtexultrascaleplus/sasquatch_ddr1280/rtl-lvfpga/SasquatchEmptyDram.vhd
 ../../deps/flexrio-deps/encrypted/ni.hw-flexrio.fixedlogic.26.3.0.32-manual-passed-users-ssantolu-targets-lite-d/common/rtl/packages/lvgen/PkgLvFpgaConst.vhd
 ../../deps/flexrio-deps/encrypted/ni.hw-flexrio.fixedlogic.26.3.0.32-manual-passed-users-ssantolu-targets-lite-d/sasquatchfixedlogic/rtl/FixedLogicWrapper.vhd
 ../../deps/flexrio-deps/encrypted/ni.hw-flexrio.fixedlogic.26.3.0.32-manual-passed-users-ssantolu-targets-lite-d/sasquatchfixedlogic/rtl/packages/PkgSysMonConfig.vhd
@@ -89,4 +90,4 @@
 ../../deps/flexrio-deps/encrypted/nicores_stc3client.1.5.1b0/CommonFiles/Source/Common/PkgChinch.vhd
 ../../deps/flexrio-deps/encrypted/nicores_stc3client.1.5.1b0/CommonFiles/Source/Common/PkgChinchConfig.vhd
 ../../deps/flexrio-deps/encrypted/nicores_stc3client.1.5.1b0/CommonFiles/Source/Common/PkgSwitchedChinch.vhd
-../../deps/flexrio-deps/encrypted/pxie-7903/rtl-lvfpga/PkgFlexRioTargetConfig.vhd
+../../deps/flexrio-deps/encrypted/pxie-7903-ddr1280/rtl-lvfpga/PkgFlexRioTargetConfig.vhd

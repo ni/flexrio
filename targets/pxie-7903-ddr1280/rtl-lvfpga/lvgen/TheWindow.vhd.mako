@@ -286,10 +286,10 @@ entity TheWindow is
     du0DramAddrFifoWrEn      : out   std_logic;
     du0DramPhyInitDone       : in    std_logic;
     du0DramRdDataValid       : in    std_logic;
-    du0DramRdFifoDataOut     : in    std_logic_vector(639 downto 0);
-    du0DramWrFifoDataIn      : out   std_logic_vector(639 downto 0);
+    du0DramRdFifoDataOut     : in    std_logic_vector(1279 downto 0);
+    du0DramWrFifoDataIn      : out   std_logic_vector(1279 downto 0);
     du0DramWrFifoFull        : in    std_logic;
-    du0DramWrFifoMaskData    : out   std_logic_vector(79 downto 0);
+    du0DramWrFifoMaskData    : out   std_logic_vector(159 downto 0);
     du0DramWrFifoWrEn        : out   std_logic;
     du1DramAddrFifoAddr      : out   std_logic_vector(29 downto 0);
     du1DramAddrFifoCmd       : out   std_logic_vector(2 downto 0);
@@ -297,10 +297,10 @@ entity TheWindow is
     du1DramAddrFifoWrEn      : out   std_logic;
     du1DramPhyInitDone       : in    std_logic;
     du1DramRdDataValid       : in    std_logic;
-    du1DramRdFifoDataOut     : in    std_logic_vector(639 downto 0);
-    du1DramWrFifoDataIn      : out   std_logic_vector(639 downto 0);
+    du1DramRdFifoDataOut     : in    std_logic_vector(1279 downto 0);
+    du1DramWrFifoDataIn      : out   std_logic_vector(1279 downto 0);
     du1DramWrFifoFull        : in    std_logic;
-    du1DramWrFifoMaskData    : out   std_logic_vector(79 downto 0);
+    du1DramWrFifoMaskData    : out   std_logic_vector(159 downto 0);
     du1DramWrFifoWrEn        : out   std_logic;
 
     -----------------------------------------------------------------------------

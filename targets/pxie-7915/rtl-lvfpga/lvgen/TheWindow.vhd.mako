@@ -103,17 +103,17 @@ entity TheWindow is
     -----------------------------------
     -- Clocks from TopLevel
     -----------------------------------
-    DmaClk            : in std_logic;
-    BusClk            : in std_logic;
-    ReliableClkIn     : in std_logic;
-    PllClk80          : in std_logic;
-    DlyRefClk         : in std_logic;
-    PxieClk100        : in std_logic;
-    DramClkLvFpga     : in std_logic;
-    Dram0ClkSocket    : in std_logic;
-    Dram1ClkSocket    : in std_logic;
-    Dram0ClkUser      : in std_logic;
-    Dram1ClkUser      : in std_logic;
+    DmaClk         : in std_logic;
+    BusClk         : in std_logic;
+    ReliableClkIn  : in std_logic;
+    PllClk80       : in std_logic;
+    DlyRefClk      : in std_logic;
+    PxieClk100     : in std_logic;
+    DramClkLvFpga  : in std_logic;
+    Dram0ClkSocket : in std_logic;
+    Dram1ClkSocket : in std_logic;
+    Dram0ClkUser   : in std_logic;
+    Dram1ClkUser   : in std_logic;
     dHmbDmaClkSocket  : in std_logic;
     dLlbDmaClkSocket  : in std_logic;
 
@@ -123,12 +123,101 @@ entity TheWindow is
     -- clocks on external clocks
     -----------------------------------
 
-
     -----------------------------------
     -- Clock/Sync IO Node ports
     -----------------------------------
     pIntSync100            : in    std_logic;
     aIntClk10              : in    std_logic;
+
+% if include_target_io:
+    -----------------------------------
+    -- IO Node ports
+    -----------------------------------
+    aLvAuxDio0OutputData   : out   std_logic;
+    aLvAuxDio0InputData    : in    std_logic;
+    aLvAuxDio0OutputEnable : out   std_logic;
+    oClkaLvAuxDio0         : in    std_logic;
+    aoResetaLvAuxDio0      : in    std_logic;
+    oDoneaLvAuxDio0        : in    std_logic;
+    oDirectionaLvAuxDio0   : out   std_logic := '0';
+    oRequestaLvAuxDio0     : out   std_logic := '1';
+    aLvAuxDio1OutputData   : out   std_logic;
+    aLvAuxDio1InputData    : in    std_logic;
+    aLvAuxDio1OutputEnable : out   std_logic;
+    oClkaLvAuxDio1         : in    std_logic;
+    aoResetaLvAuxDio1      : in    std_logic;
+    oDoneaLvAuxDio1        : in    std_logic;
+    oDirectionaLvAuxDio1   : out   std_logic := '0';
+    oRequestaLvAuxDio1     : out   std_logic := '1';
+    aLvAuxDio2OutputData   : out   std_logic;
+    aLvAuxDio2InputData    : in    std_logic;
+    aLvAuxDio2OutputEnable : out   std_logic;
+    oClkaLvAuxDio2         : in    std_logic;
+    aoResetaLvAuxDio2      : in    std_logic;
+    oDoneaLvAuxDio2        : in    std_logic;
+    oDirectionaLvAuxDio2   : out   std_logic := '0';
+    oRequestaLvAuxDio2     : out   std_logic := '1';
+    aLvAuxDio3OutputData   : out   std_logic;
+    aLvAuxDio3InputData    : in    std_logic;
+    aLvAuxDio3OutputEnable : out   std_logic;
+    oClkaLvAuxDio3         : in    std_logic;
+    aoResetaLvAuxDio3      : in    std_logic;
+    oDoneaLvAuxDio3        : in    std_logic;
+    oDirectionaLvAuxDio3   : out   std_logic := '0';
+    oRequestaLvAuxDio3     : out   std_logic := '1';
+    aLvAuxDio4OutputData   : out   std_logic;
+    aLvAuxDio4InputData    : in    std_logic;
+    aLvAuxDio4OutputEnable : out   std_logic;
+    oClkaLvAuxDio4         : in    std_logic;
+    aoResetaLvAuxDio4      : in    std_logic;
+    oDoneaLvAuxDio4        : in    std_logic;
+    oDirectionaLvAuxDio4   : out   std_logic := '0';
+    oRequestaLvAuxDio4     : out   std_logic := '1';
+    aLvAuxDio5OutputData   : out   std_logic;
+    aLvAuxDio5InputData    : in    std_logic;
+    aLvAuxDio5OutputEnable : out   std_logic;
+    oClkaLvAuxDio5         : in    std_logic;
+    aoResetaLvAuxDio5      : in    std_logic;
+    oDoneaLvAuxDio5        : in    std_logic;
+    oDirectionaLvAuxDio5   : out   std_logic := '0';
+    oRequestaLvAuxDio5     : out   std_logic := '1';
+    aLvAuxDio6OutputData   : out   std_logic;
+    aLvAuxDio6InputData    : in    std_logic;
+    aLvAuxDio6OutputEnable : out   std_logic;
+    oClkaLvAuxDio6         : in    std_logic;
+    aoResetaLvAuxDio6      : in    std_logic;
+    oDoneaLvAuxDio6        : in    std_logic;
+    oDirectionaLvAuxDio6   : out   std_logic := '0';
+    oRequestaLvAuxDio6     : out   std_logic := '1';
+    aLvAuxDio7OutputData   : out   std_logic;
+    aLvAuxDio7InputData    : in    std_logic;
+    aLvAuxDio7OutputEnable : out   std_logic;
+    oClkaLvAuxDio7         : in    std_logic;
+    aoResetaLvAuxDio7      : in    std_logic;
+    oDoneaLvAuxDio7        : in    std_logic;
+    oDirectionaLvAuxDio7   : out   std_logic := '0';
+    oRequestaLvAuxDio7     : out   std_logic := '1';
+
+    -----------------------------------
+    -- MGT CLIP Socket ports
+    -----------------------------------  
+    --Nanopitch I/O
+    DioMgtRefClk_p              : in  std_logic;
+    DioMgtRefClk_n              : in  std_logic;
+    DioMgtRefClkFromFam      : in    std_logic;
+    DioMgtRX_n               : in    std_logic_vector(3 downto 0);
+    DioMgtRX_p               : in    std_logic_vector(3 downto 0);
+    DioMgtTX_n               : out   std_logic_vector(3 downto 0);
+    DioMgtTX_p               : out   std_logic_vector(3 downto 0);
+    SocketClk80              : in    std_logic;
+    --Synchronous to SocketClk80
+    sDioMgtRefClkFromFamPresent : in  std_logic;
+
+% else:
+      -----------------------------------
+      -- TARGET IO AND CLIP PORTS NOT USED
+      -----------------------------------
+% endif
 
     -----------------------------------
     -- Target Method and Properties ports
@@ -158,7 +247,9 @@ entity TheWindow is
     ----------------------------------------
     PxieClk100Trigger  : in  std_logic;
     pIntSync100Trigger : in  std_logic;
+    dTdcAssert         : out std_logic;
     dDevClkEn          : in  std_logic;
+    sTdcDeassert       : out std_logic;
     aIntClk10Trigger   : in  std_logic;
     --ID Signals from Routing CLIP
     bRoutingClipPresent      : out std_logic;
@@ -185,122 +276,32 @@ entity TheWindow is
     aPxieDstarB            : in    std_logic;
     aPxieDstarC            : out   std_logic;
 
-% if include_target_io:
-    -----------------------------------
-    -- CLIP Socket ports
-    -----------------------------------
-
-    -- AxiClk is the same as BusCLk is the same as PllClk80
-    AxiClk : in std_logic;
-
-    xDiagramAxiStreamFromClipTData  : out std_logic_vector(31 downto 0);
-    xDiagramAxiStreamFromClipTLast  : out std_logic;
-    xDiagramAxiStreamFromClipTReady : out std_logic;
-    xDiagramAxiStreamFromClipTValid : out std_logic;
-    xDiagramAxiStreamToClipTData    : in  std_logic_vector(31 downto 0);
-    xDiagramAxiStreamToClipTLast    : in  std_logic;
-    xDiagramAxiStreamToClipTReady   : in  std_logic;
-    xDiagramAxiStreamToClipTValid   : in  std_logic;
-
-    xHostAxiStreamFromClipTData  : out std_logic_vector(31 downto 0);
-    xHostAxiStreamFromClipTLast  : out std_logic;
-    xHostAxiStreamFromClipTReady : out std_logic;
-    xHostAxiStreamFromClipTValid : out std_logic;
-    xHostAxiStreamToClipTData    : in  std_logic_vector(31 downto 0);
-    xHostAxiStreamToClipTLast    : in  std_logic;
-    xHostAxiStreamToClipTReady   : in  std_logic;
-    xHostAxiStreamToClipTValid   : in  std_logic;
-
-
-    -- Axi4Lite Interface from the CLIP to FixedLogic
-    xClipAxi4LiteMasterARAddr  : out std_logic_vector(31 downto 0);
-    xClipAxi4LiteMasterARProt  : out std_logic_vector(2 downto 0);
-    xClipAxi4LiteMasterARReady : in  std_logic;
-    xClipAxi4LiteMasterARValid : out std_logic;
-    xClipAxi4LiteMasterAWAddr  : out std_logic_vector(31 downto 0);
-    xClipAxi4LiteMasterAWProt  : out std_logic_vector(2 downto 0);
-    xClipAxi4LiteMasterAWReady : in  std_logic;
-    xClipAxi4LiteMasterAWValid : out std_logic;
-    xClipAxi4LiteMasterBReady  : out std_logic;
-    xClipAxi4LiteMasterBResp   : in  std_logic_vector(1 downto 0);
-    xClipAxi4LiteMasterBValid  : in  std_logic;
-    xClipAxi4LiteMasterRData   : in  std_logic_vector(31 downto 0);
-    xClipAxi4LiteMasterRReady  : out std_logic;
-    xClipAxi4LiteMasterRResp   : in  std_logic_vector(1 downto 0);
-    xClipAxi4LiteMasterRValid  : in  std_logic;
-    xClipAxi4LiteMasterWData   : out std_logic_vector(31 downto 0);
-    xClipAxi4LiteMasterWReady  : in  std_logic;
-    xClipAxi4LiteMasterWStrb   : out std_logic_vector(3 downto 0);
-    xClipAxi4LiteMasterWValid  : out std_logic;
-    xClipAxi4LiteInterrupt     : in  std_logic;
-
-    --Reserved CLIP Signals
-    stIoModuleSupportsFRAGLs : out std_logic;
-
-    -- RefClks
-    MgtRefClk_p               : in    std_logic_vector (11 downto 0);
-    MgtRefClk_n               : in    std_logic_vector (11 downto 0);
-    -- MGTs
-    MgtPortRx_p               : in    std_logic_vector (47 downto 0);
-    MgtPortRx_n               : in    std_logic_vector (47 downto 0);
-    MgtPortTx_p               : out   std_logic_vector (47 downto 0);
-    MgtPortTx_n               : out   std_logic_vector (47 downto 0);
-
-    -- Base board DIO
-    aDio                      : inout std_logic_vector(7 downto 0);
-
-    -- Configuration
-    aLmkI2cSda            : inout std_logic;
-    aLmkI2cScl            : inout std_logic;
-    aLmk1Pdn_n            : out std_logic;
-    aLmk2Pdn_n            : out std_logic;
-    aLmk1Gpio0            : out std_logic;
-    aLmk2Gpio0            : out std_logic;
-    aLmk1Status0          : in std_logic;
-    aLmk1Status1          : in std_logic;
-    aLmk2Status0          : in std_logic;
-    aLmk2Status1          : in std_logic;
-    aIPassVccPowerFault_n : in std_logic;
-    aIPassPrsnt_n         : in std_logic_vector(7 downto 0);
-    aIPassIntr_n          : in std_logic_vector(7 downto 0);
-    aIPassSCL             : inout std_logic_vector(11 downto 0);
-    aIPassSDA             : inout std_logic_vector(11 downto 0);
-    aPortExpReset_n       : out std_logic;
-    aPortExpIntr_n        : in std_logic;
-    aPortExpSda           : inout std_logic;
-    aPortExpScl           : inout std_logic;
-
-% else:
-      -----------------------------------
-      -- TARGET IO AND CLIP PORTS NOT USED
-      -----------------------------------
-% endif
 
     -----------------------------------------------------------------------------
     --Dram Interface
     -----------------------------------------------------------------------------
     aDramReady               : in    std_logic;
-    du0DramAddrFifoAddr      : out   std_logic_vector(29 downto 0);
+    du0DramAddrFifoAddr      : out   std_logic_vector(28 downto 0);
     du0DramAddrFifoCmd       : out   std_logic_vector(2 downto 0);
     du0DramAddrFifoFull      : in    std_logic;
     du0DramAddrFifoWrEn      : out   std_logic;
     du0DramPhyInitDone       : in    std_logic;
     du0DramRdDataValid       : in    std_logic;
-    du0DramRdFifoDataOut     : in    std_logic_vector(639 downto 0);
-    du0DramWrFifoDataIn      : out   std_logic_vector(639 downto 0);
+    du0DramRdFifoDataOut     : in    std_logic_vector(255 downto 0);
+    du0DramWrFifoDataIn      : out   std_logic_vector(255 downto 0);
     du0DramWrFifoFull        : in    std_logic;
-    du0DramWrFifoMaskData    : out   std_logic_vector(79 downto 0);
+    du0DramWrFifoMaskData    : out   std_logic_vector(31 downto 0);
     du0DramWrFifoWrEn        : out   std_logic;
-    du1DramAddrFifoAddr      : out   std_logic_vector(29 downto 0);
+    du1DramAddrFifoAddr      : out   std_logic_vector(28 downto 0);
     du1DramAddrFifoCmd       : out   std_logic_vector(2 downto 0);
     du1DramAddrFifoFull      : in    std_logic;
     du1DramAddrFifoWrEn      : out   std_logic;
     du1DramPhyInitDone       : in    std_logic;
     du1DramRdDataValid       : in    std_logic;
-    du1DramRdFifoDataOut     : in    std_logic_vector(639 downto 0);
-    du1DramWrFifoDataIn      : out   std_logic_vector(639 downto 0);
+    du1DramRdFifoDataOut     : in    std_logic_vector(255 downto 0);
+    du1DramWrFifoDataIn      : out   std_logic_vector(255 downto 0);
     du1DramWrFifoFull        : in    std_logic;
-    du1DramWrFifoMaskData    : out   std_logic_vector(79 downto 0);
+    du1DramWrFifoMaskData    : out   std_logic_vector(31 downto 0);
     du1DramWrFifoWrEn        : out   std_logic;
 
     -----------------------------------------------------------------------------
