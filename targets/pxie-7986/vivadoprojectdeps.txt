@@ -67,10 +67,10 @@
 ../../deps/flexrio-deps/encrypted/ni.hw-flexrio.dram.26.3.0.1-ci-passed-main-f/source/kintexultrascaleplus/appleton/rtl-lvfpga/AppletonDram.vhd
 ../../deps/flexrio-deps/encrypted/ni.hw-flexrio.dram.26.3.0.1-ci-passed-main-f/source/kintexultrascaleplus/appleton/rtl-lvfpga/AppletonDramWrapper.vhd
 ../../deps/flexrio-deps/encrypted/ni.hw-flexrio.dram.26.3.0.1-ci-passed-main-f/source/kintexultrascaleplus/appleton/rtl-lvfpga/AppletonEmptyDram.vhd
-../../deps/flexrio-deps/encrypted/ni.hw-flexrio.fixedlogic.26.5.0.3-ci-passed-main-d/appletonfixedlogic/rtl/FixedLogicWrapper.vhd
-../../deps/flexrio-deps/encrypted/ni.hw-flexrio.fixedlogic.26.5.0.3-ci-passed-main-d/appletonfixedlogic/rtl/packages/PkgSysMonConfig.vhd
-../../deps/flexrio-deps/encrypted/ni.hw-flexrio.fixedlogic.26.5.0.3-ci-passed-main-d/appletonfixedlogic/synth/MacallanFixedLogic.edf
-../../deps/flexrio-deps/encrypted/ni.hw-flexrio.fixedlogic.26.5.0.3-ci-passed-main-d/common/rtl/packages/lvgen/PkgLvFpgaConst.vhd
+../../deps/flexrio-deps/encrypted/ni.hw-flexrio.fixedlogic.26.5.0.4-ci-passed-main-d/appletonfixedlogic/rtl/FixedLogicWrapper.vhd
+../../deps/flexrio-deps/encrypted/ni.hw-flexrio.fixedlogic.26.5.0.4-ci-passed-main-d/appletonfixedlogic/rtl/packages/PkgSysMonConfig.vhd
+../../deps/flexrio-deps/encrypted/ni.hw-flexrio.fixedlogic.26.5.0.4-ci-passed-main-d/appletonfixedlogic/synth/MacallanFixedLogic.edf
+../../deps/flexrio-deps/encrypted/ni.hw-flexrio.fixedlogic.26.5.0.4-ci-passed-main-d/common/rtl/packages/lvgen/PkgLvFpgaConst.vhd
 ../../deps/flexrio-deps/encrypted/nicores_CommonCores.1.0.0a26/CommonFiles/Packages/PkgNiUtilities.vhd
 ../../deps/flexrio-deps/encrypted/nicores_CommonCores.1.0.0a26/CommonFiles/Packages/PkgXReg.vhd
 ../../deps/flexrio-deps/encrypted/nicores_CommonCores.1.0.0a26/CommonFiles/RegPort/PkgBaRegPort.vhd
