@@ -1210,6 +1210,8 @@ begin  -- architecture struct
       Dram1ClkUser                        => Dram1ClkUser,                              --in  std_logic
       dHmbDmaClkSocket                    => DmaClk,                                    --in  std_logic
       dLlbDmaClkSocket                    => DmaClk,                                    --in  std_logic
+      pIntSync100                         => pIntSync100,                               --in  std_logic
+      aIntClk10                           => aIntClk10,                                 --in  std_logic
       aLvAuxDio0OutputData                => aLvAuxDioOutputData(0),                    --out std_logic
       aLvAuxDio0InputData                 => aLvAuxDioInputData(0),                     --in  std_logic
       aLvAuxDio0OutputEnable              => aLvAuxDioOutputEnable(0),                  --out std_logic
@@ -1274,8 +1276,15 @@ begin  -- architecture struct
       oDoneaLvAuxDio7                     => bdDoneaLvAuxDio(7),                        --in  std_logic
       oDirectionaLvAuxDio7                => bdDirectionaLvAuxDio(7),                   --out std_logic:='0'
       oRequestaLvAuxDio7                  => bdRequestaLvAuxDio(7),                     --out std_logic:='1'
-      pIntSync100                         => pIntSync100,                               --in  std_logic
-      aIntClk10                           => aIntClk10,                                 --in  std_logic
+      DioMgtRefClk_p                      => AuxIoMgtRefClk_p,                          --in  std_logic
+      DioMgtRefClk_n                      => AuxIoMgtRefClk_n,                          --in  std_logic
+      DioMgtRefClkFromFam                 => '0',                                       --in  std_logic
+      DioMgtRX_n                          => AuxIoMgtRX_n,                              --in  std_logic_vector(3:0)
+      DioMgtRX_p                          => AuxIoMgtRX_p,                              --in  std_logic_vector(3:0)
+      DioMgtTX_n                          => AuxIoMgtTX_n,                              --out std_logic_vector(3:0)
+      DioMgtTX_p                          => AuxIoMgtTX_p,                              --out std_logic_vector(3:0)
+      SocketClk80                         => BusClk,                                    --in  std_logic
+      sDioMgtRefClkFromFamPresent         => '0',                                       --in  std_logic
       bdIFifoRdData                       => bdIFifoRdData,                             --out std_logic_vector(63:0)
       bdIFifoRdDataValid                  => bdIFifoRdDataValid,                        --out std_logic
       bdIFifoRdReadyForInput              => bdIFifoRdReadyForInput,                    --in  std_logic
@@ -1313,15 +1322,6 @@ begin  -- architecture struct
       aPxiStarData                        => aPxiStarData,                              --in  std_logic
       aPxieDstarB                         => aPxieDstarB,                               --in  std_logic
       aPxieDstarC                         => aPxieDstarC,                               --out std_logic
-      DioMgtRefClk_p                      => AuxIoMgtRefClk_p,                          --in  std_logic
-      DioMgtRefClk_n                      => AuxIoMgtRefClk_n,                          --in  std_logic
-      DioMgtRefClkFromFam                 => '0',                                       --in  std_logic
-      DioMgtRX_n                          => AuxIoMgtRX_n,                              --in  std_logic_vector(3:0)
-      DioMgtRX_p                          => AuxIoMgtRX_p,                              --in  std_logic_vector(3:0)
-      DioMgtTX_n                          => AuxIoMgtTX_n,                              --out std_logic_vector(3:0)
-      DioMgtTX_p                          => AuxIoMgtTX_p,                              --out std_logic_vector(3:0)
-      SocketClk80                         => BusClk,                                    --in  std_logic
-      sDioMgtRefClkFromFamPresent         => '0',                                       --in  std_logic
       aDramReady                          => aDramReady,                                --in  std_logic
       du0DramAddrFifoAddr                 => du0DramAddrFifoAddr,                       --out std_logic_vector(28:0)
       du0DramAddrFifoCmd                  => du0DramAddrFifoCmd,                        --out std_logic_vector(2:0)
