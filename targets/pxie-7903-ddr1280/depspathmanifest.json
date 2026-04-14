@@ -559,57 +559,66 @@
       "source_kind": "objects_deps"
     },
     {
-      "canonical_rel_path": "ni.hw-flexrio.dram.26.0.0.10-ci-passed-main-d/deliverables/virtexultrascaleplus/sasquatch/ddr4_0/netlist/ddr4_0.edf",
+      "canonical_rel_path": "ni.hw-flexrio.dram.26.0.0.10-ci-passed-main-d/deliverables/virtexultrascaleplus/sasquatch_ddr1280/ddr4_0/netlist/ddr4_0.edf",
       "hash_token": "",
-      "published_rel_path": "ni.hw-flexrio.dram.26.0.0.10-ci-passed-main-d/deliverables/virtexultrascaleplus/sasquatch/ddr4_0/netlist/ddr4_0.edf",
+      "published_rel_path": "ni.hw-flexrio.dram.26.0.0.10-ci-passed-main-d/deliverables/virtexultrascaleplus/sasquatch_ddr1280/ddr4_0/netlist/ddr4_0.edf",
       "shorten_reason": "",
       "shortened": false,
-      "source_abs_path": "/mnt/Work/myagent/_work/2934/s/hw-flexrio/targets/objects/deps/ni.hw-flexrio.dram.26.0.0.10-ci-passed-main-d/deliverables/virtexultrascaleplus/sasquatch/ddr4_0/netlist/ddr4_0.edf",
+      "source_abs_path": "/mnt/Work/myagent/_work/2934/s/hw-flexrio/targets/objects/deps/ni.hw-flexrio.dram.26.0.0.10-ci-passed-main-d/deliverables/virtexultrascaleplus/sasquatch_ddr1280/ddr4_0/netlist/ddr4_0.edf",
       "source_kind": "objects_deps"
     },
     {
-      "canonical_rel_path": "ni.hw-flexrio.dram.26.0.0.10-ci-passed-main-d/source/virtexultrascaleplus/sasquatch/rtl-lvfpga/SasquatchBank0Dram.vhd",
+      "canonical_rel_path": "ni.hw-flexrio.dram.26.0.0.10-ci-passed-main-d/source/virtexultrascaleplus/sasquatch_ddr1280/rtl-lvfpga/DramShim.vhd",
       "hash_token": "",
-      "published_rel_path": "ni.hw-flexrio.dram.26.0.0.10-ci-passed-main-d/source/virtexultrascaleplus/sasquatch/rtl-lvfpga/SasquatchBank0Dram.vhd",
+      "published_rel_path": "ni.hw-flexrio.dram.26.0.0.10-ci-passed-main-d/source/virtexultrascaleplus/sasquatch_ddr1280/rtl-lvfpga/DramShim.vhd",
       "shorten_reason": "",
       "shortened": false,
-      "source_abs_path": "/mnt/Work/myagent/_work/2934/s/hw-flexrio/targets/objects/deps/ni.hw-flexrio.dram.26.0.0.10-ci-passed-main-d/source/virtexultrascaleplus/sasquatch/rtl-lvfpga/SasquatchBank0Dram.vhd",
+      "source_abs_path": "/mnt/Work/myagent/_work/2934/s/hw-flexrio/targets/objects/deps/ni.hw-flexrio.dram.26.0.0.10-ci-passed-main-d/source/virtexultrascaleplus/sasquatch_ddr1280/rtl-lvfpga/DramShim.vhd",
       "source_kind": "objects_deps"
     },
     {
-      "canonical_rel_path": "ni.hw-flexrio.dram.26.0.0.10-ci-passed-main-d/source/virtexultrascaleplus/sasquatch/rtl-lvfpga/SasquatchBank1Dram.vhd",
+      "canonical_rel_path": "ni.hw-flexrio.dram.26.0.0.10-ci-passed-main-d/source/virtexultrascaleplus/sasquatch_ddr1280/rtl-lvfpga/SasquatchBank0Dram.vhd",
       "hash_token": "",
-      "published_rel_path": "ni.hw-flexrio.dram.26.0.0.10-ci-passed-main-d/source/virtexultrascaleplus/sasquatch/rtl-lvfpga/SasquatchBank1Dram.vhd",
+      "published_rel_path": "ni.hw-flexrio.dram.26.0.0.10-ci-passed-main-d/source/virtexultrascaleplus/sasquatch_ddr1280/rtl-lvfpga/SasquatchBank0Dram.vhd",
       "shorten_reason": "",
       "shortened": false,
-      "source_abs_path": "/mnt/Work/myagent/_work/2934/s/hw-flexrio/targets/objects/deps/ni.hw-flexrio.dram.26.0.0.10-ci-passed-main-d/source/virtexultrascaleplus/sasquatch/rtl-lvfpga/SasquatchBank1Dram.vhd",
+      "source_abs_path": "/mnt/Work/myagent/_work/2934/s/hw-flexrio/targets/objects/deps/ni.hw-flexrio.dram.26.0.0.10-ci-passed-main-d/source/virtexultrascaleplus/sasquatch_ddr1280/rtl-lvfpga/SasquatchBank0Dram.vhd",
       "source_kind": "objects_deps"
     },
     {
-      "canonical_rel_path": "ni.hw-flexrio.dram.26.0.0.10-ci-passed-main-d/source/virtexultrascaleplus/sasquatch/rtl-lvfpga/SasquatchDram.vhd",
+      "canonical_rel_path": "ni.hw-flexrio.dram.26.0.0.10-ci-passed-main-d/source/virtexultrascaleplus/sasquatch_ddr1280/rtl-lvfpga/SasquatchBank1Dram.vhd",
       "hash_token": "",
-      "published_rel_path": "ni.hw-flexrio.dram.26.0.0.10-ci-passed-main-d/source/virtexultrascaleplus/sasquatch/rtl-lvfpga/SasquatchDram.vhd",
+      "published_rel_path": "ni.hw-flexrio.dram.26.0.0.10-ci-passed-main-d/source/virtexultrascaleplus/sasquatch_ddr1280/rtl-lvfpga/SasquatchBank1Dram.vhd",
       "shorten_reason": "",
       "shortened": false,
-      "source_abs_path": "/mnt/Work/myagent/_work/2934/s/hw-flexrio/targets/objects/deps/ni.hw-flexrio.dram.26.0.0.10-ci-passed-main-d/source/virtexultrascaleplus/sasquatch/rtl-lvfpga/SasquatchDram.vhd",
+      "source_abs_path": "/mnt/Work/myagent/_work/2934/s/hw-flexrio/targets/objects/deps/ni.hw-flexrio.dram.26.0.0.10-ci-passed-main-d/source/virtexultrascaleplus/sasquatch_ddr1280/rtl-lvfpga/SasquatchBank1Dram.vhd",
       "source_kind": "objects_deps"
     },
     {
-      "canonical_rel_path": "ni.hw-flexrio.dram.26.0.0.10-ci-passed-main-d/source/virtexultrascaleplus/sasquatch/rtl-lvfpga/SasquatchDramWrapper.vhd",
+      "canonical_rel_path": "ni.hw-flexrio.dram.26.0.0.10-ci-passed-main-d/source/virtexultrascaleplus/sasquatch_ddr1280/rtl-lvfpga/SasquatchDram.vhd",
       "hash_token": "",
-      "published_rel_path": "ni.hw-flexrio.dram.26.0.0.10-ci-passed-main-d/source/virtexultrascaleplus/sasquatch/rtl-lvfpga/SasquatchDramWrapper.vhd",
+      "published_rel_path": "ni.hw-flexrio.dram.26.0.0.10-ci-passed-main-d/source/virtexultrascaleplus/sasquatch_ddr1280/rtl-lvfpga/SasquatchDram.vhd",
       "shorten_reason": "",
       "shortened": false,
-      "source_abs_path": "/mnt/Work/myagent/_work/2934/s/hw-flexrio/targets/objects/deps/ni.hw-flexrio.dram.26.0.0.10-ci-passed-main-d/source/virtexultrascaleplus/sasquatch/rtl-lvfpga/SasquatchDramWrapper.vhd",
+      "source_abs_path": "/mnt/Work/myagent/_work/2934/s/hw-flexrio/targets/objects/deps/ni.hw-flexrio.dram.26.0.0.10-ci-passed-main-d/source/virtexultrascaleplus/sasquatch_ddr1280/rtl-lvfpga/SasquatchDram.vhd",
       "source_kind": "objects_deps"
     },
     {
-      "canonical_rel_path": "ni.hw-flexrio.dram.26.0.0.10-ci-passed-main-d/source/virtexultrascaleplus/sasquatch/rtl-lvfpga/SasquatchEmptyDram.vhd",
+      "canonical_rel_path": "ni.hw-flexrio.dram.26.0.0.10-ci-passed-main-d/source/virtexultrascaleplus/sasquatch_ddr1280/rtl-lvfpga/SasquatchDramWrapper.vhd",
       "hash_token": "",
-      "published_rel_path": "ni.hw-flexrio.dram.26.0.0.10-ci-passed-main-d/source/virtexultrascaleplus/sasquatch/rtl-lvfpga/SasquatchEmptyDram.vhd",
+      "published_rel_path": "ni.hw-flexrio.dram.26.0.0.10-ci-passed-main-d/source/virtexultrascaleplus/sasquatch_ddr1280/rtl-lvfpga/SasquatchDramWrapper.vhd",
       "shorten_reason": "",
       "shortened": false,
-      "source_abs_path": "/mnt/Work/myagent/_work/2934/s/hw-flexrio/targets/objects/deps/ni.hw-flexrio.dram.26.0.0.10-ci-passed-main-d/source/virtexultrascaleplus/sasquatch/rtl-lvfpga/SasquatchEmptyDram.vhd",
+      "source_abs_path": "/mnt/Work/myagent/_work/2934/s/hw-flexrio/targets/objects/deps/ni.hw-flexrio.dram.26.0.0.10-ci-passed-main-d/source/virtexultrascaleplus/sasquatch_ddr1280/rtl-lvfpga/SasquatchDramWrapper.vhd",
+      "source_kind": "objects_deps"
+    },
+    {
+      "canonical_rel_path": "ni.hw-flexrio.dram.26.0.0.10-ci-passed-main-d/source/virtexultrascaleplus/sasquatch_ddr1280/rtl-lvfpga/SasquatchEmptyDram.vhd",
+      "hash_token": "",
+      "published_rel_path": "ni.hw-flexrio.dram.26.0.0.10-ci-passed-main-d/source/virtexultrascaleplus/sasquatch_ddr1280/rtl-lvfpga/SasquatchEmptyDram.vhd",
+      "shorten_reason": "",
+      "shortened": false,
+      "source_abs_path": "/mnt/Work/myagent/_work/2934/s/hw-flexrio/targets/objects/deps/ni.hw-flexrio.dram.26.0.0.10-ci-passed-main-d/source/virtexultrascaleplus/sasquatch_ddr1280/rtl-lvfpga/SasquatchEmptyDram.vhd",
       "source_kind": "objects_deps"
     },
     {
@@ -820,12 +829,12 @@
       "source_kind": "objects_deps"
     },
     {
-      "canonical_rel_path": "pxie-7903/rtl-lvfpga/PkgFlexRioTargetConfig.vhd",
+      "canonical_rel_path": "pxie-7903-ddr1280/rtl-lvfpga/PkgFlexRioTargetConfig.vhd",
       "hash_token": "",
-      "published_rel_path": "pxie-7903/rtl-lvfpga/PkgFlexRioTargetConfig.vhd",
+      "published_rel_path": "pxie-7903-ddr1280/rtl-lvfpga/PkgFlexRioTargetConfig.vhd",
       "shorten_reason": "",
       "shortened": false,
-      "source_abs_path": "/mnt/Work/myagent/_work/2934/s/hw-flexrio/targets/pxie-7903/rtl-lvfpga/PkgFlexRioTargetConfig.vhd",
+      "source_abs_path": "/mnt/Work/myagent/_work/2934/s/hw-flexrio/targets/pxie-7903-ddr1280/rtl-lvfpga/PkgFlexRioTargetConfig.vhd",
       "source_kind": "targets_tree"
     }
   ],
