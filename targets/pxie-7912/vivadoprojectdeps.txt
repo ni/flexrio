@@ -65,10 +65,10 @@
 ../../deps/flexrio-deps/encrypted/ni.hw-flexrio.dram.26.3.0.1-ci-passed-main-f/source/kintexultrascale/macallan/rtl-lvfpga/MacallanDram.vhd
 ../../deps/flexrio-deps/encrypted/ni.hw-flexrio.dram.26.3.0.1-ci-passed-main-f/source/kintexultrascale/macallan/rtl-lvfpga/MacallanDramWrapper.vhd
 ../../deps/flexrio-deps/encrypted/ni.hw-flexrio.dram.26.3.0.1-ci-passed-main-f/source/kintexultrascale/macallan/rtl-lvfpga/MacallanEmptyDram.vhd
-../../deps/flexrio-deps/encrypted/ni.hw-flexrio.fixedlogic.26.5.0.4-ci-passed-main-d/common/rtl/packages/lvgen/PkgLvFpgaConst.vhd
-../../deps/flexrio-deps/encrypted/ni.hw-flexrio.fixedlogic.26.5.0.4-ci-passed-main-d/macallanfixedlogic/rtl/FixedLogicWrapper.vhd
-../../deps/flexrio-deps/encrypted/ni.hw-flexrio.fixedlogic.26.5.0.4-ci-passed-main-d/macallanfixedlogic/rtl/packages/PkgSysMonConfig.vhd
-../../deps/flexrio-deps/encrypted/ni.hw-flexrio.fixedlogic.26.5.0.4-ci-passed-main-d/macallanfixedlogic/synth/MacallanFixedLogic.edf
+../../deps/flexrio-deps/encrypted/ni.hw-flexrio.fixedlogic.26.5.0.31-manual-passed-users-jperreau-1480-fix-data-rate-bug-d/common/rtl/packages/lvgen/PkgLvFpgaConst.vhd
+../../deps/flexrio-deps/encrypted/ni.hw-flexrio.fixedlogic.26.5.0.31-manual-passed-users-jperreau-1480-fix-data-rate-bug-d/macallanfixedlogic/rtl/FixedLogicWrapper.vhd
+../../deps/flexrio-deps/encrypted/ni.hw-flexrio.fixedlogic.26.5.0.31-manual-passed-users-jperreau-1480-fix-data-rate-bug-d/macallanfixedlogic/rtl/packages/PkgSysMonConfig.vhd
+../../deps/flexrio-deps/encrypted/ni.hw-flexrio.fixedlogic.26.5.0.31-manual-passed-users-jperreau-1480-fix-data-rate-bug-d/macallanfixedlogic/synth/MacallanFixedLogic.edf
 ../../deps/flexrio-deps/encrypted/nicores_CommonCores.1.0.0a26/CommonFiles/Packages/PkgNiUtilities.vhd
 ../../deps/flexrio-deps/encrypted/nicores_CommonCores.1.0.0a26/CommonFiles/Packages/PkgXReg.vhd
 ../../deps/flexrio-deps/encrypted/nicores_CommonCores.1.0.0a26/CommonFiles/RegPort/PkgBaRegPort.vhd
