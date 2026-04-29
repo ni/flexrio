@@ -17,7 +17,6 @@ PkgDmaPortDmaFifosFlatTypes.vhd
 DmaPortCommIfcInputController.vhd
 DmaPortCommIfcInputStream.vhd
 DmaPortCommIfcSourceStreamStateController.vhd
-DmaPortCommIfcInputDataControl.vhd
 DmaPortInputDataToDmaDelay.vhd
 PkgDmaPortCommIfcInputDataControl.vhd
 DmaPortCommIfcOutputController.vhd
@@ -27,7 +26,6 @@ DmaPortCommIfcSinkStream.vhd
 DmaPortCommIfcSinkStreamDataReceiver.vhd
 DmaPortCommIfcSinkStreamTcrUpdateController.vhd
 DmaPortCommIfcSinkDataControl.vhd
-DmaPortFixedDmaCommunicationInterface.vhd
 DmaPortCommIfcIrqInterface.vhd
 DmaPortCommIfcMasterReadInterface.vhd
 DmaPortCommIfcMasterWriteInterface.vhd
@@ -47,6 +45,7 @@ SingleClkFifoFlags.vhd
 DualPortRAM.vhd
 DualPortRAM_Vivado.vhd
 PkgLvFpgaConst.vhd
+RioDmaPortCommIfcInputDataControl.vhd
 PkgNiUtilities.vhd
 PkgNiDma.vhd
 PkgNiDmaRegMap.vhd
