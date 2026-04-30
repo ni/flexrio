@@ -4967,8 +4967,8 @@ set_input_delay -clock [get_clocks $isoClk] -clock_fall -add_delay \
 # These will be duplicate and ignored in LV FPGA compiles
 # In GitHub Vivado compiles. these will be used and the LV FPGA printed ones will be ignored
 
-set DmaPortCommCrossingFrom [get_cells {HostInterfacex/*/*DmaPortCommIfcIrqInterfacex/DoubleSyncSLx/*/iDlySigx/*FDCPEx} -filter {IS_SEQUENTIAL==true}]
-set DmaPortCommCrossingTo [get_cells {HostInterfacex/*/*DmaPortCommIfcIrqInterfacex/DoubleSyncSLx/*/DoubleSyncAsyncInBasex/oSig_msx/*FDCPEx} -filter {IS_SEQUENTIAL==true}]
+set DmaPortCommCrossingFrom [get_cells {HostInterfacex/*/*DmaPortCommIfcIrqInterfacex/DoubleSyncSLx*iDlySigx/*FDCPEx} -filter {IS_SEQUENTIAL==true}]
+set DmaPortCommCrossingTo [get_cells {HostInterfacex/*/*DmaPortCommIfcIrqInterfacex/DoubleSyncSLx*DoubleSyncAsyncInBasex/oSig_msx/*FDCPEx} -filter {IS_SEQUENTIAL==true}]
 
 set_max_delay -from $DmaPortCommCrossingFrom -to $DmaPortCommCrossingTo -datapath_only 100.0000000000
 #########################################################################################
