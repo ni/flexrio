@@ -69,11 +69,11 @@
 ../../deps/flexrio-deps/encrypted/ni.hw-flexrio.fixedlogic.26.3.0.39-ci-passed-main-d/btraceplusfixedlogic/rtl/packages/PkgSysMonConfig.vhd
 ../../deps/flexrio-deps/encrypted/ni.hw-flexrio.fixedlogic.26.3.0.39-ci-passed-main-d/btraceplusfixedlogic/synth/MacallanFixedLogic.edf
 ../../deps/flexrio-deps/encrypted/ni.hw-flexrio.fixedlogic.26.3.0.39-ci-passed-main-d/common/rtl/packages/lvgen/PkgLvFpgaConst.vhd
-../../deps/flexrio-deps/encrypted/ni.nicores.commoncores.7.2.0.11-manual-passed-users-ssantolu-fifo2/_h_829f7a0283/Dma/DmaInput/InputDataControl/RioDmaPortCommIfcInputDataControl.vhd
-../../deps/flexrio-deps/encrypted/ni.nicores.commoncores.7.2.0.11-manual-passed-users-ssantolu-fifo2/RioCommInterfaces/RioDmaPortFixedDmaCommunicationInterface.vhd
-../../deps/flexrio-deps/encrypted/nicores_CommonCores.1.0.0a26/CommonFiles/Packages/PkgNiUtilities.vhd
-../../deps/flexrio-deps/encrypted/nicores_CommonCores.1.0.0a26/CommonFiles/Packages/PkgXReg.vhd
-../../deps/flexrio-deps/encrypted/nicores_CommonCores.1.0.0a26/CommonFiles/RegPort/PkgBaRegPort.vhd
+../../deps/flexrio-deps/encrypted/ni.nicores.commoncores.7.2.0.12-manual-passed-users-ssantolu-fifo2/CommonFiles/Packages/PkgNiUtilities.vhd
+../../deps/flexrio-deps/encrypted/ni.nicores.commoncores.7.2.0.12-manual-passed-users-ssantolu-fifo2/CommonFiles/Packages/PkgXReg.vhd
+../../deps/flexrio-deps/encrypted/ni.nicores.commoncores.7.2.0.12-manual-passed-users-ssantolu-fifo2/CommonFiles/RegPort/PkgBaRegPort.vhd
+../../deps/flexrio-deps/encrypted/ni.nicores.commoncores.7.2.0.12-manual-passed-users-ssantolu-fifo2/_h_ac2c367b59/Dma/DmaInput/InputDataControl/RioDmaPortCommIfcInputDataControl.vhd
+../../deps/flexrio-deps/encrypted/ni.nicores.commoncores.7.2.0.12-manual-passed-users-ssantolu-fifo2/RioCommInterfaces/RioDmaPortFixedDmaCommunicationInterface.vhd
 ../../deps/flexrio-deps/encrypted/nicores_nidmaip.1.1.0d14/CommonFiles/Source/DMAC/PkgBaggageRegTypeRegMap.vhd
 ../../deps/flexrio-deps/encrypted/nicores_nidmaip.1.1.0d14/CommonFiles/Source/DMAC/PkgNiDma.vhd
 ../../deps/flexrio-deps/encrypted/nicores_nidmaip.1.1.0d14/CommonFiles/Source/DMAC/PkgNiDmaRegMap.vhd
