@@ -46,7 +46,6 @@ DualPortRAM.vhd
 DualPortRAM_Vivado.vhd
 PkgLvFpgaConst.vhd
 PkgNiUtilities.vhd
-RioDmaPortCommIfcInputDataControl.vhd
 PkgNiDma.vhd
 PkgNiDmaRegMap.vhd
 PkgCommunicationInterface.vhd
