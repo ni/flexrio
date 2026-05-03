@@ -42,10 +42,10 @@ DFlop.vhd
 GenDataValid.vhd
 SingleClkFifo.vhd
 SingleClkFifoFlags.vhd
+PkgNiUtilities.vhd
 DualPortRAM.vhd
 DualPortRAM_Vivado.vhd
 PkgLvFpgaConst.vhd
-PkgNiUtilities.vhd
 PkgNiDma.vhd
 PkgNiDmaRegMap.vhd
 PkgCommunicationInterface.vhd
