@@ -1,9 +1,5 @@
 PkgCommIntConfiguration.vhd
 PkgDmaPortCommIfcRegs.vhd
-Dram2DP.vhd
-PkgDram2DP.vhd
-PkgDram2DPConstants.vhd
-SingleClockDeviceRam.vhd
 DmaPortCommIfcInputArbiter.vhd
 DmaPortCommIfcOutputArbiter.vhd
 DmaPortStrmArbiterRoundRobin.vhd
@@ -17,7 +13,6 @@ PkgDmaPortDmaFifosFlatTypes.vhd
 DmaPortCommIfcInputController.vhd
 DmaPortCommIfcInputStream.vhd
 DmaPortCommIfcSourceStreamStateController.vhd
-DmaPortCommIfcInputDataControl.vhd
 DmaPortInputDataToDmaDelay.vhd
 PkgDmaPortCommIfcInputDataControl.vhd
 DmaPortCommIfcOutputController.vhd
@@ -27,7 +22,6 @@ DmaPortCommIfcSinkStream.vhd
 DmaPortCommIfcSinkStreamDataReceiver.vhd
 DmaPortCommIfcSinkStreamTcrUpdateController.vhd
 DmaPortCommIfcSinkDataControl.vhd
-DmaPortFixedDmaCommunicationInterface.vhd
 DmaPortCommIfcIrqInterface.vhd
 DmaPortCommIfcMasterReadInterface.vhd
 DmaPortCommIfcMasterWriteInterface.vhd
@@ -44,10 +38,16 @@ DFlop.vhd
 GenDataValid.vhd
 SingleClkFifo.vhd
 SingleClkFifoFlags.vhd
+PkgNiUtilities.vhd
 DualPortRAM.vhd
 DualPortRAM_Vivado.vhd
 PkgLvFpgaConst.vhd
-PkgNiUtilities.vhd
+Dram2DP.vhd
+Dram2DP.xdc
+Dram2DPCore.vhd
+PkgDram2DP.vhd
+PkgDram2DPConstants.vhd
+SingleClockDeviceRam.vhd
 PkgNiDma.vhd
 PkgNiDmaRegMap.vhd
 PkgCommunicationInterface.vhd
