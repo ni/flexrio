@@ -3360,475 +3360,6 @@ current_instance FixedLogicWrapperx/MacallanFixedLogicx
 ## 
 ##
 ###################################################################################
-set BasePath DmaClockRSD
-## Start include, file ResetSyncDeassert.xml
-set ResetSyncDeassertPath $BasePath
-set BasePath $BasePath/DoubleSyncBoolAsyncInx
-## Start include, file DoubleSyncBoolAsyncIn.xml
-set DoubleSyncBoolAsyncInPath $BasePath
-set BasePath $BasePath/DoubleSyncSlAsyncInx
-## Start include, file DoubleSyncSlAsyncIn.xml
-set DoubleSyncSlAsyncInPath $BasePath
-set BasePath $BasePath/DoubleSyncAsyncInBasex
-## Start add from file DoubleSyncAsyncInBase.xdc
-# ---------------------------------------------------------------------------------------
-# DoubleSyncAsyncInBase
-# ---------------------------------------------------------------------------------------
-# Save incoming path
-set DoubleSyncAsyncInBasePath $BasePath
-
-# First create the groups that will be needed in the -from/to constraints
-set TNM_DS_oSig_ms [get_cells "$BasePath/oSig_msx/*" -filter {IS_SEQUENTIAL==true}]
-set TNM_DS_oSig_ms_pin [get_pins -of $TNM_DS_oSig_ms -filter {REF_PIN_NAME==D}]
-set TNM_DS_oSig    [get_cells "$BasePath/oSigx/*"    -filter {IS_SEQUENTIAL==true}]
-#Second, find out the period of the clocks related to the previous groups
-set T_OClkMin [expr "min([join [get_property PERIOD [get_clocks -of $TNM_DS_oSig]] ,])"]
-# False path coming in through the D pin.
-set_false_path -to $TNM_DS_oSig_ms       -through $TNM_DS_oSig_ms_pin
-# Half-cycle max-delay from metastable to stable flop, to give time for metastability to
-# settle out.
-set_max_delay  -from $TNM_DS_oSig_ms     -to $TNM_DS_oSig     -datapath_only [expr 0.5 * $T_OClkMin]
-
-
-set BasePath $DoubleSyncSlAsyncInPath
-
-
-set BasePath $DoubleSyncBoolAsyncInPath
-
-
-
-# There is an implicit assumption that aReset coming into ResetSyncDeassert can always
-# be treated as fully-asynchronous. This will certainly be the case if the signal is
-# coming from a pin. But even if it's coming from an internal FF, it is never useful
-# to treat is as synchronous. If the signal were synchronous to the output clock, we
-# would have no need for the ResetSyncDeassert in the first place. So it's safe to
-# except the reset path into the DoubleSync Preset (ResetSyncDeasserts always reset
-# true), and avoid the potential for spurious Reset Recovery analysis on that path.
-
-
-set TNM_oSigs [get_cells "$DoubleSyncAsyncInBasePath/oSig*x/*" -filter {IS_SEQUENTIAL==true}]
-set TNM_Prst  [get_pins -of $TNM_oSigs                         -filter {REF_PIN_NAME==PRE}]
-set_false_path -to $TNM_oSigs -through $TNM_Prst
-
-set BasePath $ResetSyncDeassertPath
-
-
-set BasePath BusClockRSD
-## Start include, file ResetSyncDeassert.xml
-set ResetSyncDeassertPath $BasePath
-set BasePath $BasePath/DoubleSyncBoolAsyncInx
-## Start include, file DoubleSyncBoolAsyncIn.xml
-set DoubleSyncBoolAsyncInPath $BasePath
-set BasePath $BasePath/DoubleSyncSlAsyncInx
-## Start include, file DoubleSyncSlAsyncIn.xml
-set DoubleSyncSlAsyncInPath $BasePath
-set BasePath $BasePath/DoubleSyncAsyncInBasex
-## Start add from file DoubleSyncAsyncInBase.xdc
-# ---------------------------------------------------------------------------------------
-# DoubleSyncAsyncInBase
-# ---------------------------------------------------------------------------------------
-# Save incoming path
-set DoubleSyncAsyncInBasePath $BasePath
-
-# First create the groups that will be needed in the -from/to constraints
-set TNM_DS_oSig_ms [get_cells "$BasePath/oSig_msx/*" -filter {IS_SEQUENTIAL==true}]
-set TNM_DS_oSig_ms_pin [get_pins -of $TNM_DS_oSig_ms -filter {REF_PIN_NAME==D}]
-set TNM_DS_oSig    [get_cells "$BasePath/oSigx/*"    -filter {IS_SEQUENTIAL==true}]
-#Second, find out the period of the clocks related to the previous groups
-set T_OClkMin [expr "min([join [get_property PERIOD [get_clocks -of $TNM_DS_oSig]] ,])"]
-# False path coming in through the D pin.
-set_false_path -to $TNM_DS_oSig_ms       -through $TNM_DS_oSig_ms_pin
-# Half-cycle max-delay from metastable to stable flop, to give time for metastability to
-# settle out.
-set_max_delay  -from $TNM_DS_oSig_ms     -to $TNM_DS_oSig     -datapath_only [expr 0.5 * $T_OClkMin]
-
-
-set BasePath $DoubleSyncSlAsyncInPath
-
-
-set BasePath $DoubleSyncBoolAsyncInPath
-
-
-
-# There is an implicit assumption that aReset coming into ResetSyncDeassert can always
-# be treated as fully-asynchronous. This will certainly be the case if the signal is
-# coming from a pin. But even if it's coming from an internal FF, it is never useful
-# to treat is as synchronous. If the signal were synchronous to the output clock, we
-# would have no need for the ResetSyncDeassert in the first place. So it's safe to
-# except the reset path into the DoubleSync Preset (ResetSyncDeasserts always reset
-# true), and avoid the potential for spurious Reset Recovery analysis on that path.
-
-
-set TNM_oSigs [get_cells "$DoubleSyncAsyncInBasePath/oSig*x/*" -filter {IS_SEQUENTIAL==true}]
-set TNM_Prst  [get_pins -of $TNM_oSigs                         -filter {REF_PIN_NAME==PRE}]
-set_false_path -to $TNM_oSigs -through $TNM_Prst
-
-set BasePath $ResetSyncDeassertPath
-
-
-set BasePath BusClkDiagramRSD
-## Start include, file ResetSyncDeassert.xml
-set ResetSyncDeassertPath $BasePath
-set BasePath $BasePath/DoubleSyncBoolAsyncInx
-## Start include, file DoubleSyncBoolAsyncIn.xml
-set DoubleSyncBoolAsyncInPath $BasePath
-set BasePath $BasePath/DoubleSyncSlAsyncInx
-## Start include, file DoubleSyncSlAsyncIn.xml
-set DoubleSyncSlAsyncInPath $BasePath
-set BasePath $BasePath/DoubleSyncAsyncInBasex
-## Start add from file DoubleSyncAsyncInBase.xdc
-# ---------------------------------------------------------------------------------------
-# DoubleSyncAsyncInBase
-# ---------------------------------------------------------------------------------------
-# Save incoming path
-set DoubleSyncAsyncInBasePath $BasePath
-
-# First create the groups that will be needed in the -from/to constraints
-set TNM_DS_oSig_ms [get_cells "$BasePath/oSig_msx/*" -filter {IS_SEQUENTIAL==true}]
-set TNM_DS_oSig_ms_pin [get_pins -of $TNM_DS_oSig_ms -filter {REF_PIN_NAME==D}]
-set TNM_DS_oSig    [get_cells "$BasePath/oSigx/*"    -filter {IS_SEQUENTIAL==true}]
-#Second, find out the period of the clocks related to the previous groups
-set T_OClkMin [expr "min([join [get_property PERIOD [get_clocks -of $TNM_DS_oSig]] ,])"]
-# False path coming in through the D pin.
-set_false_path -to $TNM_DS_oSig_ms       -through $TNM_DS_oSig_ms_pin
-# Half-cycle max-delay from metastable to stable flop, to give time for metastability to
-# settle out.
-set_max_delay  -from $TNM_DS_oSig_ms     -to $TNM_DS_oSig     -datapath_only [expr 0.5 * $T_OClkMin]
-
-
-set BasePath $DoubleSyncSlAsyncInPath
-
-
-set BasePath $DoubleSyncBoolAsyncInPath
-
-
-
-# There is an implicit assumption that aReset coming into ResetSyncDeassert can always
-# be treated as fully-asynchronous. This will certainly be the case if the signal is
-# coming from a pin. But even if it's coming from an internal FF, it is never useful
-# to treat is as synchronous. If the signal were synchronous to the output clock, we
-# would have no need for the ResetSyncDeassert in the first place. So it's safe to
-# except the reset path into the DoubleSync Preset (ResetSyncDeasserts always reset
-# true), and avoid the potential for spurious Reset Recovery analysis on that path.
-
-
-set TNM_oSigs [get_cells "$DoubleSyncAsyncInBasePath/oSig*x/*" -filter {IS_SEQUENTIAL==true}]
-set TNM_Prst  [get_pins -of $TNM_oSigs                         -filter {REF_PIN_NAME==PRE}]
-set_false_path -to $TNM_oSigs -through $TNM_Prst
-
-set BasePath $ResetSyncDeassertPath
-
-
-set BasePath FastTdcClkRSD
-## Start include, file ResetSyncDeassert.xml
-set ResetSyncDeassertPath $BasePath
-set BasePath $BasePath/DoubleSyncBoolAsyncInx
-## Start include, file DoubleSyncBoolAsyncIn.xml
-set DoubleSyncBoolAsyncInPath $BasePath
-set BasePath $BasePath/DoubleSyncSlAsyncInx
-## Start include, file DoubleSyncSlAsyncIn.xml
-set DoubleSyncSlAsyncInPath $BasePath
-set BasePath $BasePath/DoubleSyncAsyncInBasex
-## Start add from file DoubleSyncAsyncInBase.xdc
-# ---------------------------------------------------------------------------------------
-# DoubleSyncAsyncInBase
-# ---------------------------------------------------------------------------------------
-# Save incoming path
-set DoubleSyncAsyncInBasePath $BasePath
-
-# First create the groups that will be needed in the -from/to constraints
-set TNM_DS_oSig_ms [get_cells "$BasePath/oSig_msx/*" -filter {IS_SEQUENTIAL==true}]
-set TNM_DS_oSig_ms_pin [get_pins -of $TNM_DS_oSig_ms -filter {REF_PIN_NAME==D}]
-set TNM_DS_oSig    [get_cells "$BasePath/oSigx/*"    -filter {IS_SEQUENTIAL==true}]
-#Second, find out the period of the clocks related to the previous groups
-set T_OClkMin [expr "min([join [get_property PERIOD [get_clocks -of $TNM_DS_oSig]] ,])"]
-# False path coming in through the D pin.
-set_false_path -to $TNM_DS_oSig_ms       -through $TNM_DS_oSig_ms_pin
-# Half-cycle max-delay from metastable to stable flop, to give time for metastability to
-# settle out.
-set_max_delay  -from $TNM_DS_oSig_ms     -to $TNM_DS_oSig     -datapath_only [expr 0.5 * $T_OClkMin]
-
-
-set BasePath $DoubleSyncSlAsyncInPath
-
-
-set BasePath $DoubleSyncBoolAsyncInPath
-
-
-
-# There is an implicit assumption that aReset coming into ResetSyncDeassert can always
-# be treated as fully-asynchronous. This will certainly be the case if the signal is
-# coming from a pin. But even if it's coming from an internal FF, it is never useful
-# to treat is as synchronous. If the signal were synchronous to the output clock, we
-# would have no need for the ResetSyncDeassert in the first place. So it's safe to
-# except the reset path into the DoubleSync Preset (ResetSyncDeasserts always reset
-# true), and avoid the potential for spurious Reset Recovery analysis on that path.
-
-
-set TNM_oSigs [get_cells "$DoubleSyncAsyncInBasePath/oSig*x/*" -filter {IS_SEQUENTIAL==true}]
-set TNM_Prst  [get_pins -of $TNM_oSigs                         -filter {REF_PIN_NAME==PRE}]
-set_false_path -to $TNM_oSigs -through $TNM_Prst
-
-set BasePath $ResetSyncDeassertPath
-
-
-set MacallanFixedLogic0 [current_instance .]
-current_instance BoardControlx/AxiStreamCpldSidebandx/SidebandTxx
-set BasePath FifoFullDs
-## Start include, file DoubleSyncSlAsyncIn.xml
-set DoubleSyncSlAsyncInPath $BasePath
-set BasePath $BasePath/DoubleSyncAsyncInBasex
-## Start add from file DoubleSyncAsyncInBase.xdc
-# ---------------------------------------------------------------------------------------
-# DoubleSyncAsyncInBase
-# ---------------------------------------------------------------------------------------
-# Save incoming path
-set DoubleSyncAsyncInBasePath $BasePath
-
-# First create the groups that will be needed in the -from/to constraints
-set TNM_DS_oSig_ms [get_cells "$BasePath/oSig_msx/*" -filter {IS_SEQUENTIAL==true}]
-set TNM_DS_oSig_ms_pin [get_pins -of $TNM_DS_oSig_ms -filter {REF_PIN_NAME==D}]
-set TNM_DS_oSig    [get_cells "$BasePath/oSigx/*"    -filter {IS_SEQUENTIAL==true}]
-#Second, find out the period of the clocks related to the previous groups
-set T_OClkMin [expr "min([join [get_property PERIOD [get_clocks -of $TNM_DS_oSig]] ,])"]
-# False path coming in through the D pin.
-set_false_path -to $TNM_DS_oSig_ms       -through $TNM_DS_oSig_ms_pin
-# Half-cycle max-delay from metastable to stable flop, to give time for metastability to
-# settle out.
-set_max_delay  -from $TNM_DS_oSig_ms     -to $TNM_DS_oSig     -datapath_only [expr 0.5 * $T_OClkMin]
-
-
-set BasePath $DoubleSyncSlAsyncInPath
-
-
-
-current_instance -quiet
-current_instance $MacallanFixedLogic0
-set MacallanFixedLogic0 [current_instance .]
-current_instance BoardControlx/AxiStreamCpldSidebandx/SidebandRxx
-set BasePath RxDataDs
-## Start include, file DoubleSyncSlAsyncIn.xml
-set DoubleSyncSlAsyncInPath $BasePath
-set BasePath $BasePath/DoubleSyncAsyncInBasex
-## Start add from file DoubleSyncAsyncInBase.xdc
-# ---------------------------------------------------------------------------------------
-# DoubleSyncAsyncInBase
-# ---------------------------------------------------------------------------------------
-# Save incoming path
-set DoubleSyncAsyncInBasePath $BasePath
-
-# First create the groups that will be needed in the -from/to constraints
-set TNM_DS_oSig_ms [get_cells "$BasePath/oSig_msx/*" -filter {IS_SEQUENTIAL==true}]
-set TNM_DS_oSig_ms_pin [get_pins -of $TNM_DS_oSig_ms -filter {REF_PIN_NAME==D}]
-set TNM_DS_oSig    [get_cells "$BasePath/oSigx/*"    -filter {IS_SEQUENTIAL==true}]
-#Second, find out the period of the clocks related to the previous groups
-set T_OClkMin [expr "min([join [get_property PERIOD [get_clocks -of $TNM_DS_oSig]] ,])"]
-# False path coming in through the D pin.
-set_false_path -to $TNM_DS_oSig_ms       -through $TNM_DS_oSig_ms_pin
-# Half-cycle max-delay from metastable to stable flop, to give time for metastability to
-# settle out.
-set_max_delay  -from $TNM_DS_oSig_ms     -to $TNM_DS_oSig     -datapath_only [expr 0.5 * $T_OClkMin]
-
-
-set BasePath $DoubleSyncSlAsyncInPath
-
-
-
-current_instance -quiet
-current_instance $MacallanFixedLogic0
-set MacallanFixedLogic0 [current_instance .]
-current_instance BusRegPortClockCrossing
-set BasePath RequestHandshake
-## Start include, file HandshakeSLV_RSD.xml
-set HandshakeSlvRsdPath $BasePath
-set BasePath $BasePath/HBx
-## Start add from file HandshakeBaseRSD.xdc
-# ---------------------------------------------------------------------------------------
-# HandshakeBaseRSD
-# ---------------------------------------------------------------------------------------
-# Save incoming path
-set HandshakeBaseRsdPath $BasePath
-
-# Data
-set TNM_HS_iData   [get_cells "$BasePath/BlkIn.iStoredDatax/*/*"      -filter {IS_SEQUENTIAL==true}]
-set TNM_HS_oData   [get_cells "$BasePath/*oDataFlopx/*/*"        -filter {IS_SEQUENTIAL==true}]
-# Toggle
-set TNM_HS_iTog    [get_cells "$BasePath/*iPushTogglex/*"        -filter {IS_SEQUENTIAL==true}]
-set TNM_HS_oTog_ms [get_cells "$BasePath/*oPushToggle0_msx/*"    -filter {IS_SEQUENTIAL==true}]
-set TNM_HS_oTog    [get_cells "$BasePath/*oPushToggle1x/*"       -filter {IS_SEQUENTIAL==true}]
-# Ready
-set TNM_HS_oRdy    [get_cells "$BasePath/*oPushToggleToReadyx/*" -filter {IS_SEQUENTIAL==true}]
-set TNM_HS_iRdy_ms [get_cells "$BasePath/*iRdyPushToggle_msx/*"  -filter {IS_SEQUENTIAL==true}]
-set TNM_HS_iRdy    [get_cells "$BasePath/*iRdyPushTogglex/*"     -filter {IS_SEQUENTIAL==true}]
-
-# Find out the minimum period of the clocks related to the previous groups.
-set T_IClkMin [expr "min([join [get_property PERIOD [get_clocks -of $TNM_HS_iData]] ,])"]
-set T_OClkMin [expr "min([join [get_property PERIOD [get_clocks -of $TNM_HS_oData]] ,])"]
-
-# The datapath clock crossings must be less than 2X the period of the destination clock.
-set_max_delay  -from $TNM_HS_iData   -to $TNM_HS_oData -datapath_only [expr 2 * $T_OClkMin - 0.5]
-
-# Toggle
-set_false_path -from $TNM_HS_iTog    -to $TNM_HS_oTog_ms
-set_max_delay  -from $TNM_HS_oTog_ms -to $TNM_HS_oTog -datapath_only [expr 0.5 * $T_OClkMin]
-
-# The return ready path isn't very important here.
-set_false_path -from $TNM_HS_oRdy    -to $TNM_HS_iRdy_ms
-set_max_delay  -from $TNM_HS_iRdy_ms -to $TNM_HS_iRdy -datapath_only [expr 0.5 * $T_IClkMin]
-
-
-set BasePath $HandshakeSlvRsdPath
-
-
-set BasePath ResponseHandshake
-## Start include, file HandshakeSLV_RSD.xml
-set HandshakeSlvRsdPath $BasePath
-set BasePath $BasePath/HBx
-## Start add from file HandshakeBaseRSD.xdc
-# ---------------------------------------------------------------------------------------
-# HandshakeBaseRSD
-# ---------------------------------------------------------------------------------------
-# Save incoming path
-set HandshakeBaseRsdPath $BasePath
-
-# Data
-set TNM_HS_iData   [get_cells "$BasePath/BlkIn.iStoredDatax/*/*"      -filter {IS_SEQUENTIAL==true}]
-set TNM_HS_oData   [get_cells "$BasePath/*oDataFlopx/*/*"        -filter {IS_SEQUENTIAL==true}]
-# Toggle
-set TNM_HS_iTog    [get_cells "$BasePath/*iPushTogglex/*"        -filter {IS_SEQUENTIAL==true}]
-set TNM_HS_oTog_ms [get_cells "$BasePath/*oPushToggle0_msx/*"    -filter {IS_SEQUENTIAL==true}]
-set TNM_HS_oTog    [get_cells "$BasePath/*oPushToggle1x/*"       -filter {IS_SEQUENTIAL==true}]
-# Ready
-set TNM_HS_oRdy    [get_cells "$BasePath/*oPushToggleToReadyx/*" -filter {IS_SEQUENTIAL==true}]
-set TNM_HS_iRdy_ms [get_cells "$BasePath/*iRdyPushToggle_msx/*"  -filter {IS_SEQUENTIAL==true}]
-set TNM_HS_iRdy    [get_cells "$BasePath/*iRdyPushTogglex/*"     -filter {IS_SEQUENTIAL==true}]
-
-# Find out the minimum period of the clocks related to the previous groups.
-set T_IClkMin [expr "min([join [get_property PERIOD [get_clocks -of $TNM_HS_iData]] ,])"]
-set T_OClkMin [expr "min([join [get_property PERIOD [get_clocks -of $TNM_HS_oData]] ,])"]
-
-# The datapath clock crossings must be less than 2X the period of the destination clock.
-set_max_delay  -from $TNM_HS_iData   -to $TNM_HS_oData -datapath_only [expr 2 * $T_OClkMin - 0.5]
-
-# Toggle
-set_false_path -from $TNM_HS_iTog    -to $TNM_HS_oTog_ms
-set_max_delay  -from $TNM_HS_oTog_ms -to $TNM_HS_oTog -datapath_only [expr 0.5 * $T_OClkMin]
-
-# The return ready path isn't very important here.
-set_false_path -from $TNM_HS_oRdy    -to $TNM_HS_iRdy_ms
-set_max_delay  -from $TNM_HS_iRdy_ms -to $TNM_HS_iRdy -datapath_only [expr 0.5 * $T_IClkMin]
-
-
-set BasePath $HandshakeSlvRsdPath
-
-
-
-current_instance -quiet
-current_instance $MacallanFixedLogic0
-set MacallanFixedLogic0 [current_instance .]
-current_instance TdcRegistersx
-set BasePath ExpandedPulseCapture.ClockCrossing.TdcInvertedDS
-## Start include, file DoubleSyncSL_RSD.xml
-set DoubleSyncSlRsdPath $BasePath
-set BasePath $BasePath/DoubleSyncBasex
-## Start add from file DoubleSyncBase.xdc
-# ---------------------------------------------------------------------------------------
-# DoubleSyncBase
-# ---------------------------------------------------------------------------------------
-# Save Incoming path
-set DoubleSyncBasePath $BasePath
-
-# First create the groups that will be needed in the -from/to constraints
-set TNM_DS_iSig    [get_cells "$BasePath/iDlySigx/*"                        -filter {IS_SEQUENTIAL==true}]
-set TNM_DS_oSig_ms [get_cells "$BasePath/DoubleSyncAsyncInBasex/oSig_msx/*" -filter {IS_SEQUENTIAL==true}]
-set TNM_DS_oSig    [get_cells "$BasePath/DoubleSyncAsyncInBasex/oSigx/*"    -filter {IS_SEQUENTIAL==true}]
-
-#Second, find out the period of the clocks related to the previous groups
-set T_OClkMin [expr "min([join [get_property PERIOD [get_clocks -of $TNM_DS_oSig]] ,])"]
-
-set_false_path -from $TNM_DS_iSig        -to $TNM_DS_oSig_ms
-set_max_delay  -from $TNM_DS_oSig_ms     -to $TNM_DS_oSig     -datapath_only [expr 0.5 * $T_OClkMin]
-
-
-set BasePath $DoubleSyncSlRsdPath
-
-
-set BasePath ExpandedPulseCapture.ClockCrossing.MeasurementHS
-## Start include, file HandshakeSLV_RSD.xml
-set HandshakeSlvRsdPath $BasePath
-set BasePath $BasePath/HBx
-## Start add from file HandshakeBaseRSD.xdc
-# ---------------------------------------------------------------------------------------
-# HandshakeBaseRSD
-# ---------------------------------------------------------------------------------------
-# Save incoming path
-set HandshakeBaseRsdPath $BasePath
-
-# Data
-set TNM_HS_iData   [get_cells "$BasePath/BlkIn.iStoredDatax/*/*"      -filter {IS_SEQUENTIAL==true}]
-set TNM_HS_oData   [get_cells "$BasePath/*oDataFlopx/*/*"        -filter {IS_SEQUENTIAL==true}]
-# Toggle
-set TNM_HS_iTog    [get_cells "$BasePath/*iPushTogglex/*"        -filter {IS_SEQUENTIAL==true}]
-set TNM_HS_oTog_ms [get_cells "$BasePath/*oPushToggle0_msx/*"    -filter {IS_SEQUENTIAL==true}]
-set TNM_HS_oTog    [get_cells "$BasePath/*oPushToggle1x/*"       -filter {IS_SEQUENTIAL==true}]
-# Ready
-set TNM_HS_oRdy    [get_cells "$BasePath/*oPushToggleToReadyx/*" -filter {IS_SEQUENTIAL==true}]
-set TNM_HS_iRdy_ms [get_cells "$BasePath/*iRdyPushToggle_msx/*"  -filter {IS_SEQUENTIAL==true}]
-set TNM_HS_iRdy    [get_cells "$BasePath/*iRdyPushTogglex/*"     -filter {IS_SEQUENTIAL==true}]
-
-# Find out the minimum period of the clocks related to the previous groups.
-set T_IClkMin [expr "min([join [get_property PERIOD [get_clocks -of $TNM_HS_iData]] ,])"]
-set T_OClkMin [expr "min([join [get_property PERIOD [get_clocks -of $TNM_HS_oData]] ,])"]
-
-# The datapath clock crossings must be less than 2X the period of the destination clock.
-set_max_delay  -from $TNM_HS_iData   -to $TNM_HS_oData -datapath_only [expr 2 * $T_OClkMin - 0.5]
-
-# Toggle
-set_false_path -from $TNM_HS_iTog    -to $TNM_HS_oTog_ms
-set_max_delay  -from $TNM_HS_oTog_ms -to $TNM_HS_oTog -datapath_only [expr 0.5 * $T_OClkMin]
-
-# The return ready path isn't very important here.
-set_false_path -from $TNM_HS_oRdy    -to $TNM_HS_iRdy_ms
-set_max_delay  -from $TNM_HS_iRdy_ms -to $TNM_HS_iRdy -datapath_only [expr 0.5 * $T_IClkMin]
-
-
-set BasePath $HandshakeSlvRsdPath
-
-
-
-current_instance -quiet
-current_instance $MacallanFixedLogic0
-set MacallanFixedLogic0 [current_instance .]
-current_instance BoardControlx
-set BasePath IrqFromFixedLogicDS
-## Start include, file DoubleSyncSL_RSD.xml
-set DoubleSyncSlRsdPath $BasePath
-set BasePath $BasePath/DoubleSyncBasex
-## Start add from file DoubleSyncBase.xdc
-# ---------------------------------------------------------------------------------------
-# DoubleSyncBase
-# ---------------------------------------------------------------------------------------
-# Save Incoming path
-set DoubleSyncBasePath $BasePath
-
-# First create the groups that will be needed in the -from/to constraints
-set TNM_DS_iSig    [get_cells "$BasePath/iDlySigx/*"                        -filter {IS_SEQUENTIAL==true}]
-set TNM_DS_oSig_ms [get_cells "$BasePath/DoubleSyncAsyncInBasex/oSig_msx/*" -filter {IS_SEQUENTIAL==true}]
-set TNM_DS_oSig    [get_cells "$BasePath/DoubleSyncAsyncInBasex/oSigx/*"    -filter {IS_SEQUENTIAL==true}]
-
-#Second, find out the period of the clocks related to the previous groups
-set T_OClkMin [expr "min([join [get_property PERIOD [get_clocks -of $TNM_DS_oSig]] ,])"]
-
-set_false_path -from $TNM_DS_iSig        -to $TNM_DS_oSig_ms
-set_max_delay  -from $TNM_DS_oSig_ms     -to $TNM_DS_oSig     -datapath_only [expr 0.5 * $T_OClkMin]
-
-
-set BasePath $DoubleSyncSlRsdPath
-
-
-
-current_instance -quiet
-current_instance $MacallanFixedLogic0
 ## Start add from file FixedLogic.xdc
 ## BoardControl.xdc placeholder
 
@@ -3841,14 +3372,256 @@ set MacallanFixedLogicInst [current_instance .]
 
 ####################################################################################
 # Generated by Vivado 2021.1 built on 'Thu Jun 10 19:36:07 MDT 2021' by 'xbuild'
-# Command Used: write_xdc -force -exclude_physical /mnt/Work/myagent/_work/2161/s/hw-flexrio/fixedlogic/objects/tool/synth_btraceplusfixedlogic/output/MacallanFixedLogic.xdc
+# Command Used: write_xdc -force -exclude_physical /mnt/Work/myagent/_work/931/s/hw-flexrio/fixedlogic/objects/tool/synth_btraceplusfixedlogic/output/MacallanFixedLogic.xdc
 ####################################################################################
 
+
+####################################################################################
+# Constraints from file : 'ResetSyncDeassert.xdc'
+####################################################################################
+
+current_instance BoardControlx/RsdBusClk
+set_false_path -to [get_pins [get_pins -regexp .*/.*/.*/oSig(_ms)?x/.*/PRE]]
+current_instance -quiet
+current_instance $MacallanFixedLogicInst
+current_instance DmaClockRSD
+set_false_path -to [get_pins [get_pins -regexp .*/.*/.*/oSig(_ms)?x/.*/PRE]]
+current_instance -quiet
+current_instance $MacallanFixedLogicInst
+current_instance BusClockRSD
+set_false_path -to [get_pins [get_pins -regexp .*/.*/.*/oSig(_ms)?x/.*/PRE]]
+current_instance -quiet
+current_instance $MacallanFixedLogicInst
+current_instance BusClkDiagramRSD
+set_false_path -to [get_pins [get_pins -regexp .*/.*/.*/oSig(_ms)?x/.*/PRE]]
+current_instance -quiet
+current_instance $MacallanFixedLogicInst
+current_instance FastTdcClkRSD
+set_false_path -to [get_pins [get_pins -regexp .*/.*/.*/oSig(_ms)?x/.*/PRE]]
+
+####################################################################################
+# Constraints from file : 'DoubleSyncAsyncInBase.xdc'
+####################################################################################
+
+current_instance -quiet
+current_instance $MacallanFixedLogicInst
+current_instance BoardControlx/BoardControlAxiRegistersx/CommonAxiRegistersx/Aux3v3FaultDs/DoubleSyncAsyncInBasex
+set_false_path -through [get_pins -of [get_cells oSig_msx/* -filter IS_SEQUENTIAL==true] -filter REF_PIN_NAME==D] -to [get_cells oSig_msx/* -filter IS_SEQUENTIAL==true]
+set TNM_DS_oSig_ms [get_cells "oSig_msx/*" -filter {IS_SEQUENTIAL==true}]
+set TNM_DS_oSig_ms_pin [get_pins -of $TNM_DS_oSig_ms -filter {REF_PIN_NAME==D}]
+set TNM_DS_oSig    [get_cells "oSigx/*"    -filter {IS_SEQUENTIAL==true}]
+set T_OClkMin [expr "min([join [get_property PERIOD [get_clocks -of $TNM_DS_oSig]] ,])"]
+set_max_delay  -from $TNM_DS_oSig_ms     -to $TNM_DS_oSig     -datapath_only [expr 0.5 * $T_OClkMin]
+current_instance -quiet
+current_instance $MacallanFixedLogicInst
+current_instance DmaClockRSD/DoubleSyncBoolAsyncInx/DoubleSyncSlAsyncInx/DoubleSyncAsyncInBasex
+set_false_path -through [get_pins -of [get_cells oSig_msx/* -filter IS_SEQUENTIAL==true] -filter REF_PIN_NAME==D] -to [get_cells oSig_msx/* -filter IS_SEQUENTIAL==true]
+set TNM_DS_oSig_ms [get_cells "oSig_msx/*" -filter {IS_SEQUENTIAL==true}]
+set TNM_DS_oSig_ms_pin [get_pins -of $TNM_DS_oSig_ms -filter {REF_PIN_NAME==D}]
+set TNM_DS_oSig    [get_cells "oSigx/*"    -filter {IS_SEQUENTIAL==true}]
+set T_OClkMin [expr "min([join [get_property PERIOD [get_clocks -of $TNM_DS_oSig]] ,])"]
+set_max_delay  -from $TNM_DS_oSig_ms     -to $TNM_DS_oSig     -datapath_only [expr 0.5 * $T_OClkMin]
+current_instance -quiet
+current_instance $MacallanFixedLogicInst
+current_instance BusClockRSD/DoubleSyncBoolAsyncInx/DoubleSyncSlAsyncInx/DoubleSyncAsyncInBasex
+set_false_path -through [get_pins -of [get_cells oSig_msx/* -filter IS_SEQUENTIAL==true] -filter REF_PIN_NAME==D] -to [get_cells oSig_msx/* -filter IS_SEQUENTIAL==true]
+set TNM_DS_oSig_ms [get_cells "oSig_msx/*" -filter {IS_SEQUENTIAL==true}]
+set TNM_DS_oSig_ms_pin [get_pins -of $TNM_DS_oSig_ms -filter {REF_PIN_NAME==D}]
+set TNM_DS_oSig    [get_cells "oSigx/*"    -filter {IS_SEQUENTIAL==true}]
+set T_OClkMin [expr "min([join [get_property PERIOD [get_clocks -of $TNM_DS_oSig]] ,])"]
+set_max_delay  -from $TNM_DS_oSig_ms     -to $TNM_DS_oSig     -datapath_only [expr 0.5 * $T_OClkMin]
+current_instance -quiet
+current_instance $MacallanFixedLogicInst
+current_instance BusClkDiagramRSD/DoubleSyncBoolAsyncInx/DoubleSyncSlAsyncInx/DoubleSyncAsyncInBasex
+set_false_path -through [get_pins -of [get_cells oSig_msx/* -filter IS_SEQUENTIAL==true] -filter REF_PIN_NAME==D] -to [get_cells oSig_msx/* -filter IS_SEQUENTIAL==true]
+set TNM_DS_oSig_ms [get_cells "oSig_msx/*" -filter {IS_SEQUENTIAL==true}]
+set TNM_DS_oSig_ms_pin [get_pins -of $TNM_DS_oSig_ms -filter {REF_PIN_NAME==D}]
+set TNM_DS_oSig    [get_cells "oSigx/*"    -filter {IS_SEQUENTIAL==true}]
+set T_OClkMin [expr "min([join [get_property PERIOD [get_clocks -of $TNM_DS_oSig]] ,])"]
+set_max_delay  -from $TNM_DS_oSig_ms     -to $TNM_DS_oSig     -datapath_only [expr 0.5 * $T_OClkMin]
+current_instance -quiet
+current_instance $MacallanFixedLogicInst
+current_instance FastTdcClkRSD/DoubleSyncBoolAsyncInx/DoubleSyncSlAsyncInx/DoubleSyncAsyncInBasex
+set_false_path -through [get_pins -of [get_cells oSig_msx/* -filter IS_SEQUENTIAL==true] -filter REF_PIN_NAME==D] -to [get_cells oSig_msx/* -filter IS_SEQUENTIAL==true]
+set TNM_DS_oSig_ms [get_cells "oSig_msx/*" -filter {IS_SEQUENTIAL==true}]
+set TNM_DS_oSig_ms_pin [get_pins -of $TNM_DS_oSig_ms -filter {REF_PIN_NAME==D}]
+set TNM_DS_oSig    [get_cells "oSigx/*"    -filter {IS_SEQUENTIAL==true}]
+set T_OClkMin [expr "min([join [get_property PERIOD [get_clocks -of $TNM_DS_oSig]] ,])"]
+set_max_delay  -from $TNM_DS_oSig_ms     -to $TNM_DS_oSig     -datapath_only [expr 0.5 * $T_OClkMin]
+current_instance -quiet
+current_instance $MacallanFixedLogicInst
+current_instance BusRegPortClockCrossing/RequestHandshake/HBx/BlkRdy.DoubleSyncBoolAsyncInx/DoubleSyncSlAsyncInx/DoubleSyncAsyncInBasex
+set_false_path -through [get_pins -of [get_cells oSig_msx/* -filter IS_SEQUENTIAL==true] -filter REF_PIN_NAME==D] -to [get_cells oSig_msx/* -filter IS_SEQUENTIAL==true]
+set TNM_DS_oSig_ms [get_cells "oSig_msx/*" -filter {IS_SEQUENTIAL==true}]
+set TNM_DS_oSig_ms_pin [get_pins -of $TNM_DS_oSig_ms -filter {REF_PIN_NAME==D}]
+set TNM_DS_oSig    [get_cells "oSigx/*"    -filter {IS_SEQUENTIAL==true}]
+set T_OClkMin [expr "min([join [get_property PERIOD [get_clocks -of $TNM_DS_oSig]] ,])"]
+set_max_delay  -from $TNM_DS_oSig_ms     -to $TNM_DS_oSig     -datapath_only [expr 0.5 * $T_OClkMin]
+current_instance -quiet
+current_instance $MacallanFixedLogicInst
+current_instance BusRegPortClockCrossing/ResponseHandshake/HBx/BlkRdy.DoubleSyncBoolAsyncInx/DoubleSyncSlAsyncInx/DoubleSyncAsyncInBasex
+set_false_path -through [get_pins -of [get_cells oSig_msx/* -filter IS_SEQUENTIAL==true] -filter REF_PIN_NAME==D] -to [get_cells oSig_msx/* -filter IS_SEQUENTIAL==true]
+set TNM_DS_oSig_ms [get_cells "oSig_msx/*" -filter {IS_SEQUENTIAL==true}]
+set TNM_DS_oSig_ms_pin [get_pins -of $TNM_DS_oSig_ms -filter {REF_PIN_NAME==D}]
+set TNM_DS_oSig    [get_cells "oSigx/*"    -filter {IS_SEQUENTIAL==true}]
+set T_OClkMin [expr "min([join [get_property PERIOD [get_clocks -of $TNM_DS_oSig]] ,])"]
+set_max_delay  -from $TNM_DS_oSig_ms     -to $TNM_DS_oSig     -datapath_only [expr 0.5 * $T_OClkMin]
+current_instance -quiet
+current_instance $MacallanFixedLogicInst
+current_instance TdcRegistersx/ExpandedPulseCapture.ClockCrossing.MeasurementHS/HBx/BlkRdy.DoubleSyncBoolAsyncInx/DoubleSyncSlAsyncInx/DoubleSyncAsyncInBasex
+set_false_path -through [get_pins -of [get_cells oSig_msx/* -filter IS_SEQUENTIAL==true] -filter REF_PIN_NAME==D] -to [get_cells oSig_msx/* -filter IS_SEQUENTIAL==true]
+set TNM_DS_oSig_ms [get_cells "oSig_msx/*" -filter {IS_SEQUENTIAL==true}]
+set TNM_DS_oSig_ms_pin [get_pins -of $TNM_DS_oSig_ms -filter {REF_PIN_NAME==D}]
+set TNM_DS_oSig    [get_cells "oSigx/*"    -filter {IS_SEQUENTIAL==true}]
+set T_OClkMin [expr "min([join [get_property PERIOD [get_clocks -of $TNM_DS_oSig]] ,])"]
+set_max_delay  -from $TNM_DS_oSig_ms     -to $TNM_DS_oSig     -datapath_only [expr 0.5 * $T_OClkMin]
+current_instance -quiet
+current_instance $MacallanFixedLogicInst
+current_instance ModulePresentDS/DoubleSyncAsyncInBasex
+set_false_path -through [get_pins -of [get_cells oSig_msx/* -filter IS_SEQUENTIAL==true] -filter REF_PIN_NAME==D] -to [get_cells oSig_msx/* -filter IS_SEQUENTIAL==true]
+set TNM_DS_oSig_ms [get_cells "oSig_msx/*" -filter {IS_SEQUENTIAL==true}]
+set TNM_DS_oSig_ms_pin [get_pins -of $TNM_DS_oSig_ms -filter {REF_PIN_NAME==D}]
+set TNM_DS_oSig    [get_cells "oSigx/*"    -filter {IS_SEQUENTIAL==true}]
+set T_OClkMin [expr "min([join [get_property PERIOD [get_clocks -of $TNM_DS_oSig]] ,])"]
+set_max_delay  -from $TNM_DS_oSig_ms     -to $TNM_DS_oSig     -datapath_only [expr 0.5 * $T_OClkMin]
+current_instance -quiet
+current_instance $MacallanFixedLogicInst
+current_instance BoardControlx/RsdBusClk/DoubleSyncBoolAsyncInx/DoubleSyncSlAsyncInx/DoubleSyncAsyncInBasex
+set_false_path -through [get_pins -of [get_cells oSig_msx/* -filter IS_SEQUENTIAL==true] -filter REF_PIN_NAME==D] -to [get_cells oSig_msx/* -filter IS_SEQUENTIAL==true]
+set TNM_DS_oSig_ms [get_cells "oSig_msx/*" -filter {IS_SEQUENTIAL==true}]
+set TNM_DS_oSig_ms_pin [get_pins -of $TNM_DS_oSig_ms -filter {REF_PIN_NAME==D}]
+set TNM_DS_oSig    [get_cells "oSigx/*"    -filter {IS_SEQUENTIAL==true}]
+set T_OClkMin [expr "min([join [get_property PERIOD [get_clocks -of $TNM_DS_oSig]] ,])"]
+set_max_delay  -from $TNM_DS_oSig_ms     -to $TNM_DS_oSig     -datapath_only [expr 0.5 * $T_OClkMin]
+current_instance -quiet
+current_instance $MacallanFixedLogicInst
+current_instance BoardControlx/AxiStreamCpldSidebandx/SidebandRxx/RxDataDs/DoubleSyncAsyncInBasex
+set_false_path -through [get_pins -of [get_cells oSig_msx/* -filter IS_SEQUENTIAL==true] -filter REF_PIN_NAME==D] -to [get_cells oSig_msx/* -filter IS_SEQUENTIAL==true]
+set TNM_DS_oSig_ms [get_cells "oSig_msx/*" -filter {IS_SEQUENTIAL==true}]
+set TNM_DS_oSig_ms_pin [get_pins -of $TNM_DS_oSig_ms -filter {REF_PIN_NAME==D}]
+set TNM_DS_oSig    [get_cells "oSigx/*"    -filter {IS_SEQUENTIAL==true}]
+set T_OClkMin [expr "min([join [get_property PERIOD [get_clocks -of $TNM_DS_oSig]] ,])"]
+set_max_delay  -from $TNM_DS_oSig_ms     -to $TNM_DS_oSig     -datapath_only [expr 0.5 * $T_OClkMin]
+current_instance -quiet
+current_instance $MacallanFixedLogicInst
+current_instance BoardControlx/IrqFromFixedLogicDS/DoubleSyncBasex/DoubleSyncAsyncInBasex
+set_false_path -through [get_pins -of [get_cells oSig_msx/* -filter IS_SEQUENTIAL==true] -filter REF_PIN_NAME==D] -to [get_cells oSig_msx/* -filter IS_SEQUENTIAL==true]
+set TNM_DS_oSig_ms [get_cells "oSig_msx/*" -filter {IS_SEQUENTIAL==true}]
+set TNM_DS_oSig_ms_pin [get_pins -of $TNM_DS_oSig_ms -filter {REF_PIN_NAME==D}]
+set TNM_DS_oSig    [get_cells "oSigx/*"    -filter {IS_SEQUENTIAL==true}]
+set T_OClkMin [expr "min([join [get_property PERIOD [get_clocks -of $TNM_DS_oSig]] ,])"]
+set_max_delay  -from $TNM_DS_oSig_ms     -to $TNM_DS_oSig     -datapath_only [expr 0.5 * $T_OClkMin]
+current_instance -quiet
+current_instance $MacallanFixedLogicInst
+current_instance GpioRegsx/DoubleSyncSlAsyncInx/DoubleSyncAsyncInBasex
+set_false_path -through [get_pins -of [get_cells oSig_msx/* -filter IS_SEQUENTIAL==true] -filter REF_PIN_NAME==D] -to [get_cells oSig_msx/* -filter IS_SEQUENTIAL==true]
+set TNM_DS_oSig_ms [get_cells "oSig_msx/*" -filter {IS_SEQUENTIAL==true}]
+set TNM_DS_oSig_ms_pin [get_pins -of $TNM_DS_oSig_ms -filter {REF_PIN_NAME==D}]
+set TNM_DS_oSig    [get_cells "oSigx/*"    -filter {IS_SEQUENTIAL==true}]
+set T_OClkMin [expr "min([join [get_property PERIOD [get_clocks -of $TNM_DS_oSig]] ,])"]
+set_max_delay  -from $TNM_DS_oSig_ms     -to $TNM_DS_oSig     -datapath_only [expr 0.5 * $T_OClkMin]
+current_instance -quiet
+current_instance $MacallanFixedLogicInst
+current_instance TdcRegistersx/ExpandedPulseCapture.ClockCrossing.TdcInvertedDS/DoubleSyncBasex/DoubleSyncAsyncInBasex
+set_false_path -through [get_pins -of [get_cells oSig_msx/* -filter IS_SEQUENTIAL==true] -filter REF_PIN_NAME==D] -to [get_cells oSig_msx/* -filter IS_SEQUENTIAL==true]
+set TNM_DS_oSig_ms [get_cells "oSig_msx/*" -filter {IS_SEQUENTIAL==true}]
+set TNM_DS_oSig_ms_pin [get_pins -of $TNM_DS_oSig_ms -filter {REF_PIN_NAME==D}]
+set TNM_DS_oSig    [get_cells "oSigx/*"    -filter {IS_SEQUENTIAL==true}]
+set T_OClkMin [expr "min([join [get_property PERIOD [get_clocks -of $TNM_DS_oSig]] ,])"]
+set_max_delay  -from $TNM_DS_oSig_ms     -to $TNM_DS_oSig     -datapath_only [expr 0.5 * $T_OClkMin]
+current_instance -quiet
+current_instance $MacallanFixedLogicInst
+current_instance FamPowerGoodFilter/DoubleSyncSlAsyncInx/DoubleSyncAsyncInBasex
+set_false_path -through [get_pins -of [get_cells oSig_msx/* -filter IS_SEQUENTIAL==true] -filter REF_PIN_NAME==D] -to [get_cells oSig_msx/* -filter IS_SEQUENTIAL==true]
+set TNM_DS_oSig_ms [get_cells "oSig_msx/*" -filter {IS_SEQUENTIAL==true}]
+set TNM_DS_oSig_ms_pin [get_pins -of $TNM_DS_oSig_ms -filter {REF_PIN_NAME==D}]
+set TNM_DS_oSig    [get_cells "oSigx/*"    -filter {IS_SEQUENTIAL==true}]
+set T_OClkMin [expr "min([join [get_property PERIOD [get_clocks -of $TNM_DS_oSig]] ,])"]
+set_max_delay  -from $TNM_DS_oSig_ms     -to $TNM_DS_oSig     -datapath_only [expr 0.5 * $T_OClkMin]
+current_instance -quiet
+current_instance $MacallanFixedLogicInst
+current_instance BoardControlx/AxiStreamCpldSidebandx/SidebandTxx/FifoFullDs/DoubleSyncAsyncInBasex
+set_false_path -through [get_pins -of [get_cells oSig_msx/* -filter IS_SEQUENTIAL==true] -filter REF_PIN_NAME==D] -to [get_cells oSig_msx/* -filter IS_SEQUENTIAL==true]
+set TNM_DS_oSig_ms [get_cells "oSig_msx/*" -filter {IS_SEQUENTIAL==true}]
+set TNM_DS_oSig_ms_pin [get_pins -of $TNM_DS_oSig_ms -filter {REF_PIN_NAME==D}]
+set TNM_DS_oSig    [get_cells "oSigx/*"    -filter {IS_SEQUENTIAL==true}]
+set T_OClkMin [expr "min([join [get_property PERIOD [get_clocks -of $TNM_DS_oSig]] ,])"]
+set_max_delay  -from $TNM_DS_oSig_ms     -to $TNM_DS_oSig     -datapath_only [expr 0.5 * $T_OClkMin]
+current_instance -quiet
+current_instance $MacallanFixedLogicInst
+current_instance BoardControlx/BoardControlAxiRegistersx/JtagControlx/FldUpdJtagTdoDs/DoubleSyncAsyncInBasex
+set_false_path -through [get_pins -of [get_cells oSig_msx/* -filter IS_SEQUENTIAL==true] -filter REF_PIN_NAME==D] -to [get_cells oSig_msx/* -filter IS_SEQUENTIAL==true]
+
+####################################################################################
+# Constraints from file : 'DoubleSyncBase.xdc'
+####################################################################################
+
+current_instance -quiet
+current_instance $MacallanFixedLogicInst
+current_instance BoardControlx/IrqFromFixedLogicDS/DoubleSyncBasex
+set_false_path -from [get_cells iDlySigx/* -filter IS_SEQUENTIAL==true] -to [get_cells DoubleSyncAsyncInBasex/oSig_msx/* -filter IS_SEQUENTIAL==true]
+set TNM_DS_iSig    [get_cells "iDlySigx/*"                        -filter {IS_SEQUENTIAL==true}]
+set TNM_DS_oSig_ms [get_cells "DoubleSyncAsyncInBasex/oSig_msx/*" -filter {IS_SEQUENTIAL==true}]
+set TNM_DS_oSig    [get_cells "DoubleSyncAsyncInBasex/oSigx/*"    -filter {IS_SEQUENTIAL==true}]
+set T_OClkMin [expr "min([join [get_property PERIOD [get_clocks -of $TNM_DS_oSig]] ,])"]
+set_max_delay  -from $TNM_DS_oSig_ms     -to $TNM_DS_oSig     -datapath_only [expr 0.5 * $T_OClkMin]
+current_instance -quiet
+current_instance $MacallanFixedLogicInst
+current_instance TdcRegistersx/ExpandedPulseCapture.ClockCrossing.TdcInvertedDS/DoubleSyncBasex
+set_false_path -from [get_cells iDlySigx/* -filter IS_SEQUENTIAL==true] -to [get_cells DoubleSyncAsyncInBasex/oSig_msx/* -filter IS_SEQUENTIAL==true]
+
+####################################################################################
+# Constraints from file : 'HandshakeBaseRSD.xdc'
+####################################################################################
+
+current_instance -quiet
+current_instance $MacallanFixedLogicInst
+current_instance BusRegPortClockCrossing/RequestHandshake/HBx
+set_false_path -from [get_cells *iPushTogglex/* -filter IS_SEQUENTIAL==true] -to [get_cells *oPushToggle0_msx/* -filter IS_SEQUENTIAL==true]
+set_false_path -from [get_cells *oPushToggleToReadyx/* -filter IS_SEQUENTIAL==true] -to [get_cells *iRdyPushToggle_msx/* -filter IS_SEQUENTIAL==true]
+set TNM_HS_iData   [get_cells "BlkIn.iStoredDatax/*/*"      -filter {IS_SEQUENTIAL==true}]
+set TNM_HS_oData   [get_cells "*oDataFlopx/*/*"        -filter {IS_SEQUENTIAL==true}]
+set TNM_HS_iTog    [get_cells "*iPushTogglex/*"        -filter {IS_SEQUENTIAL==true}]
+set TNM_HS_oTog_ms [get_cells "*oPushToggle0_msx/*"    -filter {IS_SEQUENTIAL==true}]
+set TNM_HS_oTog    [get_cells "*oPushToggle1x/*"       -filter {IS_SEQUENTIAL==true}]
+set TNM_HS_oRdy    [get_cells "*oPushToggleToReadyx/*" -filter {IS_SEQUENTIAL==true}]
+set TNM_HS_iRdy_ms [get_cells "*iRdyPushToggle_msx/*"  -filter {IS_SEQUENTIAL==true}]
+set TNM_HS_iRdy    [get_cells "*iRdyPushTogglex/*"     -filter {IS_SEQUENTIAL==true}]
+set T_IClkMin [expr "min([join [get_property PERIOD [get_clocks -of $TNM_HS_iData]] ,])"]
+set T_OClkMin [expr "min([join [get_property PERIOD [get_clocks -of $TNM_HS_oData]] ,])"]
+set_max_delay  -from $TNM_HS_iData   -to $TNM_HS_oData -datapath_only [expr 2 * $T_OClkMin - 0.5]
+set_max_delay  -from $TNM_HS_oTog_ms -to $TNM_HS_oTog -datapath_only [expr 0.5 * $T_OClkMin]
+set_max_delay  -from $TNM_HS_iRdy_ms -to $TNM_HS_iRdy -datapath_only [expr 0.5 * $T_IClkMin]
+current_instance -quiet
+current_instance $MacallanFixedLogicInst
+current_instance BusRegPortClockCrossing/ResponseHandshake/HBx
+set_false_path -from [get_cells *iPushTogglex/* -filter IS_SEQUENTIAL==true] -to [get_cells *oPushToggle0_msx/* -filter IS_SEQUENTIAL==true]
+set_false_path -from [get_cells *oPushToggleToReadyx/* -filter IS_SEQUENTIAL==true] -to [get_cells *iRdyPushToggle_msx/* -filter IS_SEQUENTIAL==true]
+set TNM_HS_iData   [get_cells "BlkIn.iStoredDatax/*/*"      -filter {IS_SEQUENTIAL==true}]
+set TNM_HS_oData   [get_cells "*oDataFlopx/*/*"        -filter {IS_SEQUENTIAL==true}]
+set TNM_HS_iTog    [get_cells "*iPushTogglex/*"        -filter {IS_SEQUENTIAL==true}]
+set TNM_HS_oTog_ms [get_cells "*oPushToggle0_msx/*"    -filter {IS_SEQUENTIAL==true}]
+set TNM_HS_oTog    [get_cells "*oPushToggle1x/*"       -filter {IS_SEQUENTIAL==true}]
+set TNM_HS_oRdy    [get_cells "*oPushToggleToReadyx/*" -filter {IS_SEQUENTIAL==true}]
+set TNM_HS_iRdy_ms [get_cells "*iRdyPushToggle_msx/*"  -filter {IS_SEQUENTIAL==true}]
+set TNM_HS_iRdy    [get_cells "*iRdyPushTogglex/*"     -filter {IS_SEQUENTIAL==true}]
+set T_IClkMin [expr "min([join [get_property PERIOD [get_clocks -of $TNM_HS_iData]] ,])"]
+set T_OClkMin [expr "min([join [get_property PERIOD [get_clocks -of $TNM_HS_oData]] ,])"]
+set_max_delay  -from $TNM_HS_iData   -to $TNM_HS_oData -datapath_only [expr 2 * $T_OClkMin - 0.5]
+set_max_delay  -from $TNM_HS_oTog_ms -to $TNM_HS_oTog -datapath_only [expr 0.5 * $T_OClkMin]
+set_max_delay  -from $TNM_HS_iRdy_ms -to $TNM_HS_iRdy -datapath_only [expr 0.5 * $T_IClkMin]
+current_instance -quiet
+current_instance $MacallanFixedLogicInst
+current_instance TdcRegistersx/ExpandedPulseCapture.ClockCrossing.MeasurementHS/HBx
+set_false_path -from [get_cells *iPushTogglex/* -filter IS_SEQUENTIAL==true] -to [get_cells *oPushToggle0_msx/* -filter IS_SEQUENTIAL==true]
+set_false_path -from [get_cells *oPushToggleToReadyx/* -filter IS_SEQUENTIAL==true] -to [get_cells *iRdyPushToggle_msx/* -filter IS_SEQUENTIAL==true]
 
 ####################################################################################
 # Constraints from file : 'xpm_cdc_gray.tcl'
 ####################################################################################
 
+current_instance -quiet
+current_instance $MacallanFixedLogicInst
 current_instance BoardControlx/BoardControlMicroblaze_i/BoardControlMicroblazeBdx/axi_quad_spi_1/U0/NO_DUAL_QUAD_MODE.QSPI_NORMAL/QSPI_LEGACY_MD_GEN.QSPI_CORE_INTERFACE_I/FIFO_EXISTS.TX_FIFO_II/xpm_fifo_instance.xpm_fifo_async_inst/gnuram_async_fifo.xpm_fifo_base_inst/gen_cdc_pntr.rd_pntr_cdc_inst
 set_max_delay -datapath_only -from [get_cells src_gray_ff_reg*] -to [get_cells {dest_graysync_ff_reg[0]*}] 1000.000
 set_bus_skew -from [get_cells src_gray_ff_reg*] -to [get_cells {dest_graysync_ff_reg[0]*}] 1000.000
