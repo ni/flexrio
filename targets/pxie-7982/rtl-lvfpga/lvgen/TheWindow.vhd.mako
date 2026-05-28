@@ -130,7 +130,7 @@ entity TheWindow is
     aIntClk10              : in    std_logic;
 
 
-% if include_board_io:
+% if include_target_io:
     -----------------------------------
     -- IO Node ports
     -----------------------------------

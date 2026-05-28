@@ -41,7 +41,7 @@
   </FPGACompilation>
 
   <!-- Optional Features -->
-% if include_board_io:
+% if include_target_io:
   <:Include what="children">Targets/NI/FPGA/RIO/79XXR/Common/Resource/MacallanDio.xml</:Include>
 % endif
 
@@ -56,7 +56,7 @@
 
   <!-- CLIPs -->
   <CLIPSocketTypeList>
-% if include_board_io:
+% if include_target_io:
     <:Include what="children">Targets/NI/FPGA/RIO/79XXR/Common/Resource/MacallanIoModule.xml</:Include>
     <:Include what="children">Targets/NI/FPGA/RIO/79XXR/Common/Resource/MacallanDioVoltageSocket.xml</:Include>    
 % endif
