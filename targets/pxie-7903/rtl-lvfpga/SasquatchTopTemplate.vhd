@@ -868,7 +868,6 @@ begin  -- architecture struct
 
   --vhook_e G3UspGtyHostInterface HostInterfacex
   --vhook_# Use BusClk for AxiClk and ViClk
-  --vhook_h kForceChannelEnable
   --vhook_a AxiClk              BusClk
   --vhook_a {x(AxiStream.+)}    xHost$1
   --vhook_a ViClk               BusClk
@@ -880,15 +879,12 @@ begin  -- architecture struct
   --vhook_a bLvWindowRegPortIn  bRegPortIn
   --vhook_a bLvWindowRegPortOut bRegPortOut
   --vhook_g kHmbInUse true
-  --vhook_g kDmaFifoConfArrayGeneric kDmaFifoConfArray
   --vhook_a GtDrpClk              open
   --vhook_a gGt*                  (others => '0') mode=in
   --vhook_a gGt*                  open            mode=out
   --vhook_a aIbertEyescanResetIn  (others => '0')
   HostInterfacex: entity work.G3UspGtyHostInterface (struct)
-    generic map (
-      kHmbInUse                => true,               --boolean:=false
-      kDmaFifoConfArrayGeneric => kDmaFifoConfArray)  --DmaChannelConfArray_t
+    generic map (kHmbInUse => true)  --boolean:=false
     port map (
       PcieRefClk_p                             => PcieRefClk_p,                              --in  std_logic
       PcieRefClk_n                             => PcieRefClk_n,                              --in  std_logic
