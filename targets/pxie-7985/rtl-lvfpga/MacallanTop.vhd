@@ -765,7 +765,6 @@ begin  -- architecture struct
 
   --vhook_e G3UsHostInterfaceIsoPort HostInterfacex
   --vhook_# Use BusClk for AxiClk and ViClk
-  --vhook_h kForceChannelEnable
   --vhook_a AxiClk              BusClk
   --vhook_a {x(AxiStream.+)}    xHost$1
   --vhook_a ViClk               BusClk
@@ -776,10 +775,12 @@ begin  -- architecture struct
   --vhook_a bLvWindowRegPortOut bRegPortOut
   --vhook_g kHmbInUse true
   --vhook_g kDmaFifoConfArrayGeneric kDmaFifoConfArray
+  --vhook_g kForceChannelEnable         (others => false)
   HostInterfacex: entity work.G3UsHostInterfaceIsoPort (struct)
     generic map (
       kHmbInUse                => true,               --boolean:=false
-      kDmaFifoConfArrayGeneric => kDmaFifoConfArray)  --DmaChannelConfArray_t
+      kDmaFifoConfArrayGeneric => kDmaFifoConfArray,  --DmaChannelConfArray_t
+      kForceChannelEnable      => (others => false))  --NiDmaDmaChannelOneHot_t:=(others=>false)
     port map (
       PcieRefClk_p                             => PcieRefClk_p,                              --in  std_logic
       PcieRefClk_n                             => PcieRefClk_n,                              --in  std_logic
