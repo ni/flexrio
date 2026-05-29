@@ -48,6 +48,8 @@ Dram2DPCore.vhd
 PkgDram2DP.vhd
 PkgDram2DPConstants.vhd
 SingleClockDeviceRam.vhd
+RioDmaPortCommIfcInputDataControl.vhd
+RioDmaPortFixedDmaCommunicationInterface.vhd
 PkgNiDma.vhd
 PkgNiDmaRegMap.vhd
 PkgCommunicationInterface.vhd
