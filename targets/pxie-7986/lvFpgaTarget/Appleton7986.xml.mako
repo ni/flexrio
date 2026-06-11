@@ -10,7 +10,7 @@
     <FPGASynthesisSourceFileList>
         <Path>Targets/NI/FPGA/RIO/79XXR/HMB/VHDL</Path>
     </FPGASynthesisSourceFileList>
-    <RequiredNICoresFiles>SingleClkFifo.vhd</RequiredNICoresFiles>
+    <RequiredNICoresFiles>SingleClkFifo.vhd, HandshakeBool.vhd</RequiredNICoresFiles>
     <:Include what="children">Targets/NI/FPGA/RIO/79XXR/Common/Resource/AppletonCommon.xml</:Include>
     <:Include what="children">Targets/NI/FPGA/RIO/79XXR/Common/Resource/MacallanCommonPxi.xml</:Include>
 	<!-- Set LV Reg Offsets in here so that they can be customized for GitHub custom targets-->
