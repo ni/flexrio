@@ -54,10 +54,10 @@
 ../../deps/flexrio-deps/encrypted/ni.hw-flexrio.common_source.iwcompanion.26.5.0.11-manual-passed-main-f/iwcompanionisoport/synth/IwCompanionIsoPortN.edf
 ../../deps/flexrio-deps/encrypted/ni.hw-flexrio.common_source.rtl.26.5.0.11-manual-passed-main-f/us-usp/packages/PkgBaRegPortConfig.vhd
 ../../deps/flexrio-deps/encrypted/ni.hw-flexrio.common_source.timingengine.26.5.0.11-manual-passed-main-f/pxieultrascale/synth/PxieUsTimingEngine.edf
-../../deps/flexrio-deps/encrypted/ni.hw-flexrio.fixedlogic.26.5.0.84-ci-passed-main-f/common/rtl/packages/lvgen/PkgLvFpgaConst.vhd
-../../deps/flexrio-deps/encrypted/ni.hw-flexrio.fixedlogic.26.5.0.84-ci-passed-main-f/macallanfixedlogic/rtl/FixedLogicWrapper.vhd
-../../deps/flexrio-deps/encrypted/ni.hw-flexrio.fixedlogic.26.5.0.84-ci-passed-main-f/macallanfixedlogic/rtl/packages/PkgSysMonConfig.vhd
-../../deps/flexrio-deps/encrypted/ni.hw-flexrio.fixedlogic.26.5.0.84-ci-passed-main-f/macallanfixedlogic/synth/MacallanFixedLogic.edf
+../../deps/flexrio-deps/encrypted/ni.hw-flexrio.fixedlogic.26.5.0.85-ci-passed-main-f/common/rtl/packages/lvgen/PkgLvFpgaConst.vhd
+../../deps/flexrio-deps/encrypted/ni.hw-flexrio.fixedlogic.26.5.0.85-ci-passed-main-f/macallanfixedlogic/rtl/FixedLogicWrapper.vhd
+../../deps/flexrio-deps/encrypted/ni.hw-flexrio.fixedlogic.26.5.0.85-ci-passed-main-f/macallanfixedlogic/rtl/packages/PkgSysMonConfig.vhd
+../../deps/flexrio-deps/encrypted/ni.hw-flexrio.fixedlogic.26.5.0.85-ci-passed-main-f/macallanfixedlogic/synth/MacallanFixedLogic.edf
 ../../deps/flexrio-deps/encrypted/ni.nicores.commoncores.7.2.0.14-ci-passed-main/CommonFiles/Packages/PkgXReg.vhd
 ../../deps/flexrio-deps/encrypted/ni.nicores.commoncores.7.2.0.14-ci-passed-main/CommonFiles/RegPort/PkgBaRegPort.vhd
 ../../deps/flexrio-deps/encrypted/ni.riocores.dram2dp.1.1.0.7/Dram2DP/VHDL/Dram2DP.vhd
