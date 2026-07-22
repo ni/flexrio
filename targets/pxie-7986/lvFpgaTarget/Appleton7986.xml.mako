@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- githubvisible=true -->
 <Target>
-% if custom_target:   
     <FPGASourceFilesDirPath>Targets/NI/FPGA/RIO/79XXR/${lv_target_name}/FpgaFiles</FPGASourceFilesDirPath>
-% else:
-    <FPGASourceFilesDirPath>Targets/NI/FPGA/RIO/79XXR/PXIe-7986/FpgaFiles</FPGASourceFilesDirPath>
-% endif
     <DeviceIDs>0x798C</DeviceIDs>
     <FPGASynthesisSourceFileList>
         <Path>Targets/NI/FPGA/RIO/79XXR/HMB/VHDL</Path>
@@ -16,7 +12,25 @@
 	<!-- Set LV Reg Offsets in here so that they can be customized for GitHub custom targets-->
 	<MaxLabVIEWFPGARegisterOffset>0x2FFFC</MaxLabVIEWFPGARegisterOffset>
     <MinLabVIEWFPGARegisterOffset>${min_lv_reg_offset}</MinLabVIEWFPGARegisterOffset>
-    
+
+  <!-- Hardware Interface Based on K7, modified to match Inchworm UserGuide  -->
+  <HardwareInterface>
+    <Type>DmaPort</Type>
+    <ClockName>BusClk</ClockName>
+    <RegisterAccessStrategies>BusHold</RegisterAccessStrategies>
+    <DmaAndIrqClockName>DmaClk</DmaAndIrqClockName>
+    <NumberOfMasterPorts>64</NumberOfMasterPorts>
+    <BusBaggageWidth>6</BusBaggageWidth>
+    <InputMaxTransfer>1024</InputMaxTransfer>
+    <OutputMaxTransfer>1024</OutputMaxTransfer>
+    <DmaAddressWidth>64</DmaAddressWidth>
+    <DmaDataWidth>256</DmaDataWidth>
+    <ReservedChannelIDs>${num_reserved_dma_stream_channel_ids}</ReservedChannelIDs>
+    <HMBChannelsReserved>0</HMBChannelsReserved>
+    <NumberOfFixedInputPorts>3</NumberOfFixedInputPorts>
+    <NumberOfFixedOutputPorts>2</NumberOfFixedOutputPorts>
+  </HardwareInterface>
+
     <!-- Compilation -->
     <FPGACompilation>
         <:Include what="children">Targets/NI/FPGA/RIO/79XXR/Common/Resource/AppletonCompileOptions.xml</:Include>
@@ -30,11 +44,7 @@
         <PartNumber>xcku15p-ffve1517-2-e</PartNumber>
         <ProcessPropertyList>
       <Process name="Place">
-% if custom_target:   
         <XdcFilePath>Targets/NI/FPGA/RIO/79XXR/${lv_target_name}/FpgaFiles/constraints_place.xdc</XdcFilePath>
-% else:
-        <XdcFilePath>Targets/NI/FPGA/RIO/79XXR/PXIe-7986/FpgaFiles/constraints_place.xdc</XdcFilePath>
-% endif
       </Process>
     </ProcessPropertyList>
     </FPGACompilation>

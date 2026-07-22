@@ -3,11 +3,7 @@
 <Target>
 
   <!-- Basic Device Configuration -->
-% if custom_target:   
   <FPGASourceFilesDirPath>Targets/NI/FPGA/RIO/79XXR/${lv_target_name}/FpgaFiles</FPGASourceFilesDirPath>
-% else:
-  <FPGASourceFilesDirPath>Targets/NI/FPGA/RIO/79XXR/PXIe-7994/FpgaFiles</FPGASourceFilesDirPath>
-% endif
   <DeviceIDs>0x7AAA</DeviceIDs>
   <FPGASynthesisSourceFileList>
     <Path>Targets/NI/FPGA/RIO/79XXR/HMB/VHDL</Path>
@@ -17,6 +13,24 @@
   <:Include what="children">Targets/NI/FPGA/RIO/79XXR/Common/Resource/MacallanCommonPxi.xml</:Include>
   <MaxLabVIEWFPGARegisterOffset>0x2FFFC</MaxLabVIEWFPGARegisterOffset>
   <MinLabVIEWFPGARegisterOffset>${min_lv_reg_offset}</MinLabVIEWFPGARegisterOffset> 
+
+  <!-- Hardware Interface Based on K7, modified to match Inchworm UserGuide  -->
+  <HardwareInterface>
+    <Type>DmaPort</Type>
+    <ClockName>BusClk</ClockName>
+    <RegisterAccessStrategies>BusHold</RegisterAccessStrategies>
+    <DmaAndIrqClockName>DmaClk</DmaAndIrqClockName>
+    <NumberOfMasterPorts>64</NumberOfMasterPorts>
+    <BusBaggageWidth>6</BusBaggageWidth>
+    <InputMaxTransfer>1024</InputMaxTransfer>
+    <OutputMaxTransfer>1024</OutputMaxTransfer>
+    <DmaAddressWidth>64</DmaAddressWidth>
+    <DmaDataWidth>256</DmaDataWidth>
+    <ReservedChannelIDs>${num_reserved_dma_stream_channel_ids}</ReservedChannelIDs>
+    <HMBChannelsReserved>0</HMBChannelsReserved>
+    <NumberOfFixedInputPorts>3</NumberOfFixedInputPorts>
+    <NumberOfFixedOutputPorts>2</NumberOfFixedOutputPorts>
+  </HardwareInterface>
 
   <!-- Compilation -->
   <FPGACompilation>
@@ -31,11 +45,7 @@
     <PartNumber>xcku060-ffva1156-2-e</PartNumber>
     <ProcessPropertyList>
       <Process name="Place">
-% if custom_target:   
         <XdcFilePath>Targets/NI/FPGA/RIO/79XXR/${lv_target_name}/FpgaFiles/constraints_place.xdc</XdcFilePath>
-% else:
-        <XdcFilePath>Targets/NI/FPGA/RIO/79XXR/PXIe-7994/FpgaFiles/constraints_place.xdc</XdcFilePath>
-% endif
       </Process>
     </ProcessPropertyList>
   </FPGACompilation>
