@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- githubvisible=true -->
+<Target>
+
+  <!-- Basic Device Configuration -->
+  <FPGASourceFilesDirPath>Targets/NI/FPGA/RIO/79XXR/${lv_target_name}/FpgaFiles</FPGASourceFilesDirPath>
+  <DeviceIDs>0x7A66</DeviceIDs>
+  <FPGASynthesisSourceFileList>
+    <Path>Targets/NI/FPGA/RIO/79XXR/HMB/VHDL</Path>
+  </FPGASynthesisSourceFileList>
+  <RequiredNICoresFiles>SingleClkFifo.vhd, HandshakeBool.vhd</RequiredNICoresFiles>
+  <:Include what="children">Targets/NI/FPGA/RIO/79XXR/Common/Resource/G3x8Common.xml</:Include>
+  <:Include what="children">Targets/NI/FPGA/RIO/79XXR/Common/Resource/MacallanCommonPxi.xml</:Include>
+  <MaxLabVIEWFPGARegisterOffset>0x2FFFC</MaxLabVIEWFPGARegisterOffset>
+  <MinLabVIEWFPGARegisterOffset>${min_lv_reg_offset}</MinLabVIEWFPGARegisterOffset>   
+  <EnableUltraRAMLocalFIFO/>
+
+  <!-- Hardware Interface Based on K7, modified to match Inchworm UserGuide  -->
+  <HardwareInterface>
+    <Type>DmaPort</Type>
+    <ClockName>BusClk</ClockName>
+    <RegisterAccessStrategies>BusHold</RegisterAccessStrategies>
+    <DmaAndIrqClockName>DmaClk</DmaAndIrqClockName>
+    <NumberOfMasterPorts>64</NumberOfMasterPorts>
+    <BusBaggageWidth>6</BusBaggageWidth>
+    <InputMaxTransfer>1024</InputMaxTransfer>
+    <OutputMaxTransfer>1024</OutputMaxTransfer>
+    <DmaAddressWidth>64</DmaAddressWidth>
+    <DmaDataWidth>256</DmaDataWidth>
+    <ReservedChannelIDs>${num_reserved_dma_stream_channel_ids}</ReservedChannelIDs>
+    <HMBChannelsReserved>0</HMBChannelsReserved>
+    <NumberOfFixedInputPorts>3</NumberOfFixedInputPorts>
+    <NumberOfFixedOutputPorts>2</NumberOfFixedOutputPorts>
+  </HardwareInterface>
+
+  <!-- Compilation -->
+  <FPGACompilation>
+    <:Include what="children">Targets/NI/FPGA/RIO/79XXR/Common/Resource/BlackadderCompileOptions.xml</:Include>
+    <NetPathToTheWindow>${net_path_to_the_window}</NetPathToTheWindow>
+% if include_current_instance_path_for_window:
+    <CurrentInstancePathForLvFpgaXdcConstraints>${current_instance_path_for_window}</CurrentInstancePathForLvFpgaXdcConstraints>
+% endif
+    <FPGADevice>xcku11p</FPGADevice>
+    <SpeedGrade>-2</SpeedGrade>
+    <Package>ffva1156</Package>
+    <PartNumber>xcku11p-ffva1156-2-e</PartNumber>
+    <ProcessPropertyList>
+      <Process name="Place">
+        <XdcFilePath>Targets/NI/FPGA/RIO/79XXR/${lv_target_name}/FpgaFiles/constraints_place.xdc</XdcFilePath>
+      </Process>
+    </ProcessPropertyList>
+  </FPGACompilation>
+
+  <!-- Optional Features -->
+  <:Include what="children">Targets/NI/FPGA/RIO/79XXR/Common/Resource/MacallanDramUtilities.xml</:Include>
+
+  <!-- Clocks -->
+  <ClockList>
+    <:Include what="children">Targets/NI/FPGA/RIO/79XXR/Common/Resource/BlackadderClocks.xml</:Include>
+    <:Include what="children">Targets/NI/FPGA/RIO/79XXR/Common/Resource/MacallanDramClocks.xml</:Include>
+    <:Include what="children">Targets/NI/FPGA/RIO/79XXR/HMB/resource/Dram2DPClocks.xml</:Include>
+% if include_custom_io:
+    <:Include what="children">Targets/NI/FPGA/RIO/79XXR/${lv_target_name}/${custom_clock}</:Include>
+% endif
+  </ClockList>
+
+  <!-- CLIPs -->
+  <CLIPSocketTypeList>
+% if include_board_io:
+    <:Include what="children">Targets/NI/FPGA/RIO/79XXR/Common/Resource/BlackadderIoModule.xml</:Include>
+% endif
+    <:Include what="children">Targets/NI/FPGA/RIO/79XXR/Common/Resource/MacallanDramSocketTypePxi.xml</:Include>
+    <:Include what="children">Targets/NI/FPGA/RIO/79XXR/Common/Resource/RoutingSocket.xml</:Include>
+  </CLIPSocketTypeList>
+
+% if include_custom_io:
+  <:Include what="children">Targets/NI/FPGA/RIO/79XXR/${lv_target_name}/${custom_boardio}</:Include>
+% endif
+
+  <SkipTopCompilationFileCheck/>
+  <FlexRIOPortMappingList>
+    <source name="BlackadderTopTemplate.vhd">
+      <target>BlackadderTop.vhd</target>
+      <port names="aDiffGpio[index=0..45]_n"> <!-- top level port name -->
+         <component_port>aDiffGpio_n(#{index})</component_port>
+         <internal_signal>aDiffGpioLcl_n(#{index})</internal_signal>
+         <clip_attribute>GPIO#{index}</clip_attribute>
+      </port>
+      <port names="aDiffGpio[index=0..45]_p"> <!-- top level port name -->
+         <component_port>aDiffGpio_p(#{index})</component_port>
+         <internal_signal>aDiffGpioLcl_p(#{index})</internal_signal>
+         <clip_attribute>GPIO#{index}</clip_attribute>
+      </port>
+    </source>
+  </FlexRIOPortMappingList>
+
+</Target>
