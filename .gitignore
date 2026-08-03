@@ -13,3 +13,5 @@ __pycache__/
 ~*.tmp
 # Ignore Deps folder
 deps/
+# Ignore AI workspace scratch files
+.build/

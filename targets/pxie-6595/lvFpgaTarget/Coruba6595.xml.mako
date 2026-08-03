@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- githubvisible=true -->
+<Target>
+  <FPGASourceFilesDirPath>Targets/NI/FPGA/RIO/79XXR/${lv_target_name}/FpgaFiles</FPGASourceFilesDirPath>
+  <DeviceIDs>0x7A7C</DeviceIDs>
+  <FPGASynthesisSourceFileList>
+    <Path>Targets/NI/FPGA/RIO/79XXR/HMB/VHDL</Path>
+  </FPGASynthesisSourceFileList>
+  <RequiredNICoresFiles>SingleClkFifo.vhd, HandshakeBool.vhd</RequiredNICoresFiles>
+  <:Include what="children">Targets/NI/FPGA/RIO/79XXR/Common/Resource/AppletonCommon.xml</:Include>
+  <:Include what="children">Targets/NI/FPGA/RIO/79XXR/Common/Resource/MacallanCommonPxi.xml</:Include>
+	<!-- Set LV Reg Offsets in here so that they can be customized for GitHub custom targets-->
+	<MaxLabVIEWFPGARegisterOffset>0x2FFFC</MaxLabVIEWFPGARegisterOffset>
+  <MinLabVIEWFPGARegisterOffset>${min_lv_reg_offset}</MinLabVIEWFPGARegisterOffset>
+
+  <!-- Hardware Interface Based on K7, modified to match Inchworm UserGuide  -->
+  <HardwareInterface>
+    <Type>DmaPort</Type>
+    <ClockName>BusClk</ClockName>
+    <RegisterAccessStrategies>BusHold</RegisterAccessStrategies>
+    <DmaAndIrqClockName>DmaClk</DmaAndIrqClockName>
+    <NumberOfMasterPorts>64</NumberOfMasterPorts>
+    <BusBaggageWidth>6</BusBaggageWidth>
+    <InputMaxTransfer>1024</InputMaxTransfer>
+    <OutputMaxTransfer>1024</OutputMaxTransfer>
+    <DmaAddressWidth>64</DmaAddressWidth>
+    <DmaDataWidth>256</DmaDataWidth>
+    <ReservedChannelIDs>${num_reserved_dma_stream_channel_ids}</ReservedChannelIDs>
+    <HMBChannelsReserved>0</HMBChannelsReserved>
+    <NumberOfFixedInputPorts>3</NumberOfFixedInputPorts>
+    <NumberOfFixedOutputPorts>2</NumberOfFixedOutputPorts>
+  </HardwareInterface>
+
+  <!-- Compilation -->
+  <FPGACompilation>
+    <:Include what="children">Targets/NI/FPGA/RIO/79XXR/Common/Resource/CorubaCompileOptions.xml</:Include>
+    <NetPathToTheWindow>${net_path_to_the_window}</NetPathToTheWindow>
+% if include_current_instance_path_for_window:
+    <CurrentInstancePathForLvFpgaXdcConstraints>${current_instance_path_for_window}</CurrentInstancePathForLvFpgaXdcConstraints>
+% endif
+    <FPGADevice>xcku15p</FPGADevice>
+    <SpeedGrade>-3</SpeedGrade>
+    <Package>ffve1517</Package>
+    <PartNumber>xcku15p-ffve1517-3-e</PartNumber>
+    <ProcessPropertyList>
+      <Process name="Place">
+        <XdcFilePath>Targets/NI/FPGA/RIO/79XXR/${lv_target_name}/FpgaFiles/constraints_place.xdc</XdcFilePath>
+      </Process>
+    </ProcessPropertyList>
+  </FPGACompilation>
+
+  <!-- Optional Features -->
+  <:Include what="children">Targets/NI/FPGA/RIO/79XXR/Common/Resource/AppletonDramUtilities.xml</:Include>
+
+  <!-- Clocks -->
+  <ClockList>
+    <:Include what="children">Targets/NI/FPGA/RIO/79XXR/Common/Resource/AppletonClocks.xml</:Include>
+    <:Include what="children">Targets/NI/FPGA/RIO/79XXR/Common/Resource/MacallanDramClocks.xml</:Include>
+    <:Include what="children">Targets/NI/FPGA/RIO/79XXR/HMB/resource/Dram2DPClocks.xml</:Include>
+% if include_custom_io:
+    <:Include what="children">Targets/NI/FPGA/RIO/79XXR/${lv_target_name}/${custom_clock}</:Include>
+% endif
+  </ClockList>
+
+  <!-- CLIPs -->
+  <CLIPSocketTypeList>
+% if include_board_io:
+    <:Include what="children">Targets/NI/FPGA/RIO/79XXR/Common/Resource/CorubaMgtSocket.xml</:Include>
+% endif
+    <:Include what="children">Targets/NI/FPGA/RIO/79XXR/Common/Resource/AppletonDramSocketType.xml</:Include>
+    <:Include what="children">Targets/NI/FPGA/RIO/79XXR/Common/Resource/RoutingSocket.xml</:Include>
+% if include_board_io:
+    <:Include what="children">Targets/NI/FPGA/RIO/79XXR/Common/Resource/USP_PCIe_DRP_IoSocket.xml</:Include>
+% endif
+  </CLIPSocketTypeList>
+
+% if include_custom_io:
+  <:Include what="children">Targets/NI/FPGA/RIO/79XXR/${lv_target_name}/${custom_boardio}</:Include>
+% endif
+
+    <SkipTopCompilationFileCheck/>
+    <FlexRIOPortMappingList>
+        <source name="CorubaTopTemplate.vhd" >
+            <constraintsSource>constraints.xdc_template</constraintsSource>
+            <constraintsTarget>constraints.xdc</constraintsTarget>
+            <target>CorubaTop.vhd</target>
+            
+            <port names="MgtPortTxLane[index=0..15]_p"> <!-- top level port name -->
+                <change_type>RemoveIfUnused</change_type>
+                <component_port>MgtPortTx_p(#{index})</component_port>
+                <clip_attribute>IOModuleTx#{index}</clip_attribute>
+            </port>
+            <port names="MgtPortTxLane[index=0..15]_n"> <!-- top level port name -->
+                <change_type>RemoveIfUnused</change_type>
+                <component_port>MgtPortTx_n(#{index})</component_port>
+                <clip_attribute>IOModuleTx#{index}</clip_attribute>
+            </port>
+            
+            <port names="MgtPortRxLane[index=0..15]_p"> <!-- top level port name -->
+                <change_type>RemoveIfUnused</change_type>
+                <component_port>MgtPortRx_p(#{index})</component_port>
+                <clip_attribute>IOModuleRx#{index}</clip_attribute>
+            </port>
+            <port names="MgtPortRxLane[index=0..15]_n"> <!-- top level port name -->
+                <change_type>RemoveIfUnused</change_type>
+                <component_port>MgtPortRx_n(#{index})</component_port>
+                <clip_attribute>IOModuleRx#{index}</clip_attribute>
+            </port>
+        </source>
+    </FlexRIOPortMappingList>
+
+</Target>
