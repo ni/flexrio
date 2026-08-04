@@ -3313,6 +3313,24 @@ set InputPorts [get_ports {aPxiGa[?]}]
 set_input_delay -max -5 [get_ports $InputPorts]
 set_input_delay -min 5 [get_ports $InputPorts]
 
+#########################################################################################
+# Outside LV Window DMA Port Crossings
+#
+# These constraints are provided by LV FPGA code generation along with TheWindow clock crossing
+# constraints.  However, these actually apply to paths that are outside TheWindow.  When used in
+# the GitHub HDL workflow, we move TheWindow into a component and require set_instance to make the
+# constraint paths work.   So we must move these outside the group of TheWindow constraints that are
+# printed by LV FPGA so that they are outside TheWindow set_instance group.
+#
+# These will be duplicate and ignored in LV FPGA compiles
+# In GitHub Vivado compiles. these will be used and the LV FPGA printed ones will be ignored
+
+set DmaPortCommCrossingFrom [get_cells {HostInterfacex/*/*DmaPortCommIfcIrqInterfacex/DoubleSyncSLx*iDlySigx/*FDCPEx} -filter {IS_SEQUENTIAL==true}]
+set DmaPortCommCrossingTo [get_cells {HostInterfacex/*/*DmaPortCommIfcIrqInterfacex/DoubleSyncSLx*DoubleSyncAsyncInBasex/oSig_msx/*FDCPEx} -filter {IS_SEQUENTIAL==true}]
+
+set_max_delay -from $DmaPortCommCrossingFrom -to $DmaPortCommCrossingTo -datapath_only 100.0000000000
+#########################################################################################
+
 
 ## Start add from file PinsBTrace.xdc
 ######################################################
