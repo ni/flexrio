@@ -63,10 +63,10 @@
 ../../deps/flexrio-deps/encrypted/ni.hw-flexrio.dram.26.5.0.14-ci-passed-main-f/source/kintexultrascale/macallan/rtl-lvfpga/MacallanDram.vhd
 ../../deps/flexrio-deps/encrypted/ni.hw-flexrio.dram.26.5.0.14-ci-passed-main-f/source/kintexultrascale/macallan/rtl-lvfpga/MacallanEmptyDram.vhd
 ../../deps/flexrio-deps/encrypted/ni.hw-flexrio.dram.26.5.0.14-ci-passed-main-f/source/kintexultrascaleplus/blackadder/rtl-lvfpga/MacallanDramWrapper.vhd
-../../deps/flexrio-deps/encrypted/ni.hw-flexrio.fixedlogic.26.8.0.17-ci-passed-main-d/blackadderfixedlogic/rtl/FixedLogicWrapper.vhd
-../../deps/flexrio-deps/encrypted/ni.hw-flexrio.fixedlogic.26.8.0.17-ci-passed-main-d/blackadderfixedlogic/rtl/packages/PkgSysMonConfig.vhd
-../../deps/flexrio-deps/encrypted/ni.hw-flexrio.fixedlogic.26.8.0.17-ci-passed-main-d/blackadderfixedlogic/synth/MacallanFixedLogic.edf
-../../deps/flexrio-deps/encrypted/ni.hw-flexrio.fixedlogic.26.8.0.17-ci-passed-main-d/common/rtl/packages/lvgen/PkgLvFpgaConst.vhd
+../../deps/flexrio-deps/encrypted/ni.hw-flexrio.fixedlogic.26.8.0.27-ci-passed-main-d/blackadderfixedlogic/rtl/FixedLogicWrapper.vhd
+../../deps/flexrio-deps/encrypted/ni.hw-flexrio.fixedlogic.26.8.0.27-ci-passed-main-d/blackadderfixedlogic/rtl/packages/PkgSysMonConfig.vhd
+../../deps/flexrio-deps/encrypted/ni.hw-flexrio.fixedlogic.26.8.0.27-ci-passed-main-d/blackadderfixedlogic/synth/MacallanFixedLogic.edf
+../../deps/flexrio-deps/encrypted/ni.hw-flexrio.fixedlogic.26.8.0.27-ci-passed-main-d/common/rtl/packages/lvgen/PkgLvFpgaConst.vhd
 ../../deps/flexrio-deps/encrypted/ni.nicores.commoncores.7.2.0.14-ci-passed-main/CommonFiles/Packages/PkgXReg.vhd
 ../../deps/flexrio-deps/encrypted/ni.nicores.commoncores.7.2.0.14-ci-passed-main/CommonFiles/RegPort/PkgBaRegPort.vhd
 ../../deps/flexrio-deps/encrypted/ni.riocores.dram2dp.1.1.0.7/Dram2DP/VHDL/Dram2DP.vhd
