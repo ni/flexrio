@@ -61,10 +61,10 @@
 ../../deps/flexrio-deps/encrypted/ni.hw-flexrio.dram.26.8.0.5-ci-passed-main-d/source/virtexultrascaleplus/sasquatch/rtl-lvfpga/SasquatchDram.vhd
 ../../deps/flexrio-deps/encrypted/ni.hw-flexrio.dram.26.8.0.5-ci-passed-main-d/source/virtexultrascaleplus/sasquatch/rtl-lvfpga/SasquatchDramWrapper.vhd
 ../../deps/flexrio-deps/encrypted/ni.hw-flexrio.dram.26.8.0.5-ci-passed-main-d/source/virtexultrascaleplus/sasquatch/rtl-lvfpga/SasquatchEmptyDram.vhd
-../../deps/flexrio-deps/encrypted/ni.hw-flexrio.fixedlogic.8d57ce20adc816379d00e496e8f1344c/common/rtl/packages/lvgen/PkgLvFpgaConst.vhd
-../../deps/flexrio-deps/encrypted/ni.hw-flexrio.fixedlogic.8d57ce20adc816379d00e496e8f1344c/sasquatchfixedlogic/rtl/FixedLogicWrapper.vhd
-../../deps/flexrio-deps/encrypted/ni.hw-flexrio.fixedlogic.8d57ce20adc816379d00e496e8f1344c/sasquatchfixedlogic/rtl/packages/PkgSysMonConfig.vhd
-../../deps/flexrio-deps/encrypted/ni.hw-flexrio.fixedlogic.8d57ce20adc816379d00e496e8f1344c/sasquatchfixedlogic/synth/MacallanFixedLogic.edf
+../../deps/flexrio-deps/encrypted/ni.hw-flexrio.fixedlogic.179d61b1f882513a8e06228d1ce2ab61/common/rtl/packages/lvgen/PkgLvFpgaConst.vhd
+../../deps/flexrio-deps/encrypted/ni.hw-flexrio.fixedlogic.179d61b1f882513a8e06228d1ce2ab61/sasquatchfixedlogic/rtl/FixedLogicWrapper.vhd
+../../deps/flexrio-deps/encrypted/ni.hw-flexrio.fixedlogic.179d61b1f882513a8e06228d1ce2ab61/sasquatchfixedlogic/rtl/packages/PkgSysMonConfig.vhd
+../../deps/flexrio-deps/encrypted/ni.hw-flexrio.fixedlogic.179d61b1f882513a8e06228d1ce2ab61/sasquatchfixedlogic/synth/MacallanFixedLogic.edf
 ../../deps/flexrio-deps/encrypted/ni.nicores.commoncores.7.2.0.14-ci-passed-main/CommonFiles/Packages/PkgXReg.vhd
 ../../deps/flexrio-deps/encrypted/ni.nicores.commoncores.7.2.0.14-ci-passed-main/CommonFiles/RegPort/PkgBaRegPort.vhd
 ../../deps/flexrio-deps/encrypted/ni.riocores.dram2dp.1.1.0.7/Dram2DP/VHDL/Dram2DP.vhd
