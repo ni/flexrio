@@ -2,7 +2,7 @@
 <!-- githubvisible=true -->
 <Target>
   <FPGASourceFilesDirPath>Targets/NI/FPGA/RIO/79XXR/${lv_target_name}/FpgaFiles</FPGASourceFilesDirPath>
-  <DeviceIDs>0x7BBA</DeviceIDs>
+  <DeviceIDs>0x7BB8</DeviceIDs>
   <FPGASynthesisSourceFileList>
     <Path>Targets/NI/FPGA/RIO/79XXR/HMB/VHDL</Path>
   </FPGASynthesisSourceFileList>
