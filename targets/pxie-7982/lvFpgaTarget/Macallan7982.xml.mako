@@ -3,7 +3,11 @@
 <Target>
 
   <!-- Basic Device Configuration -->
+% if custom_target:   
   <FPGASourceFilesDirPath>Targets/NI/FPGA/RIO/79XXR/${lv_target_name}/FpgaFiles</FPGASourceFilesDirPath>
+% else:
+  <FPGASourceFilesDirPath>Targets/NI/FPGA/RIO/79XXR/PXIe-7982/FpgaFiles</FPGASourceFilesDirPath>
+% endif
   <DeviceIDs>0x78F9</DeviceIDs>
   <FPGASynthesisSourceFileList>
     <Path>Targets/NI/FPGA/RIO/79XXR/HMB/VHDL</Path>
@@ -45,7 +49,11 @@
     <PartNumber>xcku040-ffva1156-2-e</PartNumber>
     <ProcessPropertyList>
       <Process name="Place">
+% if custom_target:   
         <XdcFilePath>Targets/NI/FPGA/RIO/79XXR/${lv_target_name}/FpgaFiles/constraints_place.xdc</XdcFilePath>
+% else:
+        <XdcFilePath>Targets/NI/FPGA/RIO/79XXR/PXIe-7982/FpgaFiles/constraints_place.xdc</XdcFilePath>
+% endif
       </Process>
     </ProcessPropertyList>
   </FPGACompilation>
