@@ -1,0 +1,2 @@
+objects/GeneratedHDL/TheWindow.vhd
+rtl-lvfpga/SasquatchTopTemplate.vhd

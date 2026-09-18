@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- githubvisible=true -->
 <Target>
-% if custom_target:   
     <FPGASourceFilesDirPath>Targets/NI/FPGA/RIO/79XXR/${lv_target_name}/FpgaFiles</FPGASourceFilesDirPath>
-% else:
-    <FPGASourceFilesDirPath>Targets/NI/FPGA/RIO/79XXR/PXIe-7986/FpgaFiles</FPGASourceFilesDirPath>
-% endif
     <DeviceIDs>0x798C</DeviceIDs>
     <FPGASynthesisSourceFileList>
         <Path>Targets/NI/FPGA/RIO/79XXR/HMB/VHDL</Path>
@@ -48,11 +44,7 @@
         <PartNumber>xcku15p-ffve1517-2-e</PartNumber>
         <ProcessPropertyList>
       <Process name="Place">
-% if custom_target:   
         <XdcFilePath>Targets/NI/FPGA/RIO/79XXR/${lv_target_name}/FpgaFiles/constraints_place.xdc</XdcFilePath>
-% else:
-        <XdcFilePath>Targets/NI/FPGA/RIO/79XXR/PXIe-7986/FpgaFiles/constraints_place.xdc</XdcFilePath>
-% endif
       </Process>
     </ProcessPropertyList>
     </FPGACompilation>
