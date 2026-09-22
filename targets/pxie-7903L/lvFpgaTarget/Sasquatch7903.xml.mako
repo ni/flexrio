@@ -41,7 +41,7 @@
     <SpeedGrade>-2</SpeedGrade>
     <Package>flgb2104</Package>
     <PartNumber>xcvu11p-flgb2104-2-e</PartNumber>
-    <UseBinaryConfiguration>Falsee</UseBinaryConfiguration>
+    <UseBinaryConfiguration>False</UseBinaryConfiguration>
     <ProcessPropertyList>
       <Process name="Place">
         <XdcFilePath>Targets/NI/FPGA/RIO/79XXR/${lv_target_name}/FpgaFiles/constraints_place.xdc</XdcFilePath>
